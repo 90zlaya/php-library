@@ -3,7 +3,7 @@
 * Use this class when working with website related data.
 * 
 * Instantiate it only once (great solution is Singleton design pattern) 
-* and call parameters and methods across entire website.
+* and call public parameters and methods across entire website.
 */
 class Website{
     public $name;
