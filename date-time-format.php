@@ -1,5 +1,5 @@
 <?php
-    class DateTimeFormat{
+    class Date_Time_Format{
         public static $user     = 'd.m.Y';
         public static $database = 'Y-m-d';
         

@@ -2,7 +2,7 @@
 /**
 * Web service related data
 */
-class Web_service{
+class Web_Service{
     
     // -------------------------------------------------------------------------
     
