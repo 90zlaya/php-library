@@ -1,14 +1,14 @@
 <?php
-    /*
-    require_once('Website.php');
-    
-    $params = array(
-        'name'          => 'php-Library', 
-        'host'          => 'http://localhost/_develop/php-library',
-        'made'          => 2017, 
-    );
-    $website = new Website($params);
-    
-    echo $website->redirect_to_page('index.html');
-    */
+/*
+| -------------------------------------------------------------------
+| INDEX PAGE
+| -------------------------------------------------------------------
+| This file contains default view for testing classes.
+|
+| You may instantiate classes here, call methods and pass parameters
+| to and from methods in purpose of testing and developing.
+|
+| -------------------------------------------------------------------
+*/
+echo 'This is index page.';
 ?>
