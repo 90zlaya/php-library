@@ -13,7 +13,7 @@ class Operating_System{
     
     /**
     * Gets operating systems list
-    *     
+    *
     */
     public static function get_list()
     {

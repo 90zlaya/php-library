@@ -14,97 +14,172 @@ class Date_Time_Format{
     
     // -------------------------------------------------------------------------
     
-    public static function current($format='YmdHis'){
+    /**
+    * Returns current date-time of given format
+    * 
+    * @param mixed $format
+    */
+    public static function current($format='YmdHis')
+    {
         return date($format);
-    }         
+    }
 
     // -------------------------------------------------------------------------
     
-    public static function compare($date){
-        if( self::current(self::$database) > date(self::$database, strtotime($date)) ){
-            return true;                          
-        }else{
-            return false;
+    /**
+    * Compares given date with current date
+    * 
+    * @param String $date
+    */
+    public static function compare($date)
+    {
+        if(self::current(self::$database) > date(self::$database, strtotime($date)))
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
         }
     }
     
     // -------------------------------------------------------------------------
     
-    public static function validate($date, $format){ 
-        switch($format){
+    /**
+    * Validates date to certain format type
+    * 
+    * @param String $date
+    * @param String $format
+    */
+    public static function validate($date, $format)
+    {
+        switch($format)
+        {
             case self::$user_placeholder:
-                $regex = '^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$^';
-                break;
+                {
+                    $regex = '^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$^';
+                } break;
             case self::$database_placeholder:
-                $regex = '^([0-9]{4})-([0-9]{2})-([0-9]{2})$^';
-                break;    
+                {
+                    $regex = '^([0-9]{4})-([0-9]{2})-([0-9]{2})$^';
+                } break;
             default: $regex = '';
         }
         
-        if( empty($regex) ){
-            return false;
-        }else{
-            if( preg_match($regex, $date) ){
-                return true;
-            }else{
-                return false;
+        if(empty($regex))
+        {
+            return FALSE;
+        }
+        else
+        {
+            if(preg_match($regex, $date))
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
             }
         }
-    } 
+    }
     
     // -------------------------------------------------------------------------
     
-    public static function format($date, $withoutTime=false){
-        if($withoutTime){
+    /**
+    * Formats date to friendly format with or without time
+    * 
+    * @param String $date
+    * @param Bool $without_time
+    */
+    public static function format($date, $without_time=FALSE)
+    {
+        if($without_time)
+        {
             return date(self::$friendly_date, strtotime($date));
-        }else{
+        }
+        else
+        {
             return date(self::$friendly_datetime, strtotime($date));
         }
     } 
     
     // -------------------------------------------------------------------------
     
-    public static function format_to_database($date){
+    /**
+    * Formats date to database-friendly format
+    * 
+    * @param String $date
+    */
+    public static function format_to_database($date)
+    {
         return date(self::$database, strtotime($date));
     } 
     
     // -------------------------------------------------------------------------
     
-    public static function format_to_user($date, $withoutTime=false){
+    /**
+    * Formats date to user-friendly format
+    * 
+    * @param String $date
+    */
+    public static function format_to_user($date)
+    {
         return date(self::$user, strtotime($date));
     }
     
     // -------------------------------------------------------------------------
     
-    public static function minutes_to_hours($time=0, $format='%02d:%02d'){
-        if($time > 0){
+    /**
+    * Converts minutes to hours
+    * 
+    * @param int $time
+    * @param String $format
+    * @return String
+    */
+    public static function minutes_to_hours($time=0, $format='%02d:%02d')
+    {
+        if($time > 0)
+        {
             $hours = floor($time / 60);
             $minutes = ($time % 60);
             
             return sprintf($format, $hours, $minutes);
-        }else{
+        }
+        else
+        {
             return '00:00';
         }
     }
     
     // -------------------------------------------------------------------------
     
-    public static function hours_to_minutes($time){
-        if (strpos($time, ':') !== false){
+    /**
+    * Converts hours to minutes
+    * 
+    * @param String $time
+    */
+    public static function hours_to_minutes($time)
+    {
+        if (strpos($time, ':') !== FALSE)
+        {
             $exploded = explode(':', $time);
           
-            $hoursFirst = true;
-            foreach($exploded as $row){
+            $hours_first = TRUE;
+            foreach($exploded as $row)
+            {
                   $number = $row;
-                                          
-                  if($hoursFirst){
+                        
+                  if($hours_first)
+                  {
                       $hours = $number; 
-                      $hoursFirst = false;
-                  }else{
+                      $hours_first = FALSE;
+                  }
+                  else
+                  {
                       $minutes = $number; 
                   }                           
             }               
-            $minutes += $hours*60;
+            $minutes += $hours * 60;
         }else{
             $minutes = '';  
         }
