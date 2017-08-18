@@ -1,8 +1,21 @@
 <?php
+/**
+* Pagination class
+* 
+* This is special class constructed from one of special templates
+* accustomed to work everywhere. It's not by standard but it might help.
+*/
 class Pagination{
     public static $steps = 9;
+
+    // -------------------------------------------------------------------------
     
-    public static function style(){
+    /**
+    * Pagination style
+    * 
+    */
+    public static function style()
+    {
         return '
             <style>
                 .pagination a,  .pagination span.gap {
@@ -67,7 +80,17 @@ class Pagination{
         ';
     }
 
-    public static function show($brstavuku, $limitstart, $dodParametar=''){
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Showing pagination navigation buttons
+    * 
+    * @param int $brstavuku
+    * @param int $limitstart
+    * @param String $dodParametar
+    */
+    public static function show($brstavuku, $limitstart, $dodParametar='')
+    {
         echo self::style();
         $steps = self::$steps;
         
@@ -131,5 +154,7 @@ class Pagination{
              echo "</nav>";
         }             
     }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

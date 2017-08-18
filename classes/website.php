@@ -202,16 +202,13 @@ class Website{
     // -------------------------------------------------------------------------
     
     /**
-    * Printing values for <head> tag of html
+    * Prints meta tags
     * 
-    * It's enough only to echo this method inside 
-    * entire <head> tag if properly initialised.
-    * 
-    * If custom page title is not passed, it will access global website name.
+    * If no title was given, prints website name
     * 
     * @param String $title
     */
-    public function head($title='')
+    public function meta($title='')
     {
         $return  = '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
         $return .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
@@ -231,8 +228,18 @@ class Website{
                 $return .= $title;
             }
         $return .= '</title>' . PHP_EOL;
-        
-        $return .= '<!-- HEAD -->' . PHP_EOL;
+    return $return;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Prints head tags
+    * 
+    */
+    public function head()
+    {
+        $return = '<!-- HEAD -->' . PHP_EOL;
         if(empty($this->_head))
         {
             $return .= '<!-- NOT LOADED -->' . PHP_EOL;
@@ -275,7 +282,6 @@ class Website{
             }
         }
         $return .= '<!-- /HEAD -->' . PHP_EOL;
-        
     return $return;
     }   
     
