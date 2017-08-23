@@ -3,19 +3,35 @@
 * Works with password related data
 */
 class Password{
-    public static $size_minimum = 6;
-    public static $size_optimum = 9;
-    public static $letters      = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    protected static $size_minimum = 6;
+    protected static $size_optimum = 9;
+    protected static $letters      = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     
     // -------------------------------------------------------------------------
     
     /**
     * Generates new password
     * 
+    * @param int $size_optimum
+    * @param String $letters
+    * 
+    * @return String $new_password
     */
-    public static function new()
+    public static function new($size_optimum=0, $letters='')
     {
-        return substr(str_shuffle(self::$letters), 0, self::$size_optimum);
+        if(empty($size_optimum))
+        {
+            $size_optimum = self::$size_optimum;
+        }
+        
+        if(empty($letters))
+        {
+            $letters = self::$letters;
+        }
+            
+        $new_password = substr(str_shuffle($letters), 0, $size_optimum);
+            
+        return $new_password;
     }
     
     // -------------------------------------------------------------------------
