@@ -21,12 +21,12 @@ class Website{
     public $creator_name      = 'Zlatan Stajic';
     public $creator_website   = 'https://www.zlatanstajic.com/';
     
-    protected $_head          = array();
-    protected $_bottom        = array();
-    protected $_link          = 'link';
-    protected $_script        = 'script';
-    protected $_link_custom   = 'link-custom';
-    protected $_script_custom = 'script-custom';
+    protected $head          = array();
+    protected $bottom        = array();
+    protected $link          = 'link';
+    protected $script        = 'script';
+    protected $link_custom   = 'link-custom';
+    protected $script_custom = 'script-custom';
     
     // -------------------------------------------------------------------------
     
@@ -96,6 +96,8 @@ class Website{
     * first method parameter as TRUE.
     * 
     * @param boolean $always_made_year
+    * 
+    * @return String $signature
     */
     public function signature($always_made_year=FALSE)
     {
@@ -110,7 +112,9 @@ class Website{
             $since = $this->made . '-' . $current_year;
         }
         
-    return 'Copyright &#169; ' . $since . ' | ' . $this->creator . ' | All Rights Reserved';
+        $signature =  'Copyright &#169; ' . $since . ' | ' . $this->creator . ' | All Rights Reserved';
+        
+        return $signature;
     }
     
     // -------------------------------------------------------------------------
@@ -122,6 +126,8 @@ class Website{
     * default website language comment will be shown.
     * 
     * @param String $language
+    * 
+    * @return String $signature_hidden
     */
     public function signature_hidden($language='')
     {
@@ -140,7 +146,8 @@ class Website{
             default: $signature_hidden .= 'Ponosno izradio: ' . $this->creator_name . '; Pronadjite me na ' . $this->creator_website;
         }
         $signature_hidden .=  ' -->' . PHP_EOL;
-    return $signature_hidden;
+        
+        return $signature_hidden;
     }   
         
     // -------------------------------------------------------------------------
@@ -151,8 +158,10 @@ class Website{
     * Custom tags are also allowed.
     * 
     * @param Array $params
+    * 
+    * @return void
     */
-    public function add_to_head($params)
+    public function add_tohead($params)
     {
         if(!empty($params))
         {
@@ -160,10 +169,10 @@ class Website{
             {
                 if(empty($param['type']))
                 {
-                    $param['type'] = $this->_link;
+                    $param['type'] = $this->link;
                 }
                 
-                $this->_head[] = array(
+                $this->head[] = array(
                     'path' => $param['path'],
                     'type' => $param['type']
                 );
@@ -179,8 +188,10 @@ class Website{
     * Custom tags are also allowed.
     * 
     * @param Array $params
+    * 
+    * @return void
     */
-    public function add_to_bottom($params)
+    public function add_tobottom($params)
     {
         if(empty($params))
         {
@@ -188,10 +199,10 @@ class Website{
             {
                 if(empty($param['type']))
                 {
-                    $param['type'] = $this->_script;
+                    $param['type'] = $this->script;
                 }
                 
-                $this->_bottom[] = array(
+                $this->bottom[] = array(
                     'path' => $param['path'],
                     'type' => $param['type']
                 );
@@ -207,28 +218,31 @@ class Website{
     * If no title was given, prints website name
     * 
     * @param String $title
+    * 
+    * @return String $meta
     */
     public function meta($title='')
     {
-        $return  = '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
-        $return .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
-        $return .= '<meta name="viewport" content="width=device-width, initial-scale=1">' . PHP_EOL;
-        $return .= '<meta name="description" content="' . $this->name . ':' . ' ' . $this->description . '">' . PHP_EOL;
-        $return .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
-        $return .= '<meta name="author" content="' . $this->creator_name . '">' . PHP_EOL;
-        $return .= '<link rel="shortcut icon" href="' . $this->favorite_icon . '" type="image/png">' . PHP_EOL;
+        $meta  = '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
+        $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
+        $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">' . PHP_EOL;
+        $meta .= '<meta name="description" content="' . $this->name . ':' . ' ' . $this->description . '">' . PHP_EOL;
+        $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
+        $meta .= '<meta name="author" content="' . $this->creator_name . '">' . PHP_EOL;
+        $meta .= '<link rel="shortcut icon" href="' . $this->favorite_icon . '" type="image/png">' . PHP_EOL;
         
-        $return .= '<title>';
+        $meta .= '<title>';
             if(empty($title))
             {
-                $return .= $this->name;
+                $meta .= $this->name;
             }
             else
             {
-                $return .= $title;
+                $meta .= $title;
             }
-        $return .= '</title>' . PHP_EOL;
-    return $return;
+        $meta .= '</title>' . PHP_EOL;
+        
+        return $meta;
     }
     
     // -------------------------------------------------------------------------
@@ -236,42 +250,43 @@ class Website{
     /**
     * Prints head tags
     * 
+    * @return String $return
     */
     public function head()
     {
         $return = '<!-- HEAD -->' . PHP_EOL;
-        if(empty($this->_head))
+        if(empty($this->head))
         {
             $return .= '<!-- NOT LOADED -->' . PHP_EOL;
         }
         else
         {
-            foreach($this->_head as $head)
+            foreach($this->head as $head)
             {
                 switch($head['type'])
                 {
-                    case $this->_link:    
+                    case $this->link:    
                         {
                             $return .= '<link rel="stylesheet" href="';
                             $return .= $head['path'];
                             $return .= '">' . PHP_EOL;
                         }
                     break; 
-                    case $this->_script:    
+                    case $this->script:    
                         {
                             $return .= '<script src="';
                             $return .= $head['path'];
                             $return .= '"></script>' . PHP_EOL;
                         }
                     break; 
-                    case $this->_link_custom:    
+                    case $this->link_custom:    
                         {
                             $return .= '<style>';
                             $return .= $head['path'];
                             $return .= '</style>' . PHP_EOL;
                         }
                     break; 
-                    case $this->_script_custom:    
+                    case $this->script_custom:    
                         {
                             $return .= '<script>';
                             $return .= $head['path'];
@@ -282,7 +297,8 @@ class Website{
             }
         }
         $return .= '<!-- /HEAD -->' . PHP_EOL;
-    return $return;
+        
+        return $return;
     }   
     
     // -------------------------------------------------------------------------
@@ -290,6 +306,7 @@ class Website{
     /**
     * Printing values somewhere in bottom of html
     * 
+    * @return String $return
     */
     public function bottom()
     {
@@ -300,32 +317,32 @@ class Website{
         }
         else
         {
-            foreach($this->_bottom as $bottom)
+            foreach($this->bottom as $bottom)
             {
                 switch($bottom['type'])
                 {
-                    case $this->_link:    
+                    case $this->link:    
                         {
                             $return .= '<link rel="stylesheet" href="';
                             $return .= $bottom['path'];
                             $return .= '">' . PHP_EOL;
                         }
                     break;
-                    case $this->_script:    
+                    case $this->script:    
                         {
                             $return .= '<script src="';
                             $return .= $bottom['path'];
                             $return .= '"></script>' . PHP_EOL;
                         }
                     break;
-                    case $this->_link_custom:    
+                    case $this->link_custom:    
                         {
                             $return .= '<style>';
                             $return .= $bottom['path'];
                             $return .= '</style>' . PHP_EOL;
                         }
                     break;
-                    case $this->_script_custom:    
+                    case $this->script_custom:    
                         {
                             $return .= '<script>';
                             $return .= $bottom['path'];
@@ -336,7 +353,8 @@ class Website{
             }
         }
         $return .= '<!-- /BOTTOM -->' . PHP_EOL;
-    return $return;
+        
+        return $return;
     }
     
     // -------------------------------------------------------------------------
@@ -344,7 +362,11 @@ class Website{
     /**
     * Page redirection
     * 
+    * Echoes html if page is not properly redirected
+    * 
     * @param String $page
+    * 
+    * @return void
     */
     public function redirect_to_page($page)
     {

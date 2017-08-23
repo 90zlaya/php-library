@@ -10,6 +10,8 @@ class Directory_Lister{
     * Reading contents for given directory
     *
     * @param String $directory
+    * 
+    * @return Bool || Array $arr_folder
     */
     public static function read($directory='')
     {

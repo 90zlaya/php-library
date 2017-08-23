@@ -13,6 +13,8 @@ class Web_Service{
     * 
     * @param String $web_service_url
     * @param String $data
+    * 
+    * @return Array $arr
     */
     public static function response_body($web_service_url, $data='')
     {
@@ -24,7 +26,8 @@ class Web_Service{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Content-Length: ' . strlen($data_string)));
         $result = curl_exec($ch);
         $arr = json_decode($result, true);
-    return $arr;
+    
+        return $arr;
     }
     
     // -------------------------------------------------------------------------

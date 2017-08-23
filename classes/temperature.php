@@ -11,6 +11,8 @@ class Temperature{
     * Kelvin to Celsius conversion
     *
     * @param int $temp
+    * 
+    * @return String $celsius
     */
     public static function k_to_c($temp)
     {
@@ -18,7 +20,10 @@ class Temperature{
         {
             return false;
         }
-    return round(($temp - self::$absolute_zero)). '&deg;';
+        
+        $celsius = round(($temp - self::$absolute_zero)). '&deg;';
+        
+        return $celsius;
     }
     
     // -------------------------------------------------------------------------
@@ -27,6 +32,8 @@ class Temperature{
     * Kelvin to Farenheit conversion
     *
     * @param int $temp
+    * 
+    * @return String $farenheit
     */
     public static function k_to_f($temp)
     {
@@ -34,7 +41,9 @@ class Temperature{
         {
             return false;
         }
-    return round((($temp - self::$absolute_zero) * 1.8) + 32);
+        $farenheit = round((($temp - self::$absolute_zero) * 1.8) + 32);
+        
+        return $farenheit;
     }
     
     // -------------------------------------------------------------------------

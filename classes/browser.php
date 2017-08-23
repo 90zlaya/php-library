@@ -15,6 +15,7 @@ class Browser{
     /**
     * Gets browsers list
     * 
+    * @return Array
     */
 	public static function get_list()
 	{
@@ -34,6 +35,8 @@ class Browser{
     * Detects browser according to user agent
     * 
     * @param String $user_agent
+    * 
+    * @return String $addOn
     */
 	public static function detect($user_agent)
 	{
@@ -63,7 +66,8 @@ class Browser{
 		{
 			$addOn = self::$sixth;
 		}
-	return $addOn;
+	    
+        return $addOn;
 	}
 	
     // -------------------------------------------------------------------------
@@ -72,6 +76,8 @@ class Browser{
     * Determines if given user agent is from mobile device
     * 
     * @param String $user_agent
+    * 
+    * @return Bool TRUE || FALSE
     */
 	public static function is_mobile($user_agent)
     {

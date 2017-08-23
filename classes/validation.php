@@ -10,6 +10,8 @@ class Validation{
     * Validates year format
     * 
     * @param int $year
+    * 
+    * @return Bool
     */
     public static function year($year)
     {
@@ -29,6 +31,8 @@ class Validation{
     * Checks if variable is set and non-empty
     * 
     * @param mixed $variable
+    * 
+    * @return Bool
     */
     public static function variables($variable)
     {
@@ -48,17 +52,21 @@ class Validation{
     * Replaces comma with dot
     * 
     * @param String $param
+    * 
+    * @return String $comma
     */
     public static function comma($param)
     {
         if(strpos($param, ',') !== false)
         {
-            return str_replace(',', '.', $param);
+            $comma = str_replace(',', '.', $param);
         }
         else
         {
-            return $param;
+            $comma = $param;
         }
+        
+        return $comma;
     }   
     
     // -------------------------------------------------------------------------
@@ -68,6 +76,8 @@ class Validation{
     * 
     * @param String $variable
     * @param Bool $trim
+    * 
+    * @return String $variable
     */
     function clear_string($variable, $trim=TRUE)
     {
@@ -84,7 +94,7 @@ class Validation{
         $variable = str_ireplace(";","",$variable);
         $variable = str_ireplace("*","",$variable);
     
-    return $variable;
+        return $variable;
     }   
     
     // -------------------------------------------------------------------------
@@ -93,19 +103,21 @@ class Validation{
     * Clears integer - returns zero if not propper
     * 
     * @param String $variable
+    * 
+    * @return int $cleared_number
     */
     function clear_number($variable)
     {
         if(is_numeric($variable))
         {
-          $variable = $variable;
+          $cleared_number = $variable;
         }
         else
         {
-          $variable = '0';
+          $cleared_number = 0;
         }
     
-    return $variable;
+        return $cleared_number;
     }
     
     // -------------------------------------------------------------------------

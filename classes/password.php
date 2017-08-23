@@ -42,6 +42,8 @@ class Password{
     * @param String $string
     * @param Bool $return_boolean
     * @param int $minimum_strength_percent
+    * 
+    * @return Bool $result
     */
     public static function strength($string, $return_boolean=TRUE, $minimum_strength_percent='60')
     {
@@ -85,7 +87,8 @@ class Password{
         {
             $result = $strength;
         }
-    return $result;
+    
+        return $result;
     }    
     
     // -------------------------------------------------------------------------
@@ -94,12 +97,15 @@ class Password{
     * Base 64 encode
     * 
     * @param String $plainText
+    * 
+    * @return String $encoded
     */
     public static function encode($plainText)
     {
         $plainText = base64_encode($plainText);
-    
-    return strtr($plainText, '+/=', '-_,');
+        $encoded = strtr($plainText, '+/=', '-_,');
+        
+        return $encoded;
     }
     
     // -------------------------------------------------------------------------
@@ -108,12 +114,15 @@ class Password{
     * Base 64 decode
     * 
     * @param String $plainText
+    * 
+    * @return String $decoded
     */
     public static function decode($plainText)
     {
         $plainText = strtr($plainText, '-_,', '+/=');
-    
-    return base64_decode($plainText);
+        $decoded = base64_decode($plainText);
+        
+        return $decoded;
     }
     
     // -------------------------------------------------------------------------

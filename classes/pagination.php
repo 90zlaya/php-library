@@ -13,10 +13,11 @@ class Pagination{
     /**
     * Pagination style
     * 
+    * @return String $style
     */
     public static function style()
     {
-        return '
+        $style =  '
             <style>
                 .pagination a,  .pagination span.gap {
                     float: left;
@@ -78,6 +79,8 @@ class Pagination{
                 }  
             </style>          
         ';
+        
+        return $style;
     }
 
     // -------------------------------------------------------------------------
@@ -85,9 +88,13 @@ class Pagination{
     /**
     * Showing pagination navigation buttons
     * 
+    * Using echo command, navigation buttons are displayed on the screen
+    * 
     * @param int $brstavuku
     * @param int $limitstart
     * @param String $dodParametar
+    * 
+    * @return void
     */
     public static function show($brstavuku, $limitstart, $dodParametar='')
     {

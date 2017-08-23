@@ -11,6 +11,7 @@ class User{
     /**
     * Records user's IP address
     * 
+    * @return String $_SERVER['REMOTE_ADDR']
     */
     public static function record_ip()
     {
@@ -22,6 +23,7 @@ class User{
     /**
     * Records user's User Agent
     * 
+    * @return String $_SERVER['HTTP_USER_AGENT']
     */
     public static function record_ua()
     {
@@ -36,8 +38,10 @@ class User{
     * @param String $image
     * @param String $image_location
     * @param String $image_default
+    * 
+    * @return String $image_link
     */
-    public static function image($image, $image_location='', $image_default="")
+    public static function image($image, $image_location='', $image_default='')
     {
         if(empty($image_location))
         {
@@ -58,7 +62,8 @@ class User{
                 $image_link = $image_default;
             }
         }
-    return $image_link;    
+        
+        return $image_link;    
     }
     
     // -------------------------------------------------------------------------

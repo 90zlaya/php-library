@@ -14,6 +14,7 @@ class Operating_System{
     /**
     * Gets operating systems list
     *
+    * @return Array
     */
     public static function get_list()
     {
