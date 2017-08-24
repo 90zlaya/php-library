@@ -17,7 +17,9 @@ class Date_Time_Format{
     /**
     * Returns current date-time of given format
     * 
-    * @param mixed $format
+    * @param String $format
+    * 
+    * @return String
     */
     public static function current($format='YmdHis')
     {
@@ -30,6 +32,8 @@ class Date_Time_Format{
     * Compares given date with current date
     * 
     * @param String $date
+    * 
+    * @return Bool
     */
     public static function compare($date)
     {
@@ -50,6 +54,8 @@ class Date_Time_Format{
     * 
     * @param String $date
     * @param String $format
+    * 
+    * @return Bool
     */
     public static function validate($date, $format)
     {
@@ -90,6 +96,8 @@ class Date_Time_Format{
     * 
     * @param String $date
     * @param Bool $without_time
+    * 
+    * @return String
     */
     public static function format($date, $without_time=FALSE)
     {
@@ -109,6 +117,8 @@ class Date_Time_Format{
     * Formats date to database-friendly format
     * 
     * @param String $date
+    * 
+    * @return String
     */
     public static function format_to_database($date)
     {
@@ -121,6 +131,8 @@ class Date_Time_Format{
     * Formats date to user-friendly format
     * 
     * @param String $date
+    * 
+    * @return String
     */
     public static function format_to_user($date)
     {
@@ -134,6 +146,8 @@ class Date_Time_Format{
     * 
     * @param int $time
     * @param String $format
+    * @return String
+    * 
     * @return String
     */
     public static function minutes_to_hours($time=0, $format='%02d:%02d')
@@ -157,6 +171,8 @@ class Date_Time_Format{
     * Converts hours to minutes
     * 
     * @param String $time
+    * 
+    * @return String $minutes
     */
     public static function hours_to_minutes($time)
     {
@@ -183,7 +199,8 @@ class Date_Time_Format{
         }else{
             $minutes = '';  
         }
-    return $minutes; 
+        
+        return $minutes; 
     } 
     
     // -------------------------------------------------------------------------
@@ -194,6 +211,8 @@ class Date_Time_Format{
     * @param int $month
     * @param String $language
     * @return String/Bool
+    * 
+    * @return String
     */
     public static function number_to_month($month, $language='')
     {

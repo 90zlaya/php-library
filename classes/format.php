@@ -12,12 +12,16 @@ class Format{
     /**
     * Converts bytes to megabytes
     * 
+    * @return Strubg $megabytes
     */
     public static function bytes_to_megabytes()
     {
         $base = log($size) / log(1024);             
         $f_base = floor($base);
-    return round(pow(1024, $base - floor($base)), 1) .' '. 'MB';
+        
+        $megabytes = round(pow(1024, $base - floor($base)), 1) .' '. 'MB';
+        
+        return $megabytes;
     }
     
     // -------------------------------------------------------------------------
@@ -26,12 +30,17 @@ class Format{
     * Formating query
     * 
     * @param String $query
+    * 
+    * @return String $formated_query
     */
     public static function query($query)
     {
         $queryPrint = str_ireplace('<', '&lt;', $query);
         $queryPrint = str_ireplace('>', '&gt;', $queryPrint);
-    return '<pre><code>' . $queryPrint . '</code></pre>';
+        
+        $formated_query = '<pre><code>' . $queryPrint . '</code></pre>';
+        
+        return $formated_query;
     }
     
     // -------------------------------------------------------------------------
@@ -42,17 +51,17 @@ class Format{
     * @param String $string
     * @param int $length
     * @param int $start
+    * 
+    * @return String $string
     */
     public static function string($string, $length, $start=0)
     {
         if(strlen($string) > $length)
         {
-            return substr($string, $start, $length) . ' ...';
+            $string = substr($string, $start, $length) . ' ...';
         }
-        else
-        {
-            return $string;
-        }
+        
+        return $string;
     }
     
     // -------------------------------------------------------------------------
@@ -62,6 +71,8 @@ class Format{
     * 
     * @param String $telephone
     * @param String $telephone_backup
+    * 
+    * @return String $result
     */
     public static function telephone($telephone='', $telephone_backup='')
     {
@@ -100,7 +111,8 @@ class Format{
                 $result = $first . '/' . $second . '-' . $third . '-' . $fourth;
             }
         }
-    return $result;
+    
+        return $result;
     }
     
     // -------------------------------------------------------------------------
@@ -110,6 +122,8 @@ class Format{
     * 
     * @param String $location
     * @param Bool $name
+    * 
+    * @return String
     */
     public static function website($location, $name=FALSE)
     {
@@ -143,6 +157,8 @@ class Format{
     * Formats IP addres and creates URL to more information
     * 
     * @param String $ip
+    * 
+    * @return String
     */
     public static function ip($ip)
     {
@@ -165,6 +181,8 @@ class Format{
     * @param String $subject
     * @param String $body
     * @param String $viseMejlova
+    * 
+    * @return String $rezultat
     */
     public static function email($eMail='', $subject='Poruka', $body='Poštovani, %0A%0A%0A', $viseMejlova='Prvi')
     {
@@ -205,7 +223,8 @@ class Format{
         {
             $rezultat = "Nepoznat";
         }
-    return $rezultat;
+        
+        return $rezultat;
     }
     
     // -------------------------------------------------------------------------
@@ -214,6 +233,8 @@ class Format{
     * Reformats string to start with big first letter
     * 
     * @param String $title
+    * 
+    * @return String
     */
     public static function title_case($title)
     {
