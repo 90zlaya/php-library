@@ -175,56 +175,25 @@ class Format{
     // -------------------------------------------------------------------------
     
     /**
-    * Formats email in order to protect it from Web spiders
+    * Formats email to mailto format
     * 
-    * @param String $eMail
+    * @param String $email
     * @param String $subject
-    * @param String $body
-    * @param String $viseMejlova
     * 
-    * @return String $rezultat
+    * @return String $formated_email
     */
-    public static function email($eMail='', $subject='Poruka', $body='Poštovani, %0A%0A%0A', $viseMejlova='Prvi')
+    public static function email($email, $subject='')
     {
-        if($eMail!="")
-        { // ima imejlova
-            $trigerViseMejlova = false; // sluzi za ispis | kod mejlova
-            $explodeEmail = explode(";", $eMail);
-            
-            switch($viseMejlova)
-            {
-                case "Svi": 
-                    {
-                        foreach($explodeEmail as $podatak){
-                            $eMail = trim($podatak);
-                            
-                            // ispitivanje trigera - ulazi kada treba da se ispise drugi mejl
-                            if($trigerViseMejlova)
-                                $rezultat .= "&nbsp;|&nbsp;";
-                                
-                            $rezultat .= "<a href='mailto:".$eMail."?subject=".$subject."&body=".$body."'>".$eMail."</a>";
-                
-                            // postavljanje trigera kada treba da se prikaze | (uspravnu crtu) za jos mejlova
-                            if($trigerViseMejlova)
-                                $trigerViseMejlova=false;
-                            else    
-                                $trigerViseMejlova=true;
-                        } // kraj foreach za vrtenje                    
-                    } break;
-                case "Prvi": 
-                    {
-                        $rezultat = "<a href='mailto:".$explodeEmail[0]."?subject=".$subject."&body=".$body."'>"; 
-                        $rezultat .= $explodeEmail[0]; 
-                        $rezultat .= "</a>";                    
-                    } break;            
-            }
+        if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            $formated_email = '';
         }
         else
         {
-            $rezultat = "Nepoznat";
+            $formated_email = '<a href="mailto:' . $email . '?subject=' . $subject . '">' . $email . '</a>';
         }
         
-        return $rezultat;
+        return $formated_email;
     }
     
     // -------------------------------------------------------------------------
