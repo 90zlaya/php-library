@@ -13,7 +13,11 @@
 echo 'This is index page.<br/><br/>';
 
 
+require_once('classes/directory-lister.php');
 
+print_r('<pre>');
+print_r(Directory_Lister::read('C:/xampp'));
+print_r('</pre>');
 
     
     /**
