@@ -159,6 +159,7 @@ class Directory_Lister{
                 if($item)
                 {
                     $link = '<img src="' . self::$directory . $item . '">';
+                    
                     array_push($arr_display, $link);
                 }
             }
