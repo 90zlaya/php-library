@@ -12,14 +12,33 @@
 */
 echo 'This is index page.<br/><br/>';
 
-
 require_once('classes/directory-lister.php');
 
+$directory = 'D:/Browser/images/';
+$files = Directory_Lister::files($directory);
 print_r('<pre>');
-print_r(Directory_Lister::read('C:/xampp'));
+print_r($files);
 print_r('</pre>');
 
-    
+$delimiter = '1457618897445-1042036105';
+$search = Directory_Lister::search($files, $delimiter);
+print_r('<pre>');
+print_r($search);
+print_r('</pre>');
+
+$mime_types = array(
+    'png',
+    'jpg',
+);
+$items = Directory_Lister::display($search, $mime_types);
+foreach($items as $item)
+{
+    echo $item;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+    // -------------------------------------------------------------------------    
     /**
     * Breadcrumbs for page
     * 
@@ -27,7 +46,7 @@ print_r('</pre>');
     * 
     * @return $breadcrumbs
     */
-/*
+    /*
     public function breadcrumbs($full_code) 
     {
         $breadcrumbs = array();
@@ -70,4 +89,6 @@ print_r('</pre>');
     }
         
     // -------------------------------------------------------------------------
-*/
+    */
+////////////////////////////////////////////////////////////////////////////////
+    
