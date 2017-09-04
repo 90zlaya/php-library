@@ -26,6 +26,7 @@ print_r('<pre>');
 print_r($search);
 print_r('</pre>');
 
+/*
 $mime_types = array(
     'png',
     'jpg',
@@ -35,6 +36,7 @@ foreach($items as $item)
 {
     echo $item;
 }
+*/
 
 
 ////////////////////////////////////////////////////////////////////////////////
