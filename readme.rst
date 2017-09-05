@@ -2,7 +2,7 @@
 PHP Library
 ###################
 
-PHP Library is set of classes containing most useful methods and variables for Web Development.
+PHP Library is set of custom made PHP classes containing most useful methods and variables for Web Development.
 
 ###################
 Release Information

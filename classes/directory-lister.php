@@ -3,7 +3,8 @@
 * Directory content retrieval
 */
 class Directory_Lister{
-    protected static $directory = '';
+    protected static $directory   = '';
+    protected static $date_format = 'Y-m-d';
     
     // -------------------------------------------------------------------------
     
@@ -14,7 +15,7 @@ class Directory_Lister{
     * 
     * @return mixed
     */
-    public static function folders($directory='')
+    protected static function folders($directory='')
     {
         if(empty($directory))
         {
@@ -62,7 +63,7 @@ class Directory_Lister{
     * 
     * @return mixed
     */
-    public static function files($directory='')
+    protected static function files($directory='')
     {
         if(empty($directory))
         {
@@ -76,14 +77,27 @@ class Directory_Lister{
         $files = scandir($directory);
         $arr_files = array();
         $counter = 1;
-        foreach($files as $folder)
+        foreach($files as $file)
         {
             if($counter > 2)
             {
-                if(stripos($folder, '.'))
+                if(stripos($file, '.'))
                 {
-                    $exploded = explode('.', $folder);  
-                    array_push($arr_files, $folder);
+                    $location  = 'file:///' . $directory . $file;
+                    $directory = self::$directory;
+                    $name      = $file;
+                    $modified  = date(self::$date_format, filemtime($location));
+                    $open      = '<a href="' . $location . '">' . $name . '</a><br/>';
+                    
+                    $data = array(
+                        'open'      => $open,
+                        'location'  => $location,
+                        'directory' => $directory,
+                        'name'      => $name,
+                        'modified'  => $modified,
+                    );
+                    
+                    array_push($arr_files, $data);
                 }
             }
             
@@ -96,75 +110,138 @@ class Directory_Lister{
     // -------------------------------------------------------------------------
     
     /**
-    * Searches specific directory reading results
+    * Displaying images
     * 
     * @param Array $list
-    * @param String $delimiter
     * 
-    *  @return mixed
+    * @return String $display
     */
-    public static function search($list, $delimiter='')
+    protected static function display($list)
     {
-        $arr_filtered = array();
-            
-        if(empty($list))
-        {
-            return $arr_filtered;
-        }
-        else if(empty($delimiter))
-        {
-            return $list;
-        }
-        else
+        $display = '';
+        if(!empty($list))
         {
             foreach($list as $item)
             {
-                if(stripos($item, $delimiter) !== FALSE)
-                {
-                    array_push($arr_filtered, $item);
-                }
+                $display .= '<script>window.open("' . $item['location'] . '");</script>' . PHP_EOL;
             }
-            
-            return $arr_filtered;
         }
+        
+        return $display;
     }
     
     // -------------------------------------------------------------------------
     
     /**
-    * Displaying images
+    * Listing specific directory reading results
     * 
-    * @param String $list
-    * @param String $directory
-    * @param Array $mime_types
+    * @param Array $params
     * 
-    * @return mixed
+    * @return Array $searched || $list
     */
-    public static function display($list, $mime_types=array())
+    public static function listing($params)
     {
-        $arr_display = array();
+        $directory  = $params['directory'];
+        $method     = $params['method'];
+        $print      = $params['print'];
+        $display    = $params['display'];
+        $delimiter  = $params['delimiter'];
+        $date_start = $params['date_start'];
+        $date_end   = $params['date_end'];
         
-        if(empty($list))
+        $list = $searched = array();
+        
+        if(!empty($directory))
         {
-            return $arr_display;
+            self::$directory = $directory;
         }
-        else if(empty($mime_types))
+        
+        switch($method)
         {
-            return $list;
+            case 'folders':
+            {
+                $list = self::folders();
+            } break;
+            case 'files':
+            {
+                $list = self::files();
+            } break;
+        }
+        
+        if(empty($delimiter))
+        {
+            foreach($list as $item)
+            {
+                $name = $item['name'];
+                $date = $item['modified'];
+                
+                if(empty($date_start))
+                {
+                    array_push($searched, $item);
+                }
+                else if(empty($date_end))
+                {
+                    if($date == $date_start)
+                    {
+                        array_push($searched, $item);
+                    }
+                }
+                else
+                {
+                    if($date >= $date_start && $date <= $date_end)
+                    {
+                        array_push($searched, $item);
+                    }
+                }
+            }
         }
         else
         {
             foreach($list as $item)
             {
-                if($item)
+                $name = $item['name'];
+                $date = $item['modified'];
+                                
+                if(stripos($name, $delimiter) !== FALSE)
                 {
-                    $link = '<img src="' . self::$directory . $item . '">';
-                    
-                    array_push($arr_display, $link);
+                    if(empty($date_start))
+                    {
+                        array_push($searched, $item);
+                    }
+                    else if(empty($date_end))
+                    {
+                        if($date == $date_start)
+                        {
+                            array_push($searched, $item);
+                        }
+                    }
+                    else
+                    {
+                        if($date >= $date_start && $date <= $date_end)
+                        {
+                            array_push($searched, $item);
+                        }
+                    }
                 }
             }
+        }
             
-            return $arr_display;
+        if($print || $display)
+        {
+            if($print)
+            {
+                print_r('<pre>');
+                print_r($searched);
+                print_r('</pre>');
+            }
+            else if($display)
+            {
+                print_r(self::display($searched));
+            }
+        }
+        else
+        {
+            return $searched;
         }
     }
     
