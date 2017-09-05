@@ -87,7 +87,7 @@ class Directory_Lister{
                     $directory = self::$directory;
                     $name      = $file;
                     $modified  = date(self::$date_format, filemtime($location));
-                    $open      = '<a href="' . $location . '">' . $name . '</a><br/>';
+                    $open      = '<a href="' . $location . '" target="_blank">' . $name . '</a>';
                     
                     $data = array(
                         'open'      => $open,
@@ -123,11 +123,51 @@ class Directory_Lister{
         {
             foreach($list as $item)
             {
-                $display .= '<script>window.open("' . $item['location'] . '");</script>' . PHP_EOL;
+                $display .= '<script>window.open("' . $item[0]['location'] . '");</script>';
             }
         }
         
         return $display;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Checks dates of listed directory limits
+    * 
+    * @param Array $params
+    * 
+    * @return Array $searched
+    */
+    private static function check_date($params)
+    {
+        $item       = $params['item'];
+        $date       = $params['date'];
+        $date_start = $params['date_start'];
+        $date_end   = $params['date_end'];
+        
+        $searched = array();
+        
+        if(empty($date_start))
+        {
+            array_push($searched, $item);
+        }
+        else if(empty($date_end))
+        {
+            if($date == $date_start)
+            {
+                array_push($searched, $item);
+            }
+        }
+        else
+        {
+            if($date >= $date_start && $date <= $date_end)
+            {
+                array_push($searched, $item);
+            }
+        }
+        
+        return $searched;
     }
     
     // -------------------------------------------------------------------------
@@ -151,81 +191,49 @@ class Directory_Lister{
         
         $list = $searched = array();
         
-        if(!empty($directory))
-        {
-            self::$directory = $directory;
-        }
-        
         switch($method)
         {
             case 'folders':
             {
-                $list = self::folders();
+                $list = self::folders($directory);
             } break;
             case 'files':
             {
-                $list = self::files();
+                $list = self::files($directory);
             } break;
         }
         
-        if(empty($delimiter))
+        foreach($list as $item)
         {
-            foreach($list as $item)
+            $params = array(
+                'item'       => $item,
+                'date'       => $item['modified'],
+                'date_start' => $date_start,
+                'date_end'   => $date_end,
+            );
+            
+            if(empty($delimiter))
             {
-                $name = $item['name'];
-                $date = $item['modified'];
-                
-                if(empty($date_start))
+                $checked = self::check_date($params);
+            }
+            else
+            {
+                if(stripos($item['name'], $delimiter) !== FALSE)
                 {
-                    array_push($searched, $item);
-                }
-                else if(empty($date_end))
-                {
-                    if($date == $date_start)
-                    {
-                        array_push($searched, $item);
-                    }
+                    $checked = self::check_date($params);
                 }
                 else
                 {
-                    if($date >= $date_start && $date <= $date_end)
-                    {
-                        array_push($searched, $item);
-                    }
+                    $checked = array();
                 }
             }
-        }
-        else
-        {
-            foreach($list as $item)
-            {
-                $name = $item['name'];
-                $date = $item['modified'];
-                                
-                if(stripos($name, $delimiter) !== FALSE)
-                {
-                    if(empty($date_start))
-                    {
-                        array_push($searched, $item);
-                    }
-                    else if(empty($date_end))
-                    {
-                        if($date == $date_start)
-                        {
-                            array_push($searched, $item);
-                        }
-                    }
-                    else
-                    {
-                        if($date >= $date_start && $date <= $date_end)
-                        {
-                            array_push($searched, $item);
-                        }
-                    }
-                }
-            }
-        }
             
+            if(!empty($checked))
+            {
+                array_push($searched, $checked);
+            }
+        }
+        
         if($print || $display)
         {
             if($print)
@@ -234,7 +242,7 @@ class Directory_Lister{
                 print_r($searched);
                 print_r('</pre>');
             }
-            else if($display)
+            if($display)
             {
                 print_r(self::display($searched));
             }
