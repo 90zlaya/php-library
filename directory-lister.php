@@ -10,7 +10,7 @@
 */
 require_once('classes/directory-lister.php');
 $params = array(
-    'directory'  => 'D:/Browser/images test/',
+    'directory'  => 'D:/Browser/img/',
     'method'     => 'files',
     'print'      => TRUE,
     'display'    => FALSE,
