@@ -14,8 +14,9 @@ $params = array(
     'method'     => 'files',
     'print'      => TRUE,
     'display'    => FALSE,
+    'reverse'    => FALSE,
     'delimiter'  => '',
-    'date_start' => '',
+    'date_start' => '2016-03-10',
     'date_end'   => '',
 );
 Directory_Lister::listing($params);

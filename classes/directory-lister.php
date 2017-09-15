@@ -185,6 +185,7 @@ class Directory_Lister{
         $method     = $params['method'];
         $print      = $params['print'];
         $display    = $params['display'];
+        $reverse    = $params['reverse'];
         $delimiter  = $params['delimiter'];
         $date_start = $params['date_start'];
         $date_end   = $params['date_end'];
@@ -218,13 +219,27 @@ class Directory_Lister{
             }
             else
             {
-                if(stripos($item['name'], $delimiter) !== FALSE)
+                if($reverse)
                 {
-                    $checked = self::check_date($params);
+                    if(stripos($item['name'], $delimiter) === FALSE)
+                    {
+                        $checked = self::check_date($params);
+                    }
+                    else
+                    {
+                        $checked = array();
+                    }
                 }
                 else
                 {
-                    $checked = array();
+                    if(stripos($item['name'], $delimiter) !== FALSE)
+                    {
+                        $checked = self::check_date($params);
+                    }
+                    else
+                    {
+                        $checked = array();
+                    }
                 }
             }
             
