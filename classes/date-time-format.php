@@ -12,6 +12,8 @@ class Date_Time_Format{
     public static $friendly_date     = 'd-M-Y';
     public static $friendly_datetime = 'd-M-Y H:i:s';
     
+    protected static $unfriendly_datetime = 'YmdHis';
+    
     // -------------------------------------------------------------------------
     
     /**
@@ -315,6 +317,29 @@ class Date_Time_Format{
                     }
                 } break;
             default: return FALSE;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Adds date-time prefix to given string
+    * 
+    * @param String $string
+    * 
+    * @return mixed
+    */
+    public static function prefix($string)
+    {
+        if(empty($string))
+        {
+            return FALSE;
+        }
+        else
+        {
+            $date_time = date(self::$unfriendly_datetime);
+            $string_with_prefix = $date_time . '_' . $string;
+            return $string_with_prefix;
         }
     }
     
