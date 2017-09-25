@@ -50,7 +50,7 @@ class Password{
         $h = 0;
         $size = strlen($string);
         
-        if($size >= self::$size_minimum and preg_match('/^[a-zA-Z0-9._]+$/', 'string'))
+        if($size >= self::$size_minimum && ctype_alnum($string))
         {
             foreach(count_chars($string, 1) as $v)
             {
