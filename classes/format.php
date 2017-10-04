@@ -211,5 +211,41 @@ class Format{
     }
     
     // -------------------------------------------------------------------------
+
+    /**
+    * Converting number to specific format
+    * 
+    * @param float $number
+    * @param Bool $with_decimal
+    * @param int $value
+    * 
+    * @return String $converted
+    */
+    public static function number($number, $with_decimal=TRUE, $value=1000000)
+    {
+        if(empty($number))
+        {
+            $converted = '';
+        }
+        else
+        {
+            if($with_decimal)
+            {
+                $converted = number_format($number/$value, 1, '.', '');
+                if($converted < 1)
+                {
+                    $converted = substr($converted, 1, 2);
+                }
+            }
+            else
+            {
+                $converted = number_format($number/$value, 0, '.', '');
+            }
+        }
+        
+        return $converted;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

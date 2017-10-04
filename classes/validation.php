@@ -155,5 +155,30 @@ class Validation{
     }
     
     // -------------------------------------------------------------------------
+
+    /**
+    * Decides which type of data should be shown
+    * 
+    * @param Bool $bool
+    * @param String $value_1
+    * @param String $value_2
+    * 
+    * @return String $even_or_odd
+    */
+    public static function even_or_odd($bool, $value_1, $value_2)
+    {
+        if($bool)
+        {
+            $even_or_odd = $value_1;
+        }
+        else
+        {
+            $even_or_odd = $value_2;
+        }
+        
+        return $even_or_odd;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>
