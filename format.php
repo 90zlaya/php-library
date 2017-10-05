@@ -8,10 +8,15 @@
 |
 | -------------------------------------------------------------------
 */
+require_once('classes/format.php');
 require_once('classes/date-time-format.php');
-require_once('classes/validation.php');
 
-$string = 'test NAZIV - a$ ČĆŠ čć ">>$#"%& 0569 fajla.JPG';
+$data = array(
+    'test_one' => 'one',
+    'test_two' => array(
+        'three' => 3,
+        'four'  => 4,
+    ),
+);
 
-$string = Validation::rewrite($string);
-echo Date_Time_Format::prefix($string);
+Format::pre($data);

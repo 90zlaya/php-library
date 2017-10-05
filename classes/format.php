@@ -247,5 +247,19 @@ class Format{
     }
     
     // -------------------------------------------------------------------------
+
+    /**
+    * Convert given data to readable format
+    * 
+    * @param mixed $data
+    */
+    public static function pre($data)
+    {
+        print_r('<pre>');
+        print_r($data);
+        print_r('</pre>');
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>
