@@ -344,5 +344,50 @@ class Date_Time_Format{
     }
     
     // -------------------------------------------------------------------------
+
+    /**
+    * Format JMBG to date
+    * 
+    * @param String $jmbg
+    * 
+    * @return mixed $date
+    */
+    public static function date_from_jmbg($jmbg){
+        if(empty($jmbg) || strlen($jmbg) < 13)
+        {
+            $date = FALSE;
+        }
+        else
+        {
+            $date_day   = substr($jmbg, 0, 2);
+            $date_month = substr($jmbg, 2, 2);
+            $date_year  = substr($jmbg, 4, 3);
+            
+            if(substr($date_day, 0, 1) == 0)
+            {
+                $date_day = substr($date_day, 1, 2); 
+            }
+            
+            if(substr($date_month, 0, 1) == 0)
+            {
+                $date_month = substr($date_month, 1, 2); 
+            }
+
+            if($date_year > 100)
+            {
+                $date_year = 1 . $date_year;
+            }
+            else
+            {
+                $date_year = 2 . $date_year;    
+            }
+            
+            $date = $date_day . '. ' . $date_month . '. ' . $date_year . '.';
+        }
+            
+        return $date;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

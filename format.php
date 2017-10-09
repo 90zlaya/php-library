@@ -11,12 +11,4 @@
 require_once('classes/format.php');
 require_once('classes/date-time-format.php');
 
-$data = array(
-    'test_one' => 'one',
-    'test_two' => array(
-        'three' => 3,
-        'four'  => 4,
-    ),
-);
-
-Format::pre($data);
+echo Date_Time_Format::date_from_jmbg('0311975123456');
