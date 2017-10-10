@@ -11,4 +11,6 @@
 require_once('classes/format.php');
 require_once('classes/date-time-format.php');
 
-echo Date_Time_Format::date_from_jmbg('0311975123456');
+$string = 'Testing string length';
+
+echo Format::correct_string_length($string);

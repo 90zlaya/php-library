@@ -261,5 +261,61 @@ class Format{
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Converting string from Windows-1250 to UTF-8
+    * 
+    * @param String $string
+    * 
+    * @return String $converted
+    */
+    public static function windows1250_to_utf8($string)
+    {
+        $converted = iconv('windows-1250', 'utf-8', $string);
+        
+        return $converted;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Converting string from UTF-8 to Windows-1250
+    * 
+    * @param String $string
+    * 
+    * @return String $converted
+    */
+    public static function utf8_to_windows1250($string)
+    {
+        $converted = iconv('utf-8', 'windows-1250', $string);
+        
+        return $converted;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Formating shortened string
+    * 
+    * @param String $string
+    * @param int $start
+    * @param int $length
+    * 
+    * @return String $corrected
+    */
+    public static function correct_string_length($string, $start=0, $length=15){
+        if(strlen($string) > $length)
+        {
+            $corrected = substr($string, $start, $length) . '...';
+        }
+        else
+        {
+            $corrected = $string;    
+        }
+        
+        return $corrected;    
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>
