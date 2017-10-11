@@ -180,5 +180,43 @@ class Validation{
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Checks if file extension is valid or not
+    * 
+    * @param String $file
+    * @param Array $allowed_extensions
+    */
+    public static function extension($file, $allowed_extensions, $type='', $allowed_types=array())
+    {
+        $exploded  = explode('.', $file);
+        $extension = end($exploded);
+        $extension = strtolower($extension);
+        
+        if(in_array($extension, $allowed_extensions))
+        {
+            if(empty($type) || empty($allowed_types))
+            {
+                return TRUE;
+            }
+            else
+            {
+                if(in_array($type, $allowed_types))
+                {
+                    return TRUE;
+                }
+                else
+                {
+                    return FALSE;
+                }
+            }
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

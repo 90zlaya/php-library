@@ -11,32 +11,10 @@
 | -------------------------------------------------------------------
 */
 echo 'This is index page.<br/><br/>';
-
-
 /**
 * PREPARING NEW METHODS
 *
-*/
-///////////////////////////////////////////////////////////////////////////////////////////
-// PROVERAVA EKSTENZIJU SLIKE - DOKUMENTA
-    /*
-    *    @param: $name
-    *    @param: $type
-    *    @return: 1 ili tekstualna poruka
-    */
-    function proveraEkstenzijeSlike($name, $type){
-        $validneExtenzije = array("jpeg", "jpg", "png", "gif", "xlsx", "xls");
-        $extenzija = end(explode(".", $name));
-        $extenzija = strtolower($extenzija);
-        if ( ( (
-                /* samo slike*/$type == "image/png") or ($type == "image/jpg") or ($type == "image/jpeg") or ($type == "image/gif") or 
-                /* samo excel */ ($type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") or ($type == "application/vnd.ms-excel") ) 
-                and in_array($extenzija, $validneExtenzije) ) {
-            return 1;
-        } else {
-            return "Dozvoljene ekstenzije: jpeg, jpg, png, gif, xlsx, xls.";
-        }
-     }
+*/     
 ///////////////////////////////////////////////////////////////////////////////////////////
 // SPREMA NAZIV SLIKE ZA SERVER I BAZU
     /*
