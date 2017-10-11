@@ -3,9 +3,11 @@
 * Format methods
 */
 class Format{
-    public static $ip_locator           = 'http://www.infosniper.net/index.php?ip_address=';
-    public static $ip_localhost_address = '::1';
-    public static $ip_localhost_name    = 'Localhost';
+    protected static $ip_locator           = 'http://www.infosniper.net/index.php?ip_address=';
+    protected static $ip_localhost_address = '::1';
+    protected static $ip_localhost_name    = 'Localhost';
+    protected static $utf_8                = 'utf-8';
+    protected static $windows_1250         = 'windows-1250';
     
     // -------------------------------------------------------------------------
     
@@ -271,7 +273,7 @@ class Format{
     */
     public static function windows1250_to_utf8($string)
     {
-        $converted = iconv('windows-1250', 'utf-8', $string);
+        $converted = iconv(self::$windows_1250, self::$utf_8, $string);
         
         return $converted;
     }
@@ -287,7 +289,7 @@ class Format{
     */
     public static function utf8_to_windows1250($string)
     {
-        $converted = iconv('utf-8', 'windows-1250', $string);
+        $converted = iconv(self::$utf_8, self::$windows_1250, $string);
         
         return $converted;
     }
@@ -303,7 +305,8 @@ class Format{
     * 
     * @return String $corrected
     */
-    public static function correct_string_length($string, $start=0, $length=15){
+    public static function correct_string_length($string, $start=0, $length=15)
+    {
         if(strlen($string) > $length)
         {
             $corrected = substr($string, $start, $length) . '...';

@@ -10,7 +10,3 @@
 */
 require_once('classes/format.php');
 require_once('classes/date-time-format.php');
-
-$string = 'Testing string length';
-
-echo Format::correct_string_length($string);
