@@ -239,6 +239,8 @@ class Validation{
     * 
     * @param String $file
     * @param Array $allowed_extensions
+    * 
+    * @return Bool
     */
     public static function extension($file, $allowed_extensions, $type='', $allowed_types=array())
     {
