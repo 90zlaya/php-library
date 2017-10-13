@@ -1,13 +1,11 @@
 <?php
 /*
 | -------------------------------------------------------------------
-| INDEX PAGE
+| FILE
 | -------------------------------------------------------------------
-| This file contains default view for testing classes.
 |
-| You may instantiate classes here, call methods and pass parameters
-| to and from methods in purpose of testing and developing.
+| Developing and testing File class
 |
 | -------------------------------------------------------------------
 */
-echo 'This is index page.';
+require_once('classes/file.php');
