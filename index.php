@@ -85,30 +85,45 @@ function hitCounterOnOccasion($fileLocation, $dataEntry, $sifraRadnika, $sifraOb
     }
 } 
 ////////////////////////////////////////////////////////////////////////////////
-// BROJANJE POSETA STRANICE
-/*
-*    @param: $fileLocation // lokacija dokumenta
-*    @return: null
+
+/**
+* Writing data to file
+* 
+* @param String $file_location
+* @param String $write_data
+* 
+* @return mixed
 */
-function hitCounterFunction($fileLocation)
+function write_to_file($file_location, $write_data)
 {
-    if( file_exists($fileLocation) ){
-        $fil = fopen($fileLocation, r);
-        $dat = fread($fil, filesize($fileLocation));
-        
-        $trenutniDatum = date("d.m.Y H:i");
-        $podaciZaUpis = $trenutniDatum. " / " .$sifraRadnika. " / " .$sifraObjekta;
-        
-        $dat .=  PHP_EOL .$podaciZaUpis;
-        
-        fclose($fil);
-        $fil = fopen($fileLocation, w);
-        fwrite($fil, $dat);
-    }else{
-        $fil = fopen($fileLocation, w);
-        fwrite($fil, 1);    
-        echo '1';
-        fclose($fil);
+    if(empty($file_location) || empty($write_data))
+    {
+        return FALSE;
     }
-}     
-////////////////////////////////////////////////////////////////////////////////
+    else
+    {
+        $new_data = $write_data . PHP_EOL;
+        
+        if(file_exists($file_location))
+        {
+            $file = fopen($file_location, 'r');
+            $data = fread($file, filesize($file_location));
+            
+            $data .=  $new_data;
+            
+            fclose($file);
+            $file = fopen($file_location, 'w');
+            fwrite($file, $data);
+        }
+        else
+        {
+            fopen($file_location, 'w');
+            $file = fopen($file_location, 'w');
+            
+            $info_message = PHP_EOL;
+            $data = $info_message . $new_data;
+            
+            fwrite($file, $data);
+        }
+    }
+}
