@@ -389,5 +389,38 @@ class Date_Time_Format{
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Name of the first day in year
+    * 
+    * @param String $format
+    * @param int $year
+    * 
+    * @return String $january_first
+    */
+    public static function first_day_of_year($format='l', $year=0)
+    {
+        $first_day_and_month = '01.01.';
+        
+        if(empty($year))
+        {
+            $year  = date('Y');
+        }
+        
+        switch($format)
+        {
+            case 'd': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
+            case 'D': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
+            case 'j': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
+            case 'l': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
+            case 'N': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
+            case 'S': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
+            case 'z': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
+        }
+        
+        return $january_first;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>
