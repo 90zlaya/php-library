@@ -112,3 +112,28 @@ function hitCounterFunction($fileLocation)
     }
 }     
 ////////////////////////////////////////////////////////////////////////////////
+// PROVERAVA KOJI JE DAN PRVI JANUAR U GODINI
+    /*
+    *    @param: void
+    *    @return: $g_dan_dod // brojka
+    *        a) ako je ponedeljak sve ostaje isto 
+    *        b) ako je neki drugi dan nedelja se smanjuje za jedan
+    */
+    function godina_start() {
+        $godina=date("Y");
+        $br_nedelje=date("W");
+        
+        $datum_1_jan= date('D', strtotime('01.01.'.$godina));
+        //echo "$datum_1_jan<BR>";
+        switch ($datum_1_jan) {
+          case "Mon": $g_dan_dod="01"; break;
+          case "Tue": $g_dan_dod="06"; break;
+          case "Wed": $g_dan_dod="05"; break;
+          case "Thu": $g_dan_dod="04"; break;
+          case "Fri": $g_dan_dod="03"; break;
+          case "Sat": $g_dan_dod="02"; break;
+          case "Sun": $g_dan_dod="08"; break;
+        }
+    return $g_dan_dod;
+    }
+////////////////////////////////////////////////////////////////////////////////

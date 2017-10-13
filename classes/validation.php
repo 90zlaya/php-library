@@ -176,17 +176,17 @@ class Validation{
                 'Č' => 'č',
                 'Ž' => 'ž',
                 'Š' => 'š',
-                'Ð' => 'đ',
             );
             
             $string_replaced = strtr($string, $special_characters);
             $string_lowered  = strtolower($string_replaced);
             
             $string_lowered = str_ireplace('ć', 'c', $string_lowered);
+            $string_lowered = str_ireplace('č', 'c', $string_lowered);
             $string_lowered = str_ireplace('ž', 'z', $string_lowered);
             $string_lowered = str_ireplace('š', 's', $string_lowered);
-            $string_lowered = str_ireplace('č', 'c', $string_lowered);
             $string_lowered = str_ireplace('đ', 'dj', $string_lowered);
+            $string_lowered = str_ireplace('Đ', 'dj', $string_lowered);
             
             $string_replaced = preg_replace('/_[a-zA-Z0-9]+(\.)/', '.', $string_lowered, 1);
             $string_trimmed  = trim($string_replaced);
