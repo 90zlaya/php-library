@@ -229,6 +229,7 @@ class Website{
         $meta .= '<meta name="description" content="' . $this->name . ':' . ' ' . $this->description . '">' . PHP_EOL;
         $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
         $meta .= '<meta name="author" content="' . $this->creator_name . '">' . PHP_EOL;
+		$meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
         $meta .= '<link rel="shortcut icon" href="' . $this->favorite_icon . '" type="image/png">' . PHP_EOL;
         
         $meta .= '<title>';
