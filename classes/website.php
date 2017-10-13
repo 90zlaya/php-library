@@ -103,7 +103,7 @@ class Website{
     {
         $current_year = date('Y');
         
-        if($current_year === $this->made OR $always_made_year)
+        if($current_year === $this->made || $always_made_year)
         {
             $since = $current_year;
         }
@@ -161,7 +161,7 @@ class Website{
     * 
     * @return void
     */
-    public function add_tohead($params)
+    public function add_to_head($params)
     {
         if(!empty($params))
         {
@@ -191,7 +191,7 @@ class Website{
     * 
     * @return void
     */
-    public function add_tobottom($params)
+    public function add_to_bottom($params)
     {
         if(empty($params))
         {
