@@ -45,75 +45,38 @@ class File{
     
     // -------------------------------------------------------------------------
     
-    
-////////////////////////////////////////////////////////////////////////////////
-// CITANJE ZADNJEG PODATKA IZ FAJLA
-/*
-*    @param: $lokacijaCounterError // lokacija dokumenta
-*
-*    @return: null
-*/
-public static function citajZadnjiPodatakIzFajla($lokacijaCounterError)
-{
-    $line = '';
-
-    $f = fopen($lokacijaCounterError, 'r');
-    $cursor = -1;
-
-    fseek($f, $cursor, SEEK_END);
-    $char = fgetc($f);
-
     /**
-     * Trim trailing newline chars of the file
-     */
-    while ($char === "\n" || $char === "\r") {
-        fseek($f, $cursor--, SEEK_END);
-        $char = fgetc($f);
-    }
-
-    /**
-     * Read until the start of file or first newline char
-     */
-    while ($char !== false && $char !== "\n" && $char !== "\r") {
-        /**
-         * Prepend the new char
-         */
-        $line = $char . $line;
-        fseek($f, $cursor--, SEEK_END);
-        $char = fgetc($f);
-    }
-return $line;                 
-}
-////////////////////////////////////////////////////////////////////////////////
-// UPIS U FAJL KADA SE NESTO DESI
-/*
-*    @param: $fileLocation // lokacija dokumenta
-*    @param: $dataEntry // podaci za unos
-*
-*    @return: null
-*/
-public static function hitCounterOnOccasion($fileLocation, $dataEntry, $sifraRadnika, $sifraObjekta )
-{
-    if( file_exists($fileLocation) )
+    * Reading last data from file
+    * 
+    * @param String $file_location
+    * 
+    * @return String $line
+    */
+    public static function read_from_file($file_location)
     {
-        $fil = fopen($fileLocation, r);
-        $dat = fread($fil, filesize($fileLocation));
+        $f = @fopen($file_location, 'r');
+        $cursor = -1;
+
+        @fseek($f, $cursor, SEEK_END);
+        $char = @fgetc($f);
         
-        $trenutniDatum = date("d.m.Y H:i");
-        $podaciZaUpis = $trenutniDatum. " / " .$sifraRadnika. " / " .$sifraObjekta. " / " .$dataEntry. " ";
+        while($char === "\n" || $char === "\r")
+        {
+            @fseek($f, $cursor--, SEEK_END);
+            $char = @fgetc($f);
+        }
         
-        $dat .=  PHP_EOL .$podaciZaUpis;
+        $line = '';
+        while($char !== false && $char !== "\n" && $char !== "\r")
+        {
+            $line = $char . $line;
+            @fseek($f, $cursor--, SEEK_END);
+            $char = @fgetc($f);
+        }
         
-        fclose($fil);
-        $fil = fopen($fileLocation, w);
-        fwrite($fil, $dat);
-    }else{
-        $fil = fopen($fileLocation, w);
-        fwrite($fil, 1);    
-        echo '1';
-        fclose($fil);
+        return $line;                 
     }
-} 
-////////////////////////////////////////////////////////////////////////////////
+    
+    // -------------------------------------------------------------------------
 }
-?>    
+?>
