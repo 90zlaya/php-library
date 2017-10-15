@@ -382,26 +382,6 @@ return $noviNaziv;
     if ($exit) exit;
   }
 ////////////////////////////////////////////////////////////////////////////////////////////
-// BROJANJE RECI U TEKSTU
-  /*
-  *  @param: $sentence // recenica koju treba prebrojati
-  *  @return: $rezultat // prebrojan broj reci
-  */
-  function wordCount($sentence){
-        $array = explode(" ", $sentence);
-      $rezultat = count($array);
-  return $rezultat;
-  }
-////////////////////////////////////////////////////////////////////////////////////////////
-// PRONALAZAK POSTOJEĆE SLIKE
-  function findExistingImage($lokacijaSlike){
-    if ( @getimagesize($lokacijaSlike) )
-      $existingImage = "<img src=\"" .$lokacijaSlike. "\"></img>";
-    else
-      $existingImage = "Image not found!";
-
-  return $existingImage;
-  }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GENERISANJE RANDOM SETA
   /*
@@ -550,25 +530,6 @@ return $noviNaziv;
       $strength = 0;
     }
   return round($strength,2);
-  }
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-// BASE64 ENCODE-DECODE STRINGA
-  function base64EncodeDecode($operation, $plainText){
-    switch($operation){
-      case "encode":
-        {
-          $base64 = base64_encode($plainText);
-          $result = strtr($base64, '+/=', '-_,');
-        }
-        break;
-      case "decode":
-        {
-          $base64 = strtr($plainText, '-_,', '+/=');
-          $result = base64_decode($base64);
-        }
-        break;
-    }
-  return $result;
   }
 ////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////IMEJL/////////////////////////////////////////////////

@@ -55,15 +55,37 @@ class User{
         
         $image_link = $image_location . $image;
         
-        if(!file_exists($image_link) or empty($image))
+        if(!file_exists($image_link) || empty($image))
         {
-            if(!file_exists('../'. $image_link) or empty($image))
+            if(!file_exists('../'. $image_link) || empty($image))
             {
                 $image_link = $image_default;
             }
         }
         
         return $image_link;    
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Image in HTML tags
+    * 
+    * @param String $image
+    * 
+    * @return mixed
+    */
+    public static function image_to_html($image){
+        if(@getimagesize($image))
+        {
+            $img_to_html = '<img src="' . $image . '"></img>';
+        }
+        else
+        {
+            $img_to_html = FALSE;
+        }
+    
+        return $img_to_html;
     }
     
     // -------------------------------------------------------------------------
