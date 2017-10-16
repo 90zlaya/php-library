@@ -6,6 +6,7 @@ class Password{
     protected static $size_minimum = 6;
     protected static $size_optimum = 9;
     protected static $letters      = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    protected static $words        = 'dog,cat,sheep,sun,sky,red,ball,happy,ice,green,blue,music,movies,radio,green,turbo,mouse,computer,paper,water,fire,storm,chicken,boot,freedom,white,nice,player,small,eyes,path,kid,box,black,flower,ping,pong,smile,coffee,colors,rainbow,plus,king,tv,ring';
     
     // -------------------------------------------------------------------------
     
@@ -34,6 +35,48 @@ class Password{
         return $new_password;
     }
     
+    // -------------------------------------------------------------------------
+
+    /**
+    * Generates new readable password
+    * 
+    * @param int $size_optimum
+    * @param String $words
+    * 
+    * @return String $new_password
+    */
+    public static function new_readable($size_optimum=0, $words=''){
+        if(empty($size_optimum))
+        {
+            $size_optimum = self::$size_optimum;
+        }
+        
+        if(empty($words))
+        {
+            $words = self::$words;
+        }
+        
+        $words = explode(',', $words);
+        $new_password = '';
+        while(strlen($new_password) < $size_optimum)
+        {
+          $r = mt_rand(0, count($words)-1);
+          $new_password .= $words[$r];
+        }
+        
+        $number = mt_rand(1000, 9999);
+        if($size_optimum > 2)
+        {
+            $new_password = substr($new_password, 0, $size_optimum-strlen($number)) . $number;
+        }
+        else
+        {
+            $new_password = substr($new_password, 0, $size_optimum);
+        }
+
+        return $new_password;
+    } 
+  
     // -------------------------------------------------------------------------
     
     /**

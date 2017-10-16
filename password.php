@@ -10,9 +10,7 @@
 */
 require_once('classes/password.php');
 
-$string = 'password';
-echo Password::strength($string, FALSE);
-
+echo Password::new();
 echo '<br/>';
+echo Password::new_readable();
 
-echo ctype_alnum($string);
