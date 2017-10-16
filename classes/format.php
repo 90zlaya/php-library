@@ -177,30 +177,6 @@ class Format{
     // -------------------------------------------------------------------------
     
     /**
-    * Formats email to mailto format
-    * 
-    * @param String $email
-    * @param String $subject
-    * 
-    * @return String $formated_email
-    */
-    public static function email($email, $subject='')
-    {
-        if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL))
-        {
-            $formated_email = '';
-        }
-        else
-        {
-            $formated_email = '<a href="mailto:' . $email . '?subject=' . $subject . '">' . $email . '</a>';
-        }
-        
-        return $formated_email;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
     * Reformats string to start with big first letter
     * 
     * @param String $title
