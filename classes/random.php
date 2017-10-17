@@ -5,12 +5,20 @@
 class Random{
     protected static $numbers      = '0123456789';
     protected static $alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    protected static $conso        = array("b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","w","x","y","z");
+    protected static $consonant    = array("b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","w","x","y","z");
     protected static $vocal        = array("a","e","i","o","u");
     
     // -------------------------------------------------------------------------    
     
-    public static function generate_random($length=4, $type='INT'){
+    /**
+    * Generates random sequence for given length and sequence type
+    * 
+    * @param int $length
+    * @param String $type
+    * 
+    * @return String $random_generated
+    */
+    public static function generate($length=4, $type='INT'){
         switch($type){
             case 'INT':
             {
@@ -38,7 +46,7 @@ class Random{
             } break;
             case 'STRING_ADVANCED':
             {
-                $conso = self::$conso;
+                $conso = self::$consonant;
                 $vocal = self::$vocal;
                 $max = $length/2;           
                 $readable_random_string = '';
@@ -62,6 +70,46 @@ class Random{
         }
         
         return $random_generated;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Returns random element of array for given dose
+    * 
+    * @param Array $list
+    * @param String $dose
+    * 
+    * @return Array $element
+    */
+    public static function element($list, $dose='')
+    {
+        $list_size = sizeof($list);
+        
+        if(($dose === 'DAY' && $list_size < 7) || ($dose === 'MONTH' && $list_size < 31))
+        {
+            $dose = '';
+        }
+        
+        switch($dose)
+        {
+            case 'DAY':
+            {
+                $index = date('N') - 1;
+            } break;
+            case 'MONTH':
+            {
+                $index = date('j') - 1;
+            } break;
+            default:
+            {
+                $index = rand(0, $list_size - 1);
+            }
+        }
+        
+        $element = $list[$index];
+        
+        return $element;
     }
     
     // -------------------------------------------------------------------------
