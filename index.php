@@ -11,19 +11,9 @@
 | -------------------------------------------------------------------
 */
 echo 'This is index page.';
-/**
-* NEW
-*/
-////////////////////////////////////////////////////////////////////////////////////////////////////
-/**
-*    poklapanjeHoroskopskihZnakova: Da li se poklapaju horoskopski znakovi dve osobe; 19-Sep-2016
-*
-*    @param: $polOsobe1
-*    @param: $znakOsobe1
-*    @param: $znakOsobe2
-*
-*    @return: $rezultat // true kada ima poklapanja
-**/
+
+// -----------------------------------------------------------------------------
+
 function poklapanjeHoroskopskihZnakova($polOsobe1, $znakOsobe1, $znakOsobe2){
     switch($polOsobe1){
         case "Male": // poklapanje za muskarca
@@ -66,15 +56,6 @@ function poklapanjeHoroskopskihZnakova($polOsobe1, $znakOsobe1, $znakOsobe2){
     } // end switch pol osobe
 return $rezultat;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////
-/**
-*    odrediHoroskopskiZnak: Odredjivanje horoskopskog znaka na osnovu datuma rodjenja; 19-Sep-2016
-*
-*    @param: $datumRodjenja // prolazi samo brojcani sa specijalnim znakovima
-*    @param: $formatDatuma="dmg" // redosled dana, meseca i godine
-*
-*    @return: $rezultat // poruka ili ime znaka
-**/
 function odrediHoroskopskiZnak($datumRodjenja, $formatDatuma="dmg", $vratiAlijasZnaka=false){
 
     /////////////////////////////////////////////////////
@@ -176,17 +157,6 @@ function odrediHoroskopskiZnak($datumRodjenja, $formatDatuma="dmg", $vratiAlijas
 
 return $rezultat;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////
-/**
-*    dajCitat_link: Ispis citata sa linkom; 15-Sep-2016
-*
-*    Kada ne prima parametre onda se ispisuju svi citati iz citavog niza
-*
-*    @param: $doza="" // predstavlja ucestalost isporuke - "dnevno" ili "nasumice"
-*    @param: $triggerMojiCitati=false // true kada se prikazuju moji citati, false kada se prikazuju tudji
-*
-*    @return: $nizSaCitatom
-**/
 function dajCitat_link($doza="", $triggerMojiCitati=false){
     
         $linkListaMojihCitata = "https://mobile.twitter.com/elonmusk/status";
@@ -254,93 +224,6 @@ function dajCitat_link($doza="", $triggerMojiCitati=false){
         
         return $nizSaCitatom;
 }
-////////////////////////////////////////////////////////////////////////////////////////////
-// REDIREKCIJA NA DRUGI SAJT
-  /*
-  *  @param: $url // link do redirektovanog sajta
-  *  @param: $exit // true po difoltu
-  *  @return: void
-  */
-  function safeRedirect($url, $exit=true) {
-    // Only use the header redirection if headers are not already sent
-    if (!headers_sent()){
-
-      header('HTTP/1.1 301 Moved Permanently');
-      header('Location: ' . $url);
-
-      // Optional workaround for an IE bug (thanks Olav)
-      header("Connection: close");
-    }
-
-    // HTML/JS Fallback:
-    // If the header redirection did not work, try to use various methods other methods
-
-    print '<html>';
-    print '<head><title>Redirecting you...</title>';
-    print '<meta http-equiv="Refresh" content="0;url='.$url.'" />';
-    print '</head>';
-    print '<body onload="location.replace(\''.$url.'\')">';
-
-    // If the javascript and meta redirect did not work,
-    // the user can still click this link
-    print 'You should be redirected to this URL:<br />';
-    print "<a href=\"$url\">$url</a><br /><br />";
-
-    print 'If you are not, please click on the link above.<br />';
-
-    print '</body>';
-    print '</html>';
-
-    // Stop the script here (optional)
-    if ($exit) exit;
-  }
-////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-// GENERISANJE RANDOM SETA
-  /*
-  *  @param: $length // duzina generisanog seta
-  *  @param: $setType // tip seta - "int", "string", "string_adv"
-  *  @return: $generisaniRandomSet
-  */
-  function generisiRandomSet($length, $setType){
-    switch($setType){
-      case "int":
-          $c= "0123456789";
-          srand((double)microtime()*1000000);
-          $randomInteger = 0;
-          for($i=0; $i<$length-1; $i++) {
-            $randomInteger.= $c[rand()%strlen($c)];
-          }
-          $generisaniRandomSet = $randomInteger; // dodeljivanje vrednosti
-        break;
-      case "string":
-          $c= "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-          srand((double)microtime()*1000000);
-          for($i=0; $i<$length; $i++){
-            $randomString.= $c[rand()%strlen($c)];
-          }
-          $generisaniRandomSet =  $randomString; // dodeljivanje vrednosti
-        break;
-      case "string_adv":
-          $conso=array("b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","w","x","y","z");
-          $vocal=array("a","e","i","o","u");
-          $password="";
-          srand((double)microtime()*1000000);
-          $max = $length/2;           
-          for($i=1; $i<=$max; $i++){
-            if($i == 1){
-              $readableRandomString.=strtoupper($conso[rand(0,19)]);
-              $readableRandomString.=$vocal[rand(0,4)]; ;
-            }else{
-              $readableRandomString.=$conso[rand(0,19)];
-              $readableRandomString.=$vocal[rand(0,4)];
-            }
-          }
-          $generisaniRandomSet = $readableRandomString; // dodeljivanje vrednosti
-        break;
-    }
-  return $generisaniRandomSet;
-  } 
   
 // -----------------------------------------------------------------------------
 
