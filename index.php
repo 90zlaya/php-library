@@ -11,10 +11,6 @@
 | -------------------------------------------------------------------
 */
 echo 'This is index page.';
-
-
-
-
 /**
 * NEW
 */
@@ -258,89 +254,6 @@ function dajCitat_link($doza="", $triggerMojiCitati=false){
         
         return $nizSaCitatom;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function skratiNazivReci($naziv){
-    $pieces = explode(" ", $naziv);
-
-    if( strlen($pieces[0]) > 4 ){ // ako je prva rec veca od cetiri slova
-        $skraceno = substr($pieces[0], 0, 1); // dodeli promenljivoj prvo slovo
-
-        foreach($pieces as $podatak){
-            if( $podatak == $pieces[0] ){ // ako JE prva rec onda dodaj samo razmak
-                $ostatak .= " ";
-            }else{ // ako NIJE prva rec onda dodaj razmak i podatak
-                $ostatak .= " " .$podatak;
-            }
-        }
-        // format ispisa
-        $noviNaziv = $skraceno. ". " .$ostatak;
-    }else{ // nema potrebe za skracivanjem
-        $noviNaziv = $naziv;
-    }
-
-return $noviNaziv;
-}
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// SISANJE KARAKTERA
-  /*
-  *  @param: $str
-  *  @return: $novaRec
-  */
-  function osisajString($str){
-    //$str = iconv("utf-8","windows-1250", $str );
-    //$str = utf8_decode($str);
-    $arr1 = str_split($str);
-    foreach($arr1 as $podatak){
-      $rec = $podatak[0];
-      //echo $rec;
-      switch($rec){
-        case "š": $rec = "s"; break;
-        case "č":
-        case "ć": $rec = "c"; break;
-        case "đ": $rec = "dj"; break;
-        case "ž": $rec = "z"; break;
-        case "Š": $rec = "S"; break;
-        case "Đ": $rec = "Dj"; break;
-        case "Č":
-        case "Ć": $rec = "C"; break;
-        case "Ž": $rec = "Z"; break;
-      }
-      $novaRec .= $rec;
-    }
-  return $novaRec;
-  }
-////////////////////////////////////////////////////////////////////////////////////////////
-// LINK KA SAJTU KROZ TEKST
-  /*
-  *  @param: $str // string sa sajtom
-  *  @return: $new_text // string koji je pretvoren u hiperlink
-  */
-  function text2links($str='') {
-    if($str=='' or !preg_match('/(http|www\.|@)/i', $str)) { return $str; }
-
-    $lines = explode("\n", $str); $new_text = '';
-    while (list($k,$l) = each($lines)) {
-      // replace links:
-      $l = preg_replace("/([ \t]|^)www\./i", "\\1http://www.", $l);
-      $l = preg_replace("/([ \t]|^)ftp\./i", "\\1ftp://ftp.", $l);
-
-      $l = preg_replace("/(http:\/\/[^ )\r\n!]+)/i",
-        "<a href=\"\\1\">\\1</a>", $l);
-
-      $l = preg_replace("/(https:\/\/[^ )\r\n!]+)/i",
-        "<a href=\"\\1\">\\1</a>", $l);
-
-      $l = preg_replace("/(ftp:\/\/[^ )\r\n!]+)/i",
-        "<a href=\"\\1\">\\1</a>", $l);
-
-      $l = preg_replace(
-        "/([-a-z0-9_]+(\.[_a-z0-9-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)+))/i",
-        "<a href=\"mailto:\\1\">\\1</a>", $l);
-
-      $new_text .= $l."\n";
-    }
-  return $new_text;
-  }
 ////////////////////////////////////////////////////////////////////////////////////////////
 // REDIREKCIJA NA DRUGI SAJT
   /*
@@ -428,3 +341,6 @@ return $noviNaziv;
     }
   return $generisaniRandomSet;
   } 
+  
+// -----------------------------------------------------------------------------
+

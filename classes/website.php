@@ -366,30 +366,48 @@ class Website{
     * Echoes html if page is not properly redirected
     * 
     * @param String $page
+    * @param Bool $is_url
+    * @param Bool $to_exit
     * 
     * @return void
     */
-    public function redirect_to_page($page)
+    public function redirect_to_page($page, $is_url=FALSE, $to_exit=TRUE)
     {
-        header('Location: ' . $page . '');
-        exit();
+        if($is_url)
+        {
+            $url = $page;
+        }
+        else
+        {
+            $url = $this->host . $page;
+        }
         
-        echo '
-            <!doctype html>
-            <html lang="en-US">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta http-equiv="refresh" content="1; url=' . $this->host . '">
-                    <script>
-                        window.location.href = "' . $this->host . '";
-                    </script>
-                    <title>Page Redirection</title>
-                </head>
-                <body>
-                    If you are not redirected automatically, follow this <a href="' . $this->host . $page . '">link to ' . $this->name . '</a>.
-                </body>
-            </html>
-        ';
+        if(!headers_sent())
+        {
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: ' . $url);
+            header("Connection: close");
+        }
+        
+        print '<html>';
+        print '<head><title>Redirecting you...</title>';
+        print '<meta http-equiv="Refresh" content="0;url=' . $url . '" />';
+        print '</head>';
+        print '<body onload="location.replace(\''.$url.'\')">';
+        
+        print 'You should be redirected to this URL:<br />';
+        print "<a href=\"$url\">$url</a><br /><br />";
+
+        print 'If you are not, please click on the link above.<br />';
+
+        print '</body>';
+        print '</html>';
+
+        
+        if($to_exit)
+        {
+            exit;
+        }
     }
     
     // -------------------------------------------------------------------------
