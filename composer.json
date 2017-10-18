@@ -2,7 +2,6 @@
     "name": "90zlaya/php-library",
     "description": "PHP Library is set of custom made PHP classes containing most useful methods and variables for Web Development.",
     "require": {
-        "php": "^5.3.7 || ^7.0",
-        "another-vendor/package": "1.1*"
+        "php": "^5.3.7 || ^7.0"
     }
 }
