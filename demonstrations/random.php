@@ -8,7 +8,7 @@
 |
 | -------------------------------------------------------------------
 */
-require_once('classes/random.php');
+require_once('../classes/random.php');
 
 $list = array(
      array(

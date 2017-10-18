@@ -1,15 +1,15 @@
 <?php
 /*
 | -------------------------------------------------------------------
-| EMAIL
+| OPERATING SYSTEM
 | -------------------------------------------------------------------
 |
-| Developing and testing Email class
+| Developing and testing Operating System class
 |
 | -------------------------------------------------------------------
 */
-require_once('classes/email.php');
+require_once('../classes/operating-system.php');
 
-$email = 'zlatan.stajic@guerrillamail.com';
-$mailto = Email::mailto($email);
-echo $mailto . '<br/>' . Email::validate($email);
+print_r('<pre>');
+print_r(Operating_System::get_list());
+print_r('</pre>');

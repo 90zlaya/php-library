@@ -1,15 +1,14 @@
 <?php
 /*
 | -------------------------------------------------------------------
-| OPERATING SYSTEM
+| FORMAT
 | -------------------------------------------------------------------
 |
-| Developing and testing Operating System class
+| Developing and testing Format & Date_Time_Format classes
 |
 | -------------------------------------------------------------------
 */
-require_once('classes/operating-system.php');
+require_once('../classes/format.php');
+require_once('../classes/date-time-format.php');
 
-print_r('<pre>');
-print_r(Operating_System::get_list());
-print_r('</pre>');
+echo Date_Time_Format::first_day_of_year('D', 2018);

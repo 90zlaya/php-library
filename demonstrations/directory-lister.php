@@ -8,7 +8,7 @@
 |
 | -------------------------------------------------------------------
 */
-require_once('classes/directory-lister.php');
+require_once('../classes/directory-lister.php');
 $params = array(
     'directory'  => 'D:/Browser/img/',
     'method'     => 'files',

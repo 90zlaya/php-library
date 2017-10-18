@@ -8,7 +8,7 @@
 |
 | -------------------------------------------------------------------
 */
-require_once('classes/validation.php');
+require_once('../classes/validation.php');
 
 /*
 $name = '90zlaya.jpeg';

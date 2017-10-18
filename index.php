@@ -10,4 +10,9 @@
 |
 | -------------------------------------------------------------------
 */
-echo 'This is index page.';
+echo 'This is index page of <strong>php-library</strong>.'; 
+echo '<br/>' . PHP_EOL;
+echo 'All classes are contained in /classes subfolder.';
+echo '<br/>' . PHP_EOL;
+echo 'All demonstrations are contained in /demonstrations subfolder.';
+echo '<br/>' . PHP_EOL;

@@ -8,4 +8,4 @@
 |
 | -------------------------------------------------------------------
 */
-require_once('classes/file.php');
+require_once('../classes/file.php');

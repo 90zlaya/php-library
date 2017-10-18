@@ -1,14 +1,15 @@
 <?php
 /*
 | -------------------------------------------------------------------
-| FORMAT
+| EMAIL
 | -------------------------------------------------------------------
 |
-| Developing and testing Format & Date_Time_Format classes
+| Developing and testing Email class
 |
 | -------------------------------------------------------------------
 */
-require_once('classes/format.php');
-require_once('classes/date-time-format.php');
+require_once('../classes/email.php');
 
-echo Date_Time_Format::first_day_of_year('D', 2018);
+$email = 'zlatan.stajic@guerrillamail.com';
+$mailto = Email::mailto($email);
+echo $mailto . '<br/>' . Email::validate($email);
