@@ -1,7 +1,24 @@
 {
     "name": "90zlaya/php-library",
+    "type": "library",
     "description": "PHP Library is set of custom made PHP classes containing most useful methods and variables for Web Development.",
+    "keywords": [
+        "php7",
+        "oop-library"
+    ],
+    "homepage": "https://github.com/90zlaya/php-library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zlatan Stajic",
+            "email": "contact@zlatanstajic.com",
+            "homepage": "https://www.zlatanstajic.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "php": "^5.3.7 || ^7.0"
-    }
+        "php": "^5.3.7 || ^7.0",
+        "90zlaya/php-library" : "dev-master"
+    },
+    "minimum-stability": "dev"
 }
