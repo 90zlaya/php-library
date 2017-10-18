@@ -20,5 +20,10 @@
         "php": "^5.3.7 || ^7.0",
         "90zlaya/php-library" : "dev-master"
     },
+    "autoload": {
+        "psr-0": {
+            "Monolog": "src"
+        }
+    },
     "minimum-stability": "dev"
 }
