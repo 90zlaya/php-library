@@ -23,5 +23,3 @@ print_r('</pre>');
 print_r('<pre>');
 print_r(Browser::is_mobile($user_agent));
 print_r('</pre>');
-
-
