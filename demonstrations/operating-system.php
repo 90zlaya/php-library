@@ -8,7 +8,7 @@
 |
 | -------------------------------------------------------------------
 */
-require_once('../classes/operating-system.php');
+include_once '../autoload.php';
 
 print_r('<pre>');
 print_r(Operating_System::get_list());

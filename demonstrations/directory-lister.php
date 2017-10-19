@@ -8,7 +8,8 @@
 |
 | -------------------------------------------------------------------
 */
-require_once('../classes/directory-lister.php');
+include_once '../autoload.php';
+
 $params = array(
     'directory'  => 'D:/Browser/img/',
     'method'     => 'files',

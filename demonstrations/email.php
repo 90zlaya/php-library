@@ -8,7 +8,7 @@
 |
 | -------------------------------------------------------------------
 */
-require_once('../classes/email.php');
+include_once '../autoload.php';
 
 $email = 'zlatan.stajic@guerrillamail.com';
 $mailto = Email::mailto($email);

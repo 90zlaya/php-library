@@ -10,6 +10,8 @@
 |
 | -------------------------------------------------------------------
 */
+include_once 'autoload.php';
+
 echo 'This is index page of <strong>php-library</strong>.'; 
 echo '<br/>' . PHP_EOL;
 echo 'All classes are contained in /classes subfolder.';

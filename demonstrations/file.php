@@ -8,4 +8,4 @@
 |
 | -------------------------------------------------------------------
 */
-require_once('../classes/file.php');
+include_once '../autoload.php';

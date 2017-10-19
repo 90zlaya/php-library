@@ -8,7 +8,7 @@
 |
 | -------------------------------------------------------------------
 */
-require_once('../classes/password.php');
+include_once '../autoload.php';
 
 echo Password::new();
 echo '<br/>';
