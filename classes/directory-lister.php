@@ -9,6 +9,108 @@ class Directory_Lister{
     // -------------------------------------------------------------------------
     
     /**
+    * Files and folders in depth
+    * 
+    * @param String $directory
+    * @param Array $list
+    * 
+    * @return mixed
+    */
+    private static function depth($directory, $list)
+    {
+        if(empty($list))
+        {
+            return FALSE;
+        }
+        else
+        {
+            $list_of_folders = array();
+            $list_of_files   = array();
+            
+            foreach($list as $folder)
+            {
+                $location = $directory . $folder . '/';
+                
+                $depth_folders = self::folders($location);
+                $depth_files = self::files($location);
+                
+                $list_of_folders = array_merge($list_of_folders, $depth_folders);
+                $list_of_files   = array_merge($list_of_files, $depth_files);
+            }
+            
+            return array(
+                'folders' => $list_of_folders,
+                'files'   => $list_of_files,
+            );
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Checks dates of listed directory limits
+    * 
+    * @param Array $params
+    * 
+    * @return Array $searched
+    */
+    private static function check_date($params)
+    {
+        $item       = $params['item'];
+        $date       = $params['date'];
+        $date_start = $params['date_start'];
+        $date_end   = $params['date_end'];
+        
+        $searched = array();
+        
+        if(empty($date_start))
+        {
+            array_push($searched, $item);
+        }
+        else if(empty($date_end))
+        {
+            if($date == $date_start)
+            {
+                array_push($searched, $item);
+            }
+        }
+        else
+        {
+            if($date >= $date_start && $date <= $date_end)
+            {
+                array_push($searched, $item);
+            }
+        }
+        
+        return $searched;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Displaying images
+    * 
+    * @param Array $list
+    * 
+    * @return String $display
+    */
+    private static function display($list)
+    {
+        $display = '';
+        if(!empty($list))
+        {
+            foreach($list as $item)
+            {
+                $display .= '<script>window.open("' . $item[0]['location'] . '");</script>';
+            }
+        }
+        
+        return $display;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Reading folder contents for given directory
     *
     * @param String $directory
@@ -101,64 +203,27 @@ class Directory_Lister{
     // -------------------------------------------------------------------------
     
     /**
-    * Displaying images
+    * Listing all files inside root directory and folders of root directory
     * 
-    * @param Array $list
+    * @param String $directory
     * 
-    * @return String $display
+    * @return Array $list_of_files
     */
-    protected static function display($list)
+    protected static function crawl($directory)
     {
-        $display = '';
-        if(!empty($list))
+        $list_of_folders = self::folders($directory);
+        $list_of_files   = self::files($directory);
+        $depth           = self::depth($directory, $list_of_folders);
+        
+        if($depth)
         {
-            foreach($list as $item)
-            {
-                $display .= '<script>window.open("' . $item[0]['location'] . '");</script>';
-            }
+            $depth_folders = $depth['folders'];
+            $depth_files   = $depth['files'];
+            
+            $list_of_files = array_merge($list_of_files, $depth_files);
         }
         
-        return $display;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Checks dates of listed directory limits
-    * 
-    * @param Array $params
-    * 
-    * @return Array $searched
-    */
-    private static function check_date($params)
-    {
-        $item       = $params['item'];
-        $date       = $params['date'];
-        $date_start = $params['date_start'];
-        $date_end   = $params['date_end'];
-        
-        $searched = array();
-        
-        if(empty($date_start))
-        {
-            array_push($searched, $item);
-        }
-        else if(empty($date_end))
-        {
-            if($date == $date_start)
-            {
-                array_push($searched, $item);
-            }
-        }
-        else
-        {
-            if($date >= $date_start && $date <= $date_end)
-            {
-                array_push($searched, $item);
-            }
-        }
-        
-        return $searched;
+        return $list_of_files;
     }
     
     // -------------------------------------------------------------------------
@@ -193,13 +258,17 @@ class Directory_Lister{
             {
                 $list = self::files($directory);
             } break;
+            case 'crawl':
+            {
+                $list = self::crawl($directory);
+            } break;
         }
         
         foreach($list as $item)
         {
             if(isset($item['modified']))
             {
-                $date = $item['modified'];
+                $date = substr($item['modified'], 5);
             }
             else
             {
@@ -265,135 +334,6 @@ class Directory_Lister{
         else
         {
             return $searched;
-        }
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Listing all files inside root directory and folders of root directory
-    * 
-    * @param String $directory
-    * 
-    * @return Array $list_of_files
-    */
-    public static function crawl($directory)
-    {
-        $list_of_folders = self::folders($directory);
-        $list_of_files   = self::files($directory);
-        $depth           = self::depth($directory, $list_of_folders);
-        
-        if($depth)
-        {
-            $depth_folders = $depth['folders'];
-            $depth_files   = $depth['files'];
-            /*
-            if(!empty($depth_folders))
-            {
-                foreach($depth_folders as $folder)
-                {
-                    if(!empty($folder))
-                    {
-                        
-                        print_r('<pre>');
-                        print_r($folder);
-                        print_r('</pre>');
-                        
-                        
-                        //$sub_depth = self::depth($folder, $depth_folders);
-                    }
-                }
-            }
-            */
-            /*
-            print_r('<pre>');
-            print_r($sub_depth);
-            print_r('</pre>');
-            */
-            /*
-            while(!empty($depth_folders))
-            {
-                
-                
-                
-                foreach($depth_folders as $folder)
-                {
-                    if(!empty($folder))
-                    {
-                        $sub_depth = self::depth($directory, $depth_folders);
-                    }
-                }
-            }
-            */
-            /*
-            print_r('<pre>');
-            print_r($list_of_files);
-            print_r('</pre>');
-            */
-            /*
-            print_r('<pre>');
-            print_r($depth_files);
-            print_r('</pre>');
-            */
-            $list_of_files[] = $depth_files;
-        }
-        
-        return $list_of_files;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Files and folders in depth
-    * 
-    * @param String $directory
-    * @param Array $list
-    * 
-    * @return mixed
-    */
-    private static function depth($directory, $list)
-    {
-        if(empty($list))
-        {
-            return FALSE;
-        }
-        else
-        {
-            $list_of_folders = array();
-            $list_of_files   = array();
-            
-            foreach($list as $folder)
-            {
-                $location = $directory . $folder . '/';
-                /*
-                print_r('<pre>');
-                print_r($location);
-                print_r('</pre>');
-                */
-                $depth_folders = self::folders($location);
-                $depth_files   = self::files($location);
-                /*
-                print_r('<pre>');
-                print_r($depth_folders);
-                print_r('</pre>');
-                */
-                /*
-                print_r('<pre>');
-                print_r($depth_files);
-                print_r('</pre>');
-                */
-                $list_of_folders[] = $depth_folders;
-                $list_of_files[]   = $depth_files;
-            }
-            /*
-            print_r('<pre>');
-            print_r($list_of_files);
-            print_r('</pre>');
-            */
-            return array(
-                'folders' => $list_of_folders,
-                'files'   => $list_of_files,
-            );
         }
     }
     
