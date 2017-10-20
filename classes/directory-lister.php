@@ -3,8 +3,9 @@
 * Directory content retrieval
 */
 class Directory_Lister{
-    protected static $directory   = '';
-    protected static $date_format = 'Y-m-d';
+    private static   $number_of_files = 0;
+    protected static $directory       = '';
+    protected static $date_format     = 'Y-m-d';
     
     // -------------------------------------------------------------------------
     
@@ -12,11 +13,12 @@ class Directory_Lister{
     * Files and folders in depth
     * 
     * @param String $directory
+    * @param Array $types
     * @param Array $list
     * 
     * @return mixed
     */
-    private static function depth($directory, $list)
+    private static function depth($directory, $types, $list)
     {
         if(empty($list))
         {
@@ -32,7 +34,7 @@ class Directory_Lister{
                 $location = $directory . $folder . '/';
                 
                 $depth_folders = self::folders($location);
-                $depth_files = self::files($location);
+                $depth_files = self::files($location, $types);
                 
                 $list_of_folders = array_merge($list_of_folders, $depth_folders);
                 $list_of_files   = array_merge($list_of_files, $depth_files);
@@ -60,25 +62,55 @@ class Directory_Lister{
         $date       = $params['date'];
         $date_start = $params['date_start'];
         $date_end   = $params['date_end'];
+        $year       = $params['year'];
         
         $searched = array();
         
+        if(empty($year))
+        {
+            $date = substr($date, 5);
+        }
+        else
+        {
+            if(!empty($date_start))
+            {
+                $date_start = $year . '-' . $date_start;    
+            }
+            
+            if(!empty($date_end))
+            {
+                $date_end = $year . '-' . $date_end;
+            }
+        }
+        
         if(empty($date_start))
         {
-            array_push($searched, $item);
+            if(empty($year))
+            {
+                $searched = array_merge($searched, $item);
+            }
+            else
+            {
+                $date = substr($date, 0, 4);
+                
+                if($date == $year)
+                {
+                    $searched = array_merge($searched, $item);
+                }
+            }
         }
         else if(empty($date_end))
         {
             if($date == $date_start)
             {
-                array_push($searched, $item);
+                $searched = array_merge($searched, $item);
             }
         }
         else
         {
             if($date >= $date_start && $date <= $date_end)
             {
-                array_push($searched, $item);
+                $searched = array_merge($searched, $item);
             }
         }
         
@@ -153,10 +185,11 @@ class Directory_Lister{
     * Reading file contents for given directory
     *
     * @param String $directory
+    * @param Array $types
     * 
     * @return mixed
     */
-    protected static function files($directory='')
+    protected static function files($directory='', $types=array())
     {
         if(empty($directory))
         {
@@ -176,21 +209,28 @@ class Directory_Lister{
             {
                 if(stripos($file, '.'))
                 {
-                    $location  = 'file:///' . $directory . $file;
-                    $directory = self::$directory;
-                    $name      = $file;
-                    $modified  = date(self::$date_format, @filemtime($location));
-                    $open      = '<a href="' . $location . '" target="_blank">' . $name . '</a>';
+                    $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
                     
-                    $data = array(
-                        'open'      => $open,
-                        'location'  => $location,
-                        'directory' => $directory,
-                        'name'      => $name,
-                        'modified'  => $modified,
-                    );
-                    
-                    array_push($arr_files, $data);
+                    if(empty($types) || in_array($extension, $types))
+                    {
+                        $location  = 'file:///' . $directory . $file;
+                        $directory = self::$directory;
+                        $name      = $file;
+                        $modified  = date(self::$date_format, @filemtime($location));
+                        $open      = '<a href="' . $location . '" target="_blank">' . $name . '</a>';
+                        
+                        $data = array(
+                            'open'      => $open,
+                            'location'  => $location,
+                            'directory' => $directory,
+                            'name'      => $name,
+                            'modified'  => $modified,
+                        );
+                        
+                        array_push($arr_files, $data);
+                        
+                        self::$number_of_files += 1;
+                    }
                 }
             }
             
@@ -209,11 +249,11 @@ class Directory_Lister{
     * 
     * @return Array $list_of_files
     */
-    protected static function crawl($directory)
+    protected static function crawl($directory, $types=array())
     {
         $list_of_folders = self::folders($directory);
-        $list_of_files   = self::files($directory);
-        $depth           = self::depth($directory, $list_of_folders);
+        $list_of_files   = self::files($directory, $types);
+        $depth           = self::depth($directory, $types, $list_of_folders);
         
         if($depth)
         {
@@ -233,7 +273,7 @@ class Directory_Lister{
     * 
     * @param Array $params
     * 
-    * @return Array $searched || $list
+    * @return Array
     */
     public static function listing($params)
     {
@@ -245,6 +285,8 @@ class Directory_Lister{
         $delimiter  = $params['delimiter'];
         $date_start = $params['date_start'];
         $date_end   = $params['date_end'];
+        $year       = $params['year'];
+        $types      = $params['types'];
         
         $list = $searched = array();
         
@@ -256,11 +298,11 @@ class Directory_Lister{
             } break;
             case 'files':
             {
-                $list = self::files($directory);
+                $list = self::files($directory, $types);
             } break;
             case 'crawl':
             {
-                $list = self::crawl($directory);
+                $list = self::crawl($directory, $types);
             } break;
         }
         
@@ -268,7 +310,7 @@ class Directory_Lister{
         {
             if(isset($item['modified']))
             {
-                $date = substr($item['modified'], 5);
+                $date = $item['modified'];
             }
             else
             {
@@ -280,6 +322,7 @@ class Directory_Lister{
                 'date'       => $date,
                 'date_start' => $date_start,
                 'date_end'   => $date_end,
+                'year'       => $year,
             );
             
             if(empty($delimiter))
@@ -333,7 +376,15 @@ class Directory_Lister{
         }
         else
         {
-            return $searched;
+            $searched_count = count($searched);
+            
+            $data = array(
+                'listing'     => $searched,
+                'count'       => $searched_count,
+                'max'         => self::$number_of_files,
+            );
+            
+            return $data;
         }
     }
     
