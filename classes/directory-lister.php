@@ -77,7 +77,7 @@ class Directory_Lister{
                     $location  = 'file:///' . $directory . $file;
                     $directory = self::$directory;
                     $name      = $file;
-                    $modified  = date(self::$date_format, filemtime($location));
+                    $modified  = date(self::$date_format, @filemtime($location));
                     $open      = '<a href="' . $location . '" target="_blank">' . $name . '</a>';
                     
                     $data = array(
@@ -265,6 +265,135 @@ class Directory_Lister{
         else
         {
             return $searched;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Listing all files inside root directory and folders of root directory
+    * 
+    * @param String $directory
+    * 
+    * @return Array $list_of_files
+    */
+    public static function crawl($directory)
+    {
+        $list_of_folders = self::folders($directory);
+        $list_of_files   = self::files($directory);
+        $depth           = self::depth($directory, $list_of_folders);
+        
+        if($depth)
+        {
+            $depth_folders = $depth['folders'];
+            $depth_files   = $depth['files'];
+            /*
+            if(!empty($depth_folders))
+            {
+                foreach($depth_folders as $folder)
+                {
+                    if(!empty($folder))
+                    {
+                        
+                        print_r('<pre>');
+                        print_r($folder);
+                        print_r('</pre>');
+                        
+                        
+                        //$sub_depth = self::depth($folder, $depth_folders);
+                    }
+                }
+            }
+            */
+            /*
+            print_r('<pre>');
+            print_r($sub_depth);
+            print_r('</pre>');
+            */
+            /*
+            while(!empty($depth_folders))
+            {
+                
+                
+                
+                foreach($depth_folders as $folder)
+                {
+                    if(!empty($folder))
+                    {
+                        $sub_depth = self::depth($directory, $depth_folders);
+                    }
+                }
+            }
+            */
+            /*
+            print_r('<pre>');
+            print_r($list_of_files);
+            print_r('</pre>');
+            */
+            /*
+            print_r('<pre>');
+            print_r($depth_files);
+            print_r('</pre>');
+            */
+            $list_of_files[] = $depth_files;
+        }
+        
+        return $list_of_files;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Files and folders in depth
+    * 
+    * @param String $directory
+    * @param Array $list
+    * 
+    * @return mixed
+    */
+    private static function depth($directory, $list)
+    {
+        if(empty($list))
+        {
+            return FALSE;
+        }
+        else
+        {
+            $list_of_folders = array();
+            $list_of_files   = array();
+            
+            foreach($list as $folder)
+            {
+                $location = $directory . $folder . '/';
+                /*
+                print_r('<pre>');
+                print_r($location);
+                print_r('</pre>');
+                */
+                $depth_folders = self::folders($location);
+                $depth_files   = self::files($location);
+                /*
+                print_r('<pre>');
+                print_r($depth_folders);
+                print_r('</pre>');
+                */
+                /*
+                print_r('<pre>');
+                print_r($depth_files);
+                print_r('</pre>');
+                */
+                $list_of_folders[] = $depth_folders;
+                $list_of_files[]   = $depth_files;
+            }
+            /*
+            print_r('<pre>');
+            print_r($list_of_files);
+            print_r('</pre>');
+            */
+            return array(
+                'folders' => $list_of_folders,
+                'files'   => $list_of_files,
+            );
         }
     }
     

@@ -13,9 +13,9 @@ include_once '../autoload.php';
 $params = array(
     'directory'  => 'D:/Browser/phpmailer/',
     'method'     => 'files',
-    'print'      => FALSE,
-    'display'    => FALSE,
-    'reverse'    => FALSE,
+    'print'      => 0,
+    'display'    => 0,
+    'reverse'    => 0,
     'delimiter'  => '',
     'date_start' => '',
     'date_end'   => '',
@@ -25,11 +25,15 @@ Directory_Lister::listing($params);
 $params = array(
     'directory'  => 'D:/Browser/phpmailer/',
     'method'     => 'folders',
-    'print'      => TRUE,
-    'display'    => FALSE,
-    'reverse'    => FALSE,
+    'print'      => 0,
+    'display'    => 0,
+    'reverse'    => 0,
     'delimiter'  => '',
     'date_start' => '',
     'date_end'   => '',
 );
 Directory_Lister::listing($params);
+
+print_r('<pre>');
+print_r(Directory_Lister::crawl('D:/Browser/phpmailer/'));
+print_r('</pre>');
