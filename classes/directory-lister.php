@@ -133,7 +133,7 @@ class Directory_Lister{
         {
             foreach($list as $item)
             {
-                $display .= '<script>window.open("' . $item[0]['location'] . '");</script>';
+                $display .= '<script>window.open("' . $item['location'] . '");</script>';
             }
         }
         
@@ -374,18 +374,18 @@ class Directory_Lister{
                 print_r(self::display($searched));
             }
         }
-        else
-        {
-            $searched_count = count($searched);
-            
-            $data = array(
-                'listing'     => $searched,
-                'count'       => $searched_count,
-                'max'         => self::$number_of_files,
-            );
-            
-            return $data;
-        }
+        
+        $searched_count = count($searched);
+        
+        $data = array(
+            'listing'     => $searched,
+            'count'       => $searched_count,
+            'max'         => self::$number_of_files,
+        );
+        
+        self::$number_of_files = 0;
+        
+        return $data;
     }
     
     // -------------------------------------------------------------------------
