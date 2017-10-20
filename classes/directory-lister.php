@@ -33,16 +33,7 @@ class Directory_Lister{
         {
             if($counter > 2)
             {
-                if(stripos($folder, '.'))
-                {
-                    $exploded = explode('.', $folder);  
-                    
-                    if(is_numeric(end($exploded)))
-                    {
-                        array_push($arr_folder, $folder);
-                    }
-                }
-                else
+                if(is_dir($directory . $folder))
                 {
                     array_push($arr_folder, $folder);
                 }
@@ -206,9 +197,18 @@ class Directory_Lister{
         
         foreach($list as $item)
         {
+            if(isset($item['modified']))
+            {
+                $date = $item['modified'];
+            }
+            else
+            {
+                $date = NULL;
+            }
+            
             $params = array(
                 'item'       => $item,
-                'date'       => $item['modified'],
+                'date'       => $date,
                 'date_start' => $date_start,
                 'date_end'   => $date_end,
             );
