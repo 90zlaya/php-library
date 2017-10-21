@@ -3,55 +3,23 @@
 * Directory content retrieval
 */
 class Directory_Lister{
+    private static   $trailing_slash  = '/';
+    private static   $dash            = '-';
+    private static   $dot             = '.';
     private static   $number_of_files = 0;
     protected static $directory       = '';
     protected static $date_format     = 'Y-m-d';
+    protected static $time_format     = 'H:m:i';
+    protected static $method_calls    = array(
+        'files'    => 'files',
+        'folders'  => 'folders',
+        'crawl'    => 'crawl',
+    );
     
     // -------------------------------------------------------------------------
     
     /**
-    * Files and folders in depth
-    * 
-    * @param String $directory
-    * @param Array $types
-    * @param Array $list
-    * 
-    * @return mixed
-    */
-    private static function depth($directory, $types, $list)
-    {
-        if(empty($list))
-        {
-            return FALSE;
-        }
-        else
-        {
-            $list_of_paths = $list_of_folders = $list_of_files = array();
-            
-            foreach($list as $folder)
-            {
-                $location = $directory . $folder . '/';
-                
-                $depth_folders = self::folders($location);
-                $depth_files   = self::files($location, $types);
-                
-                $list_of_paths   = array_merge($list_of_paths, $depth_folders['path']);
-                $list_of_folders = array_merge($list_of_folders, $depth_folders['folder']);
-                $list_of_files   = array_merge($list_of_files, $depth_files);
-            }
-            
-            return array(
-                'paths'   => $list_of_paths,
-                'folders' => $list_of_folders,
-                'files'   => $list_of_files,
-            );
-        }
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Checks dates of listed directory limits
+    * Checks dates for listed directory limits
     * 
     * @param Array $params
     * 
@@ -75,12 +43,12 @@ class Directory_Lister{
         {
             if(!empty($date_start))
             {
-                $date_start = $year . '-' . $date_start;    
+                $date_start = $year . self::$dash . $date_start;    
             }
             
             if(!empty($date_end))
             {
-                $date_end = $year . '-' . $date_end;
+                $date_end = $year . self::$dash . $date_end;
             }
         }
         
@@ -144,11 +112,54 @@ class Directory_Lister{
     // -------------------------------------------------------------------------
     
     /**
+    * Files and folders in depth
+    * 
+    * @param String $directory
+    * @param Array $types
+    * @param Array $list
+    * 
+    * @return mixed
+    */
+    private static function depth($directory, $types, $list)
+    {
+        if(empty($list))
+        {
+            return FALSE;
+        }
+        else
+        {
+            $list_of_paths = $list_of_folders = $list_of_files = array();
+            
+            foreach($list as $folder)
+            {
+                $location = $directory . $folder . self::$trailing_slash;
+                
+                $depth_folders = self::folders($location);
+                $depth_files   = self::files($location, $types);
+                
+                $list_of_paths   = array_merge($list_of_paths, $depth_folders['path']);
+                $list_of_folders = array_merge($list_of_folders, $depth_folders['folder']);
+                $list_of_files   = array_merge($list_of_files, $depth_files);
+            }
+            
+            $data = array(
+                'paths'   => $list_of_paths,
+                'folders' => $list_of_folders,
+                'files'   => $list_of_files,
+            );
+            
+            return $data;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Reading folder contents for given directory
     *
     * @param String $directory
     * 
-    * @return Array
+    * @return Array $data
     */
     protected static function folders($directory='')
     {
@@ -180,10 +191,12 @@ class Directory_Lister{
             $counter++;
         }
         
-        return array(
+        $data = array(
             'path'   => $arr_path,
             'folder' => $arr_folder,
         );
+        
+        return $data;
     }
     
     // -------------------------------------------------------------------------
@@ -194,7 +207,7 @@ class Directory_Lister{
     * @param String $directory
     * @param Array $types
     * 
-    * @return mixed
+    * @return Array $arr_files
     */
     protected static function files($directory='', $types=array())
     {
@@ -216,22 +229,27 @@ class Directory_Lister{
             {
                 if(stripos($file, '.'))
                 {
-                    $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                    $extension         = pathinfo($file, PATHINFO_EXTENSION);
+                    $extension_lowered = strtolower($extension);
                     
-                    if(empty($types) || in_array($extension, $types))
+                    if(empty($types) || in_array($extension_lowered, $types))
                     {
                         $location  = 'file:///' . $directory . $file;
                         $directory = self::$directory;
-                        $name      = $file;
-                        $modified  = date(self::$date_format, @filemtime($location));
-                        $open      = '<a href="' . $location . '" target="_blank">' . $name . '</a>';
+                        $date      = date(self::$date_format, @filemtime($location));
+                        $time      = date(self::$time_format, @filemtime($location));
+                        $open      = '<a href="' . $location . '" target="_blank">' . $file . '</a>';
+                        $title     = basename($file, self::$dot . $extension);
                         
                         $data = array(
                             'open'      => $open,
                             'location'  => $location,
                             'directory' => $directory,
-                            'name'      => $name,
-                            'modified'  => $modified,
+                            'file'      => $file,
+                            'title'     => $title,
+                            'extension' => $extension,
+                            'date'      => $date,
+                            'time'      => $time,
                         );
                         
                         array_push($arr_files, $data);
@@ -253,14 +271,17 @@ class Directory_Lister{
     * Listing all files inside root directory and folders of root directory
     * 
     * @param String $directory
+    * @param Array $types
     * 
-    * @return Array $list_of_files
+    * @return Array $data
     */
     protected static function crawl($directory, $types=array())
     {
+        $list_of_paths   = array($directory);
         $list_of_folders = self::folders($directory);
         $list_of_files   = self::files($directory, $types);
-        $depth           = self::depth($directory, $types, $list_of_folders['folder']);
+        
+        $depth = self::depth($directory, $types, $list_of_folders['folder']);
         
         if($depth)
         {
@@ -268,20 +289,29 @@ class Directory_Lister{
             $depth_folders = $depth['folders'];
             $depth_files   = $depth['files'];
             
-            $list_of_files = array_merge($list_of_files, $depth_files);
+            $list_of_paths   = array_merge($list_of_paths, $depth_paths);
+            $list_of_folders = array_merge($list_of_folders, $depth_folders);
+            $list_of_files   = array_merge($list_of_files, $depth_files);
             
             foreach($depth_paths as $path)
             {
-                $directory = $path . '/';
+                $directory = $path . self::$trailing_slash;
                 
                 $list_of_folders_paths = self::folders($directory);
                 $list_of_files_paths   = self::files($directory, $types);
                 
-                $list_of_files = array_merge($list_of_files, $list_of_files_paths);
+                $list_of_folders = array_merge($list_of_folders, $list_of_folders_paths);
+                $list_of_files   = array_merge($list_of_files, $list_of_files_paths);
             }
         }
         
-        return $list_of_files;
+        $data = array(
+            'path'   => $list_of_paths,
+            'folder' => $list_of_folders,
+            'file'   => $list_of_files,
+        );
+        
+        return $data;
     }
     
     // -------------------------------------------------------------------------
@@ -291,7 +321,7 @@ class Directory_Lister{
     * 
     * @param Array $params
     * 
-    * @return Array
+    * @return Array $data
     */
     public static function listing($params)
     {
@@ -310,73 +340,85 @@ class Directory_Lister{
         
         switch($method)
         {
-            case 'folders':
+            case self::$method_calls['folders']:
             {
                 $list = self::folders($directory);
             } break;
-            case 'files':
+            case self::$method_calls['files']:
             {
                 $list = self::files($directory, $types);
             } break;
-            case 'crawl':
+            case self::$method_calls['crawl']:
             {
                 $list = self::crawl($directory, $types);
             } break;
         }
         
-        foreach($list as $item)
+        if($method !== self::$method_calls['folders'])
         {
-            if(isset($item['modified']))
+            if($method === self::$method_calls['crawl'])
             {
-                $date = $item['modified'];
-            }
-            else
-            {
-                $date = NULL;
+                $list = $list['file'];
             }
             
-            $params = array(
-                'item'       => $item,
-                'date'       => $date,
-                'date_start' => $date_start,
-                'date_end'   => $date_end,
-                'year'       => $year,
-            );
-            
-            if(empty($delimiter))
+            foreach($list as $item)
             {
-                $checked = self::check_date($params);
-            }
-            else
-            {
-                if($reverse)
+                if(isset($item['date']))
                 {
-                    if(stripos($item['name'], $delimiter) === FALSE)
-                    {
-                        $checked = self::check_date($params);
-                    }
-                    else
-                    {
-                        $checked = array();
-                    }
+                    $date = $item['date'];
                 }
                 else
                 {
-                    if(stripos($item['name'], $delimiter) !== FALSE)
+                    $date = NULL;
+                }
+                
+                $params = array(
+                    'item'       => $item,
+                    'date'       => $date,
+                    'date_start' => $date_start,
+                    'date_end'   => $date_end,
+                    'year'       => $year,
+                );
+                
+                if(empty($delimiter))
+                {
+                    $checked = self::check_date($params);
+                }
+                else
+                {
+                    if($reverse)
                     {
-                        $checked = self::check_date($params);
+                        if(stripos($item['name'], $delimiter) === FALSE)
+                        {
+                            $checked = self::check_date($params);
+                        }
+                        else
+                        {
+                            $checked = array();
+                        }
                     }
                     else
                     {
-                        $checked = array();
+                        if(stripos($item['name'], $delimiter) !== FALSE)
+                        {
+                            $checked = self::check_date($params);
+                        }
+                        else
+                        {
+                            $checked = array();
+                        }
                     }
                 }
+                
+                if(!empty($checked))
+                {
+                    array_push($searched, $checked);
+                }
             }
-            
-            if(!empty($checked))
-            {
-                array_push($searched, $checked);
-            }
+        }    
+        else
+        {
+            $searched = $list;
         }
         
         if($print || $display)

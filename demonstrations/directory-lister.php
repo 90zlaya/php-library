@@ -20,6 +20,6 @@ $params = array(
     'date_start' => '',
     'date_end'   => '',
     'year'       => '',
-    'types'      => array('jpg', 'jpeg', 'png'),
+    'types'      => array(),
 );
-Directory_Lister::listing($params);
+$listing = Directory_Lister::listing($params);
