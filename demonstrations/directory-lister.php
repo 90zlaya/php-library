@@ -13,13 +13,13 @@ include_once '../autoload.php';
 $params = array(
     'directory'  => 'D:/Zlatan/Browser/phpmailer/',
     'method'     => 'crawl',
-    'print'      => 1,
+    'print'      => 0,
     'display'    => 0,
     'reverse'    => 0,
     'delimiter'  => '',
     'date_start' => '',
     'date_end'   => '',
     'year'       => '',
-    'types'      => array('txt'),
+    'types'      => array(),
 );
 Directory_Lister::listing($params);

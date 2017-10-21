@@ -26,21 +26,22 @@ class Directory_Lister{
         }
         else
         {
-            $list_of_folders = array();
-            $list_of_files   = array();
+            $list_of_paths = $list_of_folders = $list_of_files = array();
             
             foreach($list as $folder)
             {
                 $location = $directory . $folder . '/';
                 
                 $depth_folders = self::folders($location);
-                $depth_files = self::files($location, $types);
+                $depth_files   = self::files($location, $types);
                 
-                $list_of_folders = array_merge($list_of_folders, $depth_folders);
+                $list_of_paths   = array_merge($list_of_paths, $depth_folders['path']);
+                $list_of_folders = array_merge($list_of_folders, $depth_folders['folder']);
                 $list_of_files   = array_merge($list_of_files, $depth_files);
             }
             
             return array(
+                'paths'   => $list_of_paths,
                 'folders' => $list_of_folders,
                 'files'   => $list_of_files,
             );
@@ -147,7 +148,7 @@ class Directory_Lister{
     *
     * @param String $directory
     * 
-    * @return mixed
+    * @return Array
     */
     protected static function folders($directory='')
     {
@@ -161,14 +162,17 @@ class Directory_Lister{
         }
         
         $files = scandir($directory);
-        $arr_folder = array();
+        $arr_folder = $arr_path = array();
         $counter = 1;
         foreach($files as $folder)
         {
             if($counter > 2)
             {
-                if(is_dir($directory . $folder))
+                $path = $directory . $folder;
+                
+                if(is_dir($path))
                 {
+                    array_push($arr_path, $path);
                     array_push($arr_folder, $folder);
                 }
             }
@@ -176,7 +180,10 @@ class Directory_Lister{
             $counter++;
         }
         
-        return $arr_folder;
+        return array(
+            'path'   => $arr_path,
+            'folder' => $arr_folder,
+        );
     }
     
     // -------------------------------------------------------------------------
@@ -253,14 +260,23 @@ class Directory_Lister{
     {
         $list_of_folders = self::folders($directory);
         $list_of_files   = self::files($directory, $types);
-        $depth           = self::depth($directory, $types, $list_of_folders);
+        $depth           = self::depth($directory, $types, $list_of_folders['folder']);
         
         if($depth)
         {
+            $depth_paths   = $depth['paths'];
             $depth_folders = $depth['folders'];
             $depth_files   = $depth['files'];
             
             $list_of_files = array_merge($list_of_files, $depth_files);
+            
+            foreach($depth_paths as $directory)
+            {
+                $list_of_folders_paths = self::folders($directory);
+                $list_of_files_paths   = self::files($directory, $types);
+                
+                $list_of_files = array_merge($list_of_files, $list_of_files_paths);
+            }
         }
         
         return $list_of_files;
