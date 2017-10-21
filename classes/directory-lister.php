@@ -270,8 +270,10 @@ class Directory_Lister{
             
             $list_of_files = array_merge($list_of_files, $depth_files);
             
-            foreach($depth_paths as $directory)
+            foreach($depth_paths as $path)
             {
+                $directory = $path . '/';
+                
                 $list_of_folders_paths = self::folders($directory);
                 $list_of_files_paths   = self::files($directory, $types);
                 
