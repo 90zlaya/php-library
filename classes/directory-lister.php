@@ -388,7 +388,7 @@ class Directory_Lister{
                 {
                     if($reverse)
                     {
-                        if(stripos($item['name'], $delimiter) === FALSE)
+                        if(stripos($item['title'], $delimiter) === FALSE)
                         {
                             $checked = self::check_date($params);
                         }
@@ -399,7 +399,7 @@ class Directory_Lister{
                     }
                     else
                     {
-                        if(stripos($item['name'], $delimiter) !== FALSE)
+                        if(stripos($item['title'], $delimiter) !== FALSE)
                         {
                             $checked = self::check_date($params);
                         }
