@@ -3,47 +3,156 @@
 * Working with temperature conversions
 */
 class Temperature{
-    public static $absolute_zero = 273.15;
+    protected static $absolute_zero = 273.15;
+    protected static $signs         = array(
+        'celsius'    => '&degC',
+        'fahrenheit' => 'F',
+        'kelvin'     => 'K',
+    );
     
     // -------------------------------------------------------------------------
     
     /**
     * Kelvin to Celsius conversion
     *
-    * @param int $temp
+    * @param float $temp
+    * @param Bool $round_value
+    * @param Bool $show_sign
     * 
-    * @return String $celsius
+    * @return mixed
     */
-    public static function k_to_c($temp)
+    public static function k_to_c($temp, $round_value=FALSE)
     {
-        if(!is_numeric($temp))
+        if(is_numeric($temp))
         {
-            return false;
+            $celsius = ($temp - self::$absolute_zero);
+            
+            if($round_value)
+            {
+                $celsius = round($celsius);
+            }
+            
+            $celsius_with_sign = $celsius . ' ' . self::$signs['celsius'];
+            
+            $data = array(
+                'value' => $celsius,
+                'sign'  => $celsius_with_sign,
+            );
+            
+            return $data;
         }
-        
-        $celsius = round(($temp - self::$absolute_zero)). '&deg;';
-        
-        return $celsius;
+        else
+        {
+            return FALSE;
+        }
     }
     
     // -------------------------------------------------------------------------
     
     /**
-    * Kelvin to Farenheit conversion
+    * Kelvin to Fahrenheit conversion
     *
-    * @param int $temp
+    * @param float $temp
+    * @param Bool $round_value
     * 
-    * @return String $farenheit
+    * @return mixed
     */
-    public static function k_to_f($temp)
+    public static function k_to_f($temp, $round_value=FALSE)
     {
-        if(!is_numeric($temp))
+        if(is_numeric($temp))
         {
-            return false;
-        }
-        $farenheit = round((($temp - self::$absolute_zero) * 1.8) + 32);
+            $fahrenheit = (($temp - self::$absolute_zero) * (9 / 5)) + 32;
         
-        return $farenheit;
+            if($round_value)
+            {
+                $fahrenheit = round($fahrenheit);
+            }
+            
+            $fahrenheit_with_sign = $fahrenheit . ' ' . self::$signs['fahrenheit'];
+            
+            $data = array(
+                'value' => $fahrenheit,
+                'sign'  => $fahrenheit_with_sign,
+            );
+            
+            return $data;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Fahrenheit to Celsius conversion
+    *
+    * @param float $temp
+    * @param Bool $round_value
+    * 
+    * @return mixed
+    */
+    public static function f_to_c($temp, $round_value=FALSE)
+    {
+        if(is_numeric($temp))
+        {
+            $celsius = ($temp - 32) * (5 / 9);
+        
+            if($round_value)
+            {
+                $celsius = round($celsius);
+            }
+            
+            $celsius_with_sign = $celsius . ' ' . self::$signs['celsius'];
+        
+            $data = array(
+                'value' => $celsius,
+                'sign'  => $celsius_with_sign,
+            );
+        
+            return $data;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Fahrenheit to Kelvin conversion
+    *
+    * @param float $temp
+    * @param Bool $round_value
+    * 
+    * @return mixed
+    */
+    public static function f_to_k($temp, $round_value=FALSE)
+    {
+        if(is_numeric($temp))
+        {
+            $kelvin = ($temp + 459.67) * (5 / 9);
+        
+            if($round_value)
+            {
+                $kelvin = round($kelvin);
+            }
+            
+            $kelvin_with_sign = $kelvin . ' ' . self::$signs['kelvin'];
+        
+            $data = array(
+                'value' => $kelvin,
+                'sign'  => $kelvin_with_sign,
+            );
+        
+            return $data;
+        }
+        else
+        {
+            return FALSE;
+        }
     }
     
     // -------------------------------------------------------------------------
