@@ -17,7 +17,6 @@ class Temperature{
     *
     * @param float $temp
     * @param Bool $round_value
-    * @param Bool $show_sign
     * 
     * @return mixed
     */
