@@ -155,5 +155,77 @@ class Temperature{
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Celsius to Fahrenheit conversion
+    *
+    * @param float $temp
+    * @param Bool $round_value
+    * 
+    * @return mixed
+    */
+    public static function c_to_f($temp, $round_value=FALSE)
+    {
+        if(is_numeric($temp))
+        {
+            $fahrenheit = ($temp * (9 / 5)) + 32;
+        
+            if($round_value)
+            {
+                $fahrenheit = round($fahrenheit);
+            }
+            
+            $fahrenheit_with_sign = $fahrenheit . ' ' . self::$signs['fahrenheit'];
+        
+            $data = array(
+                'value' => $fahrenheit,
+                'sign'  => $fahrenheit_with_sign,
+            );
+        
+            return $data;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Celsius to Kelvin conversion
+    *
+    * @param float $temp
+    * @param Bool $round_value
+    * 
+    * @return mixed
+    */
+    public static function c_to_k($temp, $round_value=FALSE)
+    {
+        if(is_numeric($temp))
+        {
+            $kelvin = $temp + self::$absolute_zero;
+        
+            if($round_value)
+            {
+                $kelvin = round($kelvin);
+            }
+            
+            $kelvin_with_sign = $kelvin . ' ' . self::$signs['kelvin'];
+        
+            $data = array(
+                'value' => $kelvin,
+                'sign'  => $kelvin_with_sign,
+            );
+        
+            return $data;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>
