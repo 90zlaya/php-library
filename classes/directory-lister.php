@@ -3,16 +3,17 @@
 * Directory content retrieval
 */
 class Directory_Lister{
-    private static $trailing_slash  = '/';
-    private static $dash            = '-';
-    private static $dot             = '.';
-    private static $number_of_files = 0;
-    private static $crawled         = array();
+    private static $open_inside_browser = 'file:///';
+    private static $trailing_slash      = '/';
+    private static $dash                = '-';
+    private static $dot                 = '.';
+    private static $number_of_files     = 0;
+    private static $crawled             = array();
     
-    protected static $directory       = '';
-    protected static $date_format     = 'Y-m-d';
-    protected static $time_format     = 'H:m:i';
-    protected static $method_calls    = array(
+    protected static $directory         = '';
+    protected static $date_format       = 'Y-m-d';
+    protected static $time_format       = 'H:m:i';
+    protected static $method_calls      = array(
         'files'    => 'files',
         'folders'  => 'folders',
         'crawl'    => 'crawl',
@@ -235,7 +236,8 @@ class Directory_Lister{
                     
                     if(empty($types) || in_array($extension_lowered, $types))
                     {
-                        $location  = 'file:///' . $directory . $file;
+                        $path      = $directory . $file;
+                        $location  = self::$open_inside_browser . $path;
                         $directory = self::$directory;
                         $date      = date(self::$date_format, @filemtime($location));
                         $time      = date(self::$time_format, @filemtime($location));
@@ -245,6 +247,7 @@ class Directory_Lister{
                         $data = array(
                             'open'      => $open,
                             'location'  => $location,
+                            'path'      => $path,
                             'directory' => $directory,
                             'file'      => $file,
                             'title'     => $title,
@@ -373,14 +376,78 @@ class Directory_Lister{
     {
         $directory  = $params['directory'];
         $method     = $params['method'];
-        $print      = $params['print'];
-        $display    = $params['display'];
-        $reverse    = $params['reverse'];
-        $delimiter  = $params['delimiter'];
-        $date_start = $params['date_start'];
-        $date_end   = $params['date_end'];
-        $year       = $params['year'];
-        $types      = $params['types'];
+        
+        if(isset($params['print']))
+        {
+            $print = $params['print'];
+        }
+        else
+        {
+            $print = FALSE;
+        }
+        
+        if(isset($params['display']))
+        {
+            $display = $params['display'];
+        }
+        else
+        {
+            $display = FALSE;
+        }
+        
+        if(isset($params['reverse']))
+        {
+            $reverse = $params['reverse'];
+        }
+        else
+        {
+            $reverse = '';
+        }
+        
+        if(isset($params['delimiter']))
+        {
+            $delimiter = $params['delimiter'];
+        }
+        else
+        {
+            $delimiter = '';
+        }
+        
+        if(isset($params['date_start']))
+        {
+            $date_start = $params['date_start'];
+        }
+        else
+        {
+            $date_start = '';
+        }
+        
+        if(isset($params['date_end']))
+        {
+            $date_end = $params['date_end'];
+        }
+        else
+        {
+            $date_end = '';
+        }
+        
+        if(isset($params['year']))
+        {
+            $year = $params['year'];
+        }
+        else
+        {
+            $year = '';
+        }
+        
+        if(isset($params['types']))
+        {
+            $types = $params['types'];
+        }
+        else
+        {
+            $types = array();
+        }
         
         $list = $searched = array();
         
