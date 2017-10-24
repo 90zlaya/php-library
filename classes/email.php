@@ -4,7 +4,21 @@
 */
 class Email{
     protected static $valid_email_regex     = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/i";
-    protected static $invalid_email_clients = array("@yopmail", "@rmqkr", "@emailtemporanea", "@sharklasers", "@guerrillamail", "@guerrillamailblock", "@fakeinbox", "@tempinbox", "@opayq", "@mailinator", "@notmailinator", "@getairmail", "@meltmail");
+    protected static $invalid_email_clients = array(
+        "@yopmail", 
+        "@rmqkr", 
+        "@emailtemporanea", 
+        "@sharklasers", 
+        "@guerrillamail", 
+        "@guerrillamailblock", 
+        "@fakeinbox", 
+        "@tempinbox", 
+        "@opayq", 
+        "@mailinator", 
+        "@notmailinator", 
+        "@getairmail", 
+        "@meltmail",
+    );
     
     // -------------------------------------------------------------------------
     

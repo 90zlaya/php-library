@@ -3,10 +3,12 @@
 * Directory content retrieval
 */
 class Directory_Lister{
-    private static   $trailing_slash  = '/';
-    private static   $dash            = '-';
-    private static   $dot             = '.';
-    private static   $number_of_files = 0;
+    private static $trailing_slash  = '/';
+    private static $dash            = '-';
+    private static $dot             = '.';
+    private static $number_of_files = 0;
+    private static $crawled         = array();
+    
     protected static $directory       = '';
     protected static $date_format     = 'Y-m-d';
     protected static $time_format     = 'H:m:i';
@@ -114,13 +116,12 @@ class Directory_Lister{
     /**
     * Files and folders in depth
     * 
-    * @param String $directory
-    * @param Array $types
     * @param Array $list
+    * @param Array $types
     * 
     * @return mixed
     */
-    private static function depth($directory, $types, $list)
+    private static function depth($list, $types=array())
     {
         if(empty($list))
         {
@@ -132,7 +133,7 @@ class Directory_Lister{
             
             foreach($list as $folder)
             {
-                $location = $directory . $folder . self::$trailing_slash;
+                $location = $folder . self::$trailing_slash;
                 
                 $depth_folders = self::folders($location);
                 $depth_files   = self::files($location, $types);
@@ -268,50 +269,95 @@ class Directory_Lister{
     // -------------------------------------------------------------------------
     
     /**
-    * Listing all files inside root directory and folders of root directory
+    * Listing all files inside given directory
     * 
-    * @param String $directory
-    * @param Array $types
+    * @param Array $params
     * 
-    * @return Array $data
+    * @return void
     */
-    protected static function crawl($directory, $types=array())
+    protected static function crawl($params)
     {
-        $list_of_paths   = array($directory);
-        $list_of_folders = self::folders($directory);
-        $list_of_files   = self::files($directory, $types);
-        
-        $depth = self::depth($directory, $types, $list_of_folders['folder']);
-        
-        if($depth)
+        if(isset($params['directory']))
         {
-            $depth_paths   = $depth['paths'];
-            $depth_folders = $depth['folders'];
-            $depth_files   = $depth['files'];
-            
-            $list_of_paths   = array_merge($list_of_paths, $depth_paths);
-            $list_of_folders = array_merge($list_of_folders, $depth_folders);
-            $list_of_files   = array_merge($list_of_files, $depth_files);
-            
-            foreach($depth_paths as $path)
-            {
-                $directory = $path . self::$trailing_slash;
-                
-                $list_of_folders_paths = self::folders($directory);
-                $list_of_files_paths   = self::files($directory, $types);
-                
-                $list_of_folders = array_merge($list_of_folders, $list_of_folders_paths);
-                $list_of_files   = array_merge($list_of_files, $list_of_files_paths);
-            }
+            $directory = $params['directory'];
+        }
+        else
+        {
+            $directory = '';
         }
         
-        $data = array(
-            'path'   => $list_of_paths,
-            'folder' => $list_of_folders,
-            'file'   => $list_of_files,
-        );
+        if(isset($params['types']))
+        {
+            $types = $params['types'];
+        }
+        else
+        {
+            $types = array();
+        }
         
-        return $data;
+        if(isset($params['data']))
+        {
+            $data = $params['data'];
+        }
+        else
+        {
+            $data = array();
+        }
+        
+        if(empty($data))
+        {
+            $list_of_paths   = array();
+            $list_of_folders = self::folders($directory);
+            $list_of_files   = self::files($directory, $types);
+            
+            $paths = $list_of_folders['path'];
+            
+            $depth = self::depth($paths, $types);
+            
+            if($depth)
+            {
+                $paths = array_merge($list_of_paths, $depth['paths']);
+                $files = array_merge($list_of_files, $depth['files']);
+                
+                $params = array(
+                    'types' => $types,
+                    'data'  => array(
+                        'paths' => $paths,
+                        'files' => $files,
+                    ),
+                );
+                self::crawl($params);
+            }
+        }
+        else
+        {
+            $paths = $data['paths'];
+            $files = $data['files'];
+            
+            if(empty($paths))
+            {
+                self::$crawled = $files;
+            }
+            else
+            {
+                $depth = self::depth($paths, $types);
+            
+                if($depth)
+                {
+                    $paths = $depth['paths'];
+                    $files = array_merge($files, $depth['files']);
+                    
+                    $params = array(
+                        'types' => $types,
+                        'data'  => array(
+                            'paths' => $paths,
+                            'files' => $files,
+                        ),
+                    );
+                    self::crawl($params);
+                }
+            }
+        }
     }
     
     // -------------------------------------------------------------------------
@@ -350,69 +396,77 @@ class Directory_Lister{
             } break;
             case self::$method_calls['crawl']:
             {
-                $list = self::crawl($directory, $types);
+                
+                $params = array(
+                    'directory' => $directory, 
+                    'types'     => $types,
+                );
+                self::crawl($params);
+                $list = self::$crawled;
             } break;
         }
         
         if($method !== self::$method_calls['folders'])
         {
-            if($method === self::$method_calls['crawl'])
+            if(empty($list))
             {
-                $list = $list['file'];
+                return FALSE;
             }
-            
-            foreach($list as $item)
+            else
             {
-                if(isset($item['date']))
+                foreach($list as $item)
                 {
-                    $date = $item['date'];
-                }
-                else
-                {
-                    $date = NULL;
-                }
-                
-                $params = array(
-                    'item'       => $item,
-                    'date'       => $date,
-                    'date_start' => $date_start,
-                    'date_end'   => $date_end,
-                    'year'       => $year,
-                );
-                
-                if(empty($delimiter))
-                {
-                    $checked = self::check_date($params);
-                }
-                else
-                {
-                    if($reverse)
+                    if(isset($item['date']))
                     {
-                        if(stripos($item['title'], $delimiter) === FALSE)
-                        {
-                            $checked = self::check_date($params);
-                        }
-                        else
-                        {
-                            $checked = array();
-                        }
+                        $date = $item['date'];
                     }
                     else
                     {
-                        if(stripos($item['title'], $delimiter) !== FALSE)
+                        $date = NULL;
+                    }
+                    
+                    $params = array(
+                        'item'       => $item,
+                        'date'       => $date,
+                        'date_start' => $date_start,
+                        'date_end'   => $date_end,
+                        'year'       => $year,
+                    );
+                    
+                    if(empty($delimiter))
+                    {
+                        $checked = self::check_date($params);
+                    }
+                    else
+                    {
+                        if($reverse)
                         {
-                            $checked = self::check_date($params);
+                            if(stripos($item['title'], $delimiter) === FALSE)
+                            {
+                                $checked = self::check_date($params);
+                            }
+                            else
+                            {
+                                $checked = array();
+                            }
                         }
                         else
                         {
-                            $checked = array();
+                            if(stripos($item['title'], $delimiter) !== FALSE)
+                            {
+                                $checked = self::check_date($params);
+                            }
+                            else
+                            {
+                                $checked = array();
+                            }
                         }
                     }
-                }
-                
-                if(!empty($checked))
-                {
-                    array_push($searched, $checked);
+                    
+                    if(!empty($checked))
+                    {
+                        array_push($searched, $checked);
+                    }
                 }
             }
         }    
@@ -429,6 +483,7 @@ class Directory_Lister{
                 print_r($searched);
                 print_r('</pre>');
             }
+            
             if($display)
             {
                 print_r(self::display($searched));
@@ -438,9 +493,9 @@ class Directory_Lister{
         $searched_count = count($searched);
         
         $data = array(
-            'listing'     => $searched,
-            'count'       => $searched_count,
-            'max'         => self::$number_of_files,
+            'listing' => $searched,
+            'count'   => $searched_count,
+            'max'     => self::$number_of_files,
         );
         
         self::$number_of_files = 0;
