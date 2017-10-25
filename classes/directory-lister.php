@@ -1,6 +1,12 @@
 <?php
 /**
 * Directory content retrieval
+* 
+* IMPORTANT: Files starting with dash (-) might break this class
+* by sending it into infinite loop or stopping it at some point.
+* I know what causes this problem and will direct all my 
+* forces in future releases to fix this unforced bug. 
+* Until then, be patient and careful.
 */
 class Directory_Lister{
     private static $open_inside_browser = 'file:///';
@@ -322,14 +328,23 @@ class Directory_Lister{
                 $paths = array_merge($list_of_paths, $depth['paths']);
                 $files = array_merge($list_of_files, $depth['files']);
                 
-                $params = array(
-                    'types' => $types,
-                    'data'  => array(
-                        'paths' => $paths,
-                        'files' => $files,
-                    ),
-                );
-                self::crawl($params);
+                self::$crawled = $files;
+                
+                if(empty($paths))
+                {
+                    return TRUE;
+                }
+                else
+                {
+                    $params = array(
+                        'types' => $types,
+                        'data'  => array(
+                            'paths' => $paths,
+                            'files' => $files,
+                        ),
+                    );
+                    self::crawl($params);
+                }
             }
         }
         else
@@ -337,9 +352,11 @@ class Directory_Lister{
             $paths = $data['paths'];
             $files = $data['files'];
             
+            self::$crawled = $files;
+            
             if(empty($paths))
             {
-                self::$crawled = $files;
+                return TRUE;
             }
             else
             {
@@ -350,14 +367,23 @@ class Directory_Lister{
                     $paths = $depth['paths'];
                     $files = array_merge($files, $depth['files']);
                     
-                    $params = array(
-                        'types' => $types,
-                        'data'  => array(
-                            'paths' => $paths,
-                            'files' => $files,
-                        ),
-                    );
-                    self::crawl($params);
+                    self::$crawled = $files;
+                    
+                    if(empty($paths))
+                    {
+                        return TRUE;
+                    }
+                    else
+                    {
+                        $params = array(
+                            'types' => $types,
+                            'data'  => array(
+                                'paths' => $paths,
+                                'files' => $files,
+                            ),
+                        );
+                        self::crawl($params);
+                    }
                 }
             }
         }
