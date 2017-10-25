@@ -25,8 +25,8 @@
             "classes"
         ],
         "psr-4": {
-            "phplibrary\\": "app"
+            "phplibrary\\": "*"
         }
     },
-    "minimum-stability": "1.0"
+    "minimum-stability": "stable"
 }
