@@ -28,5 +28,5 @@
             "phplibrary\\": "*"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
