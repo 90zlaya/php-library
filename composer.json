@@ -21,8 +21,11 @@
         "90zlaya/php-library" : "*"
     },
     "autoload": {
-        "psr-0": {
-            "Monolog": "src"
+        "classmap": [
+            "classes"
+        ],
+        "psr-4": {
+            "phplibrary": "app"
         }
     },
     "minimum-stability": "dev"
