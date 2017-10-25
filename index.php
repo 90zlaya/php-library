@@ -13,8 +13,12 @@
 include_once 'autoload.php';
 
 echo 'This is index page of <strong>php-library</strong>.'; 
+echo '<br/><br/>' . PHP_EOL;
+echo 'Autoload file is created and added inside root directory. It contains calls to every class inside php-library.';
 echo '<br/>' . PHP_EOL;
-echo 'All classes are contained in /classes subfolder.';
+echo 'All classes are inside <strong>/classes</strong> folder.';
 echo '<br/>' . PHP_EOL;
-echo 'All demonstrations are contained in /demonstrations subfolder.';
+echo 'All demonstrations are inside <strong>/demonstrations</strong> folder.';
+echo '<br/>' . PHP_EOL;
+echo 'All modules are inside <strong>/modules</strong> folder and contain subfolders for every module.';
 echo '<br/>' . PHP_EOL;
