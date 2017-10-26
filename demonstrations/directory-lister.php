@@ -6,6 +6,11 @@
 |
 | Developing and testing Directory_Lister class
 |
+| Please note that this script might get broken if your
+| file/folder names start with some of special characters. 
+| In that case go to Directory_Lister class and add them
+| to the $forbidden_characters variable.
+|
 | -------------------------------------------------------------------
 */
 include_once '../autoload.php';

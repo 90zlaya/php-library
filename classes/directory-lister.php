@@ -1,12 +1,6 @@
 <?php
 /**
 * Directory content retrieval
-* 
-* IMPORTANT: Files starting with dash (-) might break this class
-* by sending it into infinite loop or stopping it at some point.
-* I know what causes this problem and will direct all my 
-* forces in future releases to fix this unforced bug. 
-* Until then, be patient and careful.
 */
 class Directory_Lister{
     private static $open_inside_browser = 'file:///';
@@ -16,14 +10,15 @@ class Directory_Lister{
     private static $number_of_files     = 0;
     private static $crawled             = array();
     
-    protected static $directory         = '';
-    protected static $date_format       = 'Y-m-d';
-    protected static $time_format       = 'H:m:i';
-    protected static $method_calls      = array(
+    protected static $directory             = '';
+    protected static $date_format           = 'Y-m-d';
+    protected static $time_format           = 'H:m:i';
+    protected static $method_calls          = array(
         'files'    => 'files',
         'folders'  => 'folders',
         'crawl'    => 'crawl',
     );
+    protected static $forbidden_characters  = array('-', '+', '!', '#', '$', '%', '&', '(', ')', '‚', '~', ':', ';');
     
     // -------------------------------------------------------------------------
     
@@ -185,18 +180,23 @@ class Directory_Lister{
         $counter = 1;
         foreach($files as $folder)
         {
-            if($counter > 2)
-            {
-                $path = $directory . $folder;
-                
-                if(is_dir($path))
-                {
-                    array_push($arr_path, $path);
-                    array_push($arr_folder, $folder);
-                }
-            }
+            $folder_first_character = substr($folder, 0, 1);
             
-            $counter++;
+            if(!in_array($folder_first_character, self::$forbidden_characters))
+            {
+                if($counter > 2)
+                {
+                    $path = $directory . $folder;
+                    
+                    if(is_dir($path))
+                    {
+                        array_push($arr_path, $path);
+                        array_push($arr_folder, $folder);
+                    }
+                }
+                
+                $counter++;
+            }
         }
         
         $data = array(
