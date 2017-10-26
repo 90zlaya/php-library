@@ -16,17 +16,10 @@
             "role": "Developer"
         }
     ],
-    "require": {
-        "php": "^5.3.7 || ^7.0",
-        "90zlaya/php-library" : "*"
-    },
     "autoload": {
         "classmap": [
             "classes"
-        ],
-        "psr-4": {
-            "phplibrary\\": "*"
-        }
+        ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
