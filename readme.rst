@@ -3,7 +3,7 @@ PHP Library
 ###################
 
 PHP Library is set of custom made PHP classes containing most useful methods and variables for Web Development.
-Project is open-sourced under MIT licence on `GitHub <https://github.com/90zlaya/php-library>`_. Available over `Composer <https://getcomposer.org/>`_ and `Packagist <https://packagist.org/packages/90zlaya/php-library>`_
+Project is open-sourced under MIT licence on `GitHub <https://github.com/90zlaya/php-library>`_. Available over `Composer <https://getcomposer.org/>`_ and `Packagist <https://packagist.org/packages/90zlaya/php-library>`_.
 
 ###################
 Release Information
