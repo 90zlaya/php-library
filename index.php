@@ -1,26 +1,71 @@
+<!doctype html>
+<!--
+
+  Instructions:
+
+  - Save this file.
+  - Replace "USER" with your GitHub username.
+  - Replace "REPO" with your GitHub repo name.
+  - Replace "Your Project" with your project name.
+  - Upload this file (or commit to GitHub Pages).
+
+  Customize as you see fit!
+
+-->
 <?php
     include_once 'autoload.php';
 ?>
-<!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo $php_library_title; ?></title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width">
+
+  <title><?php echo $php_library_title; ?></title>
+
+  <!-- Flatdoc -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/legacy.js'></script>
+  <script src='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/flatdoc.js'></script>
+
+  <!-- Flatdoc theme -->
+  <link  href='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/theme-white/style.css' rel='stylesheet'>
+  <script src='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/theme-white/script.js'></script>
+
+  <!-- Meta -->
+  <meta content="<?php echo $php_library_title; ?>" property="og:title">
+  <meta content="<?php echo $php_library_description; ?>" name="description">
+
+  <!-- Initializer -->
+  <script>
+    Flatdoc.run({
+      fetcher: Flatdoc.github('<?php echo $php_library_repository; ?>')
+    });
+  </script>
 </head>
-
-<body>
-<?php
-    echo '<h1>Welcome to ' . $php_library_title . '</h1>'; 
-    echo $php_library_description . '<br/>' . PHP_EOL;
-    
-    echo 'Projcet is open-sourced under MIT licence on <a href="https://github.com/90zlaya/php-library">GitHub</a>. Available over <a href="https://getcomposer.org/">Composer</a> and <a href="https://packagist.org/packages/90zlaya/php-library">Packagist</a>.' . PHP_EOL;
-
-    echo '<h2/>' . ucfirst($php_library_folder_demonstrations) . '</h2>' . PHP_EOL;
-    echo '<ol>' . $navigation_for_demonstration . '</ol>' . PHP_EOL;
-
-    echo '<h2/>' . ucfirst($php_library_folder_modules) . '</h2>' . PHP_EOL;
-    echo '<ol>' . $navigation_for_modules . '</ol>' . PHP_EOL;
-    
-    echo '<p>Copyright &#169; 2017 | <a href="https://www.zlatanstajic.com/">Zlatan Stajić</a> | All Rights Reserved</p>' . PHP_EOL;
-?>
+<body role='flatdoc'>
+  <!-- HEADER -->
+  <div class='header'>
+    <div class='left'>
+      <h1><?php echo $php_library_title; ?></h1>
+      <ul>
+        <li><a href='<?php echo $hyperlinks['php_library_on_github']; ?>'>View on GitHub</a></li>
+        <li><a href='<?php echo $hyperlinks['php_library_on_github']; ?>/issues'>Issues</a></li>
+      </ul>
+    </div>
+    <div class='right'>
+      <!-- GitHub buttons: see http://ghbtns.com -->
+      <iframe src="http://ghbtns.com/github-btn.html?user=USER&amp;repo=REPO&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+    </div>
+  </div>
+  <!-- /HEADER -->
+  <!-- CONTENT -->
+  <div class='content-root'>
+    <div class='menubar'>
+      <div class='menu section' role='flatdoc-menu'></div>
+    </div>
+    <div role='flatdoc-content' class='content'></div>
+  </div>
+  <!-- /CONTENT -->
 </body>
 </html>
