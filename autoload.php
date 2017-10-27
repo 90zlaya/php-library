@@ -10,10 +10,11 @@
 |
 | -------------------------------------------------------------------
 */
-$php_library_title                 = 'PHP-Library';
+$php_library_title                 = 'PHP Library';
 $php_library_name                  = 'php-library';
 $php_library_description           = 'PHP Library is set of classes containing most useful methods and variables for Web Development.';
 $php_library_namespace             = 'phplibrary';
+$php_library_repository            = '90zlaya/php-library';
 
 $php_library_folder_classes        = 'classes';
 $php_library_folder_demonstrations = 'demonstrations';
@@ -75,6 +76,10 @@ $php_library_list_of_modules       = array(
     array(
         'name' => 'file-version',
     ),
+);
+
+$hyperlinks                        = array(
+    'php_library_on_github' => 'https://github.com/90zlaya/php-library',
 );
 
 $navigation_for_demonstration = '';

@@ -1,13 +1,11 @@
-###################
 PHP Library
-###################
+=======
 
 PHP Library is set of custom made PHP classes containing most useful methods and variables for Web Development.
-Project is open-sourced under MIT licence on `GitHub <https://github.com/90zlaya/php-library>`_. Available over `Composer <https://getcomposer.org/>`_ and `Packagist <https://packagist.org/packages/90zlaya/php-library>`_.
+Project is open-sourced under MIT licence on [GitHub]. Available over Composer and [Packagist].
 
-###################
 Release Information
-###################
+=======
 
 Every class call should have phplibrary namespace call in front. 
 
@@ -18,8 +16,10 @@ Every class call should have phplibrary namespace call in front.
 
 Install latest php-library version from command line typing following line: composer require 90zlaya/php-library:dev-master and that's it!
 
-###################
 License
-###################
+=======
 
 Free to use and study.
+
+[GitHub]: https://github.com/90zlaya/php-library
+[Packagist]: https://packagist.org/packages/90zlaya/php-library
