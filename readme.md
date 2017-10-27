@@ -17,7 +17,13 @@ include_once 'autoload.php';
 * All demonstrations are inside /demonstrations folder.
 * All modules are inside /modules folder and contain subfolders for every module.
 
-List of classes/demonstrations
+Every class call should have phplibrary namespace call in front.
+
+``` php
+phplibrary\Class_Name
+``` 
+
+Classes/demonstrations
 ----------------
 
 * Breadcrumbs
@@ -37,16 +43,10 @@ List of classes/demonstrations
 * Web_Service
 * Website
 
-List of modules
+Modules
 ----------------
 
 * file-version
-
-Every class call should have phplibrary namespace call in front.
-
-``` php
-phplibrary\Class_Name
-``` 
 
 Composer
 =======
