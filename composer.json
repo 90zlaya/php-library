@@ -20,7 +20,7 @@
         "classmap": [
             "classes"
         ],
-        psr-4": {
+        "psr-4": {
             "phplibrary\\": "classes"
         }
     },
