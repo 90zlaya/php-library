@@ -26,7 +26,7 @@
   <!-- Initializer -->
   <script>
     Flatdoc.run({
-      fetcher: Flatdoc.github('<?php echo $php_library_repository; ?>')
+      fetcher: Flatdoc.github('<?php echo $git_hub_username . '/' . $php_library_name; ?>')
     });
   </script>
 </head>
@@ -37,13 +37,13 @@
       <h1><?php echo $php_library_title; ?></h1>
       <ul>
         <li><a href='<?php echo $hyperlinks['php_library_on_github']; ?>'>View on GitHub</a></li>
-        <li><a href='<?php echo $hyperlinks['php_library_on_packagist']; ?>/issues'>View on Packagist</a></li>
+        <li><a href='<?php echo $hyperlinks['php_library_on_packagist']; ?>'>View on Packagist</a></li>
         <li><a href='<?php echo $hyperlinks['php_library_on_github']; ?>/issues'>Issues</a></li>
       </ul>
     </div>
     <div class='right'>
       <!-- GitHub buttons: see http://ghbtns.com -->
-      <iframe src="http://ghbtns.com/github-btn.html?user=USER&amp;repo=REPO&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=<?php echo $git_hub_username; ?>&amp;repo=<?php echo $php_library_name; ?>&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
     </div>
   </div>
   <!-- /HEADER -->

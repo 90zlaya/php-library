@@ -23,7 +23,7 @@ Every class call should have phplibrary namespace call in front.
 phplibrary\Class_Name
 ``` 
 
-Classes/demonstrations
+List of classes
 ----------------
 
 * Breadcrumbs
@@ -43,7 +43,7 @@ Classes/demonstrations
 * Web_Service
 * Website
 
-Modules
+List of modules
 ----------------
 
 * file-version

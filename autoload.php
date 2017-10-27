@@ -10,11 +10,11 @@
 |
 | -------------------------------------------------------------------
 */
+$git_hub_username                  = '90zlaya';
 $php_library_title                 = 'PHP Library';
 $php_library_name                  = 'php-library';
 $php_library_description           = 'PHP Library is set of classes containing most useful methods and variables for Web Development.';
 $php_library_namespace             = 'phplibrary';
-$php_library_repository            = '90zlaya/php-library';
 
 $php_library_folder_classes        = 'classes';
 $php_library_folder_demonstrations = 'demonstrations';
