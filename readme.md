@@ -36,15 +36,10 @@ List of classes
 
 Composer
 =======
-Install stable php-library version
+Install stable php-library version by using standard commands or if you wish to test latest development version of php-library, just add :dev-master in extension.
 
 ```
 composer require 90zlaya/php-library
-```
-Install development php-library version
-
-```
-composer require 90zlaya/php-library:dev-master
 ```
 
 Misc
