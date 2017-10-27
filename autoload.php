@@ -10,9 +10,18 @@
 |
 | -------------------------------------------------------------------
 */
-$php_library_folder    = 'classes/';
-$php_library_extension = '.php';
-$php_library_list      = array(
+$php_library_title                 = 'PHP-Library';
+$php_library_name                  = 'php-library';
+$php_library_description           = 'PHP Library is set of classes containing most useful methods and variables for Web Development.';
+$php_library_namespace             = 'phplibrary';
+
+$php_library_folder_classes        = 'classes';
+$php_library_folder_demonstrations = 'demonstrations';
+$php_library_folder_modules        = 'modules';
+
+$php_library_extension             = '.php';
+
+$php_library_list_of_classes       = array(
     array(
         'name' => 'breadcrumbs',
     ),
@@ -62,10 +71,26 @@ $php_library_list      = array(
         'name' => 'website',
     ),
 );
+$php_library_list_of_modules       = array(
+    array(
+        'name' => 'file-version',
+    ),
+);
 
-foreach($php_library_list as $item)
+$navigation_for_demonstration = '';
+foreach($php_library_list_of_classes as $item)
 {
     $name = $item['name'];
     
-    require_once $php_library_folder . $name . $php_library_extension;
+    require_once $php_library_folder_classes . '/' . $name . $php_library_extension;
+    
+    $navigation_for_demonstration .= '<li><a href="' . $php_library_folder_demonstrations . '/' . $name . $php_library_extension . '">' . $name . '</a></li>' . PHP_EOL;
+}
+
+$navigation_for_modules = '';
+foreach($php_library_list_of_modules as $item)
+{
+    $name = $item['name'];
+    
+    $navigation_for_modules .= '<li><a href="' . $php_library_folder_modules . '/' . $name . '">' . $name . '</a></li>' . PHP_EOL;
 }

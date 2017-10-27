@@ -1,4 +1,4 @@
-<?php
+<?php namespace phplibrary;
 /**
 * Date and Time formating, validating, comparing, converting...
 */

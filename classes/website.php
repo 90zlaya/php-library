@@ -1,4 +1,4 @@
-<?php
+<?php namespace phplibrary;
 /**
 * Use this class when working with website related data.
 * 

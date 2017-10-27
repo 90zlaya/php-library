@@ -1,4 +1,4 @@
-<?php
+<?php namespace phplibrary;
 /**
 * Web service related data
 */

@@ -1,24 +1,26 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| INDEX PAGE
-| -------------------------------------------------------------------
-| This file contains default view for testing classes.
-|
-| You may instantiate classes here, call methods and pass parameters
-| to and from methods in purpose of testing and developing.
-|
-| -------------------------------------------------------------------
-*/
-include_once 'autoload.php';
+    include_once 'autoload.php';
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?php echo $php_library_title; ?></title>
+</head>
 
-echo 'This is index page of <strong>php-library</strong>.'; 
-echo '<br/><br/>' . PHP_EOL;
-echo 'Autoload file is created and added inside root directory. It contains calls to every class inside php-library.';
-echo '<br/>' . PHP_EOL;
-echo 'All classes are inside <strong>/classes</strong> folder.';
-echo '<br/>' . PHP_EOL;
-echo 'All demonstrations are inside <strong>/demonstrations</strong> folder.';
-echo '<br/>' . PHP_EOL;
-echo 'All modules are inside <strong>/modules</strong> folder and contain subfolders for every module.';
-echo '<br/>' . PHP_EOL;
+<body>
+<?php
+    echo '<h1>Welcome to ' . $php_library_title . '</h1>'; 
+    echo $php_library_description . '<br/>' . PHP_EOL;
+    
+    echo 'Projcet is open-sourced under MIT licence on <a href="https://github.com/90zlaya/php-library">GitHub</a>. Available over <a href="https://getcomposer.org/">Composer</a> and <a href="https://packagist.org/packages/90zlaya/php-library">Packagist</a>.' . PHP_EOL;
+
+    echo '<h2/>' . ucfirst($php_library_folder_demonstrations) . '</h2>' . PHP_EOL;
+    echo '<ol>' . $navigation_for_demonstration . '</ol>' . PHP_EOL;
+
+    echo '<h2/>' . ucfirst($php_library_folder_modules) . '</h2>' . PHP_EOL;
+    echo '<ol>' . $navigation_for_modules . '</ol>' . PHP_EOL;
+    
+    echo '<p>Copyright &#169; 2017 | <a href="https://www.zlatanstajic.com/">Zlatan Stajić</a> | All Rights Reserved</p>' . PHP_EOL;
+?>
+</body>
+</html>

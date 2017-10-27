@@ -1,16 +1,11 @@
 <?php
 /*
 | -------------------------------------------------------------------
-| PASSWORD
+| WEBSITE
 | -------------------------------------------------------------------
 |
-| Developing and testing Password class
+| Developing and testing Website class
 |
 | -------------------------------------------------------------------
 */
 include_once '../autoload.php';
-
-echo phplibrary\Password::new();
-echo '<br/>';
-echo phplibrary\Password::new_readable();
-

@@ -28,11 +28,11 @@ $params = array(
     'directory'  => 'D:/Zlatan/Browser/phpmailer/',
     'method'     => 'crawl',
 );
-$listing = Directory_Lister::listing($params);
+$listing = phplibrary\Directory_Lister::listing($params);
 
 // -----------------------------------------------------------------------------
 
-$data = File::read_from_file($log_files);
+$data = phplibrary\File::read_from_file($log_files);
 
 if(empty($data))
 {
@@ -40,8 +40,8 @@ if(empty($data))
     
     $contents = $current_date . ' ' . $new_version;
     
-    File::write_to_file($log_files, $contents);
-    $data = File::read_from_file($log_files);
+    phplibrary\File::write_to_file($log_files, $contents);
+    $data = phplibrary\File::read_from_file($log_files);
 }
 else
 {
@@ -83,10 +83,10 @@ if(!empty($write_to_file))
     }
     
     $write_to_log_file = $current_date . ' ' . $latest_version;
-    File::write_to_file($log_files, $write_to_log_file);
+    phplibrary\File::write_to_file($log_files, $write_to_log_file);
     
     $write_to_file = $current_date . ' ' . $latest_version . PHP_EOL . PHP_EOL . $write_to_file;
-    File::write_to_file($log_versions, $write_to_file);
+    phplibrary\File::write_to_file($log_versions, $write_to_file);
 }
 
 // -----------------------------------------------------------------------------

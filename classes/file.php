@@ -1,4 +1,4 @@
-<?php
+<?php namespace phplibrary;
 /**
 * File-related operations
 */

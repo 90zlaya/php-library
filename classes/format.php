@@ -1,4 +1,4 @@
-<?php
+<?php namespace phplibrary;
 /**
 * Format methods
 */
@@ -14,9 +14,11 @@ class Format{
     /**
     * Converts bytes to megabytes
     * 
-    * @return Strubg $megabytes
+    * @param int $size
+    * 
+    * @return String $megabytes
     */
-    public static function bytes_to_megabytes()
+    public static function bytes_to_megabytes($size)
     {
         $base = log($size) / log(1024);             
         $f_base = floor($base);

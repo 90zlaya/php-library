@@ -19,7 +19,10 @@
     "autoload": {
         "classmap": [
             "classes"
-        ]
+        ],
+        psr-4": {
+            "phplibrary\\": "classes"
+        }
     },
     "minimum-stability": "stable"
 }

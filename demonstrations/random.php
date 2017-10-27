@@ -56,5 +56,5 @@ $list = array(
 );
 
 print_r('<pre>');
-print_r(Random::element($list, 'DAY'));
+print_r(phplibrary\Random::element($list, 'DAY'));
 print_r('</pre>');

@@ -1,4 +1,4 @@
-<?php
+<?php namespace phplibrary;
 /**
 * Works with user related data
 */

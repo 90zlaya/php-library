@@ -1,16 +1,11 @@
 <?php
 /*
 | -------------------------------------------------------------------
-| PASSWORD
+| DATE TIME FORMAT
 | -------------------------------------------------------------------
 |
-| Developing and testing Password class
+| Developing and testing DATE_TIME_FORMAT class
 |
 | -------------------------------------------------------------------
 */
 include_once '../autoload.php';
-
-echo phplibrary\Password::new();
-echo '<br/>';
-echo phplibrary\Password::new_readable();
-
