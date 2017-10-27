@@ -9,7 +9,7 @@ Release Information
 
 Every class call should have phplibrary namespace call in front. 
 
-* Autoload file is created and added inside root directory. It contains calls to every class inside php-library.
+* Autoload file is inside root directory. It contains calls to every class inside php-library.
 * All classes are inside /classes folder.
 * All demonstrations are inside /demonstrations folder.
 * All modules are inside /modules folder and contain subfolders for every module.
@@ -36,14 +36,22 @@ List of classes
 
 Composer
 =======
-Install latest php-library version from command line typing following line: composer require 90zlaya/php-library:dev-master or use latest stable version.
+Install stable php-library version
 
 ```
 composer require 90zlaya/php-library
 ```
+Install development php-library version
+
+```
+composer require 90zlaya/php-library:dev-master
+```
 
 Misc
 =======
+Inspiration
+----------------
+Idea behind creation of this repository is making everyday Web Development process faster and easier. 
 
 Acknowledgements
 ----------------

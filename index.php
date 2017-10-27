@@ -1,20 +1,7 @@
-<!doctype html>
-<!--
-
-  Instructions:
-
-  - Save this file.
-  - Replace "USER" with your GitHub username.
-  - Replace "REPO" with your GitHub repo name.
-  - Replace "Your Project" with your project name.
-  - Upload this file (or commit to GitHub Pages).
-
-  Customize as you see fit!
-
--->
 <?php
     include_once 'autoload.php';
 ?>
+<!doctype html>
 <html>
 <head>
   <meta charset='utf-8'>
@@ -50,6 +37,7 @@
       <h1><?php echo $php_library_title; ?></h1>
       <ul>
         <li><a href='<?php echo $hyperlinks['php_library_on_github']; ?>'>View on GitHub</a></li>
+        <li><a href='<?php echo $hyperlinks['php_library_on_packagist']; ?>/issues'>View on Packagist</a></li>
         <li><a href='<?php echo $hyperlinks['php_library_on_github']; ?>/issues'>Issues</a></li>
       </ul>
     </div>

@@ -79,7 +79,8 @@ $php_library_list_of_modules       = array(
 );
 
 $hyperlinks                        = array(
-    'php_library_on_github' => 'https://github.com/90zlaya/php-library',
+    'php_library_on_github'     => 'https://github.com/90zlaya/php-library',
+    'php_library_on_packagist'  => 'https://packagist.org/packages/90zlaya/php-library',
 );
 
 $navigation_for_demonstration = '';
