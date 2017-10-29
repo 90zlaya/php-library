@@ -8,24 +8,46 @@ class Format{
     protected static $ip_localhost_name    = 'Localhost';
     protected static $utf_8                = 'utf-8';
     protected static $windows_1250         = 'windows-1250';
+    protected static $bytes                = array(
+        'megabyte'  => array(
+            'value' => 1024,
+            'sign'  => 'MB',
+        ),
+    );
     
     // -------------------------------------------------------------------------
     
     /**
     * Converts bytes to megabytes
     * 
-    * @param int $size
+    * @param int $bytes
+    * @param Bool $to_round
     * 
     * @return String $megabytes
     */
-    public static function bytes_to_megabytes($size)
+    public static function bytes_to_megabytes($bytes, $to_round=TRUE)
     {
-        $base = log($size) / log(1024);             
-        $f_base = floor($base);
+        $type = self::$bytes['megabyte'];
         
-        $megabytes = round(pow(1024, $base - floor($base)), 1) .' '. 'MB';
+        $log_bytes = log($bytes);
+        $log_value = log($type['value']);
         
-        return $megabytes;
+        $base        = $log_bytes / $log_value;
+        $floor_base  = floor($base);
+        $base_result = $base - $floor_base;
+        $value       = pow($type['value'], $base_result);
+        
+        if($to_round)
+        {
+            $value = round($value, 1);
+        }
+        
+        $data = array(
+            'value' => $value,
+            'sign'  => $value . ' ' . $type['sign'],
+        );
+        
+        return $data;
     }
     
     // -------------------------------------------------------------------------

@@ -10,4 +10,8 @@
 */
 include_once '../autoload.php';
 
-echo phplibrary\Format::bytes_to_megabytes(1024);
+$bytes    = 2048;
+$to_round = TRUE;
+
+$megabytes = phplibrary\Format::bytes_to_megabytes($bytes, $to_round);
+phplibrary\Format::pre($megabytes);
