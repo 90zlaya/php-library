@@ -3,12 +3,34 @@
 * Format methods
 */
 class Format{
-    protected static $ip_locator           = 'http://www.infosniper.net/index.php?ip_address=';
-    protected static $ip_localhost_address = '::1';
-    protected static $ip_localhost_name    = 'Localhost';
-    protected static $utf_8                = 'utf-8';
-    protected static $windows_1250         = 'windows-1250';
-    protected static $units                = array('B', 'KB', 'MB', 'GB', 'TB'); 
+    protected static $utf_8         = 'utf-8';
+    protected static $windows_1250  = 'windows-1250';
+    protected static $ip            = array(
+        'locator'   => 'http://www.infosniper.net/index.php?ip_address=',
+        'localhost' => array(
+            'name'      => 'Localhost',
+            'addresses' => array(
+                '::1', 
+                '127.0.0.1'
+            ),
+        ),
+    );
+    protected static $website       = array(
+        'regex'     => '/^(http(s?):\/\/)?[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/',
+        'web'       => 'www',
+        'protocol'  => array(
+            'unsafe' => 'http://',
+            'safe'   => 'https://',
+        ),
+    );
+    protected static $units         = array(
+        'B', 
+        'kB', 
+        'MB', 
+        'GB', 
+        'TB'
+    );
+    
     
     // -------------------------------------------------------------------------
     
@@ -68,7 +90,7 @@ class Format{
     * @param String $telephone
     * @param String $telephone_backup
     * 
-    * @return String $result
+    * @return mixed
     */
     public static function telephone($telephone='', $telephone_backup='')
     {
@@ -79,36 +101,37 @@ class Format{
         
         if(empty($telephone))
         {
-            $result = '';
+            return FALSE;
         }
         else
         {
             $exploded_telephone = explode(' ', $telephone);
             
-            $telephone_print = '';
-            foreach($exploded_telephone as $row)
-            {
-                $telephone = trim($row);
-                $telephone = preg_replace('/[^0-9,.]/', '', $telephone);
-                $telephone_print .= $telephone; 
-            }        
-
-            $first  = substr($telephone_print, 0, 3);
-            $second = substr($telephone_print, 3, 2);
-            $third  = substr($telephone_print, 5, 2);
-            $fourth = substr($telephone_print, 7, 5);
-            
             if(empty($exploded_telephone))
             {
-                $result = 'N/A';                    
+                return FALSE;
             }
             else
             {
+                $telephone_print = '';
+                
+                foreach($exploded_telephone as $row)
+                {
+                    $telephone = trim($row);
+                    $telephone = preg_replace('/[^0-9,.]/', '', $telephone);
+                    $telephone_print .= $telephone; 
+                }        
+
+                $first  = substr($telephone_print, 0, 3);
+                $second = substr($telephone_print, 3, 2);
+                $third  = substr($telephone_print, 5, 2);
+                $fourth = substr($telephone_print, 7, 5);
+            
                 $result = $first . '/' . $second . '-' . $third . '-' . $fourth;
+    
+                return $result;
             }
         }
-    
-        return $result;
     }
     
     // -------------------------------------------------------------------------
@@ -117,33 +140,38 @@ class Format{
     * Formats website URL
     * 
     * @param String $location
-    * @param Bool $name
     * 
-    * @return String
+    * @return mixed
     */
-    public static function website($location, $name=FALSE)
+    public static function website($location)
     {
-        $prefix_protocol = 'http://';
-        $prefix_web      = 'www.';
-        
-        if(strpos($location, $prefix_web) !== FALSE)
+        if(preg_match(self::$website['regex'], $location))
         {
-            $prefix = $prefix_protocol;
+            if(strpos($location, self::$website['protocol']['safe']) !== FALSE || strpos($location, self::$website['protocol']['unsafe']) !== FALSE)
+            {
+                $location_final = $location;
+            }
+            else if(strpos($location, self::$website['web']) !== FALSE)
+            {
+                $prefix = self::$website['protocol']['unsafe'];
+                $location_final = $prefix . $location;
+            }
+            else
+            {
+                $prefix = self::$website['protocol']['unsafe'] . self::$website['web'] . '.';
+                $location_final = $prefix . $location;
+            }
+                         
+            $data = array(
+                'name'      => $location_final,
+                'anchor'    => '<a href="' . $location_final . '" target="_blank">' . $location . '</a>',
+            );
+            
+            return $data;
         }
         else
         {
-            $prefix = $prefix_protocol . $prefix_web;   
-        }
-        
-        $location_final = $prefix . $location;
-        
-        if($name)
-        {
-            return $location_final;
-        }
-        else
-        {
-            return ' ' . '<a href="' . $location_final . '" target="_blank">' . $location . '</a>' . ' ';
+            return FALSE;
         }
     }
     
@@ -154,18 +182,20 @@ class Format{
     * 
     * @param String $ip
     * 
-    * @return String
+    * @return String $converted
     */
     public static function ip($ip)
     {
-        if($ip == self::$ip_localhost_address)
+        if(in_array($ip, self::$ip['localhost']['addresses']))
         {
-            return self::$ip_localhost_name;
+            $converted = self::$ip['localhost']['name'];
         }
         else
         {
-            return '<a href="' . self::$ip_locator . $ip . '" target="_blank">' . $ip . '</a>';
+            $converted = '<a href="' . self::$ip['locator'] . $ip . '" target="_blank">' . $ip . '</a>';
         }
+        
+        return $converted;
     }
     
     // -------------------------------------------------------------------------
@@ -175,11 +205,13 @@ class Format{
     * 
     * @param String $title
     * 
-    * @return String
+    * @return String $converted
     */
     public static function title_case($title)
     {
-        return ucfirst(strtolower($title));
+        $converted = ucfirst(strtolower($title));
+        
+        return $converted;
     }
     
     // -------------------------------------------------------------------------
@@ -243,7 +275,7 @@ class Format{
     * 
     * @return String $converted
     */
-    public static function windows_to_utf($string)
+    public static function windows1250_to_utf8($string)
     {
         $converted = iconv(self::$windows_1250, self::$utf_8, $string);
         
@@ -259,7 +291,7 @@ class Format{
     * 
     * @return String $converted
     */
-    public static function utf_to_windows($string)
+    public static function utf8_to_windows1250($string)
     {
         $converted = iconv(self::$utf_8, self::$windows_1250, $string);
         
@@ -279,7 +311,9 @@ class Format{
     */
     public static function string($string, $start=0, $length=15)
     {
-        if(strlen($string) > $length)
+        $string_length = strlen($string);
+        
+        if($string_length > $length)
         {
             $corrected = substr($string, $start, $length) . '...';
         }
