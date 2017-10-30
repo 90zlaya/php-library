@@ -8,43 +8,34 @@ class Format{
     protected static $ip_localhost_name    = 'Localhost';
     protected static $utf_8                = 'utf-8';
     protected static $windows_1250         = 'windows-1250';
-    protected static $bytes                = array(
-        'megabyte'  => array(
-            'value' => 1024,
-            'sign'  => 'MB',
-        ),
-    );
+    protected static $units                = array('B', 'KB', 'MB', 'GB', 'TB'); 
     
     // -------------------------------------------------------------------------
     
     /**
-    * Converts bytes to megabytes
+    * Converts bytes
     * 
     * @param int $bytes
     * @param Bool $to_round
+    * @param int $round_precision
     * 
     * @return String $megabytes
     */
-    public static function bytes_to_megabytes($bytes, $to_round=TRUE)
+    public static function bytes($bytes, $to_round=TRUE, $round_precision=2)
     {
-        $type = self::$bytes['megabyte'];
-        
-        $log_bytes = log($bytes);
-        $log_value = log($type['value']);
-        
-        $base        = $log_bytes / $log_value;
-        $floor_base  = floor($base);
-        $base_result = $base - $floor_base;
-        $value       = pow($type['value'], $base_result);
+        $bytes = max($bytes, 0); 
+        $pow   = floor(($bytes ? log($bytes) : 0) / log(1024)); 
+        $pow   = min($pow, count(self::$units) - 1);
+        $bytes = $bytes / pow(1024, $pow);
         
         if($to_round)
         {
-            $value = round($value, 1);
+            $bytes = round($bytes, $round_precision);
         }
         
         $data = array(
-            'value' => $value,
-            'sign'  => $value . ' ' . $type['sign'],
+            'value' => $bytes,
+            'sign'  => $bytes . ' ' . self::$units[$pow],
         );
         
         return $data;
@@ -67,27 +58,6 @@ class Format{
         $formated_query = '<pre><code>' . $queryPrint . '</code></pre>';
         
         return $formated_query;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Concatenates string
-    * 
-    * @param String $string
-    * @param int $length
-    * @param int $start
-    * 
-    * @return String $string
-    */
-    public static function string($string, $length, $start=0)
-    {
-        if(strlen($string) > $length)
-        {
-            $string = substr($string, $start, $length) . ' ...';
-        }
-        
-        return $string;
     }
     
     // -------------------------------------------------------------------------
@@ -254,6 +224,8 @@ class Format{
     * Convert given data to readable format
     * 
     * @param mixed $data
+    * 
+    * @return void
     */
     public static function pre($data)
     {
@@ -271,7 +243,7 @@ class Format{
     * 
     * @return String $converted
     */
-    public static function windows1250_to_utf8($string)
+    public static function windows_to_utf($string)
     {
         $converted = iconv(self::$windows_1250, self::$utf_8, $string);
         
@@ -287,7 +259,7 @@ class Format{
     * 
     * @return String $converted
     */
-    public static function utf8_to_windows1250($string)
+    public static function utf_to_windows($string)
     {
         $converted = iconv(self::$utf_8, self::$windows_1250, $string);
         
@@ -305,7 +277,7 @@ class Format{
     * 
     * @return String $corrected
     */
-    public static function correct_string_length($string, $start=0, $length=15)
+    public static function string($string, $start=0, $length=15)
     {
         if(strlen($string) > $length)
         {

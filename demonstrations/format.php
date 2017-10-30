@@ -10,8 +10,9 @@
 */
 include_once '../autoload.php';
 
-$bytes    = 2048;
-$to_round = TRUE;
+$value           = 715000;
+$to_round        = TRUE;
+$round_precision = 2;
 
-$megabytes = phplibrary\Format::bytes_to_megabytes($bytes, $to_round);
-phplibrary\Format::pre($megabytes);
+$bytes = phplibrary\Format::bytes($value, $to_round, $round_precision);
+phplibrary\Format::pre($bytes);
