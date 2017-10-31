@@ -164,6 +164,7 @@ class Website{
         $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
         $meta .= '<meta name="author" content="' . $this->creator['name'] . '">' . PHP_EOL;
 		$meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
+        $meta .= '<link rel="apple-touch-icon" sizes="144x144" href="' . $this->images['icon'] . '"/>' . PHP_EOL;
         $meta .= '<link rel="shortcut icon" href="' . $this->images['icon'] . '" type="image/png">' . PHP_EOL;
         
         $meta .= '<title>';

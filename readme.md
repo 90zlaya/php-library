@@ -26,7 +26,6 @@ phplibrary\Class_Name
 List of classes
 ----------------
 
-* Breadcrumbs
 * Browser
 * Date_Time_Format
 * Directory_Lister
