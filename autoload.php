@@ -24,9 +24,6 @@ $php_library_extension             = '.php';
 
 $php_library_list_of_classes       = array(
     array(
-        'name' => 'breadcrumbs',
-    ),
-    array(
         'name' => 'browser',
     ),
     array(

@@ -10,23 +10,31 @@ class Website{
     public $host;
     public $made;
     
-    public $language          = 'EN';
-    public $charset           = 'UTF-8';
-    public $description       = 'Simple website';
-    public $keywords          = 'siple, website';
-    public $favorite_icon     = 'assets/images/favorite_icon.png';
-    public $logo_front        = 'assets/images/logo_front.png';
-    public $logo_inside       = 'assets/images/logo_inside.png';
-    public $creator           = '<a href="https://www.zlatanstajic.com/">Zlatan Stajic</a>';
-    public $creator_name      = 'Zlatan Stajic';
-    public $creator_website   = 'https://www.zlatanstajic.com/';
+    protected $language          = 'EN';
+    protected $charset           = 'UTF-8';
+    protected $description       = 'Simple website';
+    protected $keywords          = 'siple, website';
     
-    protected $head          = array();
-    protected $bottom        = array();
-    protected $link          = 'link';
-    protected $script        = 'script';
-    protected $link_custom   = 'link-custom';
-    protected $script_custom = 'script-custom';
+    private $head    = array();
+    private $bottom  = array();
+    private $calls   = array(
+        'css' => array(
+            'ordinary' => 'link',
+            'custom'   => 'link-custom',
+        ),
+        'javascript' => array(
+            'ordinary' => 'script',
+            'custom'   => 'script-custom',
+        ),
+    );
+    private $images  = array(
+        'icon' => 'assets/images/icon.png',
+        'logo' => 'assets/images/logo.png',
+    );
+    private $creator = array(
+        'name'    => 'Zlatan Stajić',
+        'website' => 'https://www.zlatanstajic.com/',
+    );
     
     // -------------------------------------------------------------------------
     
@@ -60,32 +68,254 @@ class Website{
         {
             $this->keywords = $params['keywords'];
         }
-        
-        if(!empty($params['favorite_icon']))
-        {
-            $this->favorite_icon = $params['favorite_icon'];
-        }
-        
-        if(!empty($params['logo_front']))
-        {
-            $this->logo_front = $params['logo_front'];
-        }
-        
-        if(!empty($params['logo_inside']))
-        {
-            $this->logo_inside = $params['logo_inside'];
-        }
-        
-        if(!empty($params['creator']))
-        {
-            $this->creator = $params['creator'];
-        }
-        
-        if(!empty($params['creator_name']))
-        {
-            $this->creator_name = $params['creator_name'];
-        }
     }        
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Adding css and javascript tags to head of html
+    * 
+    * @param Array $params
+    * 
+    * @return void
+    */
+    public function add_to_head($params)
+    {
+        $this->head = $params;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Adding css and javascript tags to bottom of html
+    * 
+    * @param Array $params
+    * 
+    * @return void
+    */
+    public function add_to_bottom($params)
+    {
+        $this->bottom = $params;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Adding images to website
+    * 
+    * @param Array $params
+    * @param Bool $to_merge
+    * 
+    * @return void
+    */
+    public function add_to_images($params, $to_merge=FALSE)
+    {
+        if($to_merge)
+        {
+            $this->images = array_merge($this->images, $params);
+        }
+        else
+        {
+            $this->images = $params;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Adding data about website creator
+    * 
+    * @param Array $params
+    * @param Bool $to_merge
+    * 
+    * @return void
+    */
+    public function add_to_creator($params, $to_merge=FALSE)
+    {
+        if($to_merge)
+        {
+            $this->creator = array_merge($this->creator, $params);
+        }
+        else
+        {
+            $this->creator = $params;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Prints meta tags
+    * 
+    * If no title was given, prints website name
+    * 
+    * @param String $title
+    * 
+    * @return String $meta
+    */
+    public function meta($title='')
+    {
+        $meta = '';
+        
+        $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
+        $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
+        $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">' . PHP_EOL;
+        $meta .= '<meta name="description" content="' . $this->name . ':' . ' ' . $this->description . '">' . PHP_EOL;
+        $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
+        $meta .= '<meta name="author" content="' . $this->creator['name'] . '">' . PHP_EOL;
+		$meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
+        $meta .= '<link rel="shortcut icon" href="' . $this->images['icon'] . '" type="image/png">' . PHP_EOL;
+        
+        $meta .= '<title>';
+            if(empty($title))
+            {
+                $meta .= $this->name;
+            }
+            else
+            {
+                $meta .= $title;
+            }
+        $meta .= '</title>' . PHP_EOL;
+        
+        return $meta;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Printing values in head of html
+    * 
+    * @return String $return
+    */
+    public function head()
+    {
+        $return = '';
+        
+        $return .= '<!-- HEAD -->' . PHP_EOL;
+        if(empty($this->head))
+        {
+            $return .= '<!-- NOT LOADED -->' . PHP_EOL;
+        }
+        else
+        {
+            foreach($this->head as $head)
+            {
+                switch($head['type'])
+                {
+                    case $this->calls['css']['ordinary']:
+                        {
+                            $return .= '<link rel="stylesheet" href="';
+                            $return .= $head['path'];
+                            $return .= '">' . PHP_EOL;
+                        }
+                    break; 
+                    case $this->calls['javascript']['ordinary']:
+                        {
+                            $return .= '<script src="';
+                            $return .= $head['path'];
+                            $return .= '"></script>' . PHP_EOL;
+                        }
+                    break; 
+                    case $this->calls['css']['custom']:
+                        {
+                            $return .= '<style>';
+                            $return .= $head['path'];
+                            $return .= '</style>' . PHP_EOL;
+                        }
+                    break; 
+                    case $this->calls['javascript']['custom']:
+                        {
+                            $return .= '<script>';
+                            $return .= $head['path'];
+                            $return .= '</script>' . PHP_EOL;
+                        }
+                    break;    
+                }    
+            }
+        }
+        $return .= '<!-- /HEAD -->' . PHP_EOL;
+        
+        return $return;
+    }   
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Printing values in bottom of html
+    * 
+    * @return String $return
+    */
+    public function bottom()
+    {
+        $return = '';
+        
+        $return .= '<!-- BOTTOM -->' . PHP_EOL;
+        if(empty($this->bottom))
+        {
+            $return .= '<!-- NOT LOADED -->' . PHP_EOL;
+        }
+        else
+        {
+            foreach($this->bottom as $bottom)
+            {
+                switch($bottom['type'])
+                {
+                    case $this->calls['css']['ordinary']:
+                        {
+                            $return .= '<link rel="stylesheet" href="';
+                            $return .= $bottom['path'];
+                            $return .= '">' . PHP_EOL;
+                        }
+                    break;
+                    case $this->calls['javascript']['ordinary']:
+                        {
+                            $return .= '<script src="';
+                            $return .= $bottom['path'];
+                            $return .= '"></script>' . PHP_EOL;
+                        }
+                    break;
+                    case $this->calls['css']['custom']:
+                        {
+                            $return .= '<style>';
+                            $return .= $bottom['path'];
+                            $return .= '</style>' . PHP_EOL;
+                        }
+                    break;
+                    case $this->calls['javascript']['custom']:
+                        {
+                            $return .= '<script>';
+                            $return .= $bottom['path'];
+                            $return .= '</script>' . PHP_EOL;
+                        }
+                    break;
+                }   
+            }
+        }
+        $return .= '<!-- /BOTTOM -->' . PHP_EOL;
+        
+        return $return;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Printing images values
+    * 
+    * @param String $image
+    * 
+    * @return Array
+    */
+    public function images($image)
+    {
+        if(empty($image))
+        {
+            return FALSE;
+        }
+        else
+        {
+            return $this->images[$image];
+        }
+    }
     
     // -------------------------------------------------------------------------
     
@@ -103,7 +333,7 @@ class Website{
     {
         $current_year = date('Y');
         
-        if($current_year === $this->made || $always_made_year)
+        if($current_year == $this->made || $always_made_year)
         {
             $since = $current_year;
         }
@@ -112,7 +342,7 @@ class Website{
             $since = $this->made . '-' . $current_year;
         }
         
-        $signature =  'Copyright &#169; ' . $since . ' | ' . $this->creator . ' | All Rights Reserved';
+        $signature =  'Copyright &#169; ' . $since . ' | <a href="' . $this->creator['website'] . '" target="_blank">' .  $this->creator['name'] . '</a> | All Rights Reserved';
         
         return $signature;
     }
@@ -136,14 +366,14 @@ class Website{
             $language = $this->language;
         }
         
-        $signature_hidden = '<!-- ';
+        $signature_hidden = PHP_EOL . '<!-- ';
         switch($language)
         {
             case 'EN':
                 {
-                    $signature_hidden .= 'Proudly built by: ' . $this->creator_name . '; Find me on ' . $this->creator_website;
+                    $signature_hidden .= 'Proudly built by: ' . $this->creator['name'] . '; Find me on ' . $this->creator['website'];
                 } break;
-            default: $signature_hidden .= 'Ponosno izradio: ' . $this->creator_name . '; Pronadjite me na ' . $this->creator_website;
+            default: $signature_hidden .= 'Ponosno izradio: ' . $this->creator['name'] . '; Pronadjite me na ' . $this->creator['website'];
         }
         $signature_hidden .=  ' -->' . PHP_EOL;
         
@@ -153,217 +383,11 @@ class Website{
     // -------------------------------------------------------------------------
     
     /**
-    * Adding css and javascript tags to head of html
-    * 
-    * Custom tags are also allowed.
-    * 
-    * @param Array $params
-    * 
-    * @return void
-    */
-    public function add_to_head($params)
-    {
-        if(!empty($params))
-        {
-            foreach($params as $param)
-            {
-                if(empty($param['type']))
-                {
-                    $param['type'] = $this->link;
-                }
-                
-                $this->head[] = array(
-                    'path' => $param['path'],
-                    'type' => $param['type']
-                );
-            }
-        }
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Adding css and javascript tags to bottom of html
-    * 
-    * Custom tags are also allowed.
-    * 
-    * @param Array $params
-    * 
-    * @return void
-    */
-    public function add_to_bottom($params)
-    {
-        if(empty($params))
-        {
-            foreach($params as $param)
-            {
-                if(empty($param['type']))
-                {
-                    $param['type'] = $this->script;
-                }
-                
-                $this->bottom[] = array(
-                    'path' => $param['path'],
-                    'type' => $param['type']
-                );
-            }
-        }
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Prints meta tags
-    * 
-    * If no title was given, prints website name
-    * 
-    * @param String $title
-    * 
-    * @return String $meta
-    */
-    public function meta($title='')
-    {
-        $meta  = '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
-        $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
-        $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">' . PHP_EOL;
-        $meta .= '<meta name="description" content="' . $this->name . ':' . ' ' . $this->description . '">' . PHP_EOL;
-        $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
-        $meta .= '<meta name="author" content="' . $this->creator_name . '">' . PHP_EOL;
-		$meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
-        $meta .= '<link rel="shortcut icon" href="' . $this->favorite_icon . '" type="image/png">' . PHP_EOL;
-        
-        $meta .= '<title>';
-            if(empty($title))
-            {
-                $meta .= $this->name;
-            }
-            else
-            {
-                $meta .= $title;
-            }
-        $meta .= '</title>' . PHP_EOL;
-        
-        return $meta;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Prints head tags
-    * 
-    * @return String $return
-    */
-    public function head()
-    {
-        $return = '<!-- HEAD -->' . PHP_EOL;
-        if(empty($this->head))
-        {
-            $return .= '<!-- NOT LOADED -->' . PHP_EOL;
-        }
-        else
-        {
-            foreach($this->head as $head)
-            {
-                switch($head['type'])
-                {
-                    case $this->link:    
-                        {
-                            $return .= '<link rel="stylesheet" href="';
-                            $return .= $head['path'];
-                            $return .= '">' . PHP_EOL;
-                        }
-                    break; 
-                    case $this->script:    
-                        {
-                            $return .= '<script src="';
-                            $return .= $head['path'];
-                            $return .= '"></script>' . PHP_EOL;
-                        }
-                    break; 
-                    case $this->link_custom:    
-                        {
-                            $return .= '<style>';
-                            $return .= $head['path'];
-                            $return .= '</style>' . PHP_EOL;
-                        }
-                    break; 
-                    case $this->script_custom:    
-                        {
-                            $return .= '<script>';
-                            $return .= $head['path'];
-                            $return .= '</script>' . PHP_EOL;
-                        }
-                    break;    
-                }    
-            }
-        }
-        $return .= '<!-- /HEAD -->' . PHP_EOL;
-        
-        return $return;
-    }   
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Printing values somewhere in bottom of html
-    * 
-    * @return String $return
-    */
-    public function bottom()
-    {
-        $return = '<!-- BOTTOM -->' . PHP_EOL;
-        if(empty($this->bottom))
-        {
-            $return .= '<!-- NOT LOADED -->' . PHP_EOL;
-        }
-        else
-        {
-            foreach($this->bottom as $bottom)
-            {
-                switch($bottom['type'])
-                {
-                    case $this->link:    
-                        {
-                            $return .= '<link rel="stylesheet" href="';
-                            $return .= $bottom['path'];
-                            $return .= '">' . PHP_EOL;
-                        }
-                    break;
-                    case $this->script:    
-                        {
-                            $return .= '<script src="';
-                            $return .= $bottom['path'];
-                            $return .= '"></script>' . PHP_EOL;
-                        }
-                    break;
-                    case $this->link_custom:    
-                        {
-                            $return .= '<style>';
-                            $return .= $bottom['path'];
-                            $return .= '</style>' . PHP_EOL;
-                        }
-                    break;
-                    case $this->script_custom:    
-                        {
-                            $return .= '<script>';
-                            $return .= $bottom['path'];
-                            $return .= '</script>' . PHP_EOL;
-                        }
-                    break;
-                }   
-            }
-        }
-        $return .= '<!-- /BOTTOM -->' . PHP_EOL;
-        
-        return $return;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
     * Page redirection
     * 
-    * Echoes html if page is not properly redirected
+    * IMPORTANT: Please note that this method works with headers
+    * and that it modifies them. When you test this method be 
+    * careful because browser might get confused by mixed headers data.
     * 
     * @param String $page
     * @param Bool $is_url
