@@ -19,3 +19,7 @@ phplibrary\Format::pre($bytes);
 
 $website = phplibrary\Format::website('google.com');
 phplibrary\Format::pre($website);
+
+$text = '<b>Lorem Ipsum</b> is simply <i>dummy</i> text of the printing and typesetting industry.';
+$string = phplibrary\Format::string($text, 0, 50);
+echo $string;

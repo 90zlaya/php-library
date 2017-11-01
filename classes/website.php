@@ -10,13 +10,21 @@ class Website{
     public $host;
     public $made;
     
-    protected $language          = 'EN';
-    protected $charset           = 'UTF-8';
-    protected $description       = 'Simple website';
-    protected $keywords          = 'siple, website';
+    protected $language    = 'EN';
+    protected $charset     = 'UTF-8';
+    protected $description = 'Simple website';
+    protected $keywords    = 'siple, website';
     
     private $head    = array();
     private $bottom  = array();
+    private $images  = array(
+        'icon' => 'assets/images/icon.png',
+        'logo' => 'assets/images/logo.png',
+    );
+    private $creator = array(
+        'name'    => 'Zlatan Stajić',
+        'website' => 'https://www.zlatanstajic.com/',
+    );
     private $calls   = array(
         'css' => array(
             'ordinary' => 'link',
@@ -26,14 +34,6 @@ class Website{
             'ordinary' => 'script',
             'custom'   => 'script-custom',
         ),
-    );
-    private $images  = array(
-        'icon' => 'assets/images/icon.png',
-        'logo' => 'assets/images/logo.png',
-    );
-    private $creator = array(
-        'name'    => 'Zlatan Stajić',
-        'website' => 'https://www.zlatanstajic.com/',
     );
     
     // -------------------------------------------------------------------------
@@ -160,7 +160,7 @@ class Website{
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
         $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
         $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">' . PHP_EOL;
-        $meta .= '<meta name="description" content="' . $this->name . ':' . ' ' . $this->description . '">' . PHP_EOL;
+        $meta .= '<meta name="description" content="' . $this->description . '">' . PHP_EOL;
         $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
         $meta .= '<meta name="author" content="' . $this->creator['name'] . '">' . PHP_EOL;
 		$meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;

@@ -311,11 +311,12 @@ class Format{
     */
     public static function string($string, $start=0, $length=15)
     {
+        $string = strip_tags($string);
         $string_length = strlen($string);
         
         if($string_length > $length)
         {
-            $corrected = substr($string, $start, $length) . '...';
+            $corrected = mb_substr($string, $start, $length) . '...';
         }
         else
         {
