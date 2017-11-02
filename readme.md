@@ -46,6 +46,7 @@ List of modules
 ----------------
 
 * file-version
+* spider
 
 Composer
 =======
