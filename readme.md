@@ -46,7 +46,15 @@ List of modules
 ----------------
 
 * file-version
-* spider
+
+This script looks up for files inside given path for those which are changed since certain point in time.
+If or when it finds them, then creates two files, or updates them, with informations about date, version and changed files.
+Notice: This module can't be installed as standalone in this format, because it heavily resides on PHP Library and it's methods.
+
+* spider 
+
+This script crawls for visitor's data. If or when it finds them, then creates two files, or updates them, with informations about date, version and changed files.
+Notice: This module can't be installed as standalone in this format, because it heavily resides on PHP Library and it's methods.
 
 Composer
 =======

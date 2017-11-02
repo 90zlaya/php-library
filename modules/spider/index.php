@@ -145,6 +145,8 @@ $geoplugin->locate();
 
 // Collect data
 $data = array(
+    'page_name'             => $_SERVER['PHP_SELF'],
+    'ua'                    => $_SERVER['HTTP_USER_AGENT'],
     'ip'                    => $geoplugin->ip,
     'city'                  => $geoplugin->city,
     'region'                => $geoplugin->region,
@@ -167,7 +169,6 @@ $database_connection  = FALSE; // Set $database_query if TRUE
 $database_servername  = 'your_servername';
 $database_username    = 'your_username';
 $database_password    = 'your_password';
-$reference_clause     = FALSE;
 $reference_name       = 'ref';
 $timezone             = 'Europe/Belgrade';
 $mail_to_send         = FALSE; // Set $mail_message if TRUE
@@ -182,20 +183,13 @@ $to_redirect_location = '';
 date_default_timezone_set($timezone);
 
 // Reference
-if($reference_clause)
+if(isset($_GET[$reference_name]))
 {
-    if(isset($_GET[$reference_name]))
-    {
-        $reference = $_GET[$reference_name];
-    }
-    else
-    {
-        $reference = 1;
-    }    
+    $reference = $_GET[$reference_name];
 }
 else
 {
-    $reference = FALSE;
+    $reference = '0';
 }
 
 // Database connection
