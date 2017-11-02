@@ -73,6 +73,9 @@ $php_library_list_of_modules       = array(
     array(
         'name' => 'file-version',
     ),
+    array(
+        'name' => 'spider',
+    ),
 );
 
 $hyperlinks                        = array(

@@ -256,14 +256,18 @@ class Format{
     * Convert given data to readable format
     * 
     * @param mixed $data
+    * @param Bool $to_print
     * 
-    * @return void
+    * @return mixed
     */
-    public static function pre($data)
+    public static function pre($data, $to_print=TRUE)
     {
-        print_r('<pre>');
-        print_r($data);
-        print_r('</pre>');
+        if($to_print)
+        {
+            print_r('<pre>');
+            print_r($data);
+            print_r('</pre>');
+        }
     }
     
     // -------------------------------------------------------------------------
