@@ -4,7 +4,8 @@
 | SPIDER
 | -------------------------------------------------------------------
 |
-| This script crawls for visitor's data.
+| This script crawls for visitor's data. It's possible 
+| to display them, write to database and send via email.
 | 
 | Notice: This module can be installed as standalone in this format.
 | 
