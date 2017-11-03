@@ -27,20 +27,65 @@ List of classes
 ----------------
 
 * Browser
+
+Working with browsers and user agent data.
+
 * Date_Time_Format
+
+Date and Time formating, validating, comparing, converting...
+
 * Directory_Lister
+
+Directory content retrieval.
+
 * Email
+
+Email-related operations.
+
 * File
+
+File-related operations.
+
 * Format
+
+Format related methods.
+
 * Operating_System
+
+Working with Operating System related data.
+
 * Pagination
+
+This is special class constructed from one of special templates accustomed to work everywhere. It's not by standard but it might help.
+
 * Password
+
+Works with password related data.
+
 * Random
+
+Random-related data.
+
 * Temperature
+
+Working with temperature conversions.
+
 * User
+
+Works with user related data.
+
 * Validation
+
+Validation methods.
+
 * Web_Service
+
+Web service related data.
+
 * Website
+
+Use this class when working with website related data.
+Instantiate it only once (great solution is Singleton design pattern) and call public parameters and methods across entire website.
 
 List of modules
 ----------------

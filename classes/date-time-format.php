@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Date and Time formating, validating, comparing, converting...
+<?php 
+/*
+| -------------------------------------------------------------------
+| DATE TIME FORMAT
+| -------------------------------------------------------------------
+|
+| Date and Time formating, validating, comparing, converting...
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Date_Time_Format{
     public static $user     = 'd.m.Y';
     public static $database = 'Y-m-d';

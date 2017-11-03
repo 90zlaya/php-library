@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Email-related operations
+<?php 
+/*
+| -------------------------------------------------------------------
+| EMAIL
+| -------------------------------------------------------------------
+|
+| Email-related operations
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Email{
     protected static $valid_email_regex     = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/i";
     protected static $invalid_email_clients = array(

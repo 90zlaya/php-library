@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Format methods
+<?php
+/*
+| -------------------------------------------------------------------
+| FORMAT
+| -------------------------------------------------------------------
+|
+| Format related methods
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Format{
     protected static $utf_8         = 'utf-8';
     protected static $windows_1250  = 'windows-1250';

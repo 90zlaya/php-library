@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Works with user related data
+<?php
+/*
+| -------------------------------------------------------------------
+| USER
+| -------------------------------------------------------------------
+|
+| Works with user related data
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class User{
     public static $image_location = 'data/users/';
     public static $image_default  = 'assets/images/user.png';

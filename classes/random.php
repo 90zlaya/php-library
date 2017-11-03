@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Random-related methods
+<?php
+/*
+| -------------------------------------------------------------------
+| RANDOM
+| -------------------------------------------------------------------
+|
+| Random-related data
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Random{
     protected static $numbers      = '0123456789';
     protected static $alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

@@ -1,10 +1,12 @@
 <?php
 /*
 | -------------------------------------------------------------------
-| AUTOLOAD CLASSES
+| AUTOLOAD
 | -------------------------------------------------------------------
 |
 | This is file where all classes are autoloaded.
+| This file also contains global data for some pages.
+| 
 | Include this file if you want all classes 
 | at once in your project.
 |

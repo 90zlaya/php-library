@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Working with browsers and user agent data
+<?php
+/*
+| -------------------------------------------------------------------
+| BROWSER
+| -------------------------------------------------------------------
+|
+| Working with browsers and user agent data
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Browser{
 	protected static $browsers = array(
         array(
@@ -92,7 +100,9 @@ class Browser{
     */
 	public static function is_mobile($user_agent)
     {
-		if(preg_match(self::$mobile_user_agent_one, $user_agent) || preg_match(self::$mobile_user_agent_two, substr($user_agent, 0, 4)))
+		$part_of_user_agent = substr($user_agent, 0, 4);
+        
+        if(preg_match(self::$mobile_user_agent_one, $user_agent) || preg_match(self::$mobile_user_agent_two, $part_of_user_agent))
 		{
 			return TRUE;
 		}

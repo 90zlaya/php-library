@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Working with Operating System related data
+<?php
+/*
+| -------------------------------------------------------------------
+| OPERATING SYSTEM
+| -------------------------------------------------------------------
+|
+| Working with Operating System related data
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Operating_System{
     protected static $operating_systems = array(
         array(

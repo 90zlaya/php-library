@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Directory content retrieval
+<?php 
+/*
+| -------------------------------------------------------------------
+| DIRECTORY LISTER
+| -------------------------------------------------------------------
+|
+| Directory content retrieval
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Directory_Lister{
     private static $open_inside_browser = 'file:///';
     private static $trailing_slash      = '/';

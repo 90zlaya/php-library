@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Works with password related data
+<?php
+/*
+| -------------------------------------------------------------------
+| PASSWORD
+| -------------------------------------------------------------------
+|
+| Works with password related data
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Password{
     protected static $size_minimum = 6;
     protected static $size_optimum = 9;

@@ -1,10 +1,18 @@
-<?php namespace phplibrary;
-/**
-* Use this class when working with website related data.
-* 
-* Instantiate it only once (great solution is Singleton design pattern) 
-* and call public parameters and methods across entire website.
+<?php
+/*
+| -------------------------------------------------------------------
+| WEBSITE
+| -------------------------------------------------------------------
+|
+| Use this class when working with website related data.
+| 
+| Instantiate it only once (great solution is Singleton design pattern) 
+| and call public parameters and methods across entire website.
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Website{
     public $name;
     public $host;

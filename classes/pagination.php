@@ -1,10 +1,16 @@
-<?php namespace phplibrary;
-/**
-* Pagination class
-* 
-* This is special class constructed from one of special templates
-* accustomed to work everywhere. It's not by standard but it might help.
+<?php
+/*
+| -------------------------------------------------------------------
+| PAGINATION
+| -------------------------------------------------------------------
+|
+| This is special class constructed from one of special templates
+| accustomed to work everywhere. It's not by standard but it might help.
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Pagination{
     public static $steps = 9;
 

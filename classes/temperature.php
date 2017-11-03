@@ -1,7 +1,15 @@
-<?php namespace phplibrary;
-/**
-* Working with temperature conversions
+<?php
+/*
+| -------------------------------------------------------------------
+| TEMPERATURE
+| -------------------------------------------------------------------
+|
+| Working with temperature conversions
+|
+| -------------------------------------------------------------------
 */
+namespace phplibrary;
+
 class Temperature{
     protected static $absolute_zero = 273.15;
     protected static $signs         = array(
