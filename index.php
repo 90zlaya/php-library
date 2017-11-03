@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width">
 
-  <title><?php echo $php_library_title; ?></title>
+  <title><?=$php_library_title;?></title>
   
   <!-- jQuery Load -->
   <script>
@@ -29,13 +29,13 @@
   <script src='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/theme-white/script.js'></script>
 
   <!-- Meta -->
-  <meta content="<?php echo $php_library_title; ?>" property="og:title">
-  <meta content="<?php echo $php_library_description; ?>" name="description">
+  <meta content="<?=$php_library_title;?>" property="og:title">
+  <meta content="<?=$php_library_description;?>" name="description">
 
   <!-- Initializer -->
   <script>
     Flatdoc.run({
-      fetcher: Flatdoc.github('<?php echo $git_hub_username . '/' . $php_library_name; ?>')
+      fetcher: Flatdoc.github('<?=$git_hub_username . '/' . $php_library_name;?>')
     });
   </script>
 </head>
@@ -43,16 +43,16 @@
   <!-- HEADER -->
   <div class='header'>
     <div class='left'>
-      <h1><?php echo $php_library_title; ?></h1>
+      <h1><?=$php_library_title;?></h1>
       <ul>
-        <li><a href='<?php echo $hyperlinks['php_library_on_github']; ?>'>View on GitHub</a></li>
-        <li><a href='<?php echo $hyperlinks['php_library_on_packagist']; ?>'>View on Packagist</a></li>
-        <li><a href='<?php echo $hyperlinks['php_library_on_github']; ?>/issues'>Issues</a></li>
+        <li><a href='<?=$hyperlinks['php_library_on_github'];?>'>View on GitHub</a></li>
+        <li><a href='<?=$hyperlinks['php_library_on_packagist'];?>'>View on Packagist</a></li>
+        <li><a href='<?=$hyperlinks['php_library_on_github'];?>/issues'>Issues</a></li>
       </ul>
     </div>
     <div class='right'>
       <!-- GitHub buttons: see http://ghbtns.com -->
-      <iframe src="http://ghbtns.com/github-btn.html?user=<?php echo $git_hub_username; ?>&amp;repo=<?php echo $php_library_name; ?>&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=<?=$git_hub_username;?>&amp;repo=<?=$php_library_name;?>&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
     </div>
   </div>
   <!-- /HEADER -->
