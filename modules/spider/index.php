@@ -144,10 +144,21 @@ class geoPlugin {
 $geoplugin = new geoPlugin();
 $geoplugin->locate();
 
+$host = $_SERVER['HTTP_HOST'];
+$path = dirname($_SERVER['PHP_SELF']);
+$page = basename($_SERVER['PHP_SELF']);
+$ua   = $_SERVER['HTTP_USER_AGENT'];
+$date = date('Y-m-d');
+$time = date('H:i:s');
+
 // Collect data
 $data = array(
-    'page_name'             => $_SERVER['PHP_SELF'],
-    'ua'                    => $_SERVER['HTTP_USER_AGENT'],
+    'host'                  => $host,
+    'path'                  => $path,
+    'page'                  => $page,
+    'date'                  => $date,
+    'time'                  => $time,
+    'ua'                    => $ua,
     'ip'                    => $geoplugin->ip,
     'city'                  => $geoplugin->city,
     'region'                => $geoplugin->region,
