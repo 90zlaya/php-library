@@ -338,7 +338,7 @@ class Website{
     * 
     * @return String $signature
     */
-    public function signature($always_made_year=FALSE)
+    public function signature($always_made_year=FALSE, $show_licence=FALSE)
     {
         $current_year = date('Y');
         
@@ -351,7 +351,16 @@ class Website{
             $since = $this->made . '-' . $current_year;
         }
         
-        $signature =  'Copyright &#169; ' . $since . ' | <a href="' . $this->creator['website'] . '" target="_blank">' .  $this->creator['name'] . '</a> | All Rights Reserved';
+        if($show_licence)
+        {
+            $licence = ' | ' . ' All Rights Reserved';
+        }
+        else
+        {
+            $licence = '';
+        }
+        
+        $signature =  'Copyright &#169; ' . $since . ' | <a href="' . $this->creator['website'] . '" target="_blank">' .  $this->creator['name'] . '</a>' . $licence;
         
         return $signature;
     }
