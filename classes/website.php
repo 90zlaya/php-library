@@ -205,7 +205,7 @@ class Website{
         
         if(isset($params['google_site_verification']))
         {
-            $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>';
+            $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>' . PHP_EOL;
         }
         
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
