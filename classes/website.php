@@ -168,13 +168,45 @@ class Website{
     * 
     * If no title was given, prints website name
     * 
-    * @param String $title
+    * @param Array $params
     * 
     * @return String $meta
     */
-    public function meta($title='')
+    public function meta($params=array())
     {
         $meta = '';
+        
+        if(isset($params['title']))
+        {
+            $title = $params['title'];
+        }
+        else
+        {
+            $title = '';
+        }
+        
+        if(isset($params['shortcut_icon']))
+        {
+            $shortcut_icon = $params['shortcut_icon'];
+        }
+        else
+        {
+            $shortcut_icon = $this->images['icon'] ;
+        }
+        
+        if(isset($params['touch_icon']))
+        {
+            $touch_icon = $params['touch_icon'];
+        }
+        else
+        {
+            $touch_icon = $this->images['icon'] ;
+        }
+        
+        if(isset($params['google_site_verification']))
+        {
+            $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>';
+        }
         
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
         $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
@@ -183,8 +215,8 @@ class Website{
         $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
         $meta .= '<meta name="author" content="' . $this->creator['name'] . '">' . PHP_EOL;
 		$meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
-        $meta .= '<link rel="apple-touch-icon" sizes="144x144" href="' . $this->images['icon'] . '"/>' . PHP_EOL;
-        $meta .= '<link rel="shortcut icon" href="' . $this->images['icon'] . '" type="image/png">' . PHP_EOL;
+        $meta .= '<link rel="apple-touch-icon" sizes="144x144" href="' . $touch_icon . '"/>' . PHP_EOL;
+        $meta .= '<link rel="shortcut icon" href="' . $shortcut_icon . '" type="image/png">' . PHP_EOL;
         
         $meta .= '<title>';
             if(empty($title))
