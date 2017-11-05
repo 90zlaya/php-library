@@ -14,6 +14,12 @@
 namespace phplibrary;
 
 class Website{
+    public $server  = array(
+        'host' => '',
+        'uri'  => '',
+        'path' => '',
+        'page' => '',
+    );
     public $name;
     public $host;
     public $made;
@@ -53,6 +59,11 @@ class Website{
     */
     public function __construct($params)
     {
+        $this->server['host'] = $_SERVER['HTTP_HOST'];
+        $this->server['uri']  = $_SERVER['REQUEST_URI'];
+        $this->server['path'] = dirname($_SERVER['PHP_SELF']);
+        $this->server['page'] = basename($_SERVER['PHP_SELF']);
+        
         $this->name = $params['name'];
         $this->host = $params['host'];
         $this->made = $params['made'];
