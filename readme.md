@@ -50,6 +50,10 @@ File-related operations.
 
 Format related methods.
 
+* Math
+
+Mathematical operations and calculations.
+
 * Operating_System
 
 Working with Operating System related data.
