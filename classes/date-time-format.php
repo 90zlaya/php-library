@@ -79,13 +79,13 @@ class Date_Time_Format{
         switch($format)
         {
             case self::$user_placeholder:
-            {
-                $regex = self::$user_placeholder_regex;
-            } break;
+                {
+                    $regex = self::$user_placeholder_regex;
+                } break;
             case self::$database_placeholder:
-            {
-                $regex = self::$database_placeholder_regex;
-            } break;
+                {
+                    $regex = self::$database_placeholder_regex;
+                } break;
             default: $regex = '';
         }
         
@@ -367,7 +367,8 @@ class Date_Time_Format{
     * 
     * @return mixed $date
     */
-    public static function date_from_jmbg($jmbg){
+    public static function date_from_jmbg($jmbg)
+    {
         if(empty($jmbg) || strlen($jmbg) < 13)
         {
             $date = FALSE;
