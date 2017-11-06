@@ -9,3 +9,7 @@
 | -------------------------------------------------------------------
 */
 include_once '../autoload.php';
+
+$current =  phplibrary\Date_Time_Format::current();
+
+echo phplibrary\Date_Time_Format::compare($current);

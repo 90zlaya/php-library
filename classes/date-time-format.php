@@ -20,7 +20,9 @@ class Date_Time_Format{
     public static $friendly_date     = 'd-M-Y';
     public static $friendly_datetime = 'd-M-Y H:i:s';
     
-    protected static $unfriendly_datetime = 'YmdHis';
+    protected static $unfriendly_datetime        = 'YmdHis';
+    protected static $user_placeholder_regex     = '^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$^';
+    protected static $database_placeholder_regex = '^([0-9]{4})-([0-9]{2})-([0-9]{2})$^';
     
     // -------------------------------------------------------------------------
     
@@ -31,8 +33,13 @@ class Date_Time_Format{
     * 
     * @return String
     */
-    public static function current($format='YmdHis')
+    public static function current($format='')
     {
+        if(empty($format))
+        {
+            $format = self::$unfriendly_datetime;
+        }
+        
         return date($format);
     }
 
@@ -72,13 +79,13 @@ class Date_Time_Format{
         switch($format)
         {
             case self::$user_placeholder:
-                {
-                    $regex = '^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$^';
-                } break;
+            {
+                $regex = self::$user_placeholder_regex;
+            } break;
             case self::$database_placeholder:
-                {
-                    $regex = '^([0-9]{4})-([0-9]{2})-([0-9]{2})$^';
-                } break;
+            {
+                $regex = self::$database_placeholder_regex;
+            } break;
             default: $regex = '';
         }
         
