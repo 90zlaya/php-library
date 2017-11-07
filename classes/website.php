@@ -203,7 +203,7 @@ class Website{
             $touch_icon = $this->images['icon'];
         }
         
-        $touch_icon_size = $this->image_size($touch_icon, TRUE);
+        $touch_icon_size = $this->image_size($touch_icon);
         
         if(isset($params['google_site_verification']))
         {
