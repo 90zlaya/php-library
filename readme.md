@@ -116,15 +116,6 @@ composer require 90zlaya/php-library
 Misc
 =======
 
-Change Log
-----------------
-Since php-library v1.1.0
-
-* Date Time Format: refactoring regex and current date format
-* Math: new method even_or_odd added
-* Website: new method image_size for touch_icon calculations in meta method
-
-
 Inspiration
 ----------------
 
