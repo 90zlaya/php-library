@@ -12,3 +12,8 @@ include_once '../autoload.php';
 
 $percentage = phplibrary\Math::percentage(30, 50);
 phplibrary\Format::pre($percentage);
+
+for($i=0; $i<10; $i++)
+{
+    echo phplibrary\Math::even_or_odd('first', 'second') . '<br/>';
+}

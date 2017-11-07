@@ -11,6 +11,7 @@
 namespace phplibrary;
 
 class Math{
+    private static $bool = TRUE;
     
     // -------------------------------------------------------------------------
     
@@ -39,6 +40,32 @@ class Math{
         );
         
         return $data;
+    }
+    
+    // -------------------------------------------------------------------------
+
+    /**
+    * Even or odd value return
+    * 
+    * @param String $value_1
+    * @param String $value_2
+    * 
+    * @return String $even_or_odd
+    */
+    public static function even_or_odd($value_1, $value_2)
+    {
+        if(self::$bool)
+        {
+            $even_or_odd = $value_1;
+        }
+        else
+        {
+            $even_or_odd = $value_2;
+        }
+        
+        self::$bool = !self::$bool;
+        
+        return $even_or_odd;
     }
     
     // -------------------------------------------------------------------------
