@@ -71,7 +71,10 @@ $website->add_to_images(
 <head>
     <?php
         // Printing meta
-        echo $website->meta();
+        echo $website->meta(array(
+            'shortcut_icon' => $website->images('php-logo'),
+            'touch_icon'    => $website->images('php-logo'),
+        ));
         
         // Printing head
         echo $website->head();

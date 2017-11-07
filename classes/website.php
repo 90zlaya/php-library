@@ -200,14 +200,16 @@ class Website{
         }
         else
         {
-            $touch_icon = $this->images['icon'] ;
+            $touch_icon = $this->images['icon'];
         }
+        
+        $touch_icon_size = $this->image_size($touch_icon, TRUE);
         
         if(isset($params['google_site_verification']))
         {
             $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>' . PHP_EOL;
         }
-        
+                
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
         $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
         $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">' . PHP_EOL;
@@ -215,7 +217,7 @@ class Website{
         $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
         $meta .= '<meta name="author" content="' . $this->creator['name'] . '">' . PHP_EOL;
 		$meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
-        $meta .= '<link rel="apple-touch-icon" sizes="144x144" href="' . $touch_icon . '"/>' . PHP_EOL;
+        $meta .= '<link rel="apple-touch-icon" sizes="' . $touch_icon_size['width_height'] . '" href="' . $touch_icon . '"/>' . PHP_EOL;
         $meta .= '<link rel="shortcut icon" href="' . $shortcut_icon . '" type="image/png">' . PHP_EOL;
         
         $meta .= '<title>';
@@ -366,6 +368,39 @@ class Website{
         else
         {
             return $this->images[$image];
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Printing image size value
+    * 
+    * @param String $image
+    * 
+    * @return Array
+    */
+    public function image_size($image)
+    {
+        if(empty($image))
+        {
+            return FALSE;
+        }
+        else
+        {
+            $image_size = getimagesize($image);
+            
+            $data = array(
+                'width'         => $image_size[0],
+                'height'        => $image_size[1],
+                'width_height'  => $image_size[0] . 'x' . $image_size[1],
+                'type'          => $image_size[2],
+                'size'          => $image_size[3],
+                'bits'          => $image_size['bits'],
+                'mime'          => $image_size['mime'],
+            );
+            
+            return $data;
         }
     }
     
