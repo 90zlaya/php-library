@@ -117,6 +117,7 @@ Changelog
 =======
 
 Since php-library v1.1.0
+----------------
 
 * Date Time Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created
 * Email: documentation of methods updated
