@@ -51,6 +51,10 @@ File-related operations.
 
 Format related methods.
 
+* Geo_Plugin
+
+Customisation of third-party class geoPlugin. Location: http://www.geoplugin.com/
+
 * Math
 
 Mathematical operations and calculations.
@@ -120,11 +124,16 @@ Changelog
 Since php-library v1.1.0
 ----------------
 
-* Date Time Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created
+Modification:
+
+* Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created
 * Email: documentation of methods updated
 * Format: return values revisited
 
-* third-party folder added with geoplugin.class - currently isolated from the rest of the library
+New:
+
+* third-party folder added with geoplugin.class
+* Geo_Plugin: customisation of third-party class geoPlugin
 
 Misc
 =======

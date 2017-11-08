@@ -44,6 +44,9 @@ $php_library_list_of_classes       = array(
         'name' => 'format',
     ),
     array(
+        'name' => 'geo-plugin',
+    ),
+    array(
         'name' => 'math',
     ),
     array(
