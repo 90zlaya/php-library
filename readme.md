@@ -16,6 +16,7 @@ include_once 'autoload.php';
 * All classes are inside /classes folder.
 * All demonstrations are inside /demonstrations folder.
 * All modules are inside /modules folder and contain subfolders for every module.
+* All third-party classes are inside /third-party folder and contain subfolders.
 
 Every class call should have phplibrary namespace call in front.
 
@@ -122,6 +123,8 @@ Since php-library v1.1.0
 * Date Time Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created
 * Email: documentation of methods updated
 * Format: return values revisited
+
+* third-party folder added with geoplugin.class - currently isolated from the rest of the library
 
 Misc
 =======
