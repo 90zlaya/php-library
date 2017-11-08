@@ -96,7 +96,7 @@ foreach($php_library_list_of_classes as $item)
 {
     $name = $item['name'];
     
-    require $php_library_folder_classes . '/' . $name . $php_library_extension;
+    require_once $php_library_folder_classes . '/' . $name . $php_library_extension;
     
     $navigation_for_demonstration .= '<li><a href="' . $php_library_folder_demonstrations . '/' . $name . $php_library_extension . '">' . $name . '</a></li>' . PHP_EOL;
 }
