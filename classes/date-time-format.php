@@ -15,7 +15,7 @@ class Date_Time_Format{
     public static $database = 'Y-m-d';
     
     public static $user_placeholder     = 'DD.MM.YYYY';
-    public static $database_placeholder = 'YYYY.MM.DD';
+    public static $database_placeholder = 'YYYY-MM-DD';
     
     public static $friendly_date     = 'd-M-Y';
     public static $friendly_datetime = 'd-M-Y H:i:s';
@@ -23,6 +23,7 @@ class Date_Time_Format{
     protected static $unfriendly_datetime        = 'YmdHis';
     protected static $user_placeholder_regex     = '^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$^';
     protected static $database_placeholder_regex = '^([0-9]{4})-([0-9]{2})-([0-9]{2})$^';
+    protected static $invalid_dates              = array('1970-01-01', '0000-00-00');
     
     // -------------------------------------------------------------------------
     
@@ -67,6 +68,74 @@ class Date_Time_Format{
     // -------------------------------------------------------------------------
     
     /**
+    * Formats date to friendly format with or without time
+    * 
+    * @param String $date
+    * @param Bool $without_time
+    * 
+    * @return String
+    */
+    public static function format($date, $without_time=FALSE)
+    {
+        if($without_time)
+        {
+            return date(self::$friendly_date, strtotime($date));
+        }
+        else
+        {
+            return date(self::$friendly_datetime, strtotime($date));
+        }
+    } 
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Formats date to database-friendly format
+    * 
+    * @param String $date
+    * 
+    * @return mixed
+    */
+    public static function format_to_database($date)
+    {
+        $format_to_database = date(self::$database, strtotime($date));
+        
+        if(self::validate($date, self::$user_placeholder) && self::not_empty($format_to_database))
+        {
+            return $format_to_database;
+        }
+        else
+        {
+            return FALSE;
+        }
+    } 
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Formats date to user-friendly format
+    * 
+    * @param String $date
+    * 
+    * @return String
+    */
+    public static function format_to_user($date)
+    {
+        $format_to_user = date(self::$user, strtotime($date));
+        
+        if(self::validate($date, self::$database_placeholder) && self::not_empty($format_to_user))
+        {
+            return $format_to_user;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Validates date to certain format type
     * 
     * @param String $date
@@ -74,7 +143,7 @@ class Date_Time_Format{
     * 
     * @return Bool
     */
-    public static function validate($date, $format)
+    protected static function validate($date, $format)
     {
         switch($format)
         {
@@ -109,51 +178,22 @@ class Date_Time_Format{
     // -------------------------------------------------------------------------
     
     /**
-    * Formats date to friendly format with or without time
+    * Checking if given date is considered as not empty
     * 
     * @param String $date
-    * @param Bool $without_time
     * 
-    * @return String
+    * @return Bool
     */
-    public static function format($date, $without_time=FALSE)
+    protected static function not_empty($date)
     {
-        if($without_time)
+        if(empty($date) || in_array($date, self::$invalid_dates))
         {
-            return date(self::$friendly_date, strtotime($date));
+            return FALSE;
         }
         else
         {
-            return date(self::$friendly_datetime, strtotime($date));
+            return TRUE;
         }
-    } 
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Formats date to database-friendly format
-    * 
-    * @param String $date
-    * 
-    * @return String
-    */
-    public static function format_to_database($date)
-    {
-        return date(self::$database, strtotime($date));
-    } 
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Formats date to user-friendly format
-    * 
-    * @param String $date
-    * 
-    * @return String
-    */
-    public static function format_to_user($date)
-    {
-        return date(self::$user, strtotime($date));
     }
     
     // -------------------------------------------------------------------------
