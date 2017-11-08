@@ -113,6 +113,14 @@ Install stable php-library version by using standard commands or if you wish to 
 composer require 90zlaya/php-library
 ```
 
+Changelog
+=======
+
+Since php-library v1.1.0
+
+* Email: documentation of methods updated
+* Format: return values revisited
+
 Misc
 =======
 

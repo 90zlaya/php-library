@@ -34,7 +34,9 @@ class Email{
     * Formats email to mailto format
     * 
     * @param String $email
+    * @param String $link_text
     * @param String $subject
+    * @param String $attributes
     * 
     * @return String $formated_email
     */

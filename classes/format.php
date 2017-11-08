@@ -213,13 +213,11 @@ class Format{
     * 
     * @param String $title
     * 
-    * @return String $converted
+    * @return String
     */
     public static function title_case($title)
     {
-        $converted = ucfirst(strtolower($title));
-        
-        return $converted;
+        return ucfirst(strtolower($title));
     }
     
     // -------------------------------------------------------------------------
@@ -285,13 +283,11 @@ class Format{
     * 
     * @param String $string
     * 
-    * @return String $converted
+    * @return String
     */
     public static function windows1250_to_utf8($string)
     {
-        $converted = iconv(self::$windows_1250, self::$utf_8, $string);
-        
-        return $converted;
+        return iconv(self::$windows_1250, self::$utf_8, $string);
     }
     
     // -------------------------------------------------------------------------
@@ -305,9 +301,7 @@ class Format{
     */
     public static function utf8_to_windows1250($string)
     {
-        $converted = iconv(self::$utf_8, self::$windows_1250, $string);
-        
-        return $converted;
+        return iconv(self::$utf_8, self::$windows_1250, $string);
     }
     
     // -------------------------------------------------------------------------
