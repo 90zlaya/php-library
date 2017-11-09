@@ -73,6 +73,7 @@ function operate($params=array())
     if(isset($params['database']))
     {
         $database_connection = $params['database']['connection'];
+        $database_engine     = $params['database']['engine'];
         $database_servername = $params['database']['servername'];
         $database_username   = $params['database']['username'];
         $database_password   = $params['database']['password'];
@@ -108,8 +109,6 @@ function operate($params=array())
     // Database connection
     if($database_connection)
     {
-        @$connection = new mysqli($database_servername, $database_username, $database_password, $database_name);
-        
         $counter = 0;
         $import_values = "";
         foreach($table_values as $value)
@@ -128,10 +127,25 @@ function operate($params=array())
             $counter++;
         }
         
-        $query = "INSERT INTO $table_name($table_fields) VALUES($import_values);";
-        
-        @mysqli_query($connection, $query);
-        @mysqli_close($connection);
+        switch($database_engine)
+        {
+            case 'mysql':
+                {
+                    @$connection = new mysqli($database_servername, $database_username, $database_password, $database_name);
+                    $query = "INSERT INTO $table_name($table_fields) VALUES($import_values);";
+                    @mysqli_query($connection, $query);
+                    @mysqli_close($connection);
+                } break;
+            case 'mssql':
+                {
+                    $connection = new COM('ADODB.Connection');
+                    $connection_string = 'PROVIDER=SQLOLEDB;SERVER=' . $database_servername . ';UID=' . $database_username . ';PWD=' . $database_password . ';DATABASE=' . $database_name;
+                    $connection->open($connection_string);
+                    
+                    $query = "INSERT INTO $table_name($table_fields) VALUES($import_values);";
+                    $connection->execute($query);
+                } break;
+        }
     }
 
     // Send mail if trigger is set
@@ -175,6 +189,7 @@ if($spider['status'])
         ),
         'database' => array(
             'connection' => TRUE,
+            'engine'     => 'mysql',
             'servername' => 'localhost',
             'username'   => 'root',
             'password'   => '',
