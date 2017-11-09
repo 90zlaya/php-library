@@ -136,6 +136,7 @@ Modification:
 * Email: documentation of methods updated
 * Format: return values revisited
 * Spider module now works with Geo_Plugin class instead of built-in geoPlugin and works over multiple functions
+* Spider module has MySql and MS SQL connections now
 
 New:
 
