@@ -11,15 +11,7 @@
 */
 namespace phplibrary;
 
-$path = 'third-party/geoplugin.class/geoplugin.class.php';
-if(file_exists($path))
-{
-    require_once $path;
-}
-else
-{
-    require_once '../' . $path;
-}
+require 'third-party/geoplugin.class/geoplugin.class.php';
 
 use geoPlugin as geoPlugin;
 

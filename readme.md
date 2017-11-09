@@ -14,9 +14,9 @@ include_once 'autoload.php';
 ```
 
 * All classes are inside /classes folder.
-* All demonstrations are inside /demonstrations folder.
+* All class demonstrations are inside /demonstrations folder.
 * All modules are inside /modules folder and contain subfolders for every module.
-* All third-party classes are inside /third-party folder and contain subfolders.
+* All third-party classes are inside /classes/third-party folder and contain subfolders.
 
 Every class call should have phplibrary namespace call in front.
 
@@ -109,6 +109,13 @@ Notice: This module can't be installed as standalone in this format, because it 
 
 This script crawls for visitor's data. It's possible to display them, write to database and send via email. Notice: This module can be installed as standalone in this format.
 
+List of third-party
+----------------
+
+* geoplugin.class
+
+This PHP class uses the PHP Webservice of http://www.geoplugin.com/ to geolocate IP addresses. Geographical location of the IP address (visitor) and locate currency (symbol, code and exchange rate) are returned.
+
 Composer
 =======
 
@@ -129,6 +136,7 @@ Modification:
 * Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created
 * Email: documentation of methods updated
 * Format: return values revisited
+* Spider module now works with Geo_Plugin class instead of built-in geoPlugin
 
 New:
 
