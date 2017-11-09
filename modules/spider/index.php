@@ -18,7 +18,7 @@ include_once '../../autoload.php';
 * 
 * @param mixed $to_display
 * 
-* @return Arrray $data
+* @return Arrray $spider
 */
 function spider($to_display=FALSE)
 {
@@ -29,7 +29,12 @@ function spider($to_display=FALSE)
 
     phplibrary\Format::pre($data, $to_display);
     
-    return $data;
+    $spider = array(
+        'status' => $geo_plugin->is_active_service(),
+        'data'   => $data,
+    );
+    
+    return $spider;
 }
 
 /**
@@ -103,7 +108,7 @@ function operate($params=array())
     // Database connection
     if($database_connection)
     {
-        $connection = new mysqli($database_servername, $database_username, $database_password, $database_name);
+        @$connection = new mysqli($database_servername, $database_username, $database_password, $database_name);
         
         $counter = 0;
         $import_values = "";
@@ -111,20 +116,22 @@ function operate($params=array())
         {
             if(empty($counter))
             {
-                $import_values .= "'" . $value . "'";
+                $prefix = '';
             }
             else
             {
-                $import_values .= ", '" . $value . "'";
+                $prefix = ',';
             }
                 
+            $import_values .= $prefix . "'" . $value . "'";
+            
             $counter++;
         }
         
         $query = "INSERT INTO $table_name($table_fields) VALUES($import_values);";
         
-        mysqli_query($connection, $query);
-        mysqli_close($connection);
+        @mysqli_query($connection, $query);
+        @mysqli_close($connection);
     }
 
     // Send mail if trigger is set
@@ -151,40 +158,56 @@ function operate($params=array())
 // -----------------------------------------------------------------------------
 
 /**
-* Implementation
+* Collect data
 */
 $spider = spider(TRUE);
-$operate = operate(array(
-    'triggers' => array(
-        'redirect' => FALSE,
-        'exit'     => FALSE,
-    ),
-    'settings' => array(
-        'timezone'             => 'Europe/Belgrade',
-        'to_redirect_location' => '',
-    ),
-    'database' => array(
-        'connection' => TRUE,
-        'servername' => 'localhost',
-        'username'   => 'root',
-        'password'   => '',
-        'name'       => 'test',
-        'table'      => array(
-            'name'   => 'spider',
-            'fields' => 'ip, ua',
-            'values' => array(
-                $spider['ip'],
-                $spider['ua'],
+
+if($spider['status'])
+{
+    operate(array(
+        'triggers' => array(
+            'redirect' => FALSE,
+            'exit'     => FALSE,
+        ),
+        'settings' => array(
+            'timezone'             => 'Europe/Belgrade',
+            'to_redirect_location' => '',
+        ),
+        'database' => array(
+            'connection' => TRUE,
+            'servername' => 'localhost',
+            'username'   => 'root',
+            'password'   => '',
+            'name'       => 'test',
+            'table'      => array(
+                'name'   => 'spider',
+                'fields' => 'ip, ua',
+                'values' => array(
+                    $spider['data']['ip'],
+                    $spider['data']['ua'],
+                ),
             ),
         ),
-    ),
-    'mail'     => array(
-        'to_send' => FALSE,
-        'to'      => 'your-name@example.com',
-        'from'    => 'sender-name@example.com',
-        'subject' => 'Spider',
-        'message' => 'New spider message',
-    ),
-));
+        'mail'     => array(
+            'to_send' => FALSE,
+            'to'      => 'your-name@example.com',
+            'from'    => 'sender-name@example.com',
+            'subject' => 'Spider',
+            'message' => 'New spider message',
+        ),
+    ));
+}
+else
+{
+    operate(array(
+        'mail'     => array(
+            'to_send' => TRUE,
+            'to'      => 'your-name@example.com',
+            'from'    => 'sender-name@example.com',
+            'subject' => 'Spider failed',
+            'message' => 'Spider moudle failed to collect data',
+        ),
+    ));
+}
 
 // -----------------------------------------------------------------------------

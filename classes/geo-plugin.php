@@ -16,13 +16,15 @@ require 'third-party/geoplugin.class/geoplugin.class.php';
 use geoPlugin as geoPlugin;
 
 class Geo_Plugin extends geoPlugin{
-    protected $data = array();
+    protected $info    = array();
+    protected $service = array();
     
     // -------------------------------------------------------------------------
     
     /**
     * Returns all data
     * 
+    * @return Array
     */
     public function data()
     {
@@ -32,14 +34,17 @@ class Geo_Plugin extends geoPlugin{
         $date = date('Y-m-d');
         $time = date('H:i:s');
         $ua   = $_SERVER['HTTP_USER_AGENT'];
-
-        $this->data = array(
+        
+        $this->info = array(
             'host'                  => $host,
             'path'                  => $path,
             'page'                  => $page,
             'date'                  => $date,
             'time'                  => $time,
             'ua'                    => $ua,
+        );
+        
+        $this->service = array(
             'ip'                    => $this->ip,
             'city'                  => $this->city,
             'region'                => $this->region,
@@ -55,7 +60,29 @@ class Geo_Plugin extends geoPlugin{
             'currency_code'         => $this->currencyCode,
         );
         
-        return $this->data;
+        $data = array();
+        $data = array_merge($this->info, $this->service);
+        
+        return $data;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Checks if service returned data
+    * 
+    * @return Bool
+    */
+    public function is_active_service()
+    {
+        if(empty($this->service))
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
     }
     
     // -------------------------------------------------------------------------
