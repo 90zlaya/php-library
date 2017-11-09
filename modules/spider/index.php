@@ -67,10 +67,13 @@ function operate($params=array())
     
     if(isset($params['database']))
     {
-        $database_connection = $params['database']['connection']; // Set query if TRUE
+        $database_connection = $params['database']['connection'];
         $database_servername = $params['database']['servername'];
         $database_username   = $params['database']['username'];
         $database_password   = $params['database']['password'];
+        $table_name          = $params['database']['table']['name'];
+        $table_fields        = $params['database']['table']['fields'];
+        $table_values        = $params['database']['table']['values'];
     }
     else
     {
@@ -101,7 +104,7 @@ function operate($params=array())
     {
         $connection = new mysqli($database_servername, $database_username, $database_password);
         
-        mysqli_query($connection, "INSERT INTO table_name(table_fields) VALUES(table_values);");
+        mysqli_query($connection, "INSERT INTO $table_name($table_fields) VALUES($table_values);");
         mysqli_close($connection);
     }
 
@@ -142,10 +145,15 @@ $operate = operate(array(
         'to_redirect_location' => '',
     ),
     'database' => array(
-        'connection' => FALSE, // Set query if TRUE
+        'connection' => FALSE,
         'servername' => 'your_servername',
         'username'   => 'your_username',
         'password'   => 'your_password',
+        'table'      => array(
+            'name'   => 'table_name',
+            'fields' => 'table_fields',
+            'values' => 'table_values',
+        ),
     ),
     'mail'     => array(
         'to_send' => FALSE,
