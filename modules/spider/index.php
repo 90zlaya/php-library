@@ -71,6 +71,7 @@ function operate($params=array())
         $database_servername = $params['database']['servername'];
         $database_username   = $params['database']['username'];
         $database_password   = $params['database']['password'];
+        $database_name       = $params['database']['name'];
         $table_name          = $params['database']['table']['name'];
         $table_fields        = $params['database']['table']['fields'];
         $table_values        = $params['database']['table']['values'];
@@ -102,9 +103,27 @@ function operate($params=array())
     // Database connection
     if($database_connection)
     {
-        $connection = new mysqli($database_servername, $database_username, $database_password);
+        $connection = new mysqli($database_servername, $database_username, $database_password, $database_name);
         
-        mysqli_query($connection, "INSERT INTO $table_name($table_fields) VALUES($table_values);");
+        $counter = 0;
+        $import_values = "";
+        foreach($table_values as $value)
+        {
+            if(empty($counter))
+            {
+                $import_values .= "'" . $value . "'";
+            }
+            else
+            {
+                $import_values .= ", '" . $value . "'";
+            }
+                
+            $counter++;
+        }
+        
+        $query = "INSERT INTO $table_name($table_fields) VALUES($import_values);";
+        
+        mysqli_query($connection, $query);
         mysqli_close($connection);
     }
 
@@ -145,14 +164,18 @@ $operate = operate(array(
         'to_redirect_location' => '',
     ),
     'database' => array(
-        'connection' => FALSE,
-        'servername' => 'your_servername',
-        'username'   => 'your_username',
-        'password'   => 'your_password',
+        'connection' => TRUE,
+        'servername' => 'localhost',
+        'username'   => 'root',
+        'password'   => '',
+        'name'       => 'test',
         'table'      => array(
-            'name'   => 'table_name',
-            'fields' => 'table_fields',
-            'values' => 'table_values',
+            'name'   => 'spider',
+            'fields' => 'ip, ua',
+            'values' => array(
+                $spider['ip'],
+                $spider['ua'],
+            ),
         ),
     ),
     'mail'     => array(
