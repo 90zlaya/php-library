@@ -107,7 +107,7 @@ Notice: This module can't be installed as standalone in this format, because it 
 
 * spider 
 
-This script crawls for visitor's data. It's possible to display them, write to database and send via email. Notice: This module can be installed as standalone in this format.
+This script crawls for visitor's data. It's possible to display them, write to database and send via email. Notice: This module can't be installed as standalone in this format, because it heavily resides on PHP Library and it's methods.
 
 List of third-party
 ----------------
