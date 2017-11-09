@@ -103,11 +103,10 @@ List of modules
 
 This script looks up for files inside given path for those which are changed since certain point in time.
 If or when it finds them, then creates two files, or updates them, with informations about date, version and changed files.
-Notice: This module can't be installed as standalone in this format, because it heavily resides on PHP Library and it's methods.
 
 * spider 
 
-This script crawls for visitor's data. It's possible to display them, write to database and send via email. Notice: This module can't be installed as standalone in this format, because it heavily resides on PHP Library and it's methods.
+This script crawls for visitor's data. It's possible to display them, write to database and send via email.
 
 List of third-party
 ----------------
@@ -136,7 +135,7 @@ Modification:
 * Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created
 * Email: documentation of methods updated
 * Format: return values revisited
-* Spider module now works with Geo_Plugin class instead of built-in geoPlugin
+* Spider module now works with Geo_Plugin class instead of built-in geoPlugin and works over multiple functions
 
 New:
 

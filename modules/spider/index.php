@@ -6,82 +6,154 @@
 |
 | This script crawls for visitor's data. It's possible 
 | to display them, write to database and send via email.
-| 
-| Notice: This module can't be installed as standalone in this format, 
-| because it heavily resides on PHP Library and it's methods.
 |
 | -------------------------------------------------------------------
 */
 include_once '../../autoload.php';
 
-$geo_plugin = new phplibrary\Geo_Plugin();
-$geo_plugin->locate();
-$data = $geo_plugin->data();
+// -----------------------------------------------------------------------------
 
-phplibrary\Format::pre($data, TRUE);
+/**
+* Function for collecting data
+* 
+* @param mixed $to_display
+* 
+* @return Arrray $data
+*/
+function spider($to_display=FALSE)
+{
+    // Geo Plugin class instance
+    $geo_plugin = new phplibrary\Geo_Plugin();
+    $geo_plugin->locate();
+    $data = $geo_plugin->data();
+
+    phplibrary\Format::pre($data, $to_display);
+    
+    return $data;
+}
+
+/**
+* Function for operations over collected data
+* 
+* @param Array $params
+* 
+* @return void
+*/
+function operate($params=array())
+{
+    // -------------------------------------------------------------------------
+    
+    if(isset($params['triggers']))
+    {
+        $to_redirect = $params['triggers']['redirect'];;
+        $to_exit     = $params['triggers']['exit'];
+    }
+    else
+    {
+        $to_redirect = FALSE;
+        $to_exit     = FALSE;
+    }
+    
+    if(isset($params['settings']))
+    {
+        $to_redirect_location = $params['settings']['to_redirect_location'];
+        $timezone             = $params['settings']['timezone'];;
+    }
+    else
+    {
+        $to_redirect_location = '';
+        $timezone             = 'Europe/Belgrade';
+    }
+    
+    if(isset($params['database']))
+    {
+        $database_connection = $params['database']['connection']; // Set query if TRUE
+        $database_servername = $params['database']['servername'];
+        $database_username   = $params['database']['username'];
+        $database_password   = $params['database']['password'];
+    }
+    else
+    {
+        $database_connection = FALSE;
+    }
+    
+    if(isset($params['mail']))
+    {
+        $mail_to_send = $params['mail']['to_send'];
+        $mail_to      = $params['mail']['to'];
+        $mail_from    = $params['mail']['from'];
+        $mail_subject = $params['mail']['subject'];
+        $mail_message = $params['mail']['message'];
+        $mail_headers = 'From: ' . $mail_from . "\r\n" . 'Reply-To: ' . $mail_from . "\r\n";
+    }
+    else
+    {
+        $mail_to_send = FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    // Default timezone
+    date_default_timezone_set($timezone);
+    
+    // Database connection
+    if($database_connection)
+    {
+        $connection = new mysqli($database_servername, $database_username, $database_password);
+        
+        mysqli_query($connection, "INSERT INTO table_name(table_fields) VALUES(table_values);");
+        mysqli_close($connection);
+    }
+
+    // Send mail if trigger is set
+    if($mail_to_send)
+    {
+	    mail($mail_to, $mail_subject, $mail_message, $mail_headers);
+    }
+    
+    // Redirect if trigger is set
+    if($to_redirect)
+    {
+        header("Location: $to_redirect_location");
+    }
+
+    // Exit if trigger is set
+    if($to_exit)
+    {
+        exit();
+    }
+
+    // -------------------------------------------------------------------------
+}
 
 // -----------------------------------------------------------------------------
 
-// Settings
-$database_connection  = FALSE; // Set $database_query if TRUE
-$database_servername  = 'your_servername';
-$database_username    = 'your_username';
-$database_password    = 'your_password';
-$reference_name       = 'ref';
-$timezone             = 'Europe/Belgrade';
-$mail_to_send         = FALSE; // Set $mail_message if TRUE
-$mail_to              = 'your-name@example.com';
-$mail_from            = 'sender-name@example.com';
-$mail_headers         = 'From: ' . $mail_from . "\r\n" . 'Reply-To: ' . $mail_from . "\r\n";
-$mail_subject         = 'Spider';
-$to_redirect          = FALSE;
-$to_redirect_location = '';
-
-// Default timezone
-date_default_timezone_set($timezone);
-
-// Reference
-if(isset($_GET[$reference_name]))
-{
-    $reference = $_GET[$reference_name];
-}
-else
-{
-    $reference = '0';
-}
-
-// Database connection
-if($database_connection)
-{
-    $conn           = new mysqli($database_servername, $database_username, $database_password);
-    $database_query = "INSERT INTO table_name(field) VALUES('value');";
-    $result         = mysqli_query($conn, $database_query);
-}
-else
-{
-    $conn = $database_query = $result = FALSE;
-}
-
-// Send mail if trigger is set
-if($mail_to_send)
-{
-	$mail_message = 'Please set mail message';
-    $mail_sent    = mail($mail_to, $mail_subject, $mail_message, $mail_headers);
-}
-
-// Close connection to database if open
-if($database_connection)
-{
-    mysqli_close($conn);
-}
-
-// Redirect if trigger is set
-if($to_redirect)
-{
-    header("Location: $to_redirect_location");
-}
-
-// Exit at the end of the script
-exit();
+/**
+* Implementation
+*/
+$spider = spider(TRUE);
+$operate = operate(array(
+    'triggers' => array(
+        'redirect' => FALSE,
+        'exit'     => FALSE,
+    ),
+    'settings' => array(
+        'timezone'             => 'Europe/Belgrade',
+        'to_redirect_location' => '',
+    ),
+    'database' => array(
+        'connection' => FALSE, // Set query if TRUE
+        'servername' => 'your_servername',
+        'username'   => 'your_username',
+        'password'   => 'your_password',
+    ),
+    'mail'     => array(
+        'to_send' => FALSE,
+        'to'      => 'your-name@example.com',
+        'from'    => 'sender-name@example.com',
+        'subject' => 'Spider',
+        'message' => 'New spider message',
+    ),
+));
 
 // -----------------------------------------------------------------------------
