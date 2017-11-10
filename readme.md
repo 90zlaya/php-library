@@ -104,6 +104,10 @@ List of modules
 This script looks up for files inside given path for those which are changed since certain point in time.
 If or when it finds them, then creates two files, or updates them, with informations about date, version and changed files.
 
+* image-sorter
+
+Crawls for files in one folder, creates new folders according to files prefix and copies them to that newly created folder.
+
 * spider 
 
 This script crawls for visitor's data. It's possible to display them, write to database and send via email.
