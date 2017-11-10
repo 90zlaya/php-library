@@ -87,7 +87,7 @@ foreach($listing['listing'] as $item)
     $location_from = $where_to_read_files . $file;
     $location_to = $where_to_make_dir . $file_prefix . $folder_sufix . '/' . $file;
     
-    $is_copied = copy($location_from, $location_to);
+    $is_copied = @copy($location_from, $location_to);
     
     if(!$is_copied)
     {
