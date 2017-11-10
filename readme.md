@@ -146,6 +146,7 @@ New:
 
 * third-party folder added with geoplugin.class
 * Geo_Plugin: customisation of third-party class geoPlugin
+* image-sorter module added
 
 Misc
 =======
