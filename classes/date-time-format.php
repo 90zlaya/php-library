@@ -11,19 +11,28 @@
 namespace phplibrary;
 
 class Date_Time_Format{
-    public static $user     = 'd.m.Y';
-    public static $database = 'Y-m-d';
+    public static $types = array(
+        'user'     => array(
+            'format'      => 'd.m.Y',
+            'placeholder' => 'DD.MM.YYYY',
+            'regex'       => '^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$^',
+        ),
+        'database' => array(
+            'format'      => 'Y-m-d',
+            'placeholder' => 'YYYY-MM-DD',
+            'regex'       => '^([0-9]{4})-([0-9]{2})-([0-9]{2})$^',
+        ),
+        'friendly' => array(
+            'date'     => 'd-M-Y',
+            'datetime' => 'd-M-Y H:i:s',
+        ),
+        'unfriendly' => array(
+            'date'     => 'Ymd',
+            'datetime' => 'YmdHis',
+        ),
+    );
     
-    public static $user_placeholder     = 'DD.MM.YYYY';
-    public static $database_placeholder = 'YYYY-MM-DD';
-    
-    public static $friendly_date     = 'd-M-Y';
-    public static $friendly_datetime = 'd-M-Y H:i:s';
-    
-    protected static $unfriendly_datetime        = 'YmdHis';
-    protected static $user_placeholder_regex     = '^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$^';
-    protected static $database_placeholder_regex = '^([0-9]{4})-([0-9]{2})-([0-9]{2})$^';
-    protected static $invalid_dates              = array('1970-01-01', '0000-00-00');
+    protected static $invalid_dates = array('1970-01-01', '0000-00-00');
     
     // -------------------------------------------------------------------------
     
@@ -38,7 +47,7 @@ class Date_Time_Format{
     {
         if(empty($format))
         {
-            $format = self::$unfriendly_datetime;
+            $format = self::$types['unfriendly']['datetime'];
         }
         
         return date($format);
@@ -55,7 +64,7 @@ class Date_Time_Format{
     */
     public static function compare($date)
     {
-        if(self::current(self::$database) > date(self::$database, strtotime($date)))
+        if(self::current(self::$types['database']['format']) > date(self::$types['database']['format'], strtotime($date)))
         {
             return TRUE;
         }
@@ -79,11 +88,11 @@ class Date_Time_Format{
     {
         if($without_time)
         {
-            return date(self::$friendly_date, strtotime($date));
+            return date(self::$types['friendly']['date'], strtotime($date));
         }
         else
         {
-            return date(self::$friendly_datetime, strtotime($date));
+            return date(self::$types['friendly']['datetime'], strtotime($date));
         }
     } 
     
@@ -98,9 +107,9 @@ class Date_Time_Format{
     */
     public static function format_to_database($date)
     {
-        $format_to_database = date(self::$database, strtotime($date));
+        $format_to_database = date(self::$types['database']['format'], strtotime($date));
         
-        if(self::validate($date, self::$user_placeholder) && self::not_empty($format_to_database))
+        if(self::validate($date, self::$types['user']['placeholder']) && self::not_empty($format_to_database))
         {
             return $format_to_database;
         }
@@ -121,9 +130,9 @@ class Date_Time_Format{
     */
     public static function format_to_user($date)
     {
-        $format_to_user = date(self::$user, strtotime($date));
+        $format_to_user = date(self::$types['user']['format'], strtotime($date));
         
-        if(self::validate($date, self::$database_placeholder) && self::not_empty($format_to_user))
+        if(self::validate($date, self::$types['database']['placeholder']) && self::not_empty($format_to_user))
         {
             return $format_to_user;
         }
@@ -147,13 +156,13 @@ class Date_Time_Format{
     {
         switch($format)
         {
-            case self::$user_placeholder:
+            case self::$types['user']['placeholder']:
                 {
-                    $regex = self::$user_placeholder_regex;
+                    $regex = self::$types['user']['regex'];
                 } break;
-            case self::$database_placeholder:
+            case self::$types['database']['placeholder']:
                 {
-                    $regex = self::$database_placeholder_regex;
+                    $regex = self::$types['database']['regex'];
                 } break;
             default: $regex = '';
         }
@@ -203,22 +212,28 @@ class Date_Time_Format{
     * 
     * @param int $time
     * @param String $format
-    * @return String
     * 
-    * @return String
+    * @return Bool
     */
     public static function minutes_to_hours($time=0, $format='%02d:%02d')
     {
-        if($time > 0)
+        if(is_int($time))
         {
-            $hours = floor($time / 60);
-            $minutes = ($time % 60);
-            
-            return sprintf($format, $hours, $minutes);
+            if($time > 0)
+            {
+                $hours = floor($time / 60);
+                $minutes = ($time % 60);
+                
+                return sprintf($format, $hours, $minutes);
+            }
+            else
+            {
+                return '00:00';
+            }
         }
         else
         {
-            return '00:00';
+            return FALSE;
         }
     }
     
@@ -233,7 +248,7 @@ class Date_Time_Format{
     */
     public static function hours_to_minutes($time)
     {
-        if (strpos($time, ':') !== FALSE)
+        if(strpos($time, ':') !== FALSE)
         {
             $exploded = explode(':', $time);
           
@@ -253,8 +268,10 @@ class Date_Time_Format{
                   }                           
             }               
             $minutes += $hours * 60;
-        }else{
-            $minutes = '';  
+        }
+        else
+        {
+            $minutes = '';
         }
         
         return $minutes; 
@@ -269,7 +286,7 @@ class Date_Time_Format{
     * @param String $language
     * @return String/Bool
     * 
-    * @return String
+    * @return mixed
     */
     public static function number_to_month($month, $language='')
     {
@@ -392,7 +409,7 @@ class Date_Time_Format{
         }
         else
         {
-            $date_time = date(self::$unfriendly_datetime);
+            $date_time = date(self::$types['unfriendly']['datetime']);
             $string_with_prefix = $date_time . '_' . $string;
             return $string_with_prefix;
         }

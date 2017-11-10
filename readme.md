@@ -132,7 +132,7 @@ Since php-library v1.1.0
 
 Modification:
 
-* Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created
+* Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created. Variables reformated to $types array.
 * Email: documentation of methods updated
 * Format: return values revisited
 * Spider module now works with Geo_Plugin class instead of built-in geoPlugin and works over multiple functions
