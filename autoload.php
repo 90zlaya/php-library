@@ -82,6 +82,9 @@ $php_library_list_of_modules       = array(
         'name' => 'file-version',
     ),
     array(
+        'name' => 'image-sorter',
+    ),
+    array(
         'name' => 'spider',
     ),
 );
