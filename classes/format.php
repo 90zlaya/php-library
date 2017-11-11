@@ -14,7 +14,7 @@ class Format{
     protected static $utf_8         = 'utf-8';
     protected static $windows_1250  = 'windows-1250';
     protected static $ip            = array(
-        'locator'   => 'http://www.infosniper.net/index.php?ip_address=',
+        'locator'   => 'http://www.geoplugin.net/php.gp?ip=',
         'localhost' => array(
             'name'      => 'Localhost',
             'addresses' => array(
@@ -82,10 +82,10 @@ class Format{
     */
     public static function query($query)
     {
-        $queryPrint = str_ireplace('<', '&lt;', $query);
-        $queryPrint = str_ireplace('>', '&gt;', $queryPrint);
+        $query = str_ireplace('<', '&lt;', $query);
+        $query = str_ireplace('>', '&gt;', $query);
         
-        $formated_query = '<pre><code>' . $queryPrint . '</code></pre>';
+        $formated_query = '<pre><code>' . $query . '</code></pre>';
         
         return $formated_query;
     }

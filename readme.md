@@ -138,7 +138,7 @@ Modification:
 
 * Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created. Variables reformated to $types array.
 * Email: documentation of methods updated
-* Format: return values revisited
+* Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper
 * Spider module now works with Geo_Plugin class instead of built-in geoPlugin and works over multiple functions
 * Spider module has MySql and MS SQL connections now
 
