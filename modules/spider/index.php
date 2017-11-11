@@ -94,7 +94,8 @@ function operate($params=array())
         $mail_from    = $params['mail']['from'];
         $mail_subject = $params['mail']['subject'];
         $mail_message = $params['mail']['message'];
-        $mail_headers = 'From: ' . $mail_from . "\r\n" . 'Reply-To: ' . $mail_from . "\r\n";
+        $mail_headers = 'Content-type: text/html; charset=UTF-8' . "\r\n";
+        $mail_headers .= 'From: ' . $mail_from . "\r\n" . 'Reply-To: ' . $mail_from . "\r\n";
     }
     else
     {
