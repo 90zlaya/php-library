@@ -23,11 +23,10 @@ class Website{
     public $name;
     public $host;
     public $made;
-    
-    protected $language    = 'EN';
-    protected $charset     = 'UTF-8';
-    protected $description = 'Simple website';
-    protected $keywords    = 'siple, website';
+    public $language    = 'EN';
+    public $charset     = 'UTF-8';
+    public $description = 'Simple website';
+    public $keywords    = 'siple, website';
     
     private $head    = array();
     private $bottom  = array();
