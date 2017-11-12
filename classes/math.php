@@ -52,9 +52,14 @@ class Math{
     * 
     * @return String $even_or_odd
     */
-    public static function even_or_odd($value_1, $value_2)
+    public static function even_or_odd($value_1, $value_2, $bool=FALSE)
     {
-        if(self::$bool)
+        if(!$bool)
+        {
+            $bool = self::$bool;
+        }
+        
+        if($bool)
         {
             $even_or_odd = $value_1;
         }
