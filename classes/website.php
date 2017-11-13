@@ -67,25 +67,10 @@ class Website{
         $this->host = $params['host'];
         $this->made = $params['made'];
         
-        if(!empty($params['language']))
-        {
-            $this->language = $params['language'];
-        }
-        
-        if(!empty($params['charset']))
-        {
-            $this->charset = $params['charset'];
-        }
-        
-        if(!empty($params['description']))
-        {
-            $this->description = $params['description'];
-        }
-        
-        if(!empty($params['keywords']))
-        {
-            $this->keywords = $params['keywords'];
-        }
+        empty($params['language']) ? NULL : $this->language = $params['language'];
+        empty($params['charset']) ? NULL : $this->charset = $params['charset'];
+        empty($params['description']) ? NULL : $this->charset = $params['description'];
+        empty($params['keywords']) ? NULL : $this->charset = $params['keywords'];
     }        
     
     // -------------------------------------------------------------------------
@@ -175,39 +160,12 @@ class Website{
     {
         $meta = '';
         
-        if(isset($params['title']))
-        {
-            $title = $params['title'];
-        }
-        else
-        {
-            $title = '';
-        }
-        
-        if(isset($params['shortcut_icon']))
-        {
-            $shortcut_icon = $params['shortcut_icon'];
-        }
-        else
-        {
-            $shortcut_icon = $this->images['icon'] ;
-        }
-        
-        if(isset($params['touch_icon']))
-        {
-            $touch_icon = $params['touch_icon'];
-        }
-        else
-        {
-            $touch_icon = $this->images['icon'];
-        }
+        isset($params['title']) ? $title = $params['title'] : $title = '';
+        isset($params['shortcut_icon']) ? $shortcut_icon = $params['shortcut_icon'] : $shortcut_icon = $this->images['icon'];
+        isset($params['touch_icon']) ? $touch_icon = $params['touch_icon'] : $touch_icon = $this->images['icon'];
+        isset($params['google_site_verification']) ? $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>' . PHP_EOL : NULL;
         
         $touch_icon_size = $this->image_size($touch_icon);
-        
-        if(isset($params['google_site_verification']))
-        {
-            $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>' . PHP_EOL;
-        }
                 
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
         $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
@@ -456,10 +414,7 @@ class Website{
     */
     public function signature_hidden($language='')
     {
-        if(empty($language))
-        {
-            $language = $this->language;
-        }
+        empty($language) ? $language = $this->language : NULL;
         
         $signature_hidden = PHP_EOL . '<!-- ';
         switch($language)
@@ -492,14 +447,7 @@ class Website{
     */
     public function redirect_to_page($page, $is_url=FALSE, $to_exit=TRUE)
     {
-        if($is_url)
-        {
-            $url = $page;
-        }
-        else
-        {
-            $url = $this->host . $page;
-        }
+        $is_url ? $url = $page : $url = $this->host . $page;
         
         if(!headers_sent())
         {

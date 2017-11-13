@@ -142,6 +142,7 @@ Modification:
 * Geo_Plugin: huge modification of array structure and methods.
 * Math: even_or_odd method modified.
 * User: removed ip and ua methods because they exist in Geo_Plugin class under array elements of data['base']['address'] and data['base']['agent'].
+* Website: reformating if statements.
 
 * Spider module now works with Geo_Plugin class instead of built-in geoPlugin and works over multiple functions and has MySql and MS SQL connections now. Updated after modifications of Geo_Plugin class.
 
