@@ -199,8 +199,8 @@ if($spider['status'])
                 'name'   => 'spider',
                 'fields' => 'ip, ua',
                 'values' => array(
-                    $spider['data']['ip'],
-                    $spider['data']['ua'],
+                    $spider['data']['base']['ip'],
+                    $spider['data']['base']['ua'],
                 ),
             ),
         ),

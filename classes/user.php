@@ -17,30 +17,6 @@ class User{
     // -------------------------------------------------------------------------
     
     /**
-    * Records user's IP address
-    * 
-    * @return String $_SERVER['REMOTE_ADDR']
-    */
-    public static function record_ip()
-    {
-        return $_SERVER['REMOTE_ADDR'];
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Records user's User Agent
-    * 
-    * @return String $_SERVER['HTTP_USER_AGENT']
-    */
-    public static function record_ua()
-    {
-        return $_SERVER['HTTP_USER_AGENT'];
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
     * Searches for user's image
     * 
     * @param String $image

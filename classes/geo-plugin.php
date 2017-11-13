@@ -16,35 +16,29 @@ require 'third-party/geoplugin.class/geoplugin.class.php';
 use geoPlugin as geoPlugin;
 
 class Geo_Plugin extends geoPlugin{
-    protected $info    = array();
-    protected $service = array();
+    protected $data = array();
     
     // -------------------------------------------------------------------------
     
     /**
-    * Returns all data
+    * Class constructor
     * 
-    * @return Array
     */
-    public function data()
+    public function __construct()
     {
-        $host = $_SERVER['HTTP_HOST'];
-        $path = dirname($_SERVER['PHP_SELF']);
-        $page = basename($_SERVER['PHP_SELF']);
-        $date = date('Y-m-d');
-        $time = date('H:i:s');
-        $ua   = $_SERVER['HTTP_USER_AGENT'];
+        parent::__construct();
         
-        $this->info = array(
-            'host'                  => $host,
-            'path'                  => $path,
-            'page'                  => $page,
-            'date'                  => $date,
-            'time'                  => $time,
-            'ua'                    => $ua,
+        $this->data['base'] = array(
+            'host'                  => $_SERVER['HTTP_HOST'],
+            'path'                  => dirname($_SERVER['PHP_SELF']),
+            'page'                  => basename($_SERVER['PHP_SELF']),
+            'date'                  => date('Y-m-d'),
+            'time'                  => date('H:i:s'),
+            'agent'                 => $_SERVER['HTTP_USER_AGENT'],
+            'address'               => $_SERVER['REMOTE_ADDR'],
         );
         
-        $this->service = array(
+        $this->data['service'] = array(
             'ip'                    => $this->ip,
             'city'                  => $this->city,
             'region'                => $this->region,
@@ -59,23 +53,18 @@ class Geo_Plugin extends geoPlugin{
             'currency_converter'    => $this->currencyConverter,
             'currency_code'         => $this->currencyCode,
         );
-        
-        $data = array();
-        $data = array_merge($this->info, $this->service);
-        
-        return $data;
     }
-    
+
     // -------------------------------------------------------------------------
     
     /**
-    * Checks if service returned data
+    * Checks if service returned ip
     * 
     * @return Bool
     */
     public function is_active_service()
     {
-        if(empty($this->service))
+        if(empty($this->data['service']['ip']))
         {
             return FALSE;
         }
@@ -83,6 +72,18 @@ class Geo_Plugin extends geoPlugin{
         {
             return TRUE;
         }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Returns all data
+    * 
+    * @return Array $this->info
+    */
+    public function data()
+    {
+        return $this->data;
     }
     
     // -------------------------------------------------------------------------

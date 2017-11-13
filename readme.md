@@ -137,17 +137,19 @@ Since php-library v1.1.0
 Modification:
 
 * Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created. Variables reformated to $types array.
-* Email: documentation of methods updated
-* Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper, even_or_odd class removed because duplicate exists in Math class
-* Math: even_or_odd method modified
-* Spider module now works with Geo_Plugin class instead of built-in geoPlugin and works over multiple functions
-* Spider module has MySql and MS SQL connections now
+* Email: documentation of methods updated.
+* Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper, even_or_odd class removed because duplicate exists in Math class.
+* Geo_Plugin: huge modification of array structure and methods.
+* Math: even_or_odd method modified.
+* User: removed ip and ua methods because they exist in Geo_Plugin class under array elements of data['base']['address'] and data['base']['agent'].
+
+* Spider module now works with Geo_Plugin class instead of built-in geoPlugin and works over multiple functions and has MySql and MS SQL connections now. Updated after modifications of Geo_Plugin class.
 
 New:
 
-* third-party folder added with geoplugin.class
-* Geo_Plugin: customisation of third-party class geoPlugin
-* image-sorter module added
+* third-party folder added with geoplugin.class.
+* Geo_Plugin: customisation of third-party class geoPlugin.
+* image-sorter module added.
 
 Misc
 =======

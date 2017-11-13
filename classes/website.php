@@ -14,7 +14,7 @@
 namespace phplibrary;
 
 class Website{
-    public $server  = array(
+    public $server      = array(
         'host' => '',
         'uri'  => '',
         'path' => '',
