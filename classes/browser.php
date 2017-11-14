@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Browser{
+class Browser {
 	protected static $browsers = array(
         array(
             'name'      => 'Firefox',
@@ -66,14 +66,14 @@ class Browser{
 	{
 		$info = '';
         
-        foreach(self::$browsers as $browser)
+        foreach (self::$browsers as $browser)
         {
             $name       = $browser['name'];
             $signature  = $browser['signature'];
             
-            foreach($signature as $item)
+            foreach ($signature as $item)
             {
-                if(strpos($user_agent, $item))
+                if (strpos($user_agent, $item))
                 {
                     $info = $name;
                     break;
@@ -81,7 +81,7 @@ class Browser{
             }
         }
         
-        if(empty($info))
+        if (empty($info))
         {
             $info = $name_when_no_match;
         }
@@ -100,16 +100,12 @@ class Browser{
     */
 	public static function is_mobile($user_agent)
     {
-		$part_of_user_agent = substr($user_agent, 0, 4);
-        
-        if(preg_match(self::$mobile_user_agent_one, $user_agent) || preg_match(self::$mobile_user_agent_two, $part_of_user_agent))
+		if (preg_match(self::$mobile_user_agent_one, $user_agent) || preg_match(self::$mobile_user_agent_two, substr($user_agent, 0, 4)))
 		{
 			return TRUE;
 		}
-		else
-		{
-			return FALSE;
-		}
+		
+        return FALSE;
 	}
     
     // -------------------------------------------------------------------------
