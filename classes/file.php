@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class File{
+class File {
 
     // -------------------------------------------------------------------------    
     
@@ -24,7 +24,7 @@ class File{
     */
     public static function write_to_file($file_location, $write_data)
     {
-        if(empty($file_location) || empty($write_data))
+        if (empty($file_location) || empty($write_data))
         {
             return FALSE;
         }
@@ -32,7 +32,7 @@ class File{
         {
             $new_data = $write_data . PHP_EOL;
             
-            if(@file_exists($file_location))
+            if (@file_exists($file_location))
             {
                 $file = @fopen($file_location, 'r');
                 $data = @fread($file, @filesize($file_location));
@@ -68,14 +68,14 @@ class File{
         @fseek($f, $cursor, SEEK_END);
         $char = @fgetc($f);
         
-        while($char === "\n" || $char === "\r")
+        while ($char === "\n" || $char === "\r")
         {
             @fseek($f, $cursor--, SEEK_END);
             $char = @fgetc($f);
         }
         
         $line = '';
-        while($char !== false && $char !== "\n" && $char !== "\r")
+        while ($char !== false && $char !== "\n" && $char !== "\r")
         {
             $line = $char . $line;
             @fseek($f, $cursor--, SEEK_END);

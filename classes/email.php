@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 | -------------------------------------------------------------------
 | EMAIL
@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Email{
+class Email {
     protected static $valid_email_regex     = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/i";
     protected static $invalid_email_clients = array(
         "@yopmail", 
@@ -42,13 +42,13 @@ class Email{
     */
     public static function mailto($email, $link_text='', $subject='', $attributes='')
     {
-        if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL))
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             $formated_email = '';
         }
         else
         {
-            if(empty($link_text))
+            if (empty($link_text))
             {
                 $link_text = $email;
             }
@@ -71,14 +71,14 @@ class Email{
             $formated_email .= "document.write('$part1');";
             $formated_email .= "document.write('$part2');";
 
-            foreach($email as $e){
+            foreach ($email as $e){
                 $formated_email .= "document.write('$e');";
             }
 
             $formated_email .= "document.write('$part_subject');";
             $formated_email .= "document.write('$part3');";
 
-            foreach($link_text as $l){
+            foreach ($link_text as $l){
                 $formated_email .= "document.write('$l');";
             }
 
@@ -101,14 +101,14 @@ class Email{
     */
     public static function validate($email, $invalid_email_clients=array())
     {
-        if(empty($invalid_email_clients))
+        if (empty($invalid_email_clients))
         {
             $invalid_email_clients = self::$invalid_email_clients;
         }
         
-        foreach($invalid_email_clients as $item)
+        foreach ($invalid_email_clients as $item)
         {
-            if(stristr($email, $item))
+            if (stristr($email, $item))
             {
                 return FALSE;
             }

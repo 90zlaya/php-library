@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Directory_Lister{
+class Directory_Lister {
     private static $open_inside_browser = 'file:///';
     private static $trailing_slash      = '/';
     private static $dash                = '-';
@@ -47,26 +47,19 @@ class Directory_Lister{
         
         $searched = array();
         
-        if(empty($year))
+        if (empty($year))
         {
             $date = substr($date, 5);
         }
         else
         {
-            if(!empty($date_start))
-            {
-                $date_start = $year . self::$dash . $date_start;    
-            }
-            
-            if(!empty($date_end))
-            {
-                $date_end = $year . self::$dash . $date_end;
-            }
+            empty($date_start) ? NULL : $date_start = $year . self::$dash . $date_start;
+            empty($date_end) ? NULL : $date_end = $year . self::$dash . $date_end;
         }
         
-        if(empty($date_start))
+        if (empty($date_start))
         {
-            if(empty($year))
+            if (empty($year))
             {
                 $searched = array_merge($searched, $item);
             }
@@ -74,22 +67,22 @@ class Directory_Lister{
             {
                 $date = substr($date, 0, 4);
                 
-                if($date == $year)
+                if ($date == $year)
                 {
                     $searched = array_merge($searched, $item);
                 }
             }
         }
-        else if(empty($date_end))
+        else if (empty($date_end))
         {
-            if($date == $date_start)
+            if ($date == $date_start)
             {
                 $searched = array_merge($searched, $item);
             }
         }
         else
         {
-            if($date >= $date_start && $date <= $date_end)
+            if ($date >= $date_start && $date <= $date_end)
             {
                 $searched = array_merge($searched, $item);
             }
@@ -111,9 +104,9 @@ class Directory_Lister{
     {
         $display = '';
         
-        if(!empty($list))
+        if (!empty($list))
         {
-            foreach($list as $item)
+            foreach ($list as $item)
             {
                 $display .= '<script>window.open("' . $item['location'] . '");</script>';
             }
@@ -134,15 +127,11 @@ class Directory_Lister{
     */
     private static function depth($list, $types=array())
     {
-        if(empty($list))
-        {
-            return FALSE;
-        }
-        else
+        if (!empty($list))
         {
             $list_of_paths = $list_of_folders = $list_of_files = array();
             
-            foreach($list as $folder)
+            foreach ($list as $folder)
             {
                 $location = $folder . self::$trailing_slash;
                 
@@ -154,14 +143,14 @@ class Directory_Lister{
                 $list_of_files   = array_merge($list_of_files, $depth_files);
             }
             
-            $data = array(
+            return array(
                 'paths'   => $list_of_paths,
                 'folders' => $list_of_folders,
                 'files'   => $list_of_files,
             );
-            
-            return $data;
         }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -180,17 +169,17 @@ class Directory_Lister{
         $files = scandir($directory);
         $arr_folder = $arr_path = array();
         $counter = 1;
-        foreach($files as $folder)
+        foreach ($files as $folder)
         {
             $folder_first_character = substr($folder, 0, 1);
             
-            if(!in_array($folder_first_character, self::$forbidden_characters))
+            if (!in_array($folder_first_character, self::$forbidden_characters))
             {
-                if($counter > 2)
+                if ($counter > 2)
                 {
                     $path = $directory . $folder;
                     
-                    if(is_dir($path))
+                    if (is_dir($path))
                     {
                         array_push($arr_path, $path);
                         array_push($arr_folder, $folder);
@@ -201,12 +190,10 @@ class Directory_Lister{
             }
         }
         
-        $data = array(
+        return array(
             'path'   => $arr_path,
             'folder' => $arr_folder,
         );
-        
-        return $data;
     }
     
     // -------------------------------------------------------------------------
@@ -226,16 +213,16 @@ class Directory_Lister{
         $files = scandir($directory);
         $arr_files = array();
         $counter = 1;
-        foreach($files as $file)
+        foreach ($files as $file)
         {
-            if($counter > 2)
+            if ($counter > 2)
             {
-                if(stripos($file, '.'))
+                if (stripos($file, '.'))
                 {
                     $extension         = pathinfo($file, PATHINFO_EXTENSION);
                     $extension_lowered = strtolower($extension);
                     
-                    if(empty($types) || in_array($extension_lowered, $types))
+                    if (empty($types) || in_array($extension_lowered, $types))
                     {
                         $path      = $directory . $file;
                         $location  = self::$open_inside_browser . $path;
@@ -285,7 +272,7 @@ class Directory_Lister{
         isset($params['types']) ? $types = $params['types'] : $types = array();
         isset($params['data']) ? $data = $params['data'] : $data = array();
         
-        if(empty($data))
+        if (empty($data))
         {
             $list_of_paths   = array();
             $list_of_folders = self::folders($directory);
@@ -295,27 +282,26 @@ class Directory_Lister{
             
             $depth = self::depth($paths, $types);
             
-            if($depth)
+            if ($depth)
             {
                 $paths = array_merge($list_of_paths, $depth['paths']);
                 $files = array_merge($list_of_files, $depth['files']);
                 
                 self::$crawled = $files;
                 
-                if(empty($paths))
+                if (empty($paths))
                 {
                     return TRUE;
                 }
                 else
                 {
-                    $params = array(
+                    self::crawl(array(
                         'types' => $types,
                         'data'  => array(
                             'paths' => $paths,
                             'files' => $files,
                         ),
-                    );
-                    self::crawl($params);
+                    ));
                 }
             }
         }
@@ -326,7 +312,7 @@ class Directory_Lister{
             
             self::$crawled = $files;
             
-            if(empty($paths))
+            if (empty($paths))
             {
                 return TRUE;
             }
@@ -334,27 +320,26 @@ class Directory_Lister{
             {
                 $depth = self::depth($paths, $types);
             
-                if($depth)
+                if ($depth)
                 {
                     $paths = $depth['paths'];
                     $files = array_merge($files, $depth['files']);
                     
                     self::$crawled = $files;
                     
-                    if(empty($paths))
+                    if (empty($paths))
                     {
                         return TRUE;
                     }
                     else
                     {
-                        $params = array(
+                        self::crawl(array(
                             'types' => $types,
                             'data'  => array(
                                 'paths' => $paths,
                                 'files' => $files,
                             ),
-                        );
-                        self::crawl($params);
+                        ));
                     }
                 }
             }
@@ -386,39 +371,37 @@ class Directory_Lister{
         
         $list = $searched = array();
         
-        switch($method)
+        switch ($method)
         {
             case self::$method_calls['folders']:
-            {
-                $list = self::folders($directory);
-            } break;
+                {
+                    $list = self::folders($directory);
+                } break;
             case self::$method_calls['files']:
-            {
-                $list = self::files($directory, $types);
-            } break;
+                {
+                    $list = self::files($directory, $types);
+                } break;
             case self::$method_calls['crawl']:
-            {
-                
-                $params = array(
-                    'directory' => $directory, 
-                    'types'     => $types,
-                );
-                self::crawl($params);
-                $list = self::$crawled;
-            } break;
+                {
+                    self::crawl(array(
+                        'directory' => $directory, 
+                        'types'     => $types,
+                    ));
+                    $list = self::$crawled;
+                } break;
         }
         
-        if($method !== self::$method_calls['folders'])
+        if ($method !== self::$method_calls['folders'])
         {
-            if(empty($list))
+            if (empty($list))
             {
                 return FALSE;
             }
             else
             {
-                foreach($list as $item)
+                foreach ($list as $item)
                 {
-                    if(isset($item['date']))
+                    if (isset($item['date']))
                     {
                         $date = $item['date'];
                     }
@@ -435,15 +418,15 @@ class Directory_Lister{
                         'year'       => $year,
                     );
                     
-                    if(empty($delimiter))
+                    if (empty($delimiter))
                     {
                         $checked = self::check_date($params);
                     }
                     else
                     {
-                        if($reverse)
+                        if ($reverse)
                         {
-                            if(stripos($item['title'], $delimiter) === FALSE)
+                            if (stripos($item['title'], $delimiter) === FALSE)
                             {
                                 $checked = self::check_date($params);
                             }
@@ -454,7 +437,7 @@ class Directory_Lister{
                         }
                         else
                         {
-                            if(stripos($item['title'], $delimiter) !== FALSE)
+                            if (stripos($item['title'], $delimiter) !== FALSE)
                             {
                                 $checked = self::check_date($params);
                             }
@@ -465,7 +448,7 @@ class Directory_Lister{
                         }
                     }
                     
-                    if(!empty($checked))
+                    if (!empty($checked))
                     {
                         array_push($searched, $checked);
                     }
@@ -477,16 +460,16 @@ class Directory_Lister{
             $searched = $list;
         }
         
-        if($print || $display)
+        if ($print || $display)
         {
-            if($print)
+            if ($print)
             {
                 print_r('<pre>');
                 print_r($searched);
                 print_r('</pre>');
             }
             
-            if($display)
+            if ($display)
             {
                 print_r(self::display($searched));
             }
