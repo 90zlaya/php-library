@@ -53,7 +53,8 @@ class Password{
     * 
     * @return String $new_password
     */
-    public static function new_readable($size_optimum=0, $words=''){
+    public static function new_readable($size_optimum=0, $words='')
+    {
         if(empty($size_optimum))
         {
             $size_optimum = self::$size_optimum;

@@ -110,6 +110,7 @@ class Directory_Lister{
     private static function display($list)
     {
         $display = '';
+        
         if(!empty($list))
         {
             foreach($list as $item)
@@ -174,14 +175,7 @@ class Directory_Lister{
     */
     protected static function folders($directory='')
     {
-        if(empty($directory))
-        {
-            $directory = self::$directory;
-        }
-        else
-        {
-            self::$directory = $directory;
-        }
+        empty($directory) ? $directory = self::$directory : self::$directory = $directory;
         
         $files = scandir($directory);
         $arr_folder = $arr_path = array();
@@ -227,14 +221,7 @@ class Directory_Lister{
     */
     protected static function files($directory='', $types=array())
     {
-        if(empty($directory))
-        {
-            $directory = self::$directory;
-        }
-        else
-        {
-            self::$directory = $directory;
-        }
+        empty($directory) ? $directory = self::$directory : self::$directory = $directory;
         
         $files = scandir($directory);
         $arr_files = array();
@@ -294,32 +281,9 @@ class Directory_Lister{
     */
     protected static function crawl($params)
     {
-        if(isset($params['directory']))
-        {
-            $directory = $params['directory'];
-        }
-        else
-        {
-            $directory = '';
-        }
-        
-        if(isset($params['types']))
-        {
-            $types = $params['types'];
-        }
-        else
-        {
-            $types = array();
-        }
-        
-        if(isset($params['data']))
-        {
-            $data = $params['data'];
-        }
-        else
-        {
-            $data = array();
-        }
+        isset($params['directory']) ? $directory = $params['directory'] : $directory = '';
+        isset($params['types']) ? $types = $params['types'] : $types = array();
+        isset($params['data']) ? $data = $params['data'] : $data = array();
         
         if(empty($data))
         {
@@ -411,77 +375,14 @@ class Directory_Lister{
         $directory  = $params['directory'];
         $method     = $params['method'];
         
-        if(isset($params['print']))
-        {
-            $print = $params['print'];
-        }
-        else
-        {
-            $print = FALSE;
-        }
-        
-        if(isset($params['display']))
-        {
-            $display = $params['display'];
-        }
-        else
-        {
-            $display = FALSE;
-        }
-        
-        if(isset($params['reverse']))
-        {
-            $reverse = $params['reverse'];
-        }
-        else
-        {
-            $reverse = '';
-        }
-        
-        if(isset($params['delimiter']))
-        {
-            $delimiter = $params['delimiter'];
-        }
-        else
-        {
-            $delimiter = '';
-        }
-        
-        if(isset($params['date_start']))
-        {
-            $date_start = $params['date_start'];
-        }
-        else
-        {
-            $date_start = '';
-        }
-        
-        if(isset($params['date_end']))
-        {
-            $date_end = $params['date_end'];
-        }
-        else
-        {
-            $date_end = '';
-        }
-        
-        if(isset($params['year']))
-        {
-            $year = $params['year'];
-        }
-        else
-        {
-            $year = '';
-        }
-        
-        if(isset($params['types']))
-        {
-            $types = $params['types'];
-        }
-        else
-        {
-            $types = array();
-        }
+        isset($params['print']) ? $print = $params['print'] : $print = FALSE;
+        isset($params['display']) ? $display = $params['display'] : $display = FALSE;
+        isset($params['reverse']) ? $reverse = $params['reverse'] : $reverse = '';
+        isset($params['delimiter']) ? $delimiter = $params['delimiter'] : $delimiter = '';
+        isset($params['date_start']) ? $date_start = $params['date_start'] : $date_start = '';
+        isset($params['date_end']) ? $date_end = $params['date_end'] : $date_end = '';
+        isset($params['year']) ? $year = $params['year'] : $year = '';
+        isset($params['types']) ? $types = $params['types'] : $types = array();
         
         $list = $searched = array();
         

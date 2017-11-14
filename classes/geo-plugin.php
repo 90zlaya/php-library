@@ -37,7 +37,6 @@ class Geo_Plugin extends geoPlugin{
             'agent'                 => $_SERVER['HTTP_USER_AGENT'],
             'address'               => $_SERVER['REMOTE_ADDR'],
         );
-        
         $this->data['service'] = array(
             'ip'                    => $this->ip,
             'city'                  => $this->city,

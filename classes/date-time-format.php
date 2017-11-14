@@ -411,6 +411,7 @@ class Date_Time_Format{
         {
             $date_time = date(self::$types['unfriendly']['datetime']);
             $string_with_prefix = $date_time . '_' . $string;
+            
             return $string_with_prefix;
         }
     }
