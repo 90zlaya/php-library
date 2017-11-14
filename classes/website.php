@@ -13,7 +13,7 @@
 */
 namespace phplibrary;
 
-class Website{
+class Website {
     public $server      = array(
         'host' => '',
         'uri'  => '',
@@ -113,7 +113,7 @@ class Website{
     */
     public function add_to_images($params, $to_merge=FALSE)
     {
-        if($to_merge)
+        if ($to_merge)
         {
             $this->images = array_merge($this->images, $params);
         }
@@ -135,7 +135,7 @@ class Website{
     */
     public function add_to_creator($params, $to_merge=FALSE)
     {
-        if($to_merge)
+        if ($to_merge)
         {
             $this->creator = array_merge($this->creator, $params);
         }
@@ -178,14 +178,9 @@ class Website{
         $meta .= '<link rel="shortcut icon" href="' . $shortcut_icon . '" type="image/png">' . PHP_EOL;
         
         $meta .= '<title>';
-            if(empty($title))
-            {
-                $meta .= $this->name;
-            }
-            else
-            {
-                $meta .= $title;
-            }
+        
+        empty($title) ? $meta .= $this->name : $meta .= $title;
+        
         $meta .= '</title>' . PHP_EOL;
         
         return $meta;
@@ -203,47 +198,45 @@ class Website{
         $return = '';
         
         $return .= '<!-- HEAD -->' . PHP_EOL;
-        if(empty($this->head))
+        
+        if (empty($this->head))
         {
             $return .= '<!-- NOT LOADED -->' . PHP_EOL;
         }
         else
         {
-            foreach($this->head as $head)
+            foreach ($this->head as $head)
             {
-                switch($head['type'])
+                switch ($head['type'])
                 {
                     case $this->calls['css']['ordinary']:
                         {
                             $return .= '<link rel="stylesheet" href="';
                             $return .= $head['path'];
                             $return .= '">' . PHP_EOL;
-                        }
-                    break; 
+                        } break;
                     case $this->calls['javascript']['ordinary']:
                         {
                             $return .= '<script src="';
                             $return .= $head['path'];
                             $return .= '"></script>' . PHP_EOL;
-                        }
-                    break; 
+                        } break;
                     case $this->calls['css']['custom']:
                         {
                             $return .= '<style>';
                             $return .= $head['path'];
                             $return .= '</style>' . PHP_EOL;
-                        }
-                    break; 
+                        } break;
                     case $this->calls['javascript']['custom']:
                         {
                             $return .= '<script>';
                             $return .= $head['path'];
                             $return .= '</script>' . PHP_EOL;
-                        }
-                    break;    
+                        } break;
                 }    
             }
         }
+        
         $return .= '<!-- /HEAD -->' . PHP_EOL;
         
         return $return;
@@ -261,47 +254,45 @@ class Website{
         $return = '';
         
         $return .= '<!-- BOTTOM -->' . PHP_EOL;
-        if(empty($this->bottom))
+        
+        if (empty($this->bottom))
         {
             $return .= '<!-- NOT LOADED -->' . PHP_EOL;
         }
         else
         {
-            foreach($this->bottom as $bottom)
+            foreach ($this->bottom as $bottom)
             {
-                switch($bottom['type'])
+                switch ($bottom['type'])
                 {
                     case $this->calls['css']['ordinary']:
                         {
                             $return .= '<link rel="stylesheet" href="';
                             $return .= $bottom['path'];
                             $return .= '">' . PHP_EOL;
-                        }
-                    break;
+                        } break;
                     case $this->calls['javascript']['ordinary']:
                         {
                             $return .= '<script src="';
                             $return .= $bottom['path'];
                             $return .= '"></script>' . PHP_EOL;
-                        }
-                    break;
+                        } break;
                     case $this->calls['css']['custom']:
                         {
                             $return .= '<style>';
                             $return .= $bottom['path'];
                             $return .= '</style>' . PHP_EOL;
-                        }
-                    break;
+                        } break;
                     case $this->calls['javascript']['custom']:
                         {
                             $return .= '<script>';
                             $return .= $bottom['path'];
                             $return .= '</script>' . PHP_EOL;
-                        }
-                    break;
+                        } break;
                 }   
             }
         }
+        
         $return .= '<!-- /BOTTOM -->' . PHP_EOL;
         
         return $return;
@@ -310,22 +301,20 @@ class Website{
     // -------------------------------------------------------------------------
     
     /**
-    * Printing images values
+    * Printing images
     * 
     * @param String $image
     * 
-    * @return Array
+    * @return mixed
     */
     public function images($image)
     {
-        if(empty($image))
-        {
-            return FALSE;
-        }
-        else
+        if (!empty($image))
         {
             return $this->images[$image];
         }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -335,15 +324,11 @@ class Website{
     * 
     * @param String $image
     * 
-    * @return Array
+    * @return mixed
     */
     public function image_size($image)
     {
-        if(empty($image))
-        {
-            return FALSE;
-        }
-        else
+        if (!empty($image))
         {
             $image_size = getimagesize($image);
             
@@ -359,6 +344,8 @@ class Website{
             
             return $data;
         }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -369,35 +356,19 @@ class Website{
     * When you want year span (eg. 2007-2017) set 
     * first method parameter as TRUE.
     * 
-    * @param boolean $always_made_year
+    * @param Bool $always_made_year
+    * @param Bool $show_licence
     * 
-    * @return String $signature
+    * @return String
     */
     public function signature($always_made_year=FALSE, $show_licence=FALSE)
     {
         $current_year = date('Y');
         
-        if($current_year == $this->made || $always_made_year)
-        {
-            $since = $current_year;
-        }
-        else
-        {
-            $since = $this->made . '-' . $current_year;
-        }
+        $current_year == $this->made || $always_made_year ? $since = $current_year : $since = $this->made . '-' . $current_year;
+        $show_licence ? $licence = ' | ' . ' All Rights Reserved' : $licence = '';
         
-        if($show_licence)
-        {
-            $licence = ' | ' . ' All Rights Reserved';
-        }
-        else
-        {
-            $licence = '';
-        }
-        
-        $signature =  'Copyright &#169; ' . $since . ' | <a href="' . $this->creator['website'] . '" target="_blank">' .  $this->creator['name'] . '</a>' . $licence;
-        
-        return $signature;
+        return 'Copyright &#169; ' . $since . ' | <a href="' . $this->creator['website'] . '" target="_blank">' .  $this->creator['name'] . '</a>' . $licence;
     }
     
     // -------------------------------------------------------------------------
@@ -417,7 +388,8 @@ class Website{
         empty($language) ? $language = $this->language : NULL;
         
         $signature_hidden = PHP_EOL . '<!-- ';
-        switch($language)
+        
+        switch ($language)
         {
             case 'EN':
                 {
@@ -425,6 +397,7 @@ class Website{
                 } break;
             default: $signature_hidden .= 'Ponosno izradio: ' . $this->creator['name'] . '; Pronadjite me na ' . $this->creator['website'];
         }
+        
         $signature_hidden .=  ' -->' . PHP_EOL;
         
         return $signature_hidden;
@@ -449,29 +422,29 @@ class Website{
     {
         $is_url ? $url = $page : $url = $this->host . $page;
         
-        if(!headers_sent())
+        if (!headers_sent())
         {
             header('HTTP/1.1 301 Moved Permanently');
             header('Location: ' . $url);
             header("Connection: close");
         }
         
-        print '<html>';
-        print '<head><title>Redirecting you...</title>';
-        print '<meta http-equiv="Refresh" content="0;url=' . $url . '" />';
-        print '</head>';
-        print '<body onload="location.replace(\''.$url.'\')">';
+        echo '<html>';
+        echo '<head><title>Redirecting you...</title>';
+        echo '<meta http-equiv="Refresh" content="0;url=' . $url . '" />';
+        echo '</head>';
+        echo '<body onload="location.replace(\''.$url.'\')">';
         
-        print 'You should be redirected to this URL:<br />';
-        print "<a href=\"$url\">$url</a><br /><br />";
+        echo 'You should be redirected to this URL:<br />';
+        echo "<a href=\"$url\">$url</a><br /><br />";
 
-        print 'If you are not, please click on the link above.<br />';
+        echo 'If you are not, please click on the link above.<br />';
 
-        print '</body>';
-        print '</html>';
+        echo '</body>';
+        echo '</html>';
 
         
-        if($to_exit)
+        if ($to_exit)
         {
             exit;
         }

@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Web_Service{
+class Web_Service {
     
     // -------------------------------------------------------------------------
     

@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Validation{
+class Validation {
     
     // -------------------------------------------------------------------------
     
@@ -23,14 +23,12 @@ class Validation{
     */
     public static function year($year)
     {
-        if(is_numeric($year) and strlen($year) === 4)
+        if (is_numeric($year) && strlen($year) === 4)
         {
             return TRUE;
         }
-        else
-        {
-            return FALSE;
-        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -44,14 +42,12 @@ class Validation{
     */
     public static function variables($variable)
     {
-        if(isset($variable) and !empty($variable))
+        if (isset($variable) && !empty($variable))
         {
             return TRUE;
         }
-        else
-        {
-            return FALSE;
-        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -65,7 +61,7 @@ class Validation{
     */
     public static function comma($param)
     {
-        if(strpos($param, ',') !== false)
+        if (strpos($param, ',') !== false)
         {
             $comma = str_replace(',', '.', $param);
         }
@@ -89,13 +85,13 @@ class Validation{
     */
     public static function clear_string($variable, $trim=TRUE)
     {
-        if(empty($variable))
+        if (empty($variable))
         {
             return FALSE;
         }
         else
         {
-            if($trim)
+            if ($trim)
             {
                 $variable = trim($variable);
             }
@@ -125,7 +121,7 @@ class Validation{
     */
     public static function clear_number($variable)
     {
-        if(is_numeric($variable))
+        if (is_numeric($variable))
         {
           $cleared_number = $variable;
         }
@@ -148,7 +144,7 @@ class Validation{
     */
     public static function rewrite($string)
     {
-        if(empty($string))
+        if (empty($string))
         {
             return FALSE;
         }
@@ -173,7 +169,7 @@ class Validation{
     */
     public static function rewrite_special($string)
     {
-        if(empty($string))
+        if (empty($string))
         {
             return FALSE;
         }
@@ -222,37 +218,22 @@ class Validation{
     * 
     * @param String $file
     * @param Array $allowed_extensions
+    * @param String $type
+    * @param Array $allowed_types
     * 
     * @return Bool
     */
     public static function extension($file, $allowed_extensions, $type='', $allowed_types=array())
     {
-        $exploded  = explode('.', $file);
-        $extension = end($exploded);
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
         $extension = strtolower($extension);
         
-        if(in_array($extension, $allowed_extensions))
+        if (in_array($extension, $allowed_extensions) && (empty($type) || empty($allowed_types) || in_array($type, $allowed_types)))
         {
-            if(empty($type) || empty($allowed_types))
-            {
-                return TRUE;
-            }
-            else
-            {
-                if(in_array($type, $allowed_types))
-                {
-                    return TRUE;
-                }
-                else
-                {
-                    return FALSE;
-                }
-            }
+            return TRUE;
         }
-        else
-        {
-            return FALSE;
-        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
