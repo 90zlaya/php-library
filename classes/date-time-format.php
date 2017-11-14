@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Date_Time_Format{
+class Date_Time_Format {
     public static $types = array(
         'user'     => array(
             'format'      => 'd.m.Y',
@@ -45,10 +45,7 @@ class Date_Time_Format{
     */
     public static function current($format='')
     {
-        if(empty($format))
-        {
-            $format = self::$types['unfriendly']['datetime'];
-        }
+        empty($format) ? $format = self::$types['unfriendly']['datetime'] : NULL;
         
         return date($format);
     }
@@ -64,14 +61,12 @@ class Date_Time_Format{
     */
     public static function compare($date)
     {
-        if(self::current(self::$types['database']['format']) > date(self::$types['database']['format'], strtotime($date)))
+        if (self::current(self::$types['database']['format']) > date(self::$types['database']['format'], strtotime($date)))
         {
             return TRUE;
         }
-        else
-        {
-            return FALSE;
-        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -86,7 +81,7 @@ class Date_Time_Format{
     */
     public static function format($date, $without_time=FALSE)
     {
-        if($without_time)
+        if ($without_time)
         {
             return date(self::$types['friendly']['date'], strtotime($date));
         }
@@ -109,14 +104,12 @@ class Date_Time_Format{
     {
         $format_to_database = date(self::$types['database']['format'], strtotime($date));
         
-        if(self::validate($date, self::$types['user']['placeholder']) && self::not_empty($format_to_database))
+        if (self::validate($date, self::$types['user']['placeholder']) && self::not_empty($format_to_database))
         {
             return $format_to_database;
         }
-        else
-        {
-            return FALSE;
-        }
+        
+        return FALSE;
     } 
     
     // -------------------------------------------------------------------------
@@ -126,20 +119,18 @@ class Date_Time_Format{
     * 
     * @param String $date
     * 
-    * @return String
+    * @return mixed
     */
     public static function format_to_user($date)
     {
         $format_to_user = date(self::$types['user']['format'], strtotime($date));
         
-        if(self::validate($date, self::$types['database']['placeholder']) && self::not_empty($format_to_user))
+        if (self::validate($date, self::$types['database']['placeholder']) && self::not_empty($format_to_user))
         {
             return $format_to_user;
         }
-        else
-        {
-            return FALSE;
-        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -154,7 +145,7 @@ class Date_Time_Format{
     */
     protected static function validate($date, $format)
     {
-        switch($format)
+        switch ($format)
         {
             case self::$types['user']['placeholder']:
                 {
@@ -167,21 +158,12 @@ class Date_Time_Format{
             default: $regex = '';
         }
         
-        if(empty($regex))
+        if (preg_match($regex, $date))
         {
-            return FALSE;
+            return TRUE;
         }
-        else
-        {
-            if(preg_match($regex, $date))
-            {
-                return TRUE;
-            }
-            else
-            {
-                return FALSE;
-            }
-        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -195,14 +177,12 @@ class Date_Time_Format{
     */
     protected static function not_empty($date)
     {
-        if(empty($date) || in_array($date, self::$invalid_dates))
+        if (empty($date) || in_array($date, self::$invalid_dates))
         {
             return FALSE;
         }
-        else
-        {
-            return TRUE;
-        }
+        
+        return TRUE;
     }
     
     // -------------------------------------------------------------------------
@@ -213,13 +193,13 @@ class Date_Time_Format{
     * @param int $time
     * @param String $format
     * 
-    * @return Bool
+    * @return mixed
     */
     public static function minutes_to_hours($time=0, $format='%02d:%02d')
     {
-        if(is_int($time))
+        if (is_int($time))
         {
-            if($time > 0)
+            if ($time > 0)
             {
                 $hours = floor($time / 60);
                 $minutes = ($time % 60);
@@ -231,10 +211,8 @@ class Date_Time_Format{
                 return '00:00';
             }
         }
-        else
-        {
-            return FALSE;
-        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -248,16 +226,16 @@ class Date_Time_Format{
     */
     public static function hours_to_minutes($time)
     {
-        if(strpos($time, ':') !== FALSE)
+        if (strpos($time, ':') !== FALSE)
         {
             $exploded = explode(':', $time);
           
             $hours_first = TRUE;
-            foreach($exploded as $row)
+            foreach ($exploded as $row)
             {
                   $number = $row;
                         
-                  if($hours_first)
+                  if ($hours_first)
                   {
                       $hours = $number; 
                       $hours_first = FALSE;
@@ -299,7 +277,7 @@ class Date_Time_Format{
                         case 'EN': return 'january'; break;
                         default: return 'januar';
                     }
-                } break;
+                }
             case 2:
                 {
                     switch($language)
@@ -307,7 +285,7 @@ class Date_Time_Format{
                         case 'EN': return 'february'; break;
                         default: return 'februar';
                     }
-                } break;
+                }
             case 3:
                 {
                     switch($language)
@@ -315,7 +293,7 @@ class Date_Time_Format{
                         case 'EN': return 'march'; break;
                         default: return 'mart';
                     }
-                } break;
+                }
             case 4:
                 {
                     switch($language)
@@ -323,7 +301,7 @@ class Date_Time_Format{
                         case 'EN': return 'april'; break;
                         default: return 'april';
                     }
-                } break;
+                }
             case 5:
                 {
                     switch($language)
@@ -331,7 +309,7 @@ class Date_Time_Format{
                         case 'EN': return 'may'; break;
                         default: return 'maj';
                     }
-                } break;
+                }
             case 6:
                 {
                     switch($language)
@@ -339,7 +317,7 @@ class Date_Time_Format{
                         case 'EN': return 'june'; break;
                         default: return 'jun';
                     }
-                } break;
+                }
             case 7:
                 {
                     switch($language)
@@ -347,7 +325,7 @@ class Date_Time_Format{
                         case 'EN': return 'july'; break;
                         default: return 'jul';
                     }
-                } break;
+                }
             case 8:
                 {
                     switch($language)
@@ -355,7 +333,7 @@ class Date_Time_Format{
                         case 'EN': return 'august'; break;
                         default: return 'avgust';
                     }
-                } break;
+                }
             case 9:
                 {
                     switch($language)
@@ -363,7 +341,7 @@ class Date_Time_Format{
                         case 'EN': return 'september'; break;
                         default: return 'septembar';
                     }
-                } break;
+                }
             case 10:
                 {
                     switch($language)
@@ -371,7 +349,7 @@ class Date_Time_Format{
                         case 'EN': return 'october'; break;
                         default: return 'oktobar';
                     }
-                } break;
+                }
             case 11:
                 {
                     switch($language)
@@ -379,7 +357,7 @@ class Date_Time_Format{
                         case 'EN': return 'november'; break;
                         default: return 'novembar';
                     }
-                } break;
+                }
             case 12:
                 {
                     switch($language)
@@ -387,7 +365,7 @@ class Date_Time_Format{
                         case 'EN': return 'december'; break;
                         default: return 'decembar';
                     }
-                } break;
+                }
             default: return FALSE;
         }
     }
@@ -403,17 +381,15 @@ class Date_Time_Format{
     */
     public static function prefix($string)
     {
-        if(empty($string))
-        {
-            return FALSE;
-        }
-        else
+        if (!empty($string))
         {
             $date_time = date(self::$types['unfriendly']['datetime']);
             $string_with_prefix = $date_time . '_' . $string;
             
             return $string_with_prefix;
         }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -427,7 +403,7 @@ class Date_Time_Format{
     */
     public static function date_from_jmbg($jmbg)
     {
-        if(empty($jmbg) || strlen($jmbg) < 13)
+        if (empty($jmbg) || strlen($jmbg) < 13)
         {
             $date = FALSE;
         }
@@ -437,17 +413,17 @@ class Date_Time_Format{
             $date_month = substr($jmbg, 2, 2);
             $date_year  = substr($jmbg, 4, 3);
             
-            if(substr($date_day, 0, 1) == 0)
+            if (substr($date_day, 0, 1) == 0)
             {
                 $date_day = substr($date_day, 1, 2); 
             }
             
-            if(substr($date_month, 0, 1) == 0)
+            if (substr($date_month, 0, 1) == 0)
             {
                 $date_month = substr($date_month, 1, 2); 
             }
 
-            if($date_year > 100)
+            if ($date_year > 100)
             {
                 $date_year = 1 . $date_year;
             }
@@ -476,12 +452,12 @@ class Date_Time_Format{
     {
         $first_day_and_month = '01.01.';
         
-        if(empty($year))
+        if (empty($year))
         {
             $year  = date('Y');
         }
         
-        switch($format)
+        switch ($format)
         {
             case 'd': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
             case 'D': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
