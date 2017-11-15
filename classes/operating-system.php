@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Operating_System{
+class Operating_System {
     protected static $operating_systems = array(
         array(
             'name' => 'Windows',

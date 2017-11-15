@@ -29,12 +29,10 @@ function spider($to_display=FALSE)
 
     phplibrary\Format::pre($data, $to_display);
     
-    $spider = array(
+    return array(
         'status' => $geo_plugin->is_active_service(),
         'data'   => $data,
     );
-    
-    return $spider;
 }
 
 /**
@@ -48,7 +46,7 @@ function operate($params=array())
 {
     // -------------------------------------------------------------------------
     
-    if(isset($params['triggers']))
+    if (isset($params['triggers']))
     {
         $to_redirect = $params['triggers']['redirect'];;
         $to_exit     = $params['triggers']['exit'];
@@ -59,7 +57,7 @@ function operate($params=array())
         $to_exit     = FALSE;
     }
     
-    if(isset($params['settings']))
+    if (isset($params['settings']))
     {
         $to_redirect_location = $params['settings']['to_redirect_location'];
         $timezone             = $params['settings']['timezone'];;
@@ -70,7 +68,7 @@ function operate($params=array())
         $timezone             = 'Europe/Belgrade';
     }
     
-    if(isset($params['database']))
+    if (isset($params['database']))
     {
         $database_connection = $params['database']['connection'];
         $database_engine     = $params['database']['engine'];
@@ -87,7 +85,7 @@ function operate($params=array())
         $database_connection = FALSE;
     }
     
-    if(isset($params['mail']))
+    if (isset($params['mail']))
     {
         $mail_to_send = $params['mail']['to_send'];
         $mail_to      = $params['mail']['to'];
@@ -108,13 +106,13 @@ function operate($params=array())
     date_default_timezone_set($timezone);
     
     // Database connection
-    if($database_connection)
+    if ($database_connection)
     {
         $counter = 0;
         $import_values = "";
-        foreach($table_values as $value)
+        foreach ($table_values as $value)
         {
-            if(empty($counter))
+            if (empty($counter))
             {
                 $prefix = '';
             }
@@ -128,7 +126,7 @@ function operate($params=array())
             $counter++;
         }
         
-        switch($database_engine)
+        switch ($database_engine)
         {
             case 'mysql':
                 {
@@ -150,19 +148,19 @@ function operate($params=array())
     }
 
     // Send mail if trigger is set
-    if($mail_to_send)
+    if ($mail_to_send)
     {
 	    mail($mail_to, $mail_subject, $mail_message, $mail_headers);
     }
     
     // Redirect if trigger is set
-    if($to_redirect)
+    if ($to_redirect)
     {
         header("Location: $to_redirect_location");
     }
 
     // Exit if trigger is set
-    if($to_exit)
+    if ($to_exit)
     {
         exit();
     }
@@ -177,7 +175,7 @@ function operate($params=array())
 */
 $spider = spider(TRUE);
 
-if($spider['status'])
+if ($spider['status'])
 {
     operate(array(
         'triggers' => array(

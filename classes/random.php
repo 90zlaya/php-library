@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Random{
+class Random {
     protected static $numbers      = '0123456789';
     protected static $alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     protected static $consonant    = array("b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","w","x","y","z");
@@ -28,7 +28,7 @@ class Random{
     */
     public static function generate($length=4, $type='INT')
     {
-        switch($type)
+        switch ($type)
         {
             case 'INT':
                 {
@@ -40,8 +40,8 @@ class Random{
                         $random_integer .= $c[rand()%strlen($c)];
                     }
                     
-                    $random_generated = $random_integer;
-                } break;
+                    return $random_integer;
+                }
             case 'STRING':
                 {
                     $c = self::$alphanumeric;
@@ -52,8 +52,8 @@ class Random{
                         $random_string .= $c[rand()%strlen($c)];
                     }
                     
-                    $random_generated =  $random_string;
-                } break;
+                    return $random_string;
+                }
             case 'STRING_ADVANCED':
                 {
                     $conso = self::$consonant;
@@ -75,11 +75,9 @@ class Random{
                         }
                     }
                     
-                    $random_generated = $readable_random_string;
-                } break;
+                    return $readable_random_string;
+                }
         }
-        
-        return $random_generated;
     }
     
     // -------------------------------------------------------------------------
@@ -96,30 +94,25 @@ class Random{
     {
         $list_size = sizeof($list);
         
-        if(($dose === 'DAY' && $list_size < 7) || ($dose === 'MONTH' && $list_size < 31))
-        {
-            $dose = '';
-        }
+        ($dose === 'DAY' && $list_size < 7) || ($dose === 'MONTH' && $list_size < 31) ? $dose = '' : NULL;
         
-        switch($dose)
+        switch ($dose)
         {
             case 'DAY':
-            {
-                $index = date('N') - 1;
-            } break;
+                {
+                    $index = date('N') - 1;
+                } break;
             case 'MONTH':
-            {
-                $index = date('j') - 1;
-            } break;
+                {
+                    $index = date('j') - 1;
+                } break;
             default:
-            {
-                $index = rand(0, $list_size - 1);
-            }
+                {
+                    $index = rand(0, $list_size - 1);
+                }
         }
         
-        $element = $list[$index];
-        
-        return $element;
+        return $list[$index];
     }
     
     // -------------------------------------------------------------------------

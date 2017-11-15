@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Format{
+class Format {
     protected static $utf_8         = 'utf-8';
     protected static $windows_1250  = 'windows-1250';
     protected static $ip            = array(
@@ -48,7 +48,7 @@ class Format{
     * @param Bool $to_round
     * @param int $round_precision
     * 
-    * @return String $megabytes
+    * @return Array
     */
     public static function bytes($bytes, $to_round=TRUE, $round_precision=2)
     {
@@ -57,17 +57,12 @@ class Format{
         $pow   = min($pow, count(self::$units) - 1);
         $bytes = $bytes / pow(1024, $pow);
         
-        if($to_round)
-        {
-            $bytes = round($bytes, $round_precision);
-        }
+        $to_round ? $bytes = round($bytes, $round_precision) : NULL;
         
-        $data = array(
+        return array(
             'value' => $bytes,
             'sign'  => $bytes . ' ' . self::$units[$pow],
         );
-        
-        return $data;
     }
     
     // -------------------------------------------------------------------------
@@ -77,16 +72,14 @@ class Format{
     * 
     * @param String $query
     * 
-    * @return String $formated_query
+    * @return String
     */
     public static function query($query)
     {
         $query = str_ireplace('<', '&lt;', $query);
         $query = str_ireplace('>', '&gt;', $query);
         
-        $formated_query = '<pre><code>' . $query . '</code></pre>';
-        
-        return $formated_query;
+        return '<pre><code>' . $query . '</code></pre>';
     }
     
     // -------------------------------------------------------------------------
@@ -101,44 +94,33 @@ class Format{
     */
     public static function telephone($telephone='', $telephone_backup='')
     {
-        if(empty($telephone))
+        if (empty($telephone))
         {
             $telephone = $telephone_backup;
         }
         
-        if(empty($telephone))
-        {
-            return FALSE;
-        }
-        else
-        {
-            $exploded_telephone = explode(' ', $telephone);
+        $exploded_telephone = explode(' ', $telephone);
             
-            if(empty($exploded_telephone))
+        if (!empty($exploded_telephone))
+        {
+            $telephone_print = '';
+            
+            foreach ($exploded_telephone as $row)
             {
-                return FALSE;
-            }
-            else
-            {
-                $telephone_print = '';
-                
-                foreach($exploded_telephone as $row)
-                {
-                    $telephone = trim($row);
-                    $telephone = preg_replace('/[^0-9,.]/', '', $telephone);
-                    $telephone_print .= $telephone; 
-                }        
+                $telephone = trim($row);
+                $telephone = preg_replace('/[^0-9,.]/', '', $telephone);
+                $telephone_print .= $telephone; 
+            }        
 
-                $first  = substr($telephone_print, 0, 3);
-                $second = substr($telephone_print, 3, 2);
-                $third  = substr($telephone_print, 5, 2);
-                $fourth = substr($telephone_print, 7, 5);
-            
-                $result = $first . '/' . $second . '-' . $third . '-' . $fourth;
-    
-                return $result;
-            }
+            $first  = substr($telephone_print, 0, 3);
+            $second = substr($telephone_print, 3, 2);
+            $third  = substr($telephone_print, 5, 2);
+            $fourth = substr($telephone_print, 7, 5);
+        
+            return $first . '/' . $second . '-' . $third . '-' . $fourth;
         }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -152,13 +134,13 @@ class Format{
     */
     public static function website($location)
     {
-        if(preg_match(self::$website['regex'], $location))
+        if (preg_match(self::$website['regex'], $location))
         {
-            if(strpos($location, self::$website['protocol']['safe']) !== FALSE || strpos($location, self::$website['protocol']['unsafe']) !== FALSE)
+            if (strpos($location, self::$website['protocol']['safe']) !== FALSE || strpos($location, self::$website['protocol']['unsafe']) !== FALSE)
             {
                 $location_final = $location;
             }
-            else if(strpos($location, self::$website['web']) !== FALSE)
+            else if (strpos($location, self::$website['web']) !== FALSE)
             {
                 $prefix = self::$website['protocol']['unsafe'];
                 $location_final = $prefix . $location;
@@ -169,17 +151,13 @@ class Format{
                 $location_final = $prefix . $location;
             }
                          
-            $data = array(
+            return array(
                 'name'      => $location_final,
                 'anchor'    => '<a href="' . $location_final . '" target="_blank">' . $location . '</a>',
             );
-            
-            return $data;
         }
-        else
-        {
-            return FALSE;
-        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -193,7 +171,7 @@ class Format{
     */
     public static function ip($ip)
     {
-        if(in_array($ip, self::$ip['localhost']['addresses']))
+        if (in_array($ip, self::$ip['localhost']['addresses']))
         {
             $converted = self::$ip['localhost']['name'];
         }
@@ -232,16 +210,16 @@ class Format{
     */
     public static function number($number, $with_decimal=TRUE, $value=1000000)
     {
-        if(empty($number))
+        if (empty($number))
         {
             $converted = '';
         }
         else
         {
-            if($with_decimal)
+            if ($with_decimal)
             {
                 $converted = number_format($number/$value, 1, '.', '');
-                if($converted < 1)
+                if ($converted < 1)
                 {
                     $converted = substr($converted, 1, 2);
                 }
@@ -267,7 +245,7 @@ class Format{
     */
     public static function pre($data, $to_print=TRUE)
     {
-        if($to_print)
+        if ($to_print)
         {
             print_r('<pre>');
             print_r($data);
@@ -319,7 +297,7 @@ class Format{
         $string = strip_tags($string);
         $string_length = strlen($string);
         
-        if($string_length > $length)
+        if ($string_length > $length)
         {
             $corrected = mb_substr($string, $start, $length) . '...';
         }

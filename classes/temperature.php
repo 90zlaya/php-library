@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Temperature{
+class Temperature {
     protected static $absolute_zero = 273.15;
     protected static $signs         = array(
         'celsius'    => '&degC',

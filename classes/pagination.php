@@ -11,7 +11,7 @@
 */
 namespace phplibrary;
 
-class Pagination{
+class Pagination {
     public static $steps = 9;
 
     // -------------------------------------------------------------------------

@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Password{
+class Password {
     protected static $size_minimum = 6;
     protected static $size_optimum = 9;
     protected static $letters      = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -28,19 +28,17 @@ class Password{
     */
     public static function new($size_optimum=0, $letters='')
     {
-        if(empty($size_optimum))
+        if (empty($size_optimum))
         {
             $size_optimum = self::$size_optimum;
         }
         
-        if(empty($letters))
+        if (empty($letters))
         {
             $letters = self::$letters;
         }
             
-        $new_password = substr(str_shuffle($letters), 0, $size_optimum);
-            
-        return $new_password;
+        return substr(str_shuffle($letters), 0, $size_optimum);
     }
     
     // -------------------------------------------------------------------------
@@ -55,26 +53,26 @@ class Password{
     */
     public static function new_readable($size_optimum=0, $words='')
     {
-        if(empty($size_optimum))
+        if (empty($size_optimum))
         {
             $size_optimum = self::$size_optimum;
         }
         
-        if(empty($words))
+        if (empty($words))
         {
             $words = self::$words;
         }
         
         $words = explode(',', $words);
         $new_password = '';
-        while(strlen($new_password) < $size_optimum)
+        while (strlen($new_password) < $size_optimum)
         {
           $r = mt_rand(0, count($words)-1);
           $new_password .= $words[$r];
         }
         
         $number = mt_rand(1000, 9999);
-        if($size_optimum > 2)
+        if ($size_optimum > 2)
         {
             $new_password = substr($new_password, 0, $size_optimum-strlen($number)) . $number;
         }
@@ -95,50 +93,31 @@ class Password{
     * @param Bool $return_boolean
     * @param int $minimum_strength_percent
     * 
-    * @return Bool $result
+    * @return mixed $result
     */
     public static function strength($string, $return_boolean=TRUE, $minimum_strength_percent='60')
     {
         $h = 0;
         $size = strlen($string);
         
-        if($size >= self::$size_minimum && ctype_alnum($string))
+        if ($size >= self::$size_minimum && ctype_alnum($string))
         {
-            foreach(count_chars($string, 1) as $v)
+            foreach (count_chars($string, 1) as $v)
             {
                 $p = $v / $size;
                 $h -= $p * log($p) / log(2);
             }
             
             $strength = ($h / 4) * 100;
-            
-            if($strength > 100)
-            {
-                $strength = 100;
-            }
+            $strength > 100 ? $strength = 100 : NULL;
         }
         else
         {
             $strength = 0;    
         }
         
-        if($strength > $minimum_strength_percent)
-        {
-            $flagStrength = true;
-        }
-        else
-        {
-            $flagStrength = false;
-        }   
-        
-        if($return_boolean)
-        {
-            $result = $flagStrength;
-        }
-        else
-        {
-            $result = $strength;
-        }
+        $strength > $minimum_strength_percent ? $flagStrength = TRUE : $flagStrength = FALSE;
+        $return_boolean ? $result = $flagStrength : $result = $strength;
     
         return $result;
     }    

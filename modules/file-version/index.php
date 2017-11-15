@@ -24,17 +24,16 @@ $log_files    = 'files';
 
 // -----------------------------------------------------------------------------
 
-$params = array(
+$listing = phplibrary\Directory_Lister::listing(array(
     'directory'  => 'D:/Zlatan/Browser/phpmailer/',
     'method'     => 'crawl',
-);
-$listing = phplibrary\Directory_Lister::listing($params);
+));
 
 // -----------------------------------------------------------------------------
 
 $data = phplibrary\File::read_from_file($log_files);
 
-if(empty($data))
+if (empty($data))
 {
     $is_new = TRUE;
     
@@ -54,12 +53,12 @@ $data_version = substr($data, 11);
 // -----------------------------------------------------------------------------
 
 $write_to_file = '';
-foreach($listing['listing'] as $item)
+foreach ($listing['listing'] as $item)
 {
     $path = $item['path'];
     $date = $item['date'];
     
-    if($date > $data_date && $data_date !== $current_date)
+    if ($date > $data_date && $data_date !== $current_date)
     {
         $write_to_file .= $path . PHP_EOL;
     }
@@ -67,9 +66,9 @@ foreach($listing['listing'] as $item)
 
 // -----------------------------------------------------------------------------
 
-if(!empty($write_to_file))
+if (!empty($write_to_file))
 {
-    if($is_new)
+    if ($is_new)
     {
         $latest_version = $new_version;
     }

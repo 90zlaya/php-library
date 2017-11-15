@@ -15,7 +15,7 @@ require 'third-party/geoplugin.class/geoplugin.class.php';
 
 use geoPlugin as geoPlugin;
 
-class Geo_Plugin extends geoPlugin{
+class Geo_Plugin extends geoPlugin {
     protected $data = array();
     
     // -------------------------------------------------------------------------
@@ -63,14 +63,12 @@ class Geo_Plugin extends geoPlugin{
     */
     public function is_active_service()
     {
-        if(empty($this->data['service']['ip']))
-        {
-            return FALSE;
-        }
-        else
+        if (!empty($this->data['service']['ip']))
         {
             return TRUE;
         }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------

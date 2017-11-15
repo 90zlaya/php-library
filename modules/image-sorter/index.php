@@ -65,13 +65,13 @@ phplibrary\Format::pre($listing, FALSE);
 /**
 * Create directories
 */
-for($i=0; $i<$number_of_directories; $i++)
+for ($i=0; $i<$number_of_directories; $i++)
 {
     $i_length = strlen($i);
     
-    if($i_length < 4)
+    if ($i_length < 4)
     {
-        switch($i_length)
+        switch ($i_length)
         {
             case 1:
                 {
@@ -92,11 +92,11 @@ for($i=0; $i<$number_of_directories; $i++)
     
     $new_folder = $where_to_make_dir . $folder;
     
-    if(!file_exists($new_folder))
+    if (!file_exists($new_folder))
     {
         $is_created = @mkdir($new_folder);
         
-        if($is_created)
+        if ($is_created)
         {
             $image_sorter['folders']['number']['created']++;
             array_push($image_sorter['folders']['report']['created'], $new_folder);
@@ -114,7 +114,7 @@ for($i=0; $i<$number_of_directories; $i++)
 /**
 * Move files to created directories
 */
-foreach($listing['listing'] as $item)
+foreach ($listing['listing'] as $item)
 {
     $file = $item['file'];
     $file_prefix = substr($file, 0, 3);
@@ -124,7 +124,7 @@ foreach($listing['listing'] as $item)
     
     $is_copied = @copy($location_from, $location_to);
     
-    if($is_copied)
+    if ($is_copied)
     {
         $image_sorter['files']['number']['copied']++;
         array_push($image_sorter['files']['report']['copied'], $file);

@@ -10,7 +10,7 @@
 */
 namespace phplibrary;
 
-class Math{
+class Math {
     private static $bool = TRUE;
     
     // -------------------------------------------------------------------------
@@ -25,7 +25,7 @@ class Math{
     */
     public function percentage($smaller_number, $larger_number)
     {
-        if(empty($smaller_number) || empty($larger_number))
+        if (empty($smaller_number) || empty($larger_number))
         {
             $percentage = 0;    
         }
@@ -34,12 +34,10 @@ class Math{
             $percentage = (100 * $smaller_number) / $larger_number;
         }
         
-        $data = array(
+        return array(
             'value' => $percentage,
             'sign'  => $percentage . '%',
         );
-        
-        return $data;
     }
     
     // -------------------------------------------------------------------------
@@ -54,20 +52,8 @@ class Math{
     */
     public static function even_or_odd($value_1, $value_2, $bool=FALSE)
     {
-        if(!$bool)
-        {
-            $bool = self::$bool;
-        }
-        
-        if($bool)
-        {
-            $even_or_odd = $value_1;
-        }
-        else
-        {
-            $even_or_odd = $value_2;
-        }
-        
+        !$bool ? $bool = self::$bool : NULL;
+        $bool ? $even_or_odd = $value_1 : $even_or_odd = $value_2;
         self::$bool = !self::$bool;
         
         return $even_or_odd;

@@ -13,7 +13,7 @@ include_once '../autoload.php';
 $geo_plugin = new phplibrary\Geo_Plugin();
 $geo_plugin->locate();
 
-if($geo_plugin->is_active_service())
+if ($geo_plugin->is_active_service())
 {
     echo 'Active service, all data returned.<br/>';
 }
