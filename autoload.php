@@ -22,8 +22,6 @@ $php_library_folder_classes        = 'classes';
 $php_library_folder_demonstrations = 'demonstrations';
 $php_library_folder_modules        = 'modules';
 
-$php_library_extension             = '.php';
-
 $php_library_list_of_classes       = array(
     array(
         'name' => 'browser',
@@ -88,26 +86,29 @@ $php_library_list_of_modules       = array(
         'name' => 'spider',
     ),
 );
-
 $hyperlinks                        = array(
     'php_library_on_github'     => 'https://github.com/90zlaya/php-library',
     'php_library_on_packagist'  => 'https://packagist.org/packages/90zlaya/php-library',
 );
 
-$navigation_for_demonstration = '';
-foreach($php_library_list_of_classes as $item)
+$navigation_for_demonstration = $navigation_for_modules = '';;
+
+foreach ($php_library_list_of_classes as $item)
 {
-    $name = $item['name'];
+    require_once $php_library_folder_classes . DIRECTORY_SEPARATOR . $item['name'] . '.php';
     
-    require_once $php_library_folder_classes . '/' . $name . $php_library_extension;
-    
-    $navigation_for_demonstration .= '<li><a href="' . $php_library_folder_demonstrations . '/' . $name . $php_library_extension . '">' . $name . '</a></li>' . PHP_EOL;
+    $navigation_for_demonstration .= '<li>';
+    $navigation_for_demonstration .= '<a href="' . $php_library_folder_demonstrations . DIRECTORY_SEPARATOR . $item['name'] . '.php' . '">'; 
+    $navigation_for_demonstration .= $item['name'];
+    $navigation_for_demonstration .= '</a>';
+    $navigation_for_demonstration .= '</li>' . PHP_EOL;
 }
 
-$navigation_for_modules = '';
-foreach($php_library_list_of_modules as $item)
+foreach ($php_library_list_of_modules as $item)
 {
-    $name = $item['name'];
-    
-    $navigation_for_modules .= '<li><a href="' . $php_library_folder_modules . '/' . $name . '">' . $name . '</a></li>' . PHP_EOL;
+    $navigation_for_modules .= '<li>';
+    $navigation_for_modules .= '<a href="' . $php_library_folder_modules . DIRECTORY_SEPARATOR . $item['name'] . '">';
+    $navigation_for_modules .= $item['name'];
+    $navigation_for_modules .= '</a>';
+    $navigation_for_modules .= '</li>' . PHP_EOL;
 }
