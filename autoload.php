@@ -24,9 +24,6 @@ $php_library_folder_modules        = 'modules';
 
 $php_library_list_of_classes       = array(
     array(
-        'name' => 'browser',
-    ),
-    array(
         'name' => 'date-time-format',
     ),
     array(
@@ -64,6 +61,9 @@ $php_library_list_of_classes       = array(
     ),
     array(
         'name' => 'user',
+    ),
+    array(
+        'name' => 'user-agent',
     ),
     array(
         'name' => 'validation',

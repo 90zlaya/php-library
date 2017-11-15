@@ -1,7 +1,7 @@
 <?php
 /*
 | -------------------------------------------------------------------
-| BROWSER
+| USER AGENT
 | -------------------------------------------------------------------
 |
 | Working with browsers and user agent data
@@ -10,24 +10,24 @@
 */
 namespace phplibrary;
 
-class Browser {
+class User_Agent {
 	protected static $browsers = array(
         array(
             'name'      => 'Firefox',
             'signature' => array('Firefox'),
         ),
         array(
-            'name'      => 'Chrome',
-            'signature' => array('Chrome'),
-        ), 
-        array(
             'name'      => 'Safari',
             'signature' => array('Safari'),
-        ), 
+        ),
+        array(
+            'name'      => 'Chrome',
+            'signature' => array('Chrome'),
+        ),
         array(
             'name'      => 'Opera',
             'signature' => array('OPR'),
-        ), 
+        ),
         array(
             'name'      => 'Edge',
             'signature' => array('Edge'),
@@ -35,6 +35,20 @@ class Browser {
         array(
             'name'      => 'Explorer',
             'signature' => array('MSIE', 'Trident'),
+        ),
+    );
+    protected static $devices  = array(
+        array(
+            'name'      => 'Windows',
+            'signature' => array('Windows'),
+        ),
+        array(
+            'name'      => 'Android',
+            'signature' => array('Android'),
+        ),
+        array(
+            'name'      => 'iPhone',
+            'signature' => array('iPhone'),
         ),
     );
     protected static $mobile_user_agent_one = '/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i';
@@ -60,22 +74,20 @@ class Browser {
     * @param String $user_agent
     * @param String $name_when_no_match
     * 
-    * @return String $addOn
+    * @return String $info
     */
-	public static function detect($user_agent, $name_when_no_match='')
+	public static function detect_browser($user_agent, $name_when_no_match='')
 	{
 		$info = '';
         
         foreach (self::$browsers as $browser)
         {
-            $name       = $browser['name'];
-            $signature  = $browser['signature'];
-            
-            foreach ($signature as $item)
+            foreach ($browser['signature'] as $item)
             {
                 if (strpos($user_agent, $item))
                 {
-                    $info = $name;
+                    $info = $browser['name'];
+                    
                     break;
                 }
             }
@@ -89,6 +101,41 @@ class Browser {
         return $info;
 	}
 	
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Detects device according to user agent
+    * 
+    * @param String $user_agent
+    * @param String $name_when_no_match
+    * 
+    * @return String $info
+    */
+    public static function detect_device($user_agent, $name_when_no_match='')
+    {
+        $info = '';
+        
+        foreach (self::$devices as $device)
+        {
+            foreach ($device['signature'] as $item)
+            {
+                if (strpos($user_agent, $item))
+                {
+                    $info = $device['name'];
+                    
+                    break;
+                }
+            }
+        }
+        
+        if (empty($info))
+        {
+            $info = $name_when_no_match;
+        }
+        
+        return $info;
+    }
+    
     // -------------------------------------------------------------------------
     
     /**

@@ -27,10 +27,6 @@ phplibrary\Class_Name
 List of classes
 ----------------
 
-* Browser
-
-Working with browsers and user agent data.
-
 * Date_Time_Format
 
 Date and Time formating, validating, comparing, converting...
@@ -82,6 +78,10 @@ Working with temperature conversions.
 * User
 
 Works with user related data.
+
+* User_Agent
+
+Working with browsers and user agent data.
 
 * Validation
 
@@ -136,6 +136,7 @@ Since php-library v1.1.0
 
 Modification:
 
+* Browser: class is now reformated to User_Agent
 * Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created. Variables reformated to $types array.
 * Email: documentation of methods updated.
 * Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper, even_or_odd class removed because duplicate exists in Math class.
