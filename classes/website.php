@@ -169,8 +169,6 @@ class Website {
         isset($params['touch_icon']) ? $touch_icon = $params['touch_icon'] : $touch_icon = $this->images['icon'];
         isset($params['google_site_verification']) ? $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>' . PHP_EOL : NULL;
         
-        $touch_icon_size = $this->image_size($touch_icon);
-                
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
         $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
         $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">' . PHP_EOL;
@@ -178,7 +176,7 @@ class Website {
         $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
         $meta .= '<meta name="author" content="' . $this->creator['name'] . '">' . PHP_EOL;
 		$meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
-        $meta .= '<link rel="apple-touch-icon" sizes="' . $touch_icon_size['width_height'] . '" href="' . $touch_icon . '"/>' . PHP_EOL;
+        $meta .= '<link rel="apple-touch-icon" sizes="' . $this->image_size($touch_icon)['width_height'] . '" href="' . $touch_icon . '"/>' . PHP_EOL;
         $meta .= '<link rel="shortcut icon" href="' . $shortcut_icon . '" type="image/png">' . PHP_EOL;
         
         $meta .= '<title>';
@@ -237,6 +235,7 @@ class Website {
                             $return .= $head['path'];
                             $return .= '</script>' . PHP_EOL;
                         } break;
+                    default: NULL;
                 }    
             }
         }
@@ -293,6 +292,7 @@ class Website {
                             $return .= $bottom['path'];
                             $return .= '</script>' . PHP_EOL;
                         } break;
+                    default: NULL;
                 }   
             }
         }
@@ -313,7 +313,7 @@ class Website {
     */
     public function images($image)
     {
-        if (!empty($image))
+        if ( ! empty($image))
         {
             return $this->images[$image];
         }
@@ -332,11 +332,11 @@ class Website {
     */
     public function image_size($image)
     {
-        if (!empty($image))
+        $image_size = getimagesize($image);
+        
+        if ( ! empty($image_size))
         {
-            $image_size = getimagesize($image);
-            
-            $data = array(
+            return array(
                 'width'         => $image_size[0],
                 'height'        => $image_size[1],
                 'width_height'  => $image_size[0] . 'x' . $image_size[1],
@@ -345,8 +345,6 @@ class Website {
                 'bits'          => $image_size['bits'],
                 'mime'          => $image_size['mime'],
             );
-            
-            return $data;
         }
         
         return FALSE;
@@ -426,7 +424,7 @@ class Website {
     {
         $is_url ? $url = $page : $url = $this->host . $page;
         
-        if (!headers_sent())
+        if ( ! headers_sent())
         {
             header('HTTP/1.1 301 Moved Permanently');
             header('Location: ' . $url);
