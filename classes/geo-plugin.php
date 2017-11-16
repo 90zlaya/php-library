@@ -29,6 +29,8 @@ class Geo_Plugin extends geoPlugin {
         parent::__construct();
         
         $this->data['base'] = array(
+            'location'              => $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
+            'referer'               => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL,
             'host'                  => $_SERVER['HTTP_HOST'],
             'path'                  => dirname($_SERVER['PHP_SELF']),
             'page'                  => basename($_SERVER['PHP_SELF']),
@@ -63,7 +65,7 @@ class Geo_Plugin extends geoPlugin {
     */
     public function is_active_service()
     {
-        if (!empty($this->data['service']['ip']))
+        if ( ! empty($this->data['service']['ip']))
         {
             return TRUE;
         }

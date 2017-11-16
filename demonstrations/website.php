@@ -93,7 +93,7 @@ $website->add_to_images(
         
         if (isset($website->server['referer']))
         {
-            echo 'You are appointed to this page from: ' . $website->server['referer'] . '<br/>';
+            echo 'You were appointed to this page from: ' . $website->server['referer'] . '<br/>';
         }
         
         // Printing bottom
