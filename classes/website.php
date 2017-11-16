@@ -15,10 +15,11 @@ namespace phplibrary;
 
 class Website {
     public $server      = array(
-        'host' => '',
-        'uri'  => '',
-        'path' => '',
-        'page' => '',
+        'host'    => '',
+        'uri'     => '',
+        'path'    => '',
+        'page'    => '',
+        'referer' => '',
     );
     public $name;
     public $host;
@@ -58,10 +59,11 @@ class Website {
     */
     public function __construct($params)
     {
-        $this->server['host'] = $_SERVER['HTTP_HOST'];
-        $this->server['uri']  = $_SERVER['REQUEST_URI'];
-        $this->server['path'] = dirname($_SERVER['PHP_SELF']);
-        $this->server['page'] = basename($_SERVER['PHP_SELF']);
+        $this->server['host']    = $_SERVER['HTTP_HOST'];
+        $this->server['uri']     = $_SERVER['REQUEST_URI'];
+        $this->server['path']    = dirname($_SERVER['PHP_SELF']);
+        $this->server['page']    = basename($_SERVER['PHP_SELF']);
+        $this->server['referer'] = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL;
         
         $this->name = $params['name'];
         $this->host = $params['host'];

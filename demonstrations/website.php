@@ -91,6 +91,11 @@ $website->add_to_images(
         // Redirection
         //$website->redirect_to_page('https://www.google.com/', TRUE);
         
+        if (isset($website->server['referer']))
+        {
+            echo 'You are appointed to this page from: ' . $website->server['referer'] . '<br/>';
+        }
+        
         // Printing bottom
         echo $website->bottom();
         
