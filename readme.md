@@ -81,7 +81,7 @@ Works with user related data.
 
 * User_Agent
 
-Working with browsers and user agent data.
+Working with user agent related data.
 
 * Validation
 

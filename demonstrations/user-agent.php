@@ -9,7 +9,10 @@
 | -------------------------------------------------------------------
 */
 include_once '../autoload.php';
-    
+
+phplibrary\Format::pre(phplibrary\User_Agent::list_browsers(), FALSE);
+phplibrary\Format::pre(phplibrary\User_Agent::list_devices(), FALSE);
+
 $user_agents = array(
     'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0_3 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A432 Safari/604.1',
     'Mozilla/5.0 (Linux; Android 7.0; SAMSUNG SM-J330F Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/6.2 Chrome/56.0.2924.87 Mobile Safari/537.36',

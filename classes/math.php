@@ -21,7 +21,7 @@ class Math {
     * @param int $smaller_number
     * @param int $larger_number
     * 
-    * @return Array $data
+    * @return Array
     */
     public function percentage($smaller_number, $larger_number)
     {
@@ -48,15 +48,15 @@ class Math {
     * @param String $value_1
     * @param String $value_2
     * 
-    * @return String $even_or_odd
+    * @return String
     */
     public static function even_or_odd($value_1, $value_2, $bool=FALSE)
     {
-        !$bool ? $bool = self::$bool : NULL;
-        $bool ? $even_or_odd = $value_1 : $even_or_odd = $value_2;
-        self::$bool = !self::$bool;
+        $bool ? NULL : $bool = self::$bool;
         
-        return $even_or_odd;
+        self::$bool = ! self::$bool;
+        
+        return $bool ? $value_1 : $value_2;
     }
     
     // -------------------------------------------------------------------------

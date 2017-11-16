@@ -4,7 +4,7 @@
 | USER AGENT
 | -------------------------------------------------------------------
 |
-| Working with browsers and user agent data
+| Working with user agent related data
 |
 | -------------------------------------------------------------------
 */
@@ -17,12 +17,12 @@ class User_Agent {
             'signature' => array('Firefox'),
         ),
         array(
-            'name'      => 'Safari',
-            'signature' => array('Safari'),
-        ),
-        array(
             'name'      => 'Chrome',
             'signature' => array('Chrome'),
+        ),
+        array(
+            'name'      => 'Safari',
+            'signature' => array('Safari'),
         ),
         array(
             'name'      => 'Opera',
@@ -57,15 +57,27 @@ class User_Agent {
     // -------------------------------------------------------------------------
     
     /**
-    * Gets browsers list
+    * List all browsers
     * 
     * @return Array
     */
-	public static function get_list()
-	{
-		return self::$browsers;
-	}
-	
+    public static function list_browsers()
+    {
+        return self::$browsers;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * List all devices
+    * 
+    * @return Array
+    */
+    public static function list_devices()
+    {
+        return self::$devices;
+    }
+    
     // -------------------------------------------------------------------------
     
     /**
@@ -74,31 +86,22 @@ class User_Agent {
     * @param String $user_agent
     * @param String $name_when_no_match
     * 
-    * @return String $info
+    * @return String
     */
 	public static function detect_browser($user_agent, $name_when_no_match='')
 	{
-		$info = '';
-        
-        foreach (self::$browsers as $browser)
+		foreach (self::$browsers as $browser)
         {
-            foreach ($browser['signature'] as $item)
+            foreach ($browser['signature'] as $signature)
             {
-                if (strpos($user_agent, $item))
+                if (strpos($user_agent, $signature))
                 {
-                    $info = $browser['name'];
-                    
-                    break;
+                    return $browser['name'];
                 }
             }
         }
         
-        if (empty($info))
-        {
-            $info = $name_when_no_match;
-        }
-	    
-        return $info;
+        return $name_when_no_match;
 	}
 	
     // -------------------------------------------------------------------------
@@ -109,31 +112,22 @@ class User_Agent {
     * @param String $user_agent
     * @param String $name_when_no_match
     * 
-    * @return String $info
+    * @return String
     */
     public static function detect_device($user_agent, $name_when_no_match='')
     {
-        $info = '';
-        
         foreach (self::$devices as $device)
         {
-            foreach ($device['signature'] as $item)
+            foreach ($device['signature'] as $signature)
             {
-                if (strpos($user_agent, $item))
+                if (strpos($user_agent, $signature))
                 {
-                    $info = $device['name'];
-                    
-                    break;
+                    return $device['name'];
                 }
             }
         }
         
-        if (empty($info))
-        {
-            $info = $name_when_no_match;
-        }
-        
-        return $info;
+        return $name_when_no_match;
     }
     
     // -------------------------------------------------------------------------
