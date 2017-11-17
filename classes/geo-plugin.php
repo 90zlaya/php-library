@@ -11,7 +11,7 @@
 */
 namespace phplibrary;
 
-require 'third-party/geoplugin.class/geoplugin.class.php';
+require_once 'third-party/geoplugin.class/geoplugin.class.php';
 
 use geoPlugin as geoPlugin;
 
