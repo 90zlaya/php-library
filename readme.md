@@ -136,6 +136,7 @@ Since php-library v1.1.1
 
 Modification:
 
+* Directory_Lister: file size added to file method.
 * Geo_Plugin: third-party class requirement changed from require to require_once.
 
 Since php-library v1.1.0

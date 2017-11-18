@@ -231,6 +231,7 @@ class Directory_Lister {
                         $time      = date(self::$time_format, @filemtime($location));
                         $open      = '<a href="' . $location . '" target="_blank">' . $file . '</a>';
                         $title     = basename($file, self::$dot . $extension);
+                        $size      = filesize($location);
                         
                         $data = array(
                             'open'      => $open,
@@ -240,6 +241,7 @@ class Directory_Lister {
                             'file'      => $file,
                             'title'     => $title,
                             'extension' => $extension,
+                            'size'      => $size,
                             'date'      => $date,
                             'time'      => $time,
                         );
