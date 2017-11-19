@@ -23,7 +23,7 @@ class Math {
     * 
     * @return Array
     */
-    public function percentage($smaller_number, $larger_number)
+    public static function percentage($smaller_number, $larger_number)
     {
         if (empty($smaller_number) || empty($larger_number))
         {

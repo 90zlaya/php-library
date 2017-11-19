@@ -138,6 +138,7 @@ Modification:
 
 * Directory_Lister: file size added to file method.
 * Geo_Plugin: third-party class requirement changed from require to require_once.
+* Math: static keyword added to percentage method.
 
 Since php-library v1.1.0
 ----------------
