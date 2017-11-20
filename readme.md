@@ -140,6 +140,8 @@ Modification:
 * Geo_Plugin: removed parent::__construct().
 * Math: static keyword added to percentage method.
 
+* third-party class geoPlugin: removed method of same name.
+
 Since php-library v1.1.0
 ----------------
 
