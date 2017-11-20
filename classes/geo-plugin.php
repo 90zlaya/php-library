@@ -11,7 +11,7 @@
 */
 namespace phplibrary;
 
-require_once 'third-party/geoplugin.class/geoplugin.class.php';
+require 'third-party/geoplugin.class/geoplugin.class.php';
 
 use geoPlugin as geoPlugin;
 
@@ -26,8 +26,6 @@ class Geo_Plugin extends geoPlugin {
     */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->data['base'] = array(
             'location'              => $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
             'referer'               => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL,
