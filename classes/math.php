@@ -11,6 +11,8 @@
 namespace phplibrary;
 
 class Math {
+    public static $iterator = 1;
+    
     private static $bool = TRUE;
     
     // -------------------------------------------------------------------------
@@ -57,6 +59,18 @@ class Math {
         self::$bool = ! self::$bool;
         
         return $bool ? $value_1 : $value_2;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Iterates variable
+    * 
+    * @return void
+    */
+    public static function iterate()
+    {
+        self::$iterator++;
     }
     
     // -------------------------------------------------------------------------

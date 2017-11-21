@@ -104,7 +104,7 @@ class Date_Time_Format {
     {
         $format_to_database = date(self::$types['database']['format'], strtotime($date));
         
-        if (self::validate($date, self::$types['user']['placeholder']) && self::not_empty($format_to_database))
+        if (self::not_empty($format_to_database))
         {
             return $format_to_database;
         }
@@ -125,7 +125,7 @@ class Date_Time_Format {
     {
         $format_to_user = date(self::$types['user']['format'], strtotime($date));
         
-        if (self::validate($date, self::$types['database']['placeholder']) && self::not_empty($format_to_user))
+        if (self::not_empty($format_to_user))
         {
             return $format_to_user;
         }

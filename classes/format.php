@@ -310,5 +310,20 @@ class Format {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Formats price for user
+    * 
+    * @param Float $price
+    * @param int $decimal
+    * 
+    * @return Float
+    */
+    public static function price_format($price, $decimal=2)
+    {
+        return number_format($price, $decimal);
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

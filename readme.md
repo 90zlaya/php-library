@@ -131,25 +131,18 @@ composer require 90zlaya/php-library
 Changelog
 =======
 
-Since php-library v1.1.1
-----------------
-
-Modification:
-
-* Date_Time_Format: days_before method added.
-
 Since php-library v1.1.0
 ----------------
 
 Modification:
 
 * Browser: class is now reformated to User_Agent
-* Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created. Variables reformated to $types array.
+* Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created. Variables reformated to $types array. New days_before method added. Removed valdiation from format_to_* methods.
 * Directory_Lister: file size added to file method.
 * Email: documentation of methods updated.
-* Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper, even_or_odd class removed because duplicate exists in Math class.
+* Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper, even_or_odd class removed because duplicate exists in Math class. New method price_format added.
 * Geo_Plugin: huge modification of array structure and methods, location and referer added, removed parent::__construct().
-* Math: even_or_odd method modified, static keyword added to percentage method.
+* Math: even_or_odd method modified, static keyword added to percentage method. New method iterate added. 
 * User: removed ip and ua methods because they exist in Geo_Plugin class under array elements of data['base']['address'] and data['base']['agent'].
 * Website: reformated if statements, location and referer added.
 
