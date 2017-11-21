@@ -30,3 +30,5 @@ echo $database_date_format . '<br/>' . $user_date_format . '<br/>';
 
 echo phplibrary\Date_Time_Format::minutes_to_hours(61) . '<br/>';
 echo phplibrary\Date_Time_Format::hours_to_minutes('61:55') . '<br/>';
+
+echo phplibrary\Date_Time_Format::days_before(75);

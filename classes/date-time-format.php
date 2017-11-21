@@ -472,5 +472,27 @@ class Date_Time_Format {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Date before certain number of days
+    * 
+    * @param int $number_of_days
+    * @param String $format
+    * 
+    * @return mixed
+    */
+    public static function days_before($number_of_days, $format='')
+    {
+        if ( ! empty($number_of_days))
+        {
+            empty($format) ? $format = self::$types['database']['format'] : NULL;
+        
+            return date($format, strtotime(' -' . $number_of_days . ' day'));
+        }
+        
+        return FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

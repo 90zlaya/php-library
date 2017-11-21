@@ -131,6 +131,13 @@ composer require 90zlaya/php-library
 Changelog
 =======
 
+Since php-library v1.1.1
+----------------
+
+Modification:
+
+* Date_Time_Format: days_before method added.
+
 Since php-library v1.1.0
 ----------------
 
