@@ -137,7 +137,7 @@ Since php-library v1.1.0
 Modification:
 
 * Browser: class is now reformated to User_Agent
-* Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created. Variables reformated to $types array. New days_before method added. Removed valdiation from format_to_* methods.
+* Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created. Variables reformated to $types array. New days_before method added. Removed valdiation from format_to_user and format_to_database methods.
 * Directory_Lister: file size added to file method.
 * Email: documentation of methods updated.
 * Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper, even_or_odd class removed because duplicate exists in Math class. New method price_format added.
