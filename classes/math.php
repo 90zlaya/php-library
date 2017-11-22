@@ -11,7 +11,8 @@
 namespace phplibrary;
 
 class Math {
-    private static $iterator = 1;
+    public static $iterator = 1;
+    
     private static $bool = TRUE;
     
     // -------------------------------------------------------------------------
