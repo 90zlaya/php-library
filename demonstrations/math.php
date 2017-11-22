@@ -15,7 +15,5 @@ phplibrary\Format::pre($percentage);
 
 for ($i=0; $i<10; $i++)
 {
-    echo phplibrary\Math::$iterator . '. ' . phplibrary\Math::even_or_odd('first', 'second') . '<br/>';
-    
-    phplibrary\Math::iterate();
+    echo phplibrary\Math::iterate() . '. ' . phplibrary\Math::even_or_odd('first', 'second') . '<br/>';
 }
