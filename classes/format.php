@@ -321,7 +321,13 @@ class Format {
     */
     public static function price_format($price, $decimal=2)
     {
-        return number_format($price, $decimal);
+        $price_format = number_format($price, $decimal);
+        
+        $price_format = str_replace('.', '?', $price_format);
+        $price_format = str_replace(',', '.', $price_format);
+        $price_format = str_replace('?', ',', $price_format);
+        
+        return $price_format;
     }
     
     // -------------------------------------------------------------------------
