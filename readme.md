@@ -119,8 +119,15 @@ List of third-party
 
 This PHP class uses the PHP Webservice of http://www.geoplugin.com/ to geolocate IP addresses. Geographical location of the IP address (visitor) and locate currency (symbol, code and exchange rate) are returned.
 
-Composer
+Installation
 =======
+
+Manual
+----------------
+If you want the latest stable version, get the [latest release] from the releases page.
+                                                                                                                                                          
+Composer
+----------------
 
 Install stable php-library version by using standard commands or if you wish to test latest development version of php-library, just add ":dev-master" in extension.
 
@@ -173,3 +180,4 @@ Copyright © 2017 | [Zlatan Stajic] | Released under the [MIT License].
 [GitHub]: https://github.com/90zlaya/php-library
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
 [MIT License]: http://www.opensource.org/licenses/mit-license.php
+[latest release]: https://github.com/90zlaya/php-library/releases/latest
