@@ -66,10 +66,14 @@ class Math {
     /**
     * Iterates variable
     * 
+    * @param Bool $to_reset
+    * 
     * @return void
     */
-    public static function iterate()
+    public static function iterate($to_reset=FALSE)
     {
+        $to_reset ? self::$iterator = 0 : NULL;
+        
         return ++self::$iterator;
     }
     
