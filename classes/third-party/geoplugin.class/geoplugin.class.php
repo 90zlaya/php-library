@@ -49,6 +49,10 @@ class geoPlugin {
 	var $currencySymbol = null;
 	var $currencyConverter = null;
 	
+	function geoPlugin() {
+
+	}
+	
 	function locate($ip = null) {
 		
 		global $_SERVER;

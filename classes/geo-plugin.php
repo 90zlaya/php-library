@@ -11,20 +11,21 @@
 */
 namespace phplibrary;
 
-require 'third-party/geoplugin.class/geoplugin.class.php';
+require_once 'third-party/geoplugin.class/geoplugin.class.php';
 
 use geoPlugin as geoPlugin;
 
-class Geo_Plugin extends geoPlugin {
+class Geo_Plugin extends geoPlugin{
     protected $data = array();
     
-    // -------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
     
     /**
-    * Class constructor
+    * Collect all data
     * 
+	* @return void
     */
-    public function __construct()
+    protected function collect()
     {
         $this->data['base'] = array(
             'location'              => $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
@@ -37,8 +38,10 @@ class Geo_Plugin extends geoPlugin {
             'agent'                 => $_SERVER['HTTP_USER_AGENT'],
             'address'               => $_SERVER['REMOTE_ADDR'],
         );
-        $this->data['service'] = array(
-            'ip'                    => $this->ip,
+        
+		$this->data['service'] = array(
+            'location'				=> $this->host,
+			'ip'                    => $this->ip,
             'city'                  => $this->city,
             'region'                => $this->region,
             'longitude'             => $this->longitude,
@@ -53,7 +56,21 @@ class Geo_Plugin extends geoPlugin {
             'currency_code'         => $this->currencyCode,
         );
     }
-
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Returns all data
+    * 
+    * @return Array
+    */
+    public function data()
+    {
+        $this->collect();
+		
+		return $this->data;
+    }
+    
     // -------------------------------------------------------------------------
     
     /**
@@ -63,24 +80,14 @@ class Geo_Plugin extends geoPlugin {
     */
     public function is_active_service()
     {
-        if ( ! empty($this->data['service']['ip']))
+        $this->collect();
+		
+		if ( ! empty($this->data['service']['ip']))
         {
             return TRUE;
         }
         
         return FALSE;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Returns all data
-    * 
-    * @return Array $this->info
-    */
-    public function data()
-    {
-        return $this->data;
     }
     
     // -------------------------------------------------------------------------

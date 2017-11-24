@@ -148,7 +148,7 @@ Modification:
 * Directory_Lister: file size added to file method.
 * Email: documentation of methods updated.
 * Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper, even_or_odd class removed because duplicate exists in Math class. New method price_format added. Method price_format returns value in different format.
-* Geo_Plugin: huge modification of array structure and methods, location and referer added, removed parent::__construct().
+* Geo_Plugin: huge modification of array structure and methods, location and referer added, removed parent::__construct(). Fixed bug with service inactivity.
 * Math: even_or_odd method modified, static keyword added to percentage method. New method iterate added. Iterate method returns value.
 * User: removed ip and ua methods because they exist in Geo_Plugin class under array elements of data['base']['address'] and data['base']['agent'].
 * Website: reformated if statements, location and referer added.
