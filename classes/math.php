@@ -68,7 +68,7 @@ class Math {
     * 
     * @param Bool $to_reset
     * 
-    * @return void
+    * @return int
     */
     public static function iterate($to_reset=FALSE)
     {

@@ -18,4 +18,5 @@ for ($i=0; $i<10; $i++)
     echo phplibrary\Math::iterate() . '. ' . phplibrary\Math::even_or_odd('first', 'second') . '<br/>';
 }
 
-echo 'Number of items: ' . phplibrary\Math::$iterator;
+echo 'Number of items: ' . phplibrary\Math::$iterator . '<br/>';
+echo 'After reset: ' . phplibrary\Math::iterate(TRUE) . '<br/>';
