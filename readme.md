@@ -153,7 +153,7 @@ Modification:
 * User: removed ip and ua methods because they exist in Geo_Plugin class under array elements of data['base']['address'] and data['base']['agent'].
 * Website: reformated if statements, location and referer added.
 
-* third-party class geoPlugin: removed method of same name.
+* third-party class geoPlugin: removed method of same name (deprecated as a constructor in PHP 7).
 
 * Spider module now works with Geo_Plugin class instead of built-in geoPlugin and works over multiple functions and has MySql and MS SQL connections now. Updated after modifications of Geo_Plugin class.
 
