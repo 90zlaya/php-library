@@ -4,15 +4,18 @@
 | Export
 | -------------------------------------------------------------------
 |
-| Export files
-| 
-| This class requires PHP Excel and PHP Library
+| Export files using PHPOffice/PHPExcel
+| Location: https://github.com/PHPOffice/PHPExcel
 |
 | -------------------------------------------------------------------
 */
 namespace phplibrary;
 
 require_once 'third-party/vendor/autoload.php';
+
+use PHPExcel as PHPExcel;
+use PHPExcel_IOFactory as PHPExcel_IOFactory;
+use phplibrary\Math as Math;
 
 class Export {
     protected static $file_name             = 'file_export';
@@ -221,7 +224,7 @@ class Export {
         {
             foreach ($data as $item)
             {
-                $iteration          = phplibrary\Math::iterate();
+                $iteration          = Math::iterate();
                 $item_indexed       = array_values($item);
                 $item_indexed_size  = sizeof($item_indexed);
                 
@@ -256,19 +259,19 @@ class Export {
             // Print head
             foreach ($head as $item)
             {
-                 $objPHPExcel->setActiveSheetIndex(0)->setCellValue(self::$cells[phplibrary\Math::iterate()] . '1', $item);
+                 $objPHPExcel->setActiveSheetIndex(0)->setCellValue(self::$cells[Math::iterate()] . '1', $item);
             }
             
             // Number of cells
             $number_of_cells = sizeof($head);
             
             // Reset counter
-            phplibrary\Math::iterate(TRUE);
+            Math::iterate(TRUE);
             
             // Print data
             foreach ($data as $item)
             {
-                $iteration      = phplibrary\Math::iterate();
+                $iteration      = Math::iterate();
                 $item_indexed   = array_values($item);
                 
                 for ($i=1; $i<=$number_of_cells; $i++)
