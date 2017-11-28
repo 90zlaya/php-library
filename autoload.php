@@ -33,6 +33,9 @@ $php_library_list_of_classes       = array(
         'name' => 'email',
     ),
     array(
+        'name' => 'export',
+    ),
+    array(
         'name' => 'file',
     ),
     array(
