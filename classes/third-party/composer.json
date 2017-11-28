@@ -1,0 +1,5 @@
+{
+    "require": {
+        "PHPOffice/PHPExcel": "^1.8"
+    }
+}
