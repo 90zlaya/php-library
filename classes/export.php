@@ -27,6 +27,7 @@ class Export {
         'category'      => 'Test result file',
     );
     protected static $cells                 = array('', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+    protected static $allowed_types         = array('xls', 'xlsx', 'csv', 'osp');
     
     // -------------------------------------------------------------------------
     
@@ -282,6 +283,18 @@ class Export {
         }
         
         return FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Allowed types for export
+    * 
+    * @return Array
+    */
+    public static function allowed_types()
+    {
+        return self::$allowed_types;
     }
     
     // -------------------------------------------------------------------------
