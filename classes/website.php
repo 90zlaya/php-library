@@ -306,6 +306,18 @@ class Website {
     // -------------------------------------------------------------------------
     
     /**
+    * Printing creator data
+    * 
+    * @return Array
+    */
+    public function creator()
+    {
+        return $this->creator;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Printing images
     * 
     * @param String $image
