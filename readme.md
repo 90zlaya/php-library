@@ -157,7 +157,7 @@ Modification:
 * Math: even_or_odd method modified, static keyword added to percentage method. New method iterate added. Iterate method returns value.
 * User: removed ip and ua methods because they exist in Geo_Plugin class under array elements of data['base']['address'] and data['base']['agent'].
 * Web_Service: New methodes developed.
-* Website: reformated if statements, location and referer added.
+* Website: reformated if statements, location and referer added, creator email added.
 
 * third-party class geoPlugin: removed method of same name (deprecated as a constructor in PHP 7).
 

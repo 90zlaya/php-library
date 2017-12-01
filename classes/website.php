@@ -39,6 +39,7 @@ class Website {
     private $creator = array(
         'name'    => 'Zlatan Stajić',
         'website' => 'https://www.zlatanstajic.com/',
+        'email'   => 'contact@zlatanstajic.com',
     );
     private $calls   = array(
         'css' => array(
