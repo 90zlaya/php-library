@@ -7,7 +7,7 @@ Project is open-sourced under MIT licence on [GitHub]. Available over Composer a
 Organisation
 =======
 
-Autoload file is inside root directory. It contains calls to every class inside php-library. Don't forget to add "../" if you call autoloader from some of the folders. You won't need that call if you're working in root directory.
+Autoload file is inside root directory. It contains calls to every class inside php-library.
 
 ``` php
 include_once 'autoload.php';
@@ -39,7 +39,9 @@ Directory content retrieval.
 
 Email-related operations.
 
-* Export files using PHPOffice/PHPExcel. Location: https://github.com/PHPOffice/PHPExcel
+* Export files using customisation class of PHPOffice/PHPExcel. Location: https://github.com/PHPOffice/PHPExcel 
+
+Don't forget to call composer update from command line in third-party folder for latest PHPOffice/PHPExcel library. Otherwise it will throw an error after trying to interpret require_once on Composer's autoload file.
 
 Email-related operations.
 
@@ -123,6 +125,10 @@ List of third-party
 
 This PHP class uses the PHP Webservice of http://www.geoplugin.com/ to geolocate IP addresses. Geographical location of the IP address (visitor) and locate currency (symbol, code and exchange rate) are returned.
 
+* PHPOffice/PHPExcel
+
+PHPExcel is a library written in pure PHP and providing a set of classes that allow you to write to and read from different spreadsheet file formats, like Excel (BIFF) .xls, Excel 2007 (OfficeOpenXML) .xlsx, CSV, Libre/OpenOffice Calc .ods, Gnumeric, PDF, HTML, ... This project is built around Microsoft's OpenXML standard and PHP.
+
 Installation
 =======
 
@@ -133,7 +139,7 @@ If you want the latest stable version, get the [latest release] from the release
 Composer
 ----------------
 
-Install stable php-library version by using standard commands or if you wish to test latest development version of php-library, just add ":dev-master" in extension.
+Install stable php-library version by using standard commands or if you wish to test latest development version of php-library, just add dev-master in extension.
 
 ```
 composer require 90zlaya/php-library
@@ -150,7 +156,7 @@ Idea behind creation of this repository is making everyday Web Development proce
 Acknowledgements
 ----------------
 
-Copyright © 2017 | [Zlatan Stajic] | Released under the [MIT License].
+Copyright © 2017 | [Zlatan Stajic] | Released under the [MIT License]
 
 [Zlatan Stajic]: https://www.zlatanstajic.com/
 [GitHub]: https://github.com/90zlaya/php-library

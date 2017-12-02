@@ -19,7 +19,7 @@
     echo '<h2/>' . ucfirst($php_library_folder_modules) . '</h2>' . PHP_EOL;
     echo '<ol>' . $navigation_for_modules . '</ol>' . PHP_EOL;
     
-    echo '<p>Copyright &#169; 2017 | <a href="https://www.zlatanstajic.com/">Zlatan Stajić</a> | All Rights Reserved</p>' . PHP_EOL;
+    echo '<p>Copyright &#169; 2017 | <a href="https://www.zlatanstajic.com/">Zlatan Stajić</a> | Released under the <a href="http://www.opensource.org/licenses/mit-license.php" target="_target">MIT</a> License</p>' . PHP_EOL;
 ?>
 </body>
 </html>
