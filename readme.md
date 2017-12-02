@@ -139,38 +139,6 @@ Install stable php-library version by using standard commands or if you wish to 
 composer require 90zlaya/php-library
 ```
 
-Changelog
-=======
-
-Since php-library v1.1.0
-----------------
-
-Modification:
-
-* Browser: class is now reformated to User_Agent
-* Date_Time_Format: format_to_database and format_to_user now validating date and ensuring if date is not empty - new method not_empty created. Variables reformated to $types array. New days_before method added. Removed valdiation from format_to_user and format_to_database methods.
-* Directory_Lister: file size added to file method.
-* Email: documentation of methods updated.
-* Export: setting up class, allowed_types method added.
-* Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper, even_or_odd class removed because duplicate exists in Math class. New method price_format added. Method price_format returns value in different format.
-* Geo_Plugin: huge modification of array structure and methods, location and referer added, removed parent::__construct(). Fixed bug with service inactivity. Server varaiables added as part of data method.
-* Math: even_or_odd method modified, static keyword added to percentage method. New method iterate added. Iterate method returns value.
-* User: removed ip and ua methods because they exist in Geo_Plugin class under array elements of data['base']['address'] and data['base']['agent'].
-* Web_Service: New methodes developed.
-* Website: reformated if statements, location and referer added, creator email and method added.
-
-* third-party class geoPlugin: removed method of same name (deprecated as a constructor in PHP 7).
-
-* Spider module now works with Geo_Plugin class instead of built-in geoPlugin and works over multiple functions and has MySql and MS SQL connections now. Updated after modifications of Geo_Plugin class.
-
-New:
-
-* third-party folder added with geoplugin.class.
-* Geo_Plugin: customisation of third-party class geoPlugin.
-* image-sorter module added.
-* PHPOffice/PHPExcel added via Composer
-* Export class created for data exporting residing on PHPOffice/PHPExcel
-
 Misc
 =======
 
