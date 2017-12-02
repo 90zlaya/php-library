@@ -153,7 +153,7 @@ Modification:
 * Email: documentation of methods updated.
 * Export: setting up class, allowed_types method added.
 * Format: return values revisited, ip location method now uses geoPlugin free service instead of limited info-sniper, even_or_odd class removed because duplicate exists in Math class. New method price_format added. Method price_format returns value in different format.
-* Geo_Plugin: huge modification of array structure and methods, location and referer added, removed parent::__construct(). Fixed bug with service inactivity.
+* Geo_Plugin: huge modification of array structure and methods, location and referer added, removed parent::__construct(). Fixed bug with service inactivity. Server varaiables added as part of data method.
 * Math: even_or_odd method modified, static keyword added to percentage method. New method iterate added. Iterate method returns value.
 * User: removed ip and ua methods because they exist in Geo_Plugin class under array elements of data['base']['address'] and data['base']['agent'].
 * Web_Service: New methodes developed.
