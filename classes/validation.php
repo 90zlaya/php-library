@@ -42,7 +42,7 @@ class Validation {
     */
     public static function variables($variable)
     {
-        if (isset($variable) && !empty($variable))
+        if (isset($variable) && ! empty($variable))
         {
             return TRUE;
         }
