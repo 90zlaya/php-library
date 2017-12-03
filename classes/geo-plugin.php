@@ -68,9 +68,12 @@ class Geo_Plugin extends geoPlugin{
     */
     protected function collect()
     {
+        $prefix = isset($_SERVER['HTTPS']) && ! empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+        
         $this->data['base'] = array(
-            'location'              => $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
+            'location'              => $prefix . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
             'referer'               => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL,
+            'prefix'                => $prefix,
             'host'                  => $_SERVER['HTTP_HOST'],
             'path'                  => dirname($_SERVER['PHP_SELF']),
             'page'                  => basename($_SERVER['PHP_SELF']),
