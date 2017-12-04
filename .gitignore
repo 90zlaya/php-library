@@ -6,6 +6,7 @@
 /out-tsc
 
 # custom
+composer.lock
 classes/third-party/vendor
 
 # System Files

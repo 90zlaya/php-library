@@ -8,7 +8,7 @@
 | Location: https://github.com/PHPOffice/PHPExcel
 |
 | Don't forget to call composer update from command line in 
-| third-party folder for latest PHPOffice/PHPExcel library.
+| root folder for latest PHPOffice/PHPExcel library.
 | Otherwise it will throw an error after trying to interpret 
 | require_once on Composer's autoload file.
 |
