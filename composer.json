@@ -24,5 +24,11 @@
             "phplibrary\\": "classes"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "config": {
+        "vendor-dir": "classes/third-party"
+    },
+    "require": {
+        "PHPOffice/PHPExcel": "^1.8"
+    }
 }
