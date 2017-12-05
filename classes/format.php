@@ -331,5 +331,37 @@ class Format {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Formats array to string
+    * 
+    * @param Array $array
+    * @param String $separator
+    * 
+    * @return String
+    */
+    public static function array_to_string($array, $separator='|')
+    {
+        $string = '';
+        
+        if ( ! empty($array))
+        {
+            $array_size = sizeof($array);
+            
+            for ($i=0; $i<$array_size; $i++)
+            {
+                $string .= $array[$i];
+                
+                if ($i < $array_size-1)
+                {
+                    $string .= $separator;
+                }
+            }
+        }
+        
+        return $string;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>
