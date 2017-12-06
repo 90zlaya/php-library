@@ -86,5 +86,38 @@ class File {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Read file contents into an array
+    * 
+    * @param String $file_location
+    * @param Bool $to_unlink
+    * 
+    * @return Array
+    */
+    public static function read_file_contents($file_location, $to_unlink=FALSE)
+    {
+        $status = FALSE;
+        $items  = array();
+        
+        if ( ! empty($file_location))
+        {
+            $file_contents = file($file_location);
+            
+            $to_unlink ? unlink($file_location) : NULL; 
+            
+            foreach ($file_contents as $line)
+            {
+                $items[] = explode(';', $line);
+            }
+        }
+        
+        return array(
+            'status' => $status,
+            'items'  => $items,
+        );
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>
