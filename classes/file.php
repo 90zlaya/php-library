@@ -102,6 +102,8 @@ class File {
         
         if ( ! empty($file_location))
         {
+            $status = TRUE;
+            
             $file_contents = file($file_location);
             
             $to_unlink ? unlink($file_location) : NULL; 
