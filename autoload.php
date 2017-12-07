@@ -51,9 +51,6 @@ $php_library_list_of_classes       = array(
         'name' => 'operating-system',
     ),
     array(
-        'name' => 'pagination',
-    ),
-    array(
         'name' => 'password',
     ),
     array(

@@ -63,10 +63,6 @@ Mathematical operations and calculations.
 
 Working with Operating System related data.
 
-* Pagination
-
-This is special class constructed from one of special templates accustomed to work everywhere. It's not by standard but it might help.
-
 * Password
 
 Works with password related data.
