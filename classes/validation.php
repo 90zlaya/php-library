@@ -36,7 +36,7 @@ class Validation {
     /**
     * Checks if variable is set and non-empty
     * 
-    * @param mixed $variable
+    * @param String $variable
     * 
     * @return Bool
     */
@@ -61,7 +61,7 @@ class Validation {
     */
     public static function comma($param)
     {
-        if (strpos($param, ',') !== false)
+        if (strpos($param, ',') !== FALSE)
         {
             $comma = str_replace(',', '.', $param);
         }
@@ -79,35 +79,33 @@ class Validation {
     * Clears string of special characters
     * 
     * @param String $variable
-    * @param Bool $trim
+    * @param Bool $to_trim
     * 
     * @return mixed
     */
-    public static function clear_string($variable, $trim=TRUE)
+    public static function clear_string($variable, $to_trim=TRUE)
     {
-        if (empty($variable))
+        if ( ! empty($variable))
         {
-            return FALSE;
-        }
-        else
-        {
-            if ($trim)
+            if ($to_trim)
             {
                 $variable = trim($variable);
             }
             
-            $variable = str_ireplace('"',"",$variable);
-            $variable = str_ireplace("'","",$variable);
-            $variable = str_ireplace("(","",$variable);
-            $variable = str_ireplace(")","",$variable);
-            $variable = str_ireplace("/","",$variable);
-            $variable = str_ireplace(";","",$variable);
-            $variable = str_ireplace("*","",$variable);
-            $variable = str_ireplace(">","",$variable);
-            $variable = str_ireplace("<","",$variable);
+            $variable = str_ireplace('"', "", $variable);
+            $variable = str_ireplace("'", "", $variable);
+            $variable = str_ireplace("(", "", $variable);
+            $variable = str_ireplace(")", "", $variable);
+            $variable = str_ireplace("/", "", $variable);
+            $variable = str_ireplace(";", "", $variable);
+            $variable = str_ireplace("*", "", $variable);
+            $variable = str_ireplace(">", "", $variable);
+            $variable = str_ireplace("<", "", $variable);
         
             return $variable;
         }
+        
+        return FALSE;
     }   
     
     // -------------------------------------------------------------------------
@@ -121,16 +119,7 @@ class Validation {
     */
     public static function clear_number($variable)
     {
-        if (is_numeric($variable))
-        {
-          $cleared_number = $variable;
-        }
-        else
-        {
-          $cleared_number = 0;
-        }
-    
-        return $cleared_number;
+        return is_numeric($variable) ? $variable : 0;
     }
     
     // -------------------------------------------------------------------------
@@ -144,18 +133,16 @@ class Validation {
     */
     public static function rewrite($string)
     {
-        if (empty($string))
+        if ( ! empty($string))
         {
-            return FALSE;
-        }
-        else
-        {
-            $string_rewriten = strtolower($string);
-            $string_rewriten = str_replace(' ', '_', $string_rewriten);
-            $string_rewriten = preg_replace("/[^a-z-0-9-.]+/", "_", $string_rewriten);
+            $string = strtolower($string);
+            $string = str_replace(' ', '_', $string);
+            $string = preg_replace("/[^a-z-0-9-.]+/", "_", $string);
           
-            return $string_rewriten;
-       }
+            return $string;
+        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -169,11 +156,7 @@ class Validation {
     */
     public static function rewrite_special($string)
     {
-        if (empty($string))
-        {
-            return FALSE;
-        }
-        else
+        if ( ! empty($string))
         {
             $special_characters = array(
                 'Ć' => 'ć',
@@ -209,6 +192,8 @@ class Validation {
             
             return $string_trimmed;
         }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
