@@ -113,8 +113,8 @@ $hyperlinks                         = array(
         ),
     ),
     'images'  => array(
-        'icon'       => 'http://thedeveloperworldisyours.com/wp-content/uploads/php.png',
-        'background' => 'background.jpg',
+        'icon'       => 'assets/elephpant.png',
+        'background' => 'assets/background.jpg',
     ),
     'url'     => array(
         'latest_release' => 'https://github.com/90zlaya/php-library/releases/latest',
