@@ -25,9 +25,13 @@
         }
     },
     "minimum-stability": "stable",
-    "extra": {
-        "installer-paths": {
-            "classes/third-party/vendor": ["PHPOffice/PHPExcel"]
-        }
+    "config": {
+        "vendor-dir": "classes/third-party/vendor"
+    },
+    "require": {
+        "PHPOffice/PHPExcel": "^1.8"
+    },
+    "require-dev": {
+        "PHPOffice/PHPExcel": "^1.8"
     }
 }
