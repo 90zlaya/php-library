@@ -265,7 +265,10 @@ class Export {
             // Print head
             foreach ($head as $item)
             {
-                 $objPHPExcel->setActiveSheetIndex(0)->setCellValue(self::$cells[Math::iterate()] . '1', $item);
+                $value = self::$cells[Math::iterate()]; 
+                
+                $objPHPExcel->getActiveSheet(0)->getColumnDimension($value)->setAutoSize(TRUE);
+                $objPHPExcel->setActiveSheetIndex(0)->setCellValue($value . '1', $item);
             }
             
             // Number of cells
