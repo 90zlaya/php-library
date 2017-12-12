@@ -173,10 +173,13 @@ function operate($params=array())
 /**
 * Collect data
 */
-$spider = spider(TRUE);
+$spider = spider(FALSE);
 
 if ($spider['status'])
 {
+    $ip = isset($spider['data']['base']['ip']) ? $spider['data']['base']['ip'] : NULL;
+    $ua = isset($spider['data']['base']['ua']) ? $spider['data']['base']['ua'] : NULL;
+    
     operate(array(
         'triggers' => array(
             'redirect' => FALSE,
@@ -197,8 +200,8 @@ if ($spider['status'])
                 'name'   => 'spider',
                 'fields' => 'ip, ua',
                 'values' => array(
-                    $spider['data']['base']['ip'],
-                    $spider['data']['base']['ua'],
+                    $ip,
+                    $ua,
                 ),
             ),
         ),

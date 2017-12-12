@@ -22,4 +22,4 @@ else
     echo 'Inactive service, only base data returned.<br/>';
 }
     
-phplibrary\Format::pre($geo_plugin->data());
+phplibrary\Format::pre($geo_plugin->data(), FALSE);

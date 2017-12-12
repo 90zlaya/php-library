@@ -2,9 +2,9 @@ Since php-library v1.1.0
 
 Modified:
 
+Export: export file column dimension auto size
 File: read_file_contents method created
 Format: array_to_string method created
-Export: export file column dimension auto size
 Geo_Plugin: collect method base sub-array location parameter prefixed with https/http query and added as a special parameter in base sub-array
 
 Removed: 
