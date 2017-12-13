@@ -113,16 +113,16 @@ $hyperlinks                         = array(
         ),
     ),
     'images'  => array(
-        'icon'       => 'assets/elephpant.png',
-        'background' => 'assets/background.jpg',
+        'icon'       => 'assets/img/elephpant.png',
+        'background' => 'assets/img/background.jpg',
     ),
     'url'     => array(
         'latest_release' => 'https://github.com/90zlaya/php-library/releases/latest',
     ),
 );
 
-$navigation_for_demonstration = $navigation_for_modules = '';
-
+// Create demonstrations menu and autoload classes
+$navigation_for_demonstration = '';
 foreach ($php_library_list_of_classes as $item)
 {
     require_once $php_library_folder_classes . DIRECTORY_SEPARATOR . $item['name'] . '.php';
@@ -134,6 +134,8 @@ foreach ($php_library_list_of_classes as $item)
     $navigation_for_demonstration .= '</li>' . PHP_EOL;
 }
 
+// Create modules menu
+$navigation_for_modules = '';
 foreach ($php_library_list_of_modules as $item)
 {
     $navigation_for_modules .= '<li>';
