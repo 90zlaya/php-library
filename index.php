@@ -1,49 +1,44 @@
 <?php
     include_once 'autoload.php';
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset='UTF-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-    <link rel="shortcut icon" href="<?=$hyperlinks['images']['icon']?>" type="image/png">
-    <title><?=$php_library_title?></title>
-    <meta content="<?=$php_library_title?>" property="og:title">
-    <meta content="<?=$php_library_description?>" name="description">
-
+    <link rel="shortcut icon" href="<?=$php_library['hyperlinks']['images']['icon']?>" type="image/png">
+    <title><?=$php_library['meta']['title']?></title>
+    <meta content="<?=$php_library['meta']['title']?>" property="og:title">
+    <meta content="<?=$php_library['meta']['description']?>" name="description">
     <!-- jQuery Load -->
     <script src="assets/js/jquery.min.js"></script>
-
     <!-- Flatdoc -->
-    <script src='assets/js/legacy.js'></script>
-    <script src='assets/js/flatdoc.js'></script>
-
+    <script src="assets/js/legacy.js"></script>
+    <script src="assets/js/flatdoc.js"></script>
     <!-- Flatdoc theme -->
-    <link  href='assets/css/style.css' rel='stylesheet'>
-    <script src='assets/js/script.js'></script>
-
-    <link href='assets/css/theme.css' rel='stylesheet'>
-    <script src='assets/js/theme.js'></script>
-    
+    <link  href="assets/css/style.css" rel='stylesheet'>
+    <script src="assets/js/script.js"></script>
+    <link href="assets/css/theme.css" rel='stylesheet'>
+    <script src="assets/js/theme.js"></script>
     <!-- Initializer -->
     <script>
     Flatdoc.run({
-      fetcher: Flatdoc.github('<?=$git_hub_username . '/' . $php_library_name?>')
+        fetcher: Flatdoc.github('90zlaya/php-library')
     });
     </script>
 </head>
 
 <body role='flatdoc' class='big-h3 large-brief'>
     <!-- TITLE -->
-    <div class='title-area title-card' style='background-image: url(<?=$hyperlinks['images']['background']?>);'>
+    <div class='title-area title-card' style='background-image: url(<?=$php_library['hyperlinks']['images']['background']?>);'>
         <div class='in'>
             <div class='headline'>
-                <h1><?=$php_library_title?></h1>
-                <p><?=$php_library_description_short?></p>
+                <h1><?=$php_library['meta']['title']?></h1>
+                <p><?=$php_library['meta']['tagline']?></p>
                 <h5>
                     <?php
-                        foreach ($hyperlinks['buttons'] as $button)
+                        foreach ($php_library['hyperlinks']['buttons'] as $button)
                         {
                             echo '<span onclick="window.location=\'' . $button['url'] . '\';" style="cursor: pointer;">' . $button['name'] . '</span>&nbsp;';
                         }
@@ -55,10 +50,10 @@
     <!-- HEADER -->
     <div class='header'>
         <div class='left'>
-            <h1><?=$php_library_title?></h1>
+            <h1><?=$php_library['meta']['title']?></h1>
             <ul>
               <?php
-                  foreach ($hyperlinks['php_library'] as $php_library)
+                  foreach ($php_library['hyperlinks']['php_library'] as $php_library)
                   {
                       echo '<li><a href="' . $php_library['url'] . '" target="_blank">' . $php_library['name'] . '</a></li>';
                   }
@@ -70,7 +65,7 @@
     <div class='content-root'>
         <div class='menubar'>
             <div class="section">
-                <a class="big button" href="<?=$hyperlinks['url']['latest_release']?>" target="_blank">Download</a>
+                <a class="big button" href="<?=$php_library['hyperlinks']['url']['latest_release']?>" target="_blank">Download</a>
             </div>
             <div class='menu section' role='flatdoc-menu'></div>
         </div>
