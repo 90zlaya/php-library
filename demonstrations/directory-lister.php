@@ -11,7 +11,7 @@
 | In that case go to Directory_Lister class and add them
 | to the $forbidden_characters variable.
 |
-| To enable local file links you should use some kind of browser extensions:
+| To enable local file links you should use some kind of browser extension:
 | Firefox: https://addons.mozilla.org/en-US/firefox/addon/local-filesystem-links/
 | Chrome: https://chrome.google.com/webstore/detail/enable-local-file-links/nikfmfgobenbhmocjaaboihbeocackld
 |

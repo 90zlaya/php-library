@@ -53,9 +53,9 @@
             <h1><?=$php_library['meta']['title']?></h1>
             <ul>
               <?php
-                  foreach ($php_library['hyperlinks']['php_library'] as $php_library)
+                  foreach ($php_library['hyperlinks']['php_library'] as $link)
                   {
-                      echo '<li><a href="' . $php_library['url'] . '" target="_blank">' . $php_library['name'] . '</a></li>';
+                      echo '<li><a href="' . $link['url'] . '" target="_blank">' . $link['name'] . '</a></li>';
                   }
               ?>
             </ul>
