@@ -8,6 +8,7 @@
 # custom
 composer.lock
 classes/third-party/vendor
+modules/file-version/files
 
 # System Files
 .DS_Store

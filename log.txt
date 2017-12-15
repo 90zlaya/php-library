@@ -2,6 +2,7 @@ Since php-library v1.1.0
 
 Modified:
 
+Directory_Lister: avoiding case of empty directory in files method
 Export: export file column dimension auto size
 File: read_file_contents method created
 Format: array_to_string method created

@@ -114,25 +114,28 @@ for ($i=0; $i<$number_of_directories; $i++)
 /**
 * Move files to created directories
 */
-foreach ($listing['listing'] as $item)
+if (isset($listing['listing']))
 {
-    $file = $item['file'];
-    $file_prefix = substr($file, 0, 3);
-    
-    $location_from = $where_to_read_files . $file;
-    $location_to = $where_to_make_dir . $file_prefix . $folder_sufix . '/' . $file;
-    
-    $is_copied = @copy($location_from, $location_to);
-    
-    if ($is_copied)
+    foreach ($listing['listing'] as $item)
     {
-        $image_sorter['files']['number']['copied']++;
-        array_push($image_sorter['files']['report']['copied'], $file);
-    }
-    else
-    {
-        $image_sorter['files']['number']['not_copied']++;
-        array_push($image_sorter['files']['report']['not_copied'], $file);
+        $file = $item['file'];
+        $file_prefix = substr($file, 0, 3);
+        
+        $location_from = $where_to_read_files . $file;
+        $location_to = $where_to_make_dir . $file_prefix . $folder_sufix . '/' . $file;
+        
+        $is_copied = @copy($location_from, $location_to);
+        
+        if ($is_copied)
+        {
+            $image_sorter['files']['number']['copied']++;
+            array_push($image_sorter['files']['report']['copied'], $file);
+        }
+        else
+        {
+            $image_sorter['files']['number']['not_copied']++;
+            array_push($image_sorter['files']['report']['not_copied'], $file);
+        }
     }
 }
 

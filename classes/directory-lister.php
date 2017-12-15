@@ -208,52 +208,56 @@ class Directory_Lister {
     */
     protected static function files($directory='', $types=array())
     {
+        $arr_files = array();
+
         empty($directory) ? $directory = self::$directory : self::$directory = $directory;
         
-        $files = scandir($directory);
-        $arr_files = array();
-        $counter = 1;
-        foreach ($files as $file)
+        if (file_exists($directory))
         {
-            if ($counter > 2)
+            $files = scandir($directory);
+            $counter = 1;
+            foreach ($files as $file)
             {
-                if (stripos($file, '.'))
+                if ($counter > 2)
                 {
-                    $extension         = pathinfo($file, PATHINFO_EXTENSION);
-                    $extension_lowered = strtolower($extension);
-                    
-                    if (empty($types) || in_array($extension_lowered, $types))
+                    if (stripos($file, '.'))
                     {
-                        $path      = $directory . $file;
-                        $location  = self::$open_inside_browser . $path;
-                        $directory = self::$directory;
-                        $date      = date(self::$date_format, @filemtime($location));
-                        $time      = date(self::$time_format, @filemtime($location));
-                        $open      = '<a href="' . $location . '" target="_blank">' . $file . '</a>';
-                        $title     = basename($file, self::$dot . $extension);
-                        $size      = filesize($location);
+                        $extension         = pathinfo($file, PATHINFO_EXTENSION);
+                        $extension_lowered = strtolower($extension);
                         
-                        $data = array(
-                            'open'      => $open,
-                            'location'  => $location,
-                            'path'      => $path,
-                            'directory' => $directory,
-                            'file'      => $file,
-                            'title'     => $title,
-                            'extension' => $extension,
-                            'size'      => $size,
-                            'date'      => $date,
-                            'time'      => $time,
-                        );
-                        
-                        array_push($arr_files, $data);
-                        
-                        self::$number_of_files += 1;
+                        if (empty($types) || in_array($extension_lowered, $types))
+                        {
+                            $path      = $directory . $file;
+                            $location  = self::$open_inside_browser . $path;
+                            $directory = self::$directory;
+                            $date      = date(self::$date_format, @filemtime($location));
+                            $time      = date(self::$time_format, @filemtime($location));
+                            $open      = '<a href="' . $location . '" target="_blank">' . $file . '</a>';
+                            $title     = basename($file, self::$dot . $extension);
+                            $size      = filesize($location);
+                            
+                            $data = array(
+                                'open'      => $open,
+                                'location'  => $location,
+                                'path'      => $path,
+                                'directory' => $directory,
+                                'file'      => $file,
+                                'title'     => $title,
+                                'extension' => $extension,
+                                'size'      => $size,
+                                'date'      => $date,
+                                'time'      => $time,
+                            );
+                            
+                            array_push($arr_files, $data);
+                            
+                            self::$number_of_files += 1;
+                        }
                     }
                 }
+                
+                $counter++;
             }
-            
-            $counter++;
         }
         
         return $arr_files;

@@ -15,8 +15,6 @@
 */
 include_once '../../autoload.php';
 
-// -----------------------------------------------------------------------------
-
 $current_date = date('Y-m-d');
 $new_version  = '1.0';
 $log_versions = 'versions';
@@ -33,6 +31,7 @@ $listing = phplibrary\Directory_Lister::listing(array(
 
 $data = phplibrary\File::read_from_file($log_files);
 
+$is_new = FALSE;
 if (empty($data))
 {
     $is_new = TRUE;
@@ -41,10 +40,6 @@ if (empty($data))
     
     phplibrary\File::write_to_file($log_files, $contents);
     $data = phplibrary\File::read_from_file($log_files);
-}
-else
-{
-    $is_new = FALSE;
 }
 
 $data_date    = substr($data, 0, 10);
@@ -66,7 +61,7 @@ foreach ($listing['listing'] as $item)
 
 // -----------------------------------------------------------------------------
 
-if (!empty($write_to_file))
+if ( ! empty($write_to_file))
 {
     if ($is_new)
     {
