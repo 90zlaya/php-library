@@ -6,6 +6,7 @@
 /out-tsc
 
 # custom
+images.php
 composer.lock
 classes/third-party/vendor
 modules/file-version/files

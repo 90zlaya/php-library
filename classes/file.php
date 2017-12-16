@@ -19,10 +19,11 @@ class File {
     * 
     * @param String $file_location
     * @param String $write_data
+    * @param Bool $last_in
     * 
     * @return mixed
     */
-    public static function write_to_file($file_location, $write_data)
+    public static function write_to_file($file_location, $write_data, $last_in=TRUE)
     {
         if (empty($file_location) || empty($write_data))
         {
@@ -34,10 +35,10 @@ class File {
             
             if (@file_exists($file_location))
             {
-                $file = @fopen($file_location, 'r');
-                $data = @fread($file, @filesize($file_location));
+                $file     = @fopen($file_location, 'r');
+                $old_data = @fread($file, @filesize($file_location));
                 
-                $data .=  $new_data;
+                $data = $last_in ? $old_data . $new_data : $new_data . $old_data;
                 
                 @fclose($file);
                 $file = @fopen($file_location, 'w');
