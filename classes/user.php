@@ -11,8 +11,8 @@
 namespace phplibrary;
 
 class User {
-    public static $image_location = 'data/users/';
-    public static $image_default  = 'assets/images/user.png';
+    protected static $image_location = 'data/users/';
+    protected static $image_default  = 'assets/img/user.png';
     
     // -------------------------------------------------------------------------
     
@@ -27,14 +27,14 @@ class User {
     */
     public static function image($image, $image_location='', $image_default='')
     {
-        empty($image_location) ? $image_location = self::$image_location : NULL;
-        empty($image_default) ? $image_default = self::$image_default : NULL;
+        $location = empty($image_location) ? self::$image_location : $image_location;
+        $default  = empty($image_default) ? self::$image_default : $image_default;
         
-        $image_link = $image_location . $image;
+        $image_link = $location . $image;
         
-        if (!getimagesize($image_link) || empty($image))
+        if ( ! @getimagesize($image_link) || empty($image))
         {
-            $image_link = $image_default;
+            $image_link = &$default;
         }
         
         return $image_link;    
