@@ -17,6 +17,7 @@
 namespace phplibrary;
 
 require_once 'third-party/vendor/autoload.php';
+file_exists('autoload.php') ? require_once 'autoload.php' : require_once '../autoload.php';
 
 use PHPExcel as PHPExcel;
 use PHPExcel_IOFactory as PHPExcel_IOFactory;

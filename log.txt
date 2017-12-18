@@ -1,5 +1,9 @@
 Since php-library v1.1.0
 
+New:
+
+Sorter: new class Sorter developed from image-sorter module
+
 Modified:
 
 Directory_Lister: avoiding case of empty directory in files method
@@ -13,3 +17,4 @@ User: image method refactoring
 Removed: 
 
 Pagination: entire class removed from phplibrary because of it's redundancy
+image-sorter: entire module removed and replaced with Sorter class

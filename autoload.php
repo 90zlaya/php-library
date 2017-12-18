@@ -59,6 +59,9 @@ $php_library = array(
                 'name' => 'random',
             ),
             array(
+                'name' => 'sorter',
+            ),
+            array(
                 'name' => 'temperature',
             ),
             array(
@@ -80,9 +83,6 @@ $php_library = array(
         'modules' => array(
             array(
                 'name' => 'file-version',
-            ),
-            array(
-                'name' => 'image-sorter',
             ),
             array(
                 'name' => 'spider',
@@ -126,5 +126,10 @@ $php_library = array(
 
 foreach ($php_library['list']['classes'] as $item)
 {
-    require_once $php_library['folders']['classes'] . '/' . $item['name'] . '.php';
+    $file_location  = $php_library['folders']['classes'];
+    $file_location .= '/';
+    $file_location .= $item['name'];
+    $file_location .= '.php';
+    
+    require_once $file_location;
 }
