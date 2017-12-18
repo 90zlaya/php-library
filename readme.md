@@ -22,7 +22,7 @@ Every class call should have phplibrary namespace call in front.
 
 ``` php
 phplibrary\Class_Name
-``` 
+```
 
 List of classes
 ----------------
@@ -71,17 +71,21 @@ Works with password related data.
 
 Random-related data.
 
+* Sorter
+
+Sortes files to multiple folders.
+
 * Temperature
 
 Working with temperature conversions.
 
-* User
-
-Works with user related data.
-
 * User_Agent
 
 Working with user agent related data.
+
+* User
+
+Works with user related data.
 
 * Validation
 
@@ -104,11 +108,7 @@ List of modules
 This script looks up for files inside given path for those which are changed since certain point in time.
 If or when it finds them, then creates two files, or updates them, with informations about date, version and changed files.
 
-* image-sorter
-
-Crawls for files in one folder, creates new folders according to files prefix and copies them to that newly created folder.
-
-* spider 
+* spider
 
 This script crawls for visitor's data. It's possible to display them, write to database and send via email.
 
@@ -129,7 +129,7 @@ Installation
 Manual
 ----------------
 If you want the latest stable version, get the [latest release] from the releases page.
-                                                                                                                                                          
+
 Composer
 ----------------
 
@@ -145,7 +145,7 @@ Misc
 Inspiration
 ----------------
 
-Idea behind creation of this repository is making everyday Web Development process faster and easier. 
+Idea behind creation of this repository is making everyday Web Development process faster and easier.
 
 Acknowledgements
 ----------------
