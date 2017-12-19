@@ -10,10 +10,6 @@
 */
 namespace phplibrary;
 
-file_exists('autoload.php') ? require_once 'autoload.php' : require_once '../autoload.php';
-
-use phplibrary\Directory_Lister as Directory_Lister;
-
 class Sorter {
     protected $report = array(
         'folders' => array(
@@ -85,11 +81,42 @@ class Sorter {
     */
     protected function crawl_for_files()
     {
-        return Directory_Lister::listing(array(
-            'directory' => $this->params['where_to_read_files'],
-            'method'    => 'files',
-            'types'     => $this->params['types'],
-        ));
+        $arr_files = array();
+        
+        if (file_exists($this->params['where_to_read_files']))
+        {
+            $files              = scandir($this->params['where_to_read_files']);
+            $number_of_files    = 0;
+            $counter            = 1;
+            
+            foreach ($files as $file)
+            {
+                if ($counter > 2)
+                {
+                    if (stripos($file, '.'))
+                    {
+                        $extension         = pathinfo($file, PATHINFO_EXTENSION);
+                        $extension_lowered = strtolower($extension);
+                        
+                        if (empty($this->params['types']) || in_array($extension_lowered, $this->params['types']))
+                        {
+                            array_push($arr_files, array(
+                                'path'      => $this->params['where_to_read_files'] . $file,
+                                'directory' => $this->params['where_to_read_files'],
+                                'file'      => $file,
+                                'title'     => basename($file, '.' . $extension),
+                            ));
+                            
+                            $number_of_files += 1;
+                        }
+                    }
+                }
+                
+                $counter++;
+            }
+        }
+        
+        return $arr_files;
     }
     
     // -------------------------------------------------------------------------
@@ -152,29 +179,34 @@ class Sorter {
     /**
     * Move files to created directories
     * 
+    * @param Array $files
+    * 
     * @return void
     */
-    protected function move_files($listing)
+    protected function move_files($files)
     {
-        if (isset($listing['listing']))
+        if (isset($files))
         {
-            foreach ($listing['listing'] as $item)
+            foreach ($files as $item)
             {
-                $file           = $item['file'];
-                $file_prefix    = substr($file, 0, 3);
+                $location_from  = $this->params['where_to_read_files'];
+                $location_from .= $item['file'];
                 
-                $location_from  = $this->params['where_to_read_files'] . $file;
-                $location_to    = $this->params['where_to_create_directories'] . $file_prefix . $this->params['folder_sufix'] . '/' . $file;
+                $location_to    = $this->params['where_to_create_directories'];
+                $location_to   .= substr($item['file'], 0, 3);
+                $location_to   .= $this->params['folder_sufix'];
+                $location_to   .= '/';
+                $location_to   .= $item['file'];
                 
                 if (@copy($location_from, $location_to))
                 {
                     $this->report['files']['number']['copied']++;
-                    array_push($this->report['files']['report']['copied'], $file);
+                    array_push($this->report['files']['report']['copied'], $item['file']);
                 }
                 else
                 {
                     $this->report['files']['number']['not_copied']++;
-                    array_push($this->report['files']['report']['not_copied'], $file);
+                    array_push($this->report['files']['report']['not_copied'], $item['file']);
                 }
             }
         }
@@ -194,7 +226,6 @@ class Sorter {
         $report .= '/';
         $report .= $this->report['folders']['number']['not_created'];
         $report .= '<br/>';
-        
         $report .= 'Files copied/not copied: ';
         $report .= $this->report['files']['number']['copied'];
         $report .= '/';

@@ -40,7 +40,7 @@
                     <?php
                         foreach ($php_library['hyperlinks']['buttons'] as $button)
                         {
-                            echo '<span onclick="window.location=\'' . $button['url'] . '\';" style="cursor: pointer;">' . $button['name'] . '</span>&nbsp;';
+                            echo '<span onclick="window.location=\'' . $button['url'] . '\';" style="cursor: pointer;" role="button">' . $button['name'] . '</span>&nbsp;';
                         }
                     ?>
                 </h5>

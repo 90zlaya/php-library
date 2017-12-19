@@ -17,11 +17,9 @@
 namespace phplibrary;
 
 require_once 'third-party/vendor/autoload.php';
-file_exists('autoload.php') ? require_once 'autoload.php' : require_once '../autoload.php';
 
 use PHPExcel as PHPExcel;
 use PHPExcel_IOFactory as PHPExcel_IOFactory;
-use phplibrary\Math as Math;
 
 class Export {
     protected static $file_name             = 'file_export';
@@ -229,9 +227,9 @@ class Export {
     {
         if ( ! empty($data))
         {
+            $iteration = 1;
             foreach ($data as $item)
             {
-                $iteration          = Math::iterate();
                 $item_indexed       = array_values($item);
                 $item_indexed_size  = sizeof($item_indexed);
                 
@@ -242,6 +240,8 @@ class Export {
                 }
                 
                 $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A' . $iteration, $value);
+                
+                $iteration++;
             }
         }
         
@@ -264,30 +264,30 @@ class Export {
         if ( ! empty($data))
         {
             // Print head
+            $iteration = 1;
             foreach ($head as $item)
             {
-                $value = self::$cells[Math::iterate()]; 
+                $objPHPExcel->getActiveSheet(0)->getColumnDimension(self::$cells[$iteration])->setAutoSize(TRUE);
+                $objPHPExcel->setActiveSheetIndex(0)->setCellValue(self::$cells[$iteration] . '1', $item);
                 
-                $objPHPExcel->getActiveSheet(0)->getColumnDimension($value)->setAutoSize(TRUE);
-                $objPHPExcel->setActiveSheetIndex(0)->setCellValue($value . '1', $item);
+                $iteration++;
             }
             
             // Number of cells
             $number_of_cells = sizeof($head);
             
-            // Reset counter
-            Math::iterate(TRUE);
-            
             // Print data
+            $iteration = 2;
             foreach ($data as $item)
             {
-                $iteration      = Math::iterate();
-                $item_indexed   = array_values($item);
+                $item_indexed = array_values($item);
                 
                 for ($i=1; $i<=$number_of_cells; $i++)
                 {
                     $objPHPExcel->setActiveSheetIndex(0)->setCellValue(self::$cells[$i] . $iteration, $item_indexed[$i-1]);
                 }
+                
+                $iteration++;
             }
         }
         
