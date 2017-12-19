@@ -10,6 +10,7 @@ images.php
 composer.lock
 classes/third-party/vendor
 modules/file-version/files
+modules/file-version/versions
 
 # System Files
 .DS_Store
