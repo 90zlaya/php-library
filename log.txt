@@ -16,5 +16,6 @@ User: image method refactoring
 
 Removed: 
 
-Pagination: entire class removed from phplibrary because of it's redundancy
+Pagination: entire class removed from php-library because of it's redundancy
 image-sorter: entire module removed and replaced with Sorter class
+spider: entire module removed from php-library

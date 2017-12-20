@@ -84,9 +84,6 @@ $php_library = array(
             array(
                 'name' => 'file-version',
             ),
-            array(
-                'name' => 'spider',
-            ),
         ),
     ),
     'hyperlinks'    => array(
