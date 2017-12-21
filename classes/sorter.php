@@ -11,7 +11,7 @@
 namespace phplibrary;
 
 class Sorter {
-    protected $report = array(
+    protected $report   = array(
         'folders' => array(
             'number' => array(
                 'created'     => 0,
@@ -26,20 +26,27 @@ class Sorter {
             'number' => array(
                 'copied'     => 0,
                 'not_copied' => 0,
+                'moved'      => 0,
+                'not_moved'  => 0,
             ),
             'report' => array(
                 'copied'     => array(),
                 'not_copied' => array(),
+                'moved'      => array(),
+                'not_moved'  => array(),
             ),
         ),
     );
-    protected $params = array(
+    protected $deploy   = array(
         'where_to_read_files'           => '',
         'where_to_create_directories'   => '',
         'number_of_directories'         => 0,
         'folder_suffix'                 => '',
+        'operation'                     => '',
         'types'                         => array(),
-        'max_execution_time'            => 3600,
+    );
+    protected $settings = array(
+        'max_execution_time' => 3600,
     );
     
     // -------------------------------------------------------------------------
@@ -48,9 +55,11 @@ class Sorter {
     * Class constructor
     * 
     */
-    public function __construct()
+    public function __construct($params=array())
     {
-        ini_set('max_execution_time', $this->params['max_execution_time']);
+        empty($params) ? NULL : $this->settings = $params;
+        
+        ini_set('max_execution_time', $this->settings['max_execution_time']);
     }
     
     // -------------------------------------------------------------------------
@@ -62,12 +71,10 @@ class Sorter {
     */
     public function deploy($params)
     {
-        $this->params = $params;
+        $this->deploy = $params;
         
         $this->create_directories();
-        $this->move_files(
-            $this->crawl_for_files()
-        );
+        $this->transport_files($this->get_files(), $this->deploy['operation']);
         
         return $this->report();
     }
@@ -79,13 +86,13 @@ class Sorter {
     * 
     * @return Array
     */
-    protected function crawl_for_files()
+    protected function get_files()
     {
         $arr_files = array();
         
-        if (file_exists($this->params['where_to_read_files']))
+        if (file_exists($this->deploy['where_to_read_files']))
         {
-            $files              = scandir($this->params['where_to_read_files']);
+            $files              = scandir($this->deploy['where_to_read_files']);
             $number_of_files    = 0;
             $counter            = 1;
             
@@ -98,11 +105,11 @@ class Sorter {
                         $extension         = pathinfo($file, PATHINFO_EXTENSION);
                         $extension_lowered = strtolower($extension);
                         
-                        if (empty($this->params['types']) || in_array($extension_lowered, $this->params['types']))
+                        if (empty($this->deploy['types']) || in_array($extension_lowered, $this->deploy['types']))
                         {
                             array_push($arr_files, array(
-                                'path'      => $this->params['where_to_read_files'] . $file,
-                                'directory' => $this->params['where_to_read_files'],
+                                'path'      => $this->deploy['where_to_read_files'] . $file,
+                                'directory' => $this->deploy['where_to_read_files'],
                                 'file'      => $file,
                                 'title'     => basename($file, '.' . $extension),
                             ));
@@ -128,47 +135,21 @@ class Sorter {
     */
     protected function create_directories()
     {
-        for ($i=0; $i<$this->params['number_of_directories']; $i++)
+        for ($i=0; $i<$this->deploy['number_of_directories']; $i++)
         {
-            $i_length = strlen($i);
+            $folder = $this->folder_name($i);
             
-            if ($i_length < 4)
+            if ( ! file_exists($folder))
             {
-                switch ($i_length)
-                {
-                    case 1:
-                        {
-                            $folder_prefix = '00' . $i;
-                        } break;
-                    case 2:
-                        {
-                            $folder_prefix = '0' . $i;
-                        } break;
-                    case 3:
-                        {
-                            $folder_prefix = $i;
-                        } break;
-                    default: $folder_prefix = '';
-                }
-                
-                $folder = $folder_prefix . $this->params['folder_sufix'];
-            }
-            
-            $new_folder = $this->params['where_to_create_directories'] . $folder;
-            
-            if ( ! file_exists($new_folder))
-            {
-                $is_created = @mkdir($new_folder);
-                
-                if ($is_created)
+                if (mkdir($folder))
                 {
                     $this->report['folders']['number']['created']++;
-                    array_push($this->report['folders']['report']['created'], $new_folder);
+                    array_push($this->report['folders']['report']['created'], $folder);
                 }
                 else
                 {
                     $this->report['folders']['number']['not_created']++;
-                    array_push($this->report['folders']['report']['not_created'], $new_folder);
+                    array_push($this->report['folders']['report']['not_created'], $folder);
                 }
             }
         }
@@ -177,36 +158,38 @@ class Sorter {
     // -------------------------------------------------------------------------
 
     /**
-    * Move files to created directories
+    * Transport files to created directories
     * 
     * @param Array $files
+    * @param String $operation
     * 
     * @return void
     */
-    protected function move_files($files)
+    protected function transport_files($files, $operation)
     {
         if (isset($files))
         {
             foreach ($files as $item)
             {
-                $location_from  = $this->params['where_to_read_files'];
+                $location_from  = $this->deploy['where_to_read_files'];
                 $location_from .= $item['file'];
                 
-                $location_to    = $this->params['where_to_create_directories'];
+                $location_to    = $this->deploy['where_to_create_directories'];
                 $location_to   .= substr($item['file'], 0, 3);
-                $location_to   .= $this->params['folder_sufix'];
+                $location_to   .= $this->deploy['folder_sufix'];
                 $location_to   .= '/';
                 $location_to   .= $item['file'];
                 
-                if (@copy($location_from, $location_to))
+                if ( ! file_exists($location_to))
                 {
-                    $this->report['files']['number']['copied']++;
-                    array_push($this->report['files']['report']['copied'], $item['file']);
-                }
-                else
-                {
-                    $this->report['files']['number']['not_copied']++;
-                    array_push($this->report['files']['report']['not_copied'], $item['file']);
+                    switch ($operation)
+                    {
+                        case 'm':
+                            {
+                                $this->move_files($location_from, $location_to, $item['file']);
+                            } break;
+                        default: $this->copy_files($location_from, $location_to, $item['file']);
+                    }
                 }
             }
         }
@@ -231,11 +214,100 @@ class Sorter {
         $report .= '/';
         $report .= $this->report['files']['number']['not_copied'];
         $report .= '<br/>';
+        $report .= 'Files moved/not moved: ';
+        $report .= $this->report['files']['number']['moved'];
+        $report .= '/';
+        $report .= $this->report['files']['number']['not_moved'];
+        $report .= '<br/>';
 
         return array(
             'string' => $report,
-            'array'  => $this->report
+            'array'  => array(
+                'usage'  => getrusage(),
+                'result' => $this->report,
+            )
         );
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Folder name
+    * 
+    * @param int $i
+    * 
+    * @return String
+    */
+    private function folder_name($i)
+    {
+        switch (strlen($i))
+        {
+            case 1:
+                {
+                    $folder_prefix = '00' . $i;
+                } break;
+            case 2:
+                {
+                    $folder_prefix = '0' . $i;
+                } break;
+            case 3:
+                {
+                    $folder_prefix = $i;
+                } break;
+            default: $folder_prefix = '';
+        }
+        
+        return $this->deploy['where_to_create_directories'] . $folder_prefix . $this->deploy['folder_sufix'];
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Copy files from one location to another
+    * 
+    * @param String $location_from
+    * @param String $location_to
+    * @param String $file
+    * 
+    * @return void
+    */
+    private function copy_files($location_from, $location_to, $file)
+    {
+        if (copy($location_from, $location_to))
+        {
+            $this->report['files']['number']['copied']++;
+            array_push($this->report['files']['report']['copied'], $file);
+        }
+        else
+        {
+            $this->report['files']['number']['not_copied']++;
+            array_push($this->report['files']['report']['not_copied'], $file);
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Move files from one location to another
+    * 
+    * @param String $location_from
+    * @param String $location_to
+    * @param String $file
+    * 
+    * @return void
+    */
+    private function move_files($location_from, $location_to, $file)
+    {
+        if (rename($location_from, $location_to))
+        {
+            $this->report['files']['number']['moved']++;
+            array_push($this->report['files']['report']['moved'], $file);
+        }
+        else
+        {
+            $this->report['files']['number']['not_moved']++;
+            array_push($this->report['files']['report']['not_moved'], $file);
+        }
     }
     
     // -------------------------------------------------------------------------
