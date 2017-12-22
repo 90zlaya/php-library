@@ -31,7 +31,7 @@ class Export {
         'category'      => 'Test result file',
     );
     protected static $cells                 = array('', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
-    protected static $allowed_types         = array('xls', 'xlsx', 'csv', 'osp');
+    protected static $allowed_types         = array('xlsx', 'xls', 'csv', 'osp');
     
     // -------------------------------------------------------------------------
     
@@ -77,9 +77,9 @@ class Export {
                 } break;
             case 'csv':
                 {
-                    self::line_arrangement($objPHPExcel, $head, $data);
+                    $csv = self::line_arrangement($objPHPExcel, $head, $data);
                     self::for_ie_ssl();
-                    self::to_csv($objPHPExcel, $file_name);
+                    self::to_csv($csv, $file_name);
                 } break;
             case 'xls':
                 {
@@ -132,7 +132,7 @@ class Export {
     * 
     * @return void
     */
-    private static function to_csv($objPHPExcel, $file_name)
+    private static function to_csv($csv, $file_name)
     {
         // Redirect output to a client’s web browser (CSV)
         header('Content-Type: text/csv');
@@ -141,8 +141,7 @@ class Export {
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
         
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
-        $objWriter->save('php://output');
+        print $csv;
         
         exit;
     }
@@ -227,7 +226,7 @@ class Export {
     {
         if ( ! empty($data))
         {
-            $iteration = 1;
+            $iteration  = 1;
             foreach ($data as $item)
             {
                 $item_indexed       = array_values($item);
@@ -239,7 +238,7 @@ class Export {
                     $value .= $item_indexed[$i] . ';';
                 }
                 
-                $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A' . $iteration, $value);
+                echo $value . "\r\n";
                 
                 $iteration++;
             }

@@ -8,6 +8,7 @@ Modified:
 
 Directory_Lister: avoiding case of empty directory in files method
 Export: export file column dimension auto size
+Export: csv export set to avoid PHPExcel output because of double quotes
 File: read_file_contents method created
 File: write_to_file method - added new parameter to determine if file is written to top or bottom
 Format: array_to_string method created
