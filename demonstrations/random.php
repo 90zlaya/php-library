@@ -10,6 +10,9 @@
 */
 include_once '../autoload.php';
 
+use phplibrary\Random as random;
+use phplibrary\Format as format;
+
 $list = array(
      array(
         'content'     => "Monday: There's no place like home!",
@@ -55,6 +58,4 @@ $list = array(
      ),
 );
 
-print_r('<pre>');
-print_r(phplibrary\Random::element($list, 'DAY'));
-print_r('</pre>');
+format::pre(random::element($list, 'DAY'));

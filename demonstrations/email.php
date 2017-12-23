@@ -10,6 +10,8 @@
 */
 include_once '../autoload.php';
 
+use phplibrary\Email as email;
+
 $email = 'zlatan.stajic@guerrillamail.com';
-$mailto = phplibrary\Email::mailto($email);
-echo $mailto . '<br/>' . phplibrary\Email::validate($email);
+$mailto = email::mailto($email);
+echo $mailto . '<br/>' . email::validate($email);

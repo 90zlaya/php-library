@@ -15,6 +15,9 @@
 */
 include_once '../../autoload.php';
 
+use phplibrary\File as file;
+use phplibrary\Directory_Lister as directory_lister;
+
 $current_date = date('Y-m-d');
 $new_version  = '1.0';
 $log_versions = 'versions';
@@ -22,14 +25,14 @@ $log_files    = 'files';
 
 // -----------------------------------------------------------------------------
 
-$listing = phplibrary\Directory_Lister::listing(array(
+$listing = directory_lister::listing(array(
     'directory'  => 'D:/Zlatan/Browser/phpmailer/',
     'method'     => 'crawl',
 ));
 
 // -----------------------------------------------------------------------------
 
-$data = phplibrary\File::read_from_file($log_files);
+$data = file::read_from_file($log_files);
 
 $is_new = FALSE;
 if (empty($data))
@@ -38,8 +41,8 @@ if (empty($data))
     
     $contents = $current_date . ' ' . $new_version;
     
-    phplibrary\File::write_to_file($log_files, $contents);
-    $data = phplibrary\File::read_from_file($log_files);
+    file::write_to_file($log_files, $contents);
+    $data = file::read_from_file($log_files);
 }
 
 $data_date    = substr($data, 0, 10);
@@ -77,10 +80,10 @@ if ( ! empty($write_to_file))
     }
     
     $write_to_log_file = $current_date . ' ' . $latest_version;
-    phplibrary\File::write_to_file($log_files, $write_to_log_file);
+    file::write_to_file($log_files, $write_to_log_file);
     
     $write_to_file = $current_date . ' ' . $latest_version . PHP_EOL . PHP_EOL . $write_to_file;
-    phplibrary\File::write_to_file($log_versions, $write_to_file);
+    file::write_to_file($log_versions, $write_to_file);
 }
 
 // -----------------------------------------------------------------------------

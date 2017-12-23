@@ -10,7 +10,9 @@
 */
 include_once '../autoload.php';
 
-echo phplibrary\Password::new();
+use phplibrary\Password as password;
+
+echo password::new();
 echo '<br/>';
-echo phplibrary\Password::new_readable();
+echo password::new_readable();
 

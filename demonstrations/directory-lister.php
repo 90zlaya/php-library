@@ -19,6 +19,8 @@
 */
 include_once '../autoload.php';
 
+use phplibrary\Directory_Lister as directory_lister;
+
 $params = array(
     'directory'  => 'D:/Zlatan/Browser/phpmailer/',
     'method'     => 'crawl',
@@ -31,4 +33,4 @@ $params = array(
     'year'       => '',
     'types'      => array(),
 );
-$listing = phplibrary\Directory_Lister::listing($params);
+$listing = directory_lister::listing($params);

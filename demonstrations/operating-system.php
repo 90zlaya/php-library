@@ -10,6 +10,9 @@
 */
 include_once '../autoload.php';
 
-print_r('<pre>');
-print_r(phplibrary\Operating_System::get_list());
-print_r('</pre>');
+use phplibrary\Operating_System as operating_system;
+use phplibrary\Format as format;
+
+format::pre(
+    operating_system::get_list()
+);

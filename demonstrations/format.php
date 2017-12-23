@@ -10,20 +10,18 @@
 */
 include_once '../autoload.php';
 
-$value           = 715000;
-$to_round        = TRUE;
-$round_precision = 2;
+use phplibrary\Format as format;
 
-$bytes = phplibrary\Format::bytes($value, $to_round, $round_precision);
-phplibrary\Format::pre($bytes);
+$bytes = format::bytes(715000, TRUE, 2);
+format::pre($bytes, 1);
 
-$website = phplibrary\Format::website('google.com');
-phplibrary\Format::pre($website);
+$website = format::website('google.com');
+format::pre($website);
 
 $text = '<b>Lorem Ipsum</b> is simply <i>dummy</i> text of the printing and typesetting industry.';
-$string = phplibrary\Format::string($text, 0, 50);
+$string = format::string($text, 0, 50);
 echo $string . '<br/>';
 
-echo phplibrary\Format::price_format(104955.54) . '<br/>';
+echo format::price_format(104955.54) . '<br/>';
 
-echo phplibrary\Format::array_to_string(array('csv', 'txt', 'php'), ',') . '<br/>';
+echo format::array_to_string(array('csv', 'txt', 'php'), ',') . '<br/>';

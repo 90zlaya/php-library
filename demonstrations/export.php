@@ -10,6 +10,9 @@
 */
 include_once '../autoload.php';
 
+use phplibrary\Format as format;
+use phplibrary\Export as export;
+
 $head = array(
     'Title1',
     'Title2',
@@ -38,4 +41,4 @@ $params = array(
 
 echo '<a href="#" onclick="">Export</a>';
 
-phplibrary\Format::pre(phplibrary\Export::allowed_types());
+format::pre(export::allowed_types());

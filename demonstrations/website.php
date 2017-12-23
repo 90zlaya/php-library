@@ -10,8 +10,10 @@
 */
 include_once '../autoload.php';
 
+use phplibrary\Website as website;
+
 // Instance of Website class
-$website = new phplibrary\Website(
+$website = new website(
     array(
         'name'          => 'PHP Library',
         'host'          => 'http://localhost/_develop/php-library/',

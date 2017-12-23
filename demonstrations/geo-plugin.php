@@ -10,7 +10,10 @@
 */
 include_once '../autoload.php';
 
-$geo_plugin = new phplibrary\Geo_Plugin();
+use phplibrary\Geo_Plugin as geo_plugin;
+use phplibrary\Format as format;
+
+$geo_plugin = new geo_plugin();
 $geo_plugin->locate();
 
 if ($geo_plugin->is_active_service())
@@ -22,4 +25,4 @@ else
     echo 'Inactive service, only base data returned.<br/>';
 }
     
-phplibrary\Format::pre($geo_plugin->data(), FALSE);
+format::pre($geo_plugin->data(), FALSE);

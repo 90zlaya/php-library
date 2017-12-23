@@ -10,8 +10,11 @@
 */
 include_once '../autoload.php';
 
-phplibrary\Format::pre(phplibrary\User_Agent::list_browsers(), FALSE);
-phplibrary\Format::pre(phplibrary\User_Agent::list_devices(), FALSE);
+use phplibrary\User_Agent as user_agent;
+use phplibrary\Format as format;
+
+format::pre(user_agent::list_browsers(), FALSE);
+format::pre(user_agent::list_devices(), FALSE);
 
 $user_agents = array(
     'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0_3 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A432 Safari/604.1',
@@ -31,10 +34,10 @@ $user_agents = array(
 
 foreach ($user_agents as $agent)
 {
-    echo phplibrary\User_Agent::detect_browser($agent);
+    echo user_agent::detect_browser($agent);
     echo '-';
-    echo phplibrary\User_Agent::detect_device($agent);
+    echo user_agent::detect_device($agent);
     echo '-';
-    echo phplibrary\User_Agent::is_mobile($agent) ? 'Mobile' : 'Not mobile';
+    echo user_agent::is_mobile($agent) ? 'Mobile' : 'Not mobile';
     echo '<br/>';
 }
