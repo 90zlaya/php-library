@@ -21,6 +21,8 @@
     <script src="assets/js/script.js"></script>
     <link href="assets/css/theme.css" rel='stylesheet'>
     <script src="assets/js/theme.js"></script>
+    <!-- Custom PHP Library style -->
+	<link href="assets/css/custom.css" rel='stylesheet'>
     <!-- Initializer -->
     <script>
     Flatdoc.run({
@@ -31,7 +33,7 @@
 
 <body role='flatdoc' class='big-h3 large-brief'>
     <!-- TITLE -->
-    <div class='title-area title-card' style='background-image: url(<?=$php_library['hyperlinks']['images']['background']?>);'>
+    <div class='title-area title-card title-image'>
         <div class='in'>
             <div class='headline'>
                 <h1><?=$php_library['meta']['title']?></h1>
@@ -40,7 +42,7 @@
                     <?php
                         foreach ($php_library['hyperlinks']['buttons'] as $button)
                         {
-                            echo '<span onclick="window.location=\'' . $button['url'] . '\';" style="cursor: pointer;" role="button">' . $button['name'] . '</span>&nbsp;';
+                            echo '<span onclick="window.location=\'' . $button['url'] . '\';" class="main-button" role="button">' . $button['name'] . '</span>&nbsp;';
                         }
                     ?>
                 </h5>

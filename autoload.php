@@ -113,7 +113,6 @@ $php_library = array(
         ),
         'images'        => array(
             'icon'       => 'assets/img/elephpant.png',
-            'background' => 'assets/img/background.jpg',
         ),
         'url'           => array(
             'latest_release' => 'https://github.com/90zlaya/php-library/releases/latest',
