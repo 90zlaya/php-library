@@ -363,5 +363,19 @@ class Format {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Formats name and surname to one string
+    * 
+    * @param String $name
+    * @param String $surname
+    * @param String $delimiter
+    */
+    public static function fullname($name, $surname, $delimiter=' ')
+    {
+        return $name . $delimiter . $surname;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

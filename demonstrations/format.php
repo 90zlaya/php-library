@@ -25,3 +25,5 @@ echo $string . '<br/>';
 echo format::price_format(104955.54) . '<br/>';
 
 echo format::array_to_string(array('csv', 'txt', 'php'), ',') . '<br/>';
+
+echo format::fullname('John', 'Doe') . '<br/>';
