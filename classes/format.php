@@ -377,5 +377,66 @@ class Format {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Advanced database search
+    * 
+    * @param String $term
+    * @param Array $fields
+    * 
+    * @return mixed
+    */
+    public function search_wizard($term='', $fields=array())
+    {
+        if ( ! empty($term) && ! empty($fields))
+        {
+            $term_counter = $field_counter = TRUE;
+            $term_array = explode(' ', $term);
+            
+            $html = " AND( ";
+            
+            foreach ($term_array as $term_item)
+            {
+                if( $term_counter)
+                {
+                    $term_counter = FALSE;
+                    $html .= " ( ";
+                }
+                else
+                {
+                    $html .= " AND ( ";
+                }
+                
+                $field_counter = TRUE;
+                
+                foreach ($fields as $field_item)
+                {
+                    if ($field_counter)
+                    {
+                        $field_counter = FALSE;
+                        $html .= "
+                            $field_item LIKE('%" . $term_item . "%') 
+                        ";
+                    }
+                    else
+                    {
+                        $html .= "
+                            OR $field_item LIKE('%" . $term_item . "%') 
+                        ";
+                    }
+                }
+                    
+                $html .= " ) ";
+            }
+            
+            $html .= " ) ";
+            
+            return $html;
+        }
+        
+        return FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>
