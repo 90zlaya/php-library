@@ -386,7 +386,7 @@ class Format {
     * 
     * @return mixed
     */
-    public function search_wizard($term='', $fields=array())
+    public static function search_wizard($term='', $fields=array())
     {
         if ( ! empty($term) && ! empty($fields))
         {
