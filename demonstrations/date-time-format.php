@@ -11,6 +11,7 @@
 include_once '../autoload.php';
 
 use phplibrary\Date_Time_Format as date_time_format;
+use phplibrary\Format as format;
 
 $current = date_time_format::current();
 
@@ -34,3 +35,9 @@ echo date_time_format::minutes_to_hours(61) . '<br/>';
 echo date_time_format::hours_to_minutes('61:55') . '<br/>';
 
 echo date_time_format::days_before(75);
+
+$list_of_days = date_time_format::get_days('serbian', 3, FALSE);
+format::pre($list_of_days);
+
+$list_of_months = date_time_format::get_months('serbian', 3);
+format::pre($list_of_months);

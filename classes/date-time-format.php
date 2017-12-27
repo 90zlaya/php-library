@@ -32,6 +32,14 @@ class Date_Time_Format {
         ),
     );
     
+    protected static $days          = array(
+        'english' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
+        'serbian' => array('Nedelja', 'Ponedeljak', 'Utorak', 'Sreda', 'Četvrtak', 'Petak', 'Subota'),
+    );
+    protected static $months        = array(
+        'english' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+        'serbian' => array('Januar', 'Februar', 'Mart', 'April', 'Maj', 'Jun', 'Jul', 'Avgust', 'Septembar', 'Oktobar', 'Novembar', 'Decembar'),
+    );
     protected static $invalid_dates = array('1970-01-01', '0000-00-00');
     
     // -------------------------------------------------------------------------
@@ -491,6 +499,75 @@ class Date_Time_Format {
         }
         
         return FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Get list of days
+    * 
+    * @param String $lang
+    * @param int $length
+    * @param Bool $last_day_first
+    * 
+    * @return Array
+    */
+    public static function get_days($lang='', $length=0, $sunday_first=TRUE)
+    {
+        $days = isset(self::$days[$lang]) ? self::$days[$lang] : self::$days['english'];
+        
+        if ( ! empty($length))
+        {
+            $days_short = array();
+            
+            foreach ($days as $item)
+            {
+                $days_short[] = substr($item, 0, $length);
+            }
+            
+            $days = &$days_short;
+        }
+        
+        if ($sunday_first)
+        {
+            return $days;
+        }
+        else
+        {
+            return array_merge(
+                array_slice($days, 1),
+                array($days[0])
+            );
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Get list of months
+    * 
+    * @param String $lang
+    * @param int $length
+    * 
+    * @return Array $months
+    */
+    public static function get_months($lang='', $length=0)
+    {
+        $months = isset(self::$months[$lang]) ? self::$months[$lang] : self::$months['english'];
+        
+        if ( ! empty($length))
+        {
+            $months_short = array();
+            
+            foreach ($months as $item)
+            {
+                $months_short[] = substr($item, 0, $length);
+            }
+            
+            $months = &$months_short;
+        }
+        
+        return $months;
     }
     
     // -------------------------------------------------------------------------
