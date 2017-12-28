@@ -528,17 +528,18 @@ class Date_Time_Format {
             $days = &$days_short;
         }
         
-        if ($sunday_first)
+        if ( ! $sunday_first)
         {
-            return $days;
-        }
-        else
-        {
-            return array_merge(
+            $days = array_merge(
                 array_slice($days, 1),
                 array($days[0])
             );
         }
+            
+        return array(
+            'php'  => $days,
+            'json' => json_encode($days),
+        );
     }
     
     // -------------------------------------------------------------------------
@@ -549,7 +550,7 @@ class Date_Time_Format {
     * @param String $lang
     * @param int $length
     * 
-    * @return Array $months
+    * @return Array
     */
     public static function get_months($lang='', $length=0)
     {
@@ -567,7 +568,10 @@ class Date_Time_Format {
             $months = &$months_short;
         }
         
-        return $months;
+        return array(
+            'php'  => $months,
+            'json' => json_encode($months),
+        );
     }
     
     // -------------------------------------------------------------------------
