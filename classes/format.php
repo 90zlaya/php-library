@@ -438,5 +438,27 @@ class Format {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Value for given language
+    * 
+    * @param String $language
+    * @param String $primary
+    * @param String $secondary
+    * 
+    * @return String
+    */
+    public static function language_value($language, $primary, $secondary='')
+    {
+        $secondary = empty($secondary) ? $primary : $secondary;
+        
+        switch ($language)
+        {
+            case 'serbian': return $secondary;
+            default: return $primary;
+        }
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

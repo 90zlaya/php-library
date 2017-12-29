@@ -29,3 +29,5 @@ echo format::array_to_string(array('csv', 'txt', 'php'), ',') . '<br/>';
 echo format::fullname('John', 'Doe') . '<br/>';
 
 echo format::search_wizard('Testing 123', array('field1', 'field2', 'field3')) . '<br/>';
+
+echo format::language_value('', 'Police', 'Policija');
