@@ -17,7 +17,7 @@ $current = date_time_format::current();
 
 echo $current . '<br/>';
 
-$user_date = '08.11.2017';
+$user_date = '08.11.2017 16:07';
 
 echo $user_date . '<br/>';
 
@@ -41,3 +41,5 @@ format::pre($list_of_days);
 
 $list_of_months = date_time_format::get_months('serbian', 3);
 format::pre($list_of_months);
+
+echo date_time_format::format('2017-10-23 15:57:19');

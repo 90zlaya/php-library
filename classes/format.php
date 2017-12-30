@@ -460,5 +460,34 @@ class Format {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Merge specific item with source array
+    * 
+    * @param Array $source
+    * @param Array $item
+    * 
+    * @return Array $new
+    */
+    public static function add_to_array($source, $item)
+    {
+        $new = array();
+        
+        foreach ($source as $row)
+        {
+            if (is_array($row))
+            {
+                $new[] = array_merge($row, $item);
+            }
+            else
+            {
+                $new = array($row, $item);
+            }
+        }
+        
+        return $new;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

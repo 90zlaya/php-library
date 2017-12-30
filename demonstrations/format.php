@@ -30,4 +30,30 @@ echo format::fullname('John', 'Doe') . '<br/>';
 
 echo format::search_wizard('Testing 123', array('field1', 'field2', 'field3')) . '<br/>';
 
-echo format::language_value('', 'Police', 'Policija');
+echo format::language_value('', 'Police', 'Policija') . '<br/><br/>';
+
+echo 'Onedimensional:';
+$add = format::add_to_array(
+    array(
+        'Item one' => 'Value one',
+    ),
+    'Item four'
+);
+format::pre($add);
+
+echo 'Multidimensional:';
+$add = format::add_to_array(
+    array(
+        array(
+            'Item one' => 'Value one',
+        ),
+        array(
+            'Item two' => 'Value two',
+        ),
+        array(
+            'Item three' => 'Value three',
+        ),
+    ),
+    array('Item four' => 'Value four')
+);
+format::pre($add);
