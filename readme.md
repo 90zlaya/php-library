@@ -146,7 +146,7 @@ Idea behind creation of this repository is making everyday Web Development proce
 Acknowledgements
 ----------------
 
-Copyright © 2017 | [Zlatan Stajic] | Released under the [MIT License]
+Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 
 [Zlatan Stajic]: https://www.zlatanstajic.com/
 [GitHub]: https://github.com/90zlaya/php-library
