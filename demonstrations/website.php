@@ -36,11 +36,11 @@ $website->add_to_head(
             'type' => 'link-custom',
         ),
         array(
-            'path' => 'https://code.jquery.com/jquery-3.2.1.min.js',
+            'path' => '../assets/js/jquery.min.js',
             'type' => 'script',
         ),
         array(
-            'path' => 'alert("head custom script loaded");',
+            'path' => 'alert("Head custom script loaded");',
             'type' => 'script-custom',
         ),
     )
@@ -54,7 +54,7 @@ $website->add_to_bottom(
             'type' => 'script',
         ),
         array(
-            'path' => 'alert("bottom custom script loaded");',
+            'path' => 'alert("Bottom custom script loaded");',
             'type' => 'script-custom',
         ),
     )
@@ -63,7 +63,7 @@ $website->add_to_bottom(
 // Adding images to website
 $website->add_to_images(
     array(
-        'php-logo' => 'http://thedeveloperworldisyours.com/wp-content/uploads/php.png',
+        'php-logo' => '../assets/img/elephpant.png',
     ),
     TRUE
 );

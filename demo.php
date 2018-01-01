@@ -43,7 +43,7 @@
         }    
     echo '</ol>' . PHP_EOL;
     
-    echo '<p>Copyright &#169; 2017 | <a href="https://www.zlatanstajic.com/">Zlatan Stajić</a> | Released under the <a href="http://www.opensource.org/licenses/mit-license.php" target="_target">MIT</a> License</p>' . PHP_EOL;
+    echo '<p>Copyright &#169; 2017-2018 | <a href="https://www.zlatanstajic.com/">Zlatan Stajić</a> | Released under the <a href="http://www.opensource.org/licenses/mit-license.php" target="_target">MIT</a> License</p>' . PHP_EOL;
 ?>
 </body>
 </html>
