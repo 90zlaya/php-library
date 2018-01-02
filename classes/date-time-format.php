@@ -69,7 +69,11 @@ class Date_Time_Format {
     */
     public static function compare($date)
     {
-        if (self::current(self::$types['database']['format']) > date(self::$types['database']['format'], strtotime($date)))
+        if 
+        (
+            self::current(self::$types['database']['format']) > 
+            date(self::$types['database']['format'], strtotime($date))
+        )
         {
             return TRUE;
         }
@@ -89,14 +93,9 @@ class Date_Time_Format {
     */
     public static function format($date, $without_time=FALSE)
     {
-        if ($without_time)
-        {
-            return date(self::$types['friendly']['date'], strtotime($date));
-        }
-        else
-        {
-            return date(self::$types['friendly']['datetime'], strtotime($date));
-        }
+        $type = $without_time ? self::$types['friendly']['date'] : self::$types['friendly']['datetime'];
+        
+        return date($type, strtotime($date));
     } 
     
     // -------------------------------------------------------------------------
@@ -209,7 +208,7 @@ class Date_Time_Format {
         {
             if ($time > 0)
             {
-                $hours = floor($time / 60);
+                $hours   = floor($time / 60);
                 $minutes = ($time % 60);
                 
                 return sprintf($format, $hours, $minutes);
@@ -389,7 +388,7 @@ class Date_Time_Format {
     */
     public static function prefix($string)
     {
-        if (!empty($string))
+        if ( ! empty($string))
         {
             $date_time = date(self::$types['unfriendly']['datetime']);
             $string_with_prefix = $date_time . '_' . $string;
@@ -407,76 +406,47 @@ class Date_Time_Format {
     * 
     * @param String $jmbg
     * 
-    * @return mixed $date
+    * @return mixed
     */
     public static function date_from_jmbg($jmbg)
     {
-        if (empty($jmbg) || strlen($jmbg) < 13)
-        {
-            $date = FALSE;
-        }
-        else
+        if (strlen($jmbg) === 13)
         {
             $date_day   = substr($jmbg, 0, 2);
             $date_month = substr($jmbg, 2, 2);
             $date_year  = substr($jmbg, 4, 3);
             
-            if (substr($date_day, 0, 1) == 0)
-            {
-                $date_day = substr($date_day, 1, 2); 
-            }
-            
-            if (substr($date_month, 0, 1) == 0)
-            {
-                $date_month = substr($date_month, 1, 2); 
-            }
+            substr($date_day, 0, 1) == 0 ? $date_day = substr($date_day, 1, 2) : NULL;
+            substr($date_month, 0, 1) == 0 ? $date_month = substr($date_month, 1, 2) : NULL;
 
-            if ($date_year > 100)
-            {
-                $date_year = 1 . $date_year;
-            }
-            else
-            {
-                $date_year = 2 . $date_year;    
-            }
+            $number_year = $date_year > 100 ? 1 : 2;
             
-            $date = $date_day . '. ' . $date_month . '. ' . $date_year . '.';
+            return $date_day . '. ' . $date_month . '. ' . $number_year . $date_year . '.';
         }
-            
-        return $date;
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
     
     /**
-    * Name of the first day in year
+    * Name of the first day in year for given format
     * 
     * @param String $format
     * @param int $year
     * 
-    * @return String $january_first
+    * @return mixed
     */
     public static function first_day_of_year($format='l', $year=0)
     {
-        $first_day_and_month = '01.01.';
-        
-        if (empty($year))
+        if (in_array($format, array('d', 'D', 'j', 'l', 'N', 'S', 'z')))
         {
-            $year  = date('Y');
+            empty($year) ? $year = date('Y') : NULL;
+            
+            return date($format, strtotime('01.01.' . $year));
         }
         
-        switch ($format)
-        {
-            case 'd': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
-            case 'D': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
-            case 'j': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
-            case 'l': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
-            case 'N': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
-            case 'S': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
-            case 'z': $january_first = date($format, strtotime($first_day_and_month . $year)); break;
-        }
-        
-        return $january_first;
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------

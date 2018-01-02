@@ -8,6 +8,7 @@ Modified:
 
 Date_Time_Format: get_days and get_months methods created
 Date_Time_Format: get_days and get_months methods php and json return values
+Date_Time_Format: refactoring class
 Directory_Lister: avoiding case of empty directory in files method
 Export: export file column dimension auto size
 Export: csv export set to avoid PHPExcel output because of double quotes
