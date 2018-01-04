@@ -8,8 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\User_Agent as user_agent;
 use phplibrary\Format as format;
 

@@ -8,8 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\Math as math;
 use phplibrary\Format as format;
 

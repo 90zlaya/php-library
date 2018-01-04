@@ -8,8 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\Date_Time_Format as date_time_format;
 use phplibrary\Format as format;
 

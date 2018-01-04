@@ -8,8 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\Format as format;
 use phplibrary\Export as export;
 

@@ -104,11 +104,11 @@ $php_library = array(
         'buttons'       => array(
             array(
                 'name'  => 'Demo',
-                'url'   => 'demo.php',
+                'url'   => 'view.php?page=demo',
             ),
             array(
                 'name'  => 'Log',
-                'url'   => 'log.txt',
+                'url'   => 'view.php?page=log',
             ),
         ),
         'images'        => array(

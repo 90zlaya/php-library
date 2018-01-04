@@ -25,9 +25,9 @@
 	<link href="assets/css/custom.css" rel="stylesheet">
     <!-- Initializer -->
     <script>
-    Flatdoc.run({
-        fetcher: Flatdoc.github('90zlaya/php-library')
-    });
+        Flatdoc.run({
+            fetcher: Flatdoc.github('90zlaya/php-library')
+        });
     </script>
 </head>
 

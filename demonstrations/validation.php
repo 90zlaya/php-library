@@ -8,8 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\Validation as validation;
 
 $name = '90zlaya.jpeg';

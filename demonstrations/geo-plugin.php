@@ -8,8 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\Geo_Plugin as geo_plugin;
 use phplibrary\Format as format;
 

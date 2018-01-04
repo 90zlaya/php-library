@@ -8,8 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\Email as email;
 
 $email = 'zlatan.stajic@guerrillamail.com';

@@ -8,9 +8,11 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\Website as website;
+
+// -----------------------------------------------------------------------------
+// ---| Usage |-----------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
 // Instance of Website class
 $website = new website(
@@ -63,50 +65,47 @@ $website->add_to_bottom(
 // Adding images to website
 $website->add_to_images(
     array(
-        'php-logo' => '../assets/img/elephpant.png',
+        'php-logo' => 'assets/img/elephpant.png',
     ),
     TRUE
 );
 
-?>
-<!doctype html>
-<html>
-<head>
-    <?php
-        // Printing meta
-        echo $website->meta(array(
-            'shortcut_icon' => $website->images('php-logo'),
-            'touch_icon'    => $website->images('php-logo'),
-        ));
-        
-        // Printing head
-        echo $website->head();
-    ?>
-</head>
+// -----------------------------------------------------------------------------
+// ---| Demonstration |---------------------------------------------------------
+// -----------------------------------------------------------------------------
 
-<body>
+// Printing meta
+/*
+echo $website->meta(array(
+    'shortcut_icon' => $website->images('php-logo'),
+    'touch_icon'    => $website->images('php-logo'),
+));
+*/
+
+// Printing head
+//echo $website->head();
+
+// Show name and image
+echo '
     <div>
-        <h1>Welcome to the <?=$website->name;?></h1>
-        <img src="<?=$website->images('php-logo');?>">
+        <h1>Welcome to the ' . $website->name . '</h1>
+        <img src="' . $website->images('php-logo') . '">
     </div>
-    <?php
-        // Redirection
-        //$website->redirect_to_page('https://www.google.com/', TRUE);
-        
-        if (isset($website->server['referer']))
-        {
-            echo 'You were appointed to this page from: ' . $website->server['referer'] . '<br/>';
-        }
-        
-        // Printing bottom
-        echo $website->bottom();
-        
-        // Creator signature
-        echo $website->signature();
-        
-        // Creator signature for html source
-        echo $website->signature_hidden();
-    ?>
-</body>
+';
 
-</html>
+// Redirection
+//$website->redirect_to_page('https://www.google.com/', TRUE);
+
+if (isset($website->server['referer']))
+{
+    echo 'You were appointed to this page from: ' . $website->server['referer'] . '<br/>';
+}
+
+// Printing bottom
+//echo $website->bottom();
+
+// Creator signature
+echo $website->signature();
+
+// Creator signature for html source
+echo $website->signature_hidden();

@@ -8,8 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\Format as format;
 
 $bytes = format::bytes(715000, TRUE, 2);

@@ -8,8 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../autoload.php';
-
 use phplibrary\Operating_System as operating_system;
 use phplibrary\Format as format;
 
