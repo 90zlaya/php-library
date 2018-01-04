@@ -15,9 +15,27 @@
 
 <body>
 <?php
-    $page = isset($_GET['page']) ? $_GET['page'] . '.php' : header('Location: index.php');
+    $home_page  = 'index.php';
+    $location   = isset($_GET['page']) ? $_GET['page'] : header('Location: ' . $home_page);
+    $page       = $location . '.php';
     
-    file_exists($page) ? include $page : header('Location: index.php');
+    if (file_exists($page))
+    {
+        include $page;
+    }
+    else
+    {
+        $special_location = $location . '/index.php';
+        
+        if (file_exists($special_location))
+        {
+            include $special_location;
+        }
+        else
+        {
+            header('Location: ' . $home_page);
+        }
+    }
 ?>
 </body>
 </html>

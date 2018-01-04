@@ -10,6 +10,6 @@
 */
 use phplibrary\User as user;
 
-$image = user::image('background.jpg', '../assets/img/', 'elephpant.png');
+$image = user::image('background.jpg', 'assets/img/', 'elephpant.png');
 
 echo '<img src="' . $image . '" alt="Image" />';

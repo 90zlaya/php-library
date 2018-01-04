@@ -6,7 +6,6 @@
         foreach ($php_library['list']['classes'] as $item)
         {
             echo '<li>';
-            //echo '<a href="' . $php_library['folders']['demonstrations'] . DIRECTORY_SEPARATOR . $item['name'] . '.php' . '">'; 
             echo '<a href="view.php?page=' . $php_library['folders']['demonstrations'] . '/' . $item['name'] . '">'; 
             echo $item['name'];
             echo '</a>';
@@ -21,7 +20,7 @@
         foreach ($php_library['list']['modules'] as $item)
         {
             echo '<li>';
-            echo '<a href="' . $php_library['folders']['modules'] . '/' . $item['name'] . '">';
+            echo '<a href="view.php?page=' . $php_library['folders']['modules'] . '/' . $item['name'] . '">';
             echo $item['name'];
             echo '</a>';
             echo '</li>' . PHP_EOL;

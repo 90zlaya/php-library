@@ -13,8 +13,6 @@
 |
 | -------------------------------------------------------------------
 */
-include_once '../../autoload.php';
-
 use phplibrary\File as file;
 use phplibrary\Directory_Lister as directory_lister;
 
