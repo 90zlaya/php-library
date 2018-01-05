@@ -84,6 +84,9 @@ $php_library = array(
             array(
                 'name' => 'file-version',
             ),
+            array(
+                'name' => 'mysql-dump',
+            ),
         ),
     ),
     'hyperlinks'    => array(

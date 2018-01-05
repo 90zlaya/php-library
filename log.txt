@@ -3,6 +3,7 @@ Since php-library v1.1.0
 New:
 
 Sorter: new class Sorter developed from image-sorter module
+mysql-dump: new module added
 
 Modified:
 

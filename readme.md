@@ -108,6 +108,10 @@ List of modules
 This script looks up for files inside given path for those which are changed since certain point in time.
 If or when it finds them, then creates two files, or updates them, with informations about date, version and changed files.
 
+* mysql-dump
+
+This script works on MySQL databases backup
+
 List of third-party
 ----------------
 
