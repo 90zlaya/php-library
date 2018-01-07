@@ -181,13 +181,36 @@ class User_Agent {
     */
 	public static function is_mobile($user_agent)
     {
-		if (preg_match(self::$mobile_user_agent_one, $user_agent) || preg_match(self::$mobile_user_agent_two, substr($user_agent, 0, 4)))
+		if 
+        (
+            preg_match(self::$mobile_user_agent_one, $user_agent) || 
+            preg_match(self::$mobile_user_agent_two, substr($user_agent, 0, 4))
+        )
 		{
 			return TRUE;
 		}
 		
         return FALSE;
 	}
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Determines if given user agent is crawler or not
+    * 
+    * @param String $user_agent
+    * 
+    * @return Bool
+    */
+    public static function is_crawler($user_agent)
+    {
+        if (in_array($user_agent, self::$crawlers))
+        {
+            return TRUE;
+        }
+        
+        return FALSE;
+    }
     
     // -------------------------------------------------------------------------
 }

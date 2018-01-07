@@ -5,6 +5,7 @@ Since php-library v1.2.0
 Modified:
 
 User_Agent: list_crawlers method created
+User_Agent: is_crawler method created
 
 -------------------------------------------
 Since php-library v1.1.0
