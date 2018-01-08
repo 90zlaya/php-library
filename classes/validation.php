@@ -57,20 +57,16 @@ class Validation {
     * 
     * @param String $param
     * 
-    * @return String $comma
+    * @return String
     */
     public static function comma($param)
     {
         if (strpos($param, ',') !== FALSE)
         {
-            $comma = str_replace(',', '.', $param);
-        }
-        else
-        {
-            $comma = $param;
+            return str_replace(',', '.', $param);
         }
         
-        return $comma;
+        return $param;
     }   
     
     // -------------------------------------------------------------------------
@@ -115,7 +111,7 @@ class Validation {
     * 
     * @param String $variable
     * 
-    * @return int $cleared_number
+    * @return int
     */
     public static function clear_number($variable)
     {
@@ -213,7 +209,11 @@ class Validation {
         $extension = pathinfo($file, PATHINFO_EXTENSION);
         $extension = strtolower($extension);
         
-        if (in_array($extension, $allowed_extensions) && (empty($type) || empty($allowed_types) || in_array($type, $allowed_types)))
+        if 
+        (
+            in_array($extension, $allowed_extensions) && 
+            (empty($type) || empty($allowed_types) || in_array($type, $allowed_types))
+        )
         {
             return TRUE;
         }

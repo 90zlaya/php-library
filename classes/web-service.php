@@ -23,13 +23,11 @@ class Web_Service {
     */
     public static function response_code($code)
     {
+        $status = FALSE;
+        
         switch ($code)
         {
-            case 200: 
-                {
-                    $status = TRUE;
-                } break;
-            default: $status = FALSE;
+            case 200: $status = TRUE; break;
         }
         
         return array(
