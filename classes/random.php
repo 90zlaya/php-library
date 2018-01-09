@@ -35,7 +35,7 @@ class Random {
                     $c = self::$numbers;
                     $random_integer = NULL;
                     
-                    for($i=0; $i<$length; $i++)
+                    for ($i=0; $i<$length; $i++)
                     {
                         $random_integer .= $c[rand()%strlen($c)];
                     }
@@ -47,7 +47,7 @@ class Random {
                     $c = self::$alphanumeric;
                     $random_string = '';
                     
-                    for($i=0; $i<$length; $i++)
+                    for ($i=0; $i<$length; $i++)
                     {
                         $random_string .= $c[rand()%strlen($c)];
                     }
@@ -61,9 +61,9 @@ class Random {
                     $max = $length/2;           
                     $readable_random_string = '';
                     
-                    for($i=1; $i<=$max; $i++)
+                    for ($i=1; $i<=$max; $i++)
                     {
-                        if($i == 1)
+                        if ($i == 1)
                         {
                             $readable_random_string .= strtoupper($conso[rand(0,19)]);
                             $readable_random_string .= $vocal[rand(0,4)]; ;
@@ -77,6 +77,7 @@ class Random {
                     
                     return $readable_random_string;
                 }
+            default: return FALSE;
         }
     }
     
@@ -98,18 +99,9 @@ class Random {
         
         switch ($dose)
         {
-            case 'DAY':
-                {
-                    $index = date('N') - 1;
-                } break;
-            case 'MONTH':
-                {
-                    $index = date('j') - 1;
-                } break;
-            default:
-                {
-                    $index = rand(0, $list_size - 1);
-                }
+            case 'DAY': $index = date('N') - 1; break;
+            case 'MONTH': $index = date('j') - 1; break;
+            default: $index = rand(0, $list_size - 1);
         }
         
         return $list[$index];

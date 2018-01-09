@@ -11,6 +11,8 @@
 use phplibrary\Random as random;
 use phplibrary\Format as format;
 
+format::pre(random::generate(4, 'STRING_ADVANCED'));
+
 $list = array(
      array(
         'content'     => "Monday: There's no place like home!",
