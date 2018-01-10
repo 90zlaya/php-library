@@ -24,19 +24,12 @@ class Password {
     * @param int $size_optimum
     * @param String $letters
     * 
-    * @return String $new_password
+    * @return String
     */
     public static function new($size_optimum=0, $letters='')
     {
-        if (empty($size_optimum))
-        {
-            $size_optimum = self::$size_optimum;
-        }
-        
-        if (empty($letters))
-        {
-            $letters = self::$letters;
-        }
+        empty($size_optimum) ? $size_optimum = self::$size_optimum : NULL;
+        empty($letters) ? $letters = self::$letters : NULL;
             
         return substr(str_shuffle($letters), 0, $size_optimum);
     }
@@ -49,22 +42,15 @@ class Password {
     * @param int $size_optimum
     * @param String $words
     * 
-    * @return String $new_password
+    * @return String
     */
     public static function new_readable($size_optimum=0, $words='')
     {
-        if (empty($size_optimum))
-        {
-            $size_optimum = self::$size_optimum;
-        }
+        empty($size_optimum) ? $size_optimum = self::$size_optimum : NULL;
+        empty($words) ? $words = self::$words : NULL;
         
-        if (empty($words))
-        {
-            $words = self::$words;
-        }
-        
-        $words = explode(',', $words);
-        $new_password = '';
+        $words          = explode(',', $words);
+        $new_password   = '';
         while (strlen($new_password) < $size_optimum)
         {
           $r = mt_rand(0, count($words)-1);
@@ -74,14 +60,12 @@ class Password {
         $number = mt_rand(1000, 9999);
         if ($size_optimum > 2)
         {
-            $new_password = substr($new_password, 0, $size_optimum-strlen($number)) . $number;
+            return substr($new_password, 0, $size_optimum-strlen($number)) . $number;
         }
         else
         {
-            $new_password = substr($new_password, 0, $size_optimum);
+            return substr($new_password, 0, $size_optimum);
         }
-
-        return $new_password;
     } 
   
     // -------------------------------------------------------------------------
@@ -93,14 +77,14 @@ class Password {
     * @param Bool $return_boolean
     * @param int $minimum_strength_percent
     * 
-    * @return mixed $result
+    * @return mixed
     */
-    public static function strength($string, $return_boolean=TRUE, $minimum_strength_percent='60')
+    public static function strength($string, $return_boolean=TRUE, $minimum_strength_percent=60)
     {
         $h = 0;
         $size = strlen($string);
         
-        if ($size >= self::$size_minimum && ctype_alnum($string))
+        if ($size >= self::$size_minimum)
         {
             foreach (count_chars($string, 1) as $v)
             {
@@ -116,10 +100,7 @@ class Password {
             $strength = 0;    
         }
         
-        $strength > $minimum_strength_percent ? $flagStrength = TRUE : $flagStrength = FALSE;
-        $return_boolean ? $result = $flagStrength : $result = $strength;
-    
-        return $result;
+        return $return_boolean ? $strength > $minimum_strength_percent : $strength;
     }    
     
     // -------------------------------------------------------------------------
@@ -129,14 +110,11 @@ class Password {
     * 
     * @param String $plainText
     * 
-    * @return String $encoded
+    * @return String
     */
     public static function encode($plainText)
     {
-        $plainText = base64_encode($plainText);
-        $encoded = strtr($plainText, '+/=', '-_,');
-        
-        return $encoded;
+        return strtr(base64_encode($plainText), '+/=', '-_,');
     }
     
     // -------------------------------------------------------------------------
@@ -146,14 +124,11 @@ class Password {
     * 
     * @param String $plainText
     * 
-    * @return String $decoded
+    * @return String
     */
     public static function decode($plainText)
     {
-        $plainText = strtr($plainText, '-_,', '+/=');
-        $decoded = base64_decode($plainText);
-        
-        return $decoded;
+        return base64_decode(strtr($plainText, '-_,', '+/='));
     }
     
     // -------------------------------------------------------------------------
