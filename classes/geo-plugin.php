@@ -62,25 +62,25 @@ class Geo_Plugin extends geoPlugin{
 	// -------------------------------------------------------------------------
     
     /**
-    * Collect all data
+    * Returns all data
     * 
-	* @return void
+    * @return Array
     */
-    protected function collect()
+    public function data()
     {
         $prefix = isset($_SERVER['HTTPS']) && ! empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
         
         $this->data['base'] = array(
-            'location'              => $prefix . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
-            'referer'               => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL,
-            'prefix'                => $prefix,
-            'host'                  => $_SERVER['HTTP_HOST'],
-            'path'                  => dirname($_SERVER['PHP_SELF']),
-            'page'                  => basename($_SERVER['PHP_SELF']),
-            'date'                  => date('Y-m-d'),
-            'time'                  => date('H:i:s'),
-            'agent'                 => $_SERVER['HTTP_USER_AGENT'],
-            'address'               => $_SERVER['REMOTE_ADDR'],
+            'location'  => $prefix . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
+            'referer'   => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL,
+            'prefix'    => $prefix,
+            'host'      => $_SERVER['HTTP_HOST'],
+            'path'      => dirname($_SERVER['PHP_SELF']),
+            'page'      => basename($_SERVER['PHP_SELF']),
+            'date'      => date('Y-m-d'),
+            'time'      => date('H:i:s'),
+            'agent'     => $_SERVER['HTTP_USER_AGENT'],
+            'address'   => $_SERVER['REMOTE_ADDR'],
         );
         
         $this->data['server'] = array();
@@ -106,20 +106,8 @@ class Geo_Plugin extends geoPlugin{
             'currency_converter'    => $this->currencyConverter,
             'currency_code'         => $this->currencyCode,
         );
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Returns all data
-    * 
-    * @return Array
-    */
-    public function data()
-    {
-        $this->collect();
-		
-		return $this->data;
+        
+        return $this->data;
     }
     
     // -------------------------------------------------------------------------
@@ -131,14 +119,7 @@ class Geo_Plugin extends geoPlugin{
     */
     public function is_active_service()
     {
-        $this->collect();
-		
-		if ( ! empty($this->data['service']['ip']))
-        {
-            return TRUE;
-        }
-        
-        return FALSE;
+        return ! empty($this->data()['service']['ip']);
     }
     
     // -------------------------------------------------------------------------
