@@ -6,13 +6,12 @@
 /out-tsc
 
 # custom
+files
+versions
+development.txt
 images.php
 composer.lock
 classes/third-party/vendor
-modules/file-version/files
-modules/file-version/versions
-files
-versions
 
 # System Files
 .DS_Store
