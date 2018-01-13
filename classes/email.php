@@ -38,20 +38,13 @@ class Email {
     * @param String $subject
     * @param String $attributes
     * 
-    * @return String $formated_email
+    * @return mixed
     */
     public static function mailto($email, $link_text='', $subject='', $attributes='')
     {
-        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL))
+        if ( ! empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL))
         {
-            $formated_email = '';
-        }
-        else
-        {
-            if (empty($link_text))
-            {
-                $link_text = $email;
-            }
+            empty($link_text) ? $link_text = $email : NULL;
             
             $email = str_replace('@', '&#64;', $email);
             $email = str_replace('.', '&#46;', $email);
@@ -84,9 +77,11 @@ class Email {
 
             $formated_email .= "document.write('$part4');";
             $formated_email .= '</script>';
+            
+            return $formated_email;
         }
         
-        return $formated_email;
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -97,7 +92,7 @@ class Email {
     * @param String $email
     * @param Array $invalid_email_clients
     * 
-    * @return Bool
+    * @return mixed
     */
     public static function validate($email, $invalid_email_clients=array())
     {
@@ -111,6 +106,7 @@ class Email {
             if (stristr($email, $item))
             {
                 return FALSE;
+                break;
             }
         }
         
