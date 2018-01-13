@@ -64,14 +64,16 @@ class Email {
             $formated_email .= "document.write('$part1');";
             $formated_email .= "document.write('$part2');";
 
-            foreach ($email as $e){
+            foreach ($email as $e)
+            {
                 $formated_email .= "document.write('$e');";
             }
 
             $formated_email .= "document.write('$part_subject');";
             $formated_email .= "document.write('$part3');";
 
-            foreach ($link_text as $l){
+            foreach ($link_text as $l)
+            {
                 $formated_email .= "document.write('$l');";
             }
 
@@ -106,7 +108,6 @@ class Email {
             if (stristr($email, $item))
             {
                 return FALSE;
-                break;
             }
         }
         
