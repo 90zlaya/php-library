@@ -44,43 +44,49 @@ class Email {
     {
         if ( ! empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL))
         {
+            $email = strtolower($email);
+                        
             empty($link_text) ? $link_text = $email : NULL;
             
-            $email = str_replace('@', '&#64;', $email);
-            $email = str_replace('.', '&#46;', $email);
-            $email = str_split($email, 5);
+            $parts = array(
+                '<a href="ma',
+                'ilto&#58;',
+                '?subject=' . $subject,
+                '" ' . $attributes . ' >',
+                '</a>',
+            );
+                        
+            $email      = str_replace('@', '&#64;', $email);
+            $email      = str_replace('.', '&#46;', $email);
+            $email      = str_split($email, 5);
 
-            $link_text = str_replace('@', '&#64;', $link_text);
-            $link_text = str_replace('.', '&#46;', $link_text);
-            $link_text = str_split($link_text, 5);
-
-            $part1 = '<a href="ma';
-            $part2 = 'ilto&#58;';
-            $part_subject = '?subject='.$subject.'';
-            $part3 = '" '. $attributes .' >';
-            $part4 = '</a>';
-
-            $formated_email = '<script type="text/javascript">';
-            $formated_email .= "document.write('$part1');";
-            $formated_email .= "document.write('$part2');";
+            $link_text  = str_replace('@', '&#64;', $link_text);
+            $link_text  = str_replace('.', '&#46;', $link_text);
+            $link_text  = str_split($link_text, 5);
+            
+            $scripted   = '';
+            
+            $scripted  .= '<script type="text/javascript">';
+            $scripted  .= "document.write('" . $parts[0] . "');";
+            $scripted  .= "document.write('" . $parts[1] . "');";
 
             foreach ($email as $e)
             {
-                $formated_email .= "document.write('$e');";
+                $scripted .= "document.write('$e');";
             }
 
-            $formated_email .= "document.write('$part_subject');";
-            $formated_email .= "document.write('$part3');";
+            $scripted  .= "document.write('" . $parts[2] . "');";
+            $scripted  .= "document.write('" . $parts[3] . "');";
 
             foreach ($link_text as $l)
             {
-                $formated_email .= "document.write('$l');";
+                $scripted .= "document.write('$l');";
             }
-
-            $formated_email .= "document.write('$part4');";
-            $formated_email .= '</script>';
             
-            return $formated_email;
+            $scripted  .= "document.write('" . $parts[4] . "');";
+            $scripted  .= '</script>';
+            
+            return $scripted;
         }
         
         return FALSE;
@@ -94,7 +100,7 @@ class Email {
     * @param String $email
     * @param Array $invalid_email_clients
     * 
-    * @return mixed
+    * @return Bool
     */
     public static function validate($email, $invalid_email_clients=array())
     {
