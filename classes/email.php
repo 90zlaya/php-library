@@ -31,6 +31,41 @@ class Email {
     // -------------------------------------------------------------------------
     
     /**
+    * Show email address
+    * 
+    * @param String $email
+    * 
+    * @return mixed
+    */
+    public static function show($email)
+    {
+        if (self::validate($email))
+        {
+            $email      = strtolower($email);
+            $email      = str_replace('@', '&#64;', $email);
+            $email      = str_replace('.', '&#46;', $email);
+            $email      = str_split($email, 5);
+            
+            $scripted   = '';
+            
+            $scripted  .= '<script type="text/javascript">';
+            
+            foreach ($email as $e)
+            {
+                $scripted .= "document.write('$e');";
+            }
+            
+            $scripted  .= '</script>';
+            
+            return $scripted;
+        }
+        
+        return FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Formats email to mailto format
     * 
     * @param String $email
@@ -42,7 +77,7 @@ class Email {
     */
     public static function mailto($email, $link_text='', $subject='', $attributes='')
     {
-        if ( ! empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL))
+        if (self::validate($email))
         {
             $email = strtolower($email);
                         
@@ -104,20 +139,28 @@ class Email {
     */
     public static function validate($email, $invalid_email_clients=array())
     {
-        if (empty($invalid_email_clients))
+        if ( ! empty($email))
         {
-            $invalid_email_clients = self::$invalid_email_clients;
-        }
-        
-        foreach ($invalid_email_clients as $item)
-        {
-            if (stristr($email, $item))
+            if (empty($invalid_email_clients))
             {
-                return FALSE;
+                $invalid_email_clients = self::$invalid_email_clients;
+            }
+            
+            foreach ($invalid_email_clients as $item)
+            {
+                if (stristr($email, $item))
+                {
+                    return FALSE;
+                }
+            }
+            
+            if (preg_match(self::$valid_email_regex, $email))
+            {
+                return filter_var($email, FILTER_VALIDATE_EMAIL);
             }
         }
         
-        return preg_match(self::$valid_email_regex, $email);
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
