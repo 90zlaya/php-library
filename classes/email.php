@@ -46,18 +46,7 @@ class Email {
             $email      = str_replace('.', '&#46;', $email);
             $email      = str_split($email, 5);
             
-            $scripted   = '';
-            
-            $scripted  .= '<script type="text/javascript">';
-            
-            foreach ($email as $e)
-            {
-                $scripted .= "document.write('$e');";
-            }
-            
-            $scripted  .= '</script>';
-            
-            return $scripted;
+            return self::script($email);
         }
         
         return FALSE;
@@ -161,6 +150,31 @@ class Email {
         }
         
         return FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Return array inside <script></script> tags
+    * 
+    * @param Array $data
+    * 
+    * @return String $scripted
+    */
+    private static function script($data)
+    {
+        $scripted   = '';
+        
+        $scripted  .= '<script type="text/javascript">';
+        
+        foreach ($data as $item)
+        {
+            $scripted .= "document.write('$item');";
+        }
+        
+        $scripted  .= '</script>';
+        
+        return $scripted;
     }
     
     // -------------------------------------------------------------------------
