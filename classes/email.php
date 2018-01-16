@@ -41,12 +41,7 @@ class Email {
     {
         if (self::validate($email))
         {
-            $email      = strtolower($email);
-            $email      = str_replace('@', '&#64;', $email);
-            $email      = str_replace('.', '&#46;', $email);
-            $email      = str_split($email, 5);
-            
-            return self::script($email);
+            return self::script(self::split($email));
         }
         
         return FALSE;
@@ -72,45 +67,12 @@ class Email {
                         
             empty($link_text) ? $link_text = $email : NULL;
             
-            $parts = array(
-                '<a href="ma',
-                'ilto&#58;',
-                '?subject=' . $subject,
-                '" ' . $attributes . ' >',
-                '</a>',
+            return self::script(
+                self::split(
+                    '<a href="mailto&#58;' . $email . '?subject=' . $subject . '"' . $attributes . '>' . $link_text . '</a>',
+                    FALSE
+                )
             );
-                        
-            $email      = str_replace('@', '&#64;', $email);
-            $email      = str_replace('.', '&#46;', $email);
-            $email      = str_split($email, 5);
-
-            $link_text  = str_replace('@', '&#64;', $link_text);
-            $link_text  = str_replace('.', '&#46;', $link_text);
-            $link_text  = str_split($link_text, 5);
-            
-            $scripted   = '';
-            
-            $scripted  .= '<script type="text/javascript">';
-            $scripted  .= "document.write('" . $parts[0] . "');";
-            $scripted  .= "document.write('" . $parts[1] . "');";
-
-            foreach ($email as $e)
-            {
-                $scripted .= "document.write('$e');";
-            }
-
-            $scripted  .= "document.write('" . $parts[2] . "');";
-            $scripted  .= "document.write('" . $parts[3] . "');";
-
-            foreach ($link_text as $l)
-            {
-                $scripted .= "document.write('$l');";
-            }
-            
-            $scripted  .= "document.write('" . $parts[4] . "');";
-            $scripted  .= '</script>';
-            
-            return $scripted;
         }
         
         return FALSE;
@@ -175,6 +137,27 @@ class Email {
         $scripted  .= '</script>';
         
         return $scripted;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Split data
+    * 
+    * @param String $data
+    * @param Bool $to_lower
+    * @param int $parts
+    * 
+    * @return Array
+    */
+    private static function split($data, $to_lower=TRUE, $parts=5)
+    {
+        $to_lower ? $data = strtolower($data) : NULL;
+        
+        $data = str_replace('@', '&#64;', $data);
+        $data = str_replace('.', '&#46;', $data);
+        
+        return str_split($data, $parts);
     }
     
     // -------------------------------------------------------------------------
