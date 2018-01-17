@@ -25,7 +25,7 @@
     }
     else
     {
-        $special_location = $location . '/index.php';
+        $special_location = $location . '/' . $home_page;
         
         if (file_exists($special_location))
         {

@@ -7,6 +7,7 @@ Modified:
 Email: show method created
 Email: script method created
 Email: split method created
+Format: in_wizard method created
 Geo_Plugin: removed protected collect method
 User_Agent: list_crawlers method created
 User_Agent: is_crawler method created

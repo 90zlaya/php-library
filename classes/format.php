@@ -489,5 +489,43 @@ class Format {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Prepares SQL statement
+    * 
+    * @param String $term
+    * @param Array $fields
+    * 
+    * @return mixed
+    */
+    public static function in_wizard($term='', $fields=array())
+    {
+        if ( ! empty($term) && ! empty($fields))
+        {
+            $sql         = '';
+            $counter     = 1;
+            $fields_size = count($fields);
+            
+            $sql = ' AND ' . $term . ' IN (';
+            foreach ($fields as $item)
+            {
+                $sql .= '"' . $item . '"';
+                
+                if ($counter < $fields_size)
+                {
+                    $sql .= ', ';
+                }
+                
+                $counter++;
+            }
+            $sql .= ')';
+            
+            return $sql;
+        }
+        
+        return FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>

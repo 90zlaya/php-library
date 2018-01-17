@@ -55,3 +55,4 @@ $add = format::add_to_array(
     array('Item four' => 'Value four')
 );
 format::pre($add);
+format::pre(format::in_wizard('field', array('first', 'second', 'third')));

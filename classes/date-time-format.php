@@ -265,116 +265,26 @@ class Date_Time_Format {
     // -------------------------------------------------------------------------
     
     /**
-    * Converts number of month to month name in specific language
+    * Converts number of month to month name for given language
     * 
     * @param int $month
     * @param String $language
-    * @return String/Bool
+    * @param Bool $lowercase
     * 
     * @return mixed
     */
-    public static function number_to_month($month, $language='')
+    public static function number_to_month($month, $language='', $lowercase=TRUE)
     {
-        switch($month)
+        if ($month >= 1 && $month <= 12)
         {
-            case 1:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'january'; break;
-                        default: return 'januar';
-                    }
-                }
-            case 2:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'february'; break;
-                        default: return 'februar';
-                    }
-                }
-            case 3:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'march'; break;
-                        default: return 'mart';
-                    }
-                }
-            case 4:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'april'; break;
-                        default: return 'april';
-                    }
-                }
-            case 5:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'may'; break;
-                        default: return 'maj';
-                    }
-                }
-            case 6:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'june'; break;
-                        default: return 'jun';
-                    }
-                }
-            case 7:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'july'; break;
-                        default: return 'jul';
-                    }
-                }
-            case 8:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'august'; break;
-                        default: return 'avgust';
-                    }
-                }
-            case 9:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'september'; break;
-                        default: return 'septembar';
-                    }
-                }
-            case 10:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'october'; break;
-                        default: return 'oktobar';
-                    }
-                }
-            case 11:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'november'; break;
-                        default: return 'novembar';
-                    }
-                }
-            case 12:
-                {
-                    switch($language)
-                    {
-                        case 'EN': return 'december'; break;
-                        default: return 'decembar';
-                    }
-                }
-            default: return FALSE;
+            empty($language) ? $language = 'serbian' : NULL;
+            
+            $month = self::get_months($language)['php'][$month-1];
+            
+            return $lowercase ? strtolower($month) : $month;
         }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------

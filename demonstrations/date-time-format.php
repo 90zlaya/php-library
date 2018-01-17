@@ -41,3 +41,4 @@ $list_of_months = date_time_format::get_months('serbian', 3);
 format::pre($list_of_months);
 
 echo date_time_format::format('2017-10-23 15:57:19');
+format::pre(date_time_format::number_to_month(date('n'), 'english'));

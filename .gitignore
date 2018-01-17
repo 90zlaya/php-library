@@ -8,7 +8,6 @@
 # custom
 files
 versions
-development.txt
 images.php
 composer.lock
 classes/third-party/vendor
