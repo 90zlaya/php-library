@@ -116,6 +116,8 @@ class Export {
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
         
+        ob_end_flush();
+        
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
         $objWriter->save('php://output');
         
@@ -140,6 +142,8 @@ class Export {
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
+        
+        ob_end_flush();
         
         print $csv;
         
@@ -226,6 +230,8 @@ class Export {
     {
         if ( ! empty($data))
         {
+            ob_start();
+            
             $iteration  = 1;
             foreach ($data as $item)
             {
