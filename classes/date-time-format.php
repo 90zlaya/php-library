@@ -265,6 +265,31 @@ class Date_Time_Format {
     // -------------------------------------------------------------------------
     
     /**
+    * Converts number of day to day name for given language
+    * 
+    * @param int $day
+    * @param String $language
+    * @param Bool $lowercase
+    * 
+    * @return mixed
+    */
+    public static function number_to_day($day, $language='', $lowercase=TRUE)
+    {
+        if ($day >= 1 && $day <= 7)
+        {
+            empty($language) ? $language = 'serbian' : NULL;
+            
+            $day = self::get_days($language, 0, FALSE)['php'][$day-1];
+            
+            return $lowercase ? strtolower($day) : $day;
+        }
+        
+        return FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Converts number of month to month name for given language
     * 
     * @param int $month
