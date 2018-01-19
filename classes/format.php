@@ -1,19 +1,44 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| FORMAT
-| -------------------------------------------------------------------
-|
-| Format related methods
-|
-| -------------------------------------------------------------------
+/**
+* Format
+*
+* Format related methods
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Format
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Format related methods
+*/
 class Format {
-    protected static $utf_8         = 'utf-8';
+    /**
+    * UTF-8 value
+    * 
+    * @var String
+    */
+    protected static $utf_8 = 'utf-8';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Windows-1250 value
+    * 
+    * @var String
+    */
     protected static $windows_1250  = 'windows-1250';
-    protected static $ip            = array(
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * IP related values
+    * 
+    * @var Array
+    */
+    protected static $ip = array(
         'locator'   => 'http://www.geoplugin.net/php.gp?ip=',
         'localhost' => array(
             'name'      => 'Localhost',
@@ -23,7 +48,15 @@ class Format {
             ),
         ),
     );
-    protected static $website       = array(
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Website related values
+    * 
+    * @var Array
+    */
+    protected static $website = array(
         'regex'     => '/^(http(s?):\/\/)?[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/',
         'web'       => 'www',
         'protocol'  => array(
@@ -31,7 +64,15 @@ class Format {
             'safe'   => 'https://',
         ),
     );
-    protected static $units         = array(
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Computer digital information units
+    * 
+    * @var Array
+    */
+    protected static $units = array(
         'B', 
         'kB', 
         'MB', 

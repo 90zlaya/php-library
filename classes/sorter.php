@@ -1,16 +1,25 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| SORTER
-| -------------------------------------------------------------------
-|
-| Sortes files to multiple folders.
-| 
-| -------------------------------------------------------------------
+/**
+* Sorter
+*
+* Sortes files to multiple folders
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Sort
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Sortes files to multiple folders
+*/
 class Sorter {
+    /**
+    * Sorter class report
+    * 
+    * @var Array
+    */
     protected $report   = array(
         'folders' => array(
             'number' => array(
@@ -37,7 +46,15 @@ class Sorter {
             ),
         ),
     );
-    protected $deploy   = array(
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Deploy values
+    * 
+    * @var Array
+    */
+    protected $deploy = array(
         'where_to_read_files'           => '',
         'where_to_create_directories'   => '',
         'number_of_directories'         => 0,
@@ -45,6 +62,14 @@ class Sorter {
         'operation'                     => '',
         'types'                         => array(),
     );
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * PHP settings
+    * 
+    * @var Array
+    */
     protected $settings = array(
         'max_execution_time' => 3600,
     );
@@ -54,6 +79,9 @@ class Sorter {
     /**
     * Class constructor
     * 
+    * @param Array $params
+    * 
+    * @return void
     */
     public function __construct($params=array())
     {
@@ -66,6 +94,8 @@ class Sorter {
     
     /**
     * Deploy sorting process 
+    * 
+    * @param Array $params
     * 
     * @return Array
     */

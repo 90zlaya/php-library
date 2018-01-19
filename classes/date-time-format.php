@@ -1,16 +1,28 @@
-<?php 
-/*
-| -------------------------------------------------------------------
-| DATE TIME FORMAT
-| -------------------------------------------------------------------
-|
-| Date and Time formating, validating, comparing, converting...
-|
-| -------------------------------------------------------------------
+<?php
+/**
+* Date_Time_Format
+*
+* Date and Time formating, validating, comparing, converting...
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Time
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Date and Time formating, validating, comparing, converting...
+*/
 class Date_Time_Format {
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Date and time types
+    * 
+    * @var Array
+    */
     public static $types = array(
         'user'     => array(
             'format'      => 'd.m.Y',
@@ -32,15 +44,83 @@ class Date_Time_Format {
         ),
     );
     
-    protected static $days          = array(
-        'english' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
-        'serbian' => array('Nedelja', 'Ponedeljak', 'Utorak', 'Sreda', 'Četvrtak', 'Petak', 'Subota'),
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Days in week divided by languages
+    * 
+    * @var Array
+    */
+    protected static $days = array(
+        'english' => array(
+            'Sunday', 
+            'Monday', 
+            'Tuesday', 
+            'Wednesday', 
+            'Thursday', 
+            'Friday', 
+            'Saturday'
+        ),
+        'serbian' => array(
+            'Nedelja', 
+            'Ponedeljak', 
+            'Utorak', 
+            'Sreda', 
+            'Četvrtak', 
+            'Petak', 
+            'Subota'
+        ),
     );
-    protected static $months        = array(
-        'english' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
-        'serbian' => array('Januar', 'Februar', 'Mart', 'April', 'Maj', 'Jun', 'Jul', 'Avgust', 'Septembar', 'Oktobar', 'Novembar', 'Decembar'),
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Months in year divided by languages
+    * 
+    * @var Array
+    */
+    protected static $months = array(
+        'english' => array(
+            'January', 
+            'February', 
+            'March', 
+            'April', 
+            'May', 
+            'June', 
+            'July', 
+            'August', 
+            'September', 
+            'October', 
+            'November', 
+            'December'
+        ),
+        'serbian' => array(
+            'Januar', 
+            'Februar', 
+            'Mart', 
+            'April', 
+            'Maj', 
+            'Jun', 
+            'Jul', 
+            'Avgust', 
+            'Septembar', 
+            'Oktobar', 
+            'Novembar', 
+            'Decembar'
+        ),
     );
-    protected static $invalid_dates = array('1970-01-01', '0000-00-00');
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Invalid dates for database insertion
+    * 
+    * @var Array
+    */
+    protected static $invalid_dates = array(
+        '1970-01-01', 
+        '0000-00-00',
+    );
     
     // -------------------------------------------------------------------------
     
@@ -413,7 +493,7 @@ class Date_Time_Format {
     * 
     * @param String $lang
     * @param int $length
-    * @param Bool $last_day_first
+    * @param Bool $sunday_first
     * 
     * @return Array
     */

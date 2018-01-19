@@ -1,17 +1,34 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| USER
-| -------------------------------------------------------------------
-|
-| Works with user related data
-|
-| -------------------------------------------------------------------
+/**
+* User
+*
+* Works with user related data
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Files
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Works with user related data
+*/
 class User {
+    /**
+    * Default location of images folder
+    * 
+    * @var String
+    */
     protected static $image_location = 'data/users/';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Default image location
+    * 
+    * @var String
+    */
     protected static $image_default  = 'assets/img/user.png';
     
     // -------------------------------------------------------------------------

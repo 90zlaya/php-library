@@ -1,19 +1,28 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| WEBSITE
-| -------------------------------------------------------------------
-|
-| Use this class when working with website related data.
-| 
-| Instantiate it only once (great solution is Singleton design pattern) 
-| and call public parameters and methods across entire website.
-|
-| -------------------------------------------------------------------
+/**
+* Website
+*
+* Use this class when working with website related data.
+* 
+* Instantiate it only once (great solution is Singleton design pattern) 
+* and call public parameters and methods across entire website.
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Website
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Use this class when working with website related data
+*/
 class Website {
+    /**
+    * Server data holder
+    * 
+    * @var Array
+    */
     public $server      = array(
         'location' => '',
         'referer'  => '',
@@ -22,26 +31,121 @@ class Website {
         'path'     => '',
         'page'     => '',
     );
-    public $name;
-    public $host;
-    public $made;
-    public $language    = 'EN';
-    public $charset     = 'UTF-8';
-    public $description = 'Simple website';
-    public $keywords    = 'siple, website';
     
-    private $head    = array();
-    private $bottom  = array();
-    private $images  = array(
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Website name
+    * 
+    * @var String
+    */
+    public $name;
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Website host
+    * 
+    * @var String
+    */
+    public $host;
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Year when website was made
+    * 
+    * @var String
+    */
+    public $made;
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Website language
+    * 
+    * @var String
+    */
+    public $language = 'EN';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Website charset
+    * 
+    * @var String
+    */
+    public $charset = 'UTF-8';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Website description
+    * 
+    * @var String
+    */
+    public $description = 'Simple website';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Website keywords
+    * 
+    * @var String
+    */
+    public $keywords = 'siple, website';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Head data
+    * 
+    * @var Array
+    */
+    private $head = array();
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Bottom data
+    * 
+    * @var Array
+    */
+    private $bottom = array();
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Available website images
+    * 
+    * @var Array
+    */
+    private $images = array(
         'icon' => 'assets/images/icon.png',
         'logo' => 'assets/images/logo.png',
     );
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Website creator data
+    * 
+    * @var Array
+    */
     private $creator = array(
         'name'    => 'Zlatan Stajić',
         'website' => 'https://www.zlatanstajic.com/',
         'email'   => 'contact@zlatanstajic.com',
     );
-    private $calls   = array(
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Head and bottom data calss
+    * 
+    * @var Array
+    */
+    private $calls= array(
         'css' => array(
             'ordinary' => 'link',
             'custom'   => 'link-custom',

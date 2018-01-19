@@ -1,22 +1,82 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| RANDOM
-| -------------------------------------------------------------------
-|
-| Random-related data
-|
-| -------------------------------------------------------------------
+/**
+* Random
+*
+* Random-related data
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Data
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Random-related data
+*/
 class Random {
-    protected static $numbers      = '0123456789';
-    protected static $alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    protected static $consonant    = array("b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","w","x","y","z");
-    protected static $vocal        = array("a","e","i","o","u");
+    /**
+    * Numeric caracters
+    * 
+    * @var String
+    */
+    protected static $numbers = '0123456789';
     
-    // -------------------------------------------------------------------------    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Alphanumeric caracters
+    * 
+    * @var String
+    */
+    protected static $alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Consonant characters
+    * 
+    * @var Array
+    */
+    protected static $consonant = array(
+        "b",
+        "c",
+        "d",
+        "f",
+        "g",
+        "h",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "p",
+        "r",
+        "s",
+        "t",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z",
+    );
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Vocal characters
+    * 
+    * @var Array
+    */
+    protected static $vocal = array(
+        "a",
+        "e",
+        "i",
+        "o",
+        "u",
+    );
+    
+    // -------------------------------------------------------------------------
     
     /**
     * Generates random sequence for given length and sequence type

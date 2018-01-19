@@ -1,13 +1,14 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| GEO PLUGIN
-| -------------------------------------------------------------------
-|
-| Customisation of third-party class geoPlugin 
-| Location: http://www.geoplugin.com/
-|
-| -------------------------------------------------------------------
+/**
+* Geo_Plugin
+*
+* Customisation of third-party class geoPlugin 
+* Location: http://www.geoplugin.com/
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Geography
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
@@ -15,9 +16,27 @@ require_once 'third-party/geoplugin.class/geoplugin.class.php';
 
 use geoPlugin as geoPlugin;
 
+/**
+* Customisation of third-party class geoPlugin 
+* Location: http://www.geoplugin.com/
+*/
 class Geo_Plugin extends geoPlugin{
-    protected $data             = array();
-    protected $server_indices   = array('PHP_SELF',
+    /**
+    * Geo_Plugin data is stored here
+    * 
+    * @var Array
+    */
+    protected $data = array();
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Server PHP indices
+    * 
+    * @var Array
+    */
+    protected $server_indices = array(
+        'PHP_SELF',
         'argv',
         'argc',
         'GATEWAY_INTERFACE',

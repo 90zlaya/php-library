@@ -1,32 +1,65 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| PASSWORD
-| -------------------------------------------------------------------
-|
-| Works with password related data
-|
-| -------------------------------------------------------------------
+/**
+* Password
+*
+* Works with password related data
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Password
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Works with password related data
+*/
 class Password {
+    /**
+    * Minimum password size
+    * 
+    * @var int
+    */
     protected static $size_minimum = 6;
-    protected static $size_optimum = 9;
-    protected static $letters      = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    protected static $words        = 'dog,cat,sheep,sun,sky,red,ball,happy,ice,green,blue,music,movies,radio,green,turbo,mouse,computer,paper,water,fire,storm,chicken,boot,freedom,white,nice,player,small,eyes,path,kid,box,black,flower,ping,pong,smile,coffee,colors,rainbow,plus,king,tv,ring';
     
     // -------------------------------------------------------------------------
     
     /**
-    * Generates new password
+    * Optimum password size
+    * 
+    * @var int
+    */
+    protected static $size_optimum = 9;
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Password letters
+    * 
+    * @var String
+    */
+    protected static $letters = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Password words
+    * 
+    * @var String
+    */
+    protected static $words = 'dog,cat,sheep,sun,sky,red,ball,happy,ice,green,blue,music,movies,radio,green,turbo,mouse,computer,paper,water,fire,storm,chicken,boot,freedom,white,nice,player,small,eyes,path,kid,box,black,flower,ping,pong,smile,coffee,colors,rainbow,plus,king,tv,ring';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Generates new unreadable password
     * 
     * @param int $size_optimum
     * @param String $letters
     * 
     * @return String
     */
-    public static function new($size_optimum=0, $letters='')
+    public static function new_unreadable($size_optimum=0, $letters='')
     {
         empty($size_optimum) ? $size_optimum = self::$size_optimum : NULL;
         empty($letters) ? $letters = self::$letters : NULL;

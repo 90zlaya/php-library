@@ -1,18 +1,19 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| Export
-| -------------------------------------------------------------------
-|
-| Export files using customisation class of PHPOffice/PHPExcel
-| Location: https://github.com/PHPOffice/PHPExcel
-|
-| Don't forget to call composer update from command line in 
-| root folder for latest PHPOffice/PHPExcel library.
-| Otherwise it will throw an error after trying to interpret 
-| require_once on Composer's autoload file.
-|
-| -------------------------------------------------------------------
+/**
+* Export
+*
+* Export files using customisation class of PHPOffice/PHPExcel
+* Location: https://github.com/PHPOffice/PHPExcel
+*
+* Don't forget to call composer update from command line in 
+* root folder for latest PHPOffice/PHPExcel library.
+* Otherwise it will throw an error after trying to interpret 
+* require_once on Composer's autoload file.
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Files
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
@@ -21,17 +22,82 @@ require_once 'third-party/vendor/autoload.php';
 use PHPExcel as PHPExcel;
 use PHPExcel_IOFactory as PHPExcel_IOFactory;
 
+/**
+* Export files using customisation class of PHPOffice/PHPExcel
+*/
 class Export {
-    protected static $file_name             = 'file_export';
-    protected static $document_properties   = array(
+    /**
+    * File name
+    * 
+    * @var String
+    */
+    protected static $file_name = 'file_export';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Document properties
+    * 
+    * @var Array
+    */
+    protected static $document_properties = array(
         'creator'       => 'Maarten Balliauw',
         'title'         => 'Office 2007 XLSX Test Document',
         'description'   => 'Test document for Office 2007 XLSX, generated using PHP classes.',
         'keywords'      => 'office 2007 openxml php',
         'category'      => 'Test result file',
     );
-    protected static $cells                 = array('', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
-    protected static $allowed_types         = array('xlsx', 'xls', 'csv', 'osp');
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Available cells
+    * 
+    * @var Array
+    */
+    protected static $cells = array(
+        '', 
+        'A', 
+        'B', 
+        'C', 
+        'D', 
+        'E', 
+        'F', 
+        'G', 
+        'H', 
+        'I', 
+        'J', 
+        'K', 
+        'L', 
+        'M', 
+        'N', 
+        'O', 
+        'P', 
+        'Q', 
+        'R', 
+        'S', 
+        'T', 
+        'U', 
+        'V', 
+        'W', 
+        'X', 
+        'Y', 
+        'Z',
+    );
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Available types
+    * 
+    * @var Array
+    */
+    protected static $allowed_types = array(
+        'xlsx', 
+        'xls', 
+        'csv', 
+        'osp',
+    );
     
     // -------------------------------------------------------------------------
     
@@ -129,7 +195,7 @@ class Export {
     /**
     * Export files to CSV (csv)
     * 
-    * @param Object $objPHPExcel
+    * @param String $csv
     * @param String $file_name
     * 
     * @return void

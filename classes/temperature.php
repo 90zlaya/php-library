@@ -1,18 +1,35 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| TEMPERATURE
-| -------------------------------------------------------------------
-|
-| Working with temperature conversions
-|
-| -------------------------------------------------------------------
+/**
+* Temperature
+*
+* Working with temperature conversions
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Temperature
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Working with temperature conversions
+*/
 class Temperature {
+    /**
+    * Absolute zero value
+    * 
+    * @var float
+    */
     protected static $absolute_zero = 273.15;
-    protected static $signs         = array(
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Temperature signs
+    * 
+    * @var Array
+    */
+    protected static $signs = array(
         'celsius'    => '&degC',
         'fahrenheit' => 'F',
         'kelvin'     => 'K',

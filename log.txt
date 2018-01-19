@@ -2,6 +2,10 @@
 Since php-library v1.2.0
 -------------------------------------------
 
+Important:
+
+Password: new method is now called new_unreadable method
+
 Modified:
 
 Date_Time_Format: number_to_day

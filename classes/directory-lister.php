@@ -1,32 +1,134 @@
-<?php 
-/*
-| -------------------------------------------------------------------
-| DIRECTORY LISTER
-| -------------------------------------------------------------------
-|
-| Directory content retrieval
-|
-| -------------------------------------------------------------------
+<?php
+/**
+* Directory_Lister
+*
+* Directory content retrieval
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Files
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Directory content retrieval
+*/
 class Directory_Lister {
+    /**
+    * Local file path prefix
+    * 
+    * @var String
+    */
     private static $open_inside_browser = 'file:///';
-    private static $trailing_slash      = '/';
-    private static $dash                = '-';
-    private static $dot                 = '.';
-    private static $number_of_files     = 0;
-    private static $crawled             = array();
     
-    protected static $directory             = '';
-    protected static $date_format           = 'Y-m-d';
-    protected static $time_format           = 'H:m:i';
-    protected static $method_calls          = array(
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Slash variable
+    * 
+    * @var String
+    */
+    private static $trailing_slash = '/';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Dash variable
+    * 
+    * @var String
+    */
+    private static $dash = '-';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Dot variable
+    * 
+    * @var String
+    */
+    private static $dot = '.';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Number of files counter
+    * 
+    * @var int
+    */
+    private static $number_of_files = 0;
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Report variable
+    * 
+    * @var Array
+    */
+    private static $crawled = array();
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Directory location
+    * 
+    * @var String
+    */    
+    protected static $directory = '';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Date format
+    * 
+    * @var String
+    */
+    protected static $date_format = 'Y-m-d';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Time format
+    * 
+    * @var String
+    */
+    protected static $time_format = 'H:m:i';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Method calss
+    * 
+    * @var Array
+    */
+    protected static $method_calls = array(
         'files'    => 'files',
         'folders'  => 'folders',
         'crawl'    => 'crawl',
     );
-    protected static $forbidden_characters  = array('-', '+', '!', '#', '$', '%', '&', '(', ')', '‚', '~', ':', ';');
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Forbidden characters in files
+    * 
+    * @var Array
+    */
+    protected static $forbidden_characters  = array(
+        '-', 
+        '+', 
+        '!', 
+        '#', 
+        '$', 
+        '%', 
+        '&', 
+        '(', 
+        ')', 
+        '‚', 
+        '~', 
+        ':', 
+        ';',
+    );
     
     // -------------------------------------------------------------------------
     

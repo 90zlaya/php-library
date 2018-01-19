@@ -1,17 +1,34 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| EMAIL
-| -------------------------------------------------------------------
-|
-| Email-related operations
-|
-| -------------------------------------------------------------------
+/**
+* Email
+*
+* Email-related operations
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Email
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Email-related operations
+*/
 class Email {
-    protected static $valid_email_regex     = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/i";
+    /**
+    * Valid email regex
+    * 
+    * @var String
+    */
+    protected static $valid_email_regex = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/i";
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Invalid email clients
+    * 
+    * @var Array
+    */
     protected static $invalid_email_clients = array(
         "@yopmail", 
         "@rmqkr", 

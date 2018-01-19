@@ -1,15 +1,19 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| FILE
-| -------------------------------------------------------------------
-|
-| File-related operations
-|
-| -------------------------------------------------------------------
+/**
+* File
+*
+* File-related operations
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Files
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* File-related operations
+*/
 class File {
 
     // -------------------------------------------------------------------------    

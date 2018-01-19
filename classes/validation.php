@@ -1,15 +1,19 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| VALIDATION
-| -------------------------------------------------------------------
-|
-| Validation methods
-|
-| -------------------------------------------------------------------
+/**
+* Validation
+*
+* Validation methods
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Validation
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Validation methods
+*/
 class Validation {
     
     // -------------------------------------------------------------------------

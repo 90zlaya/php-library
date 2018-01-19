@@ -1,18 +1,34 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| MATH
-| -------------------------------------------------------------------
-|
-| Mathematical operations and calculations
-|
-| -------------------------------------------------------------------
+/**
+* Math
+*
+* Mathematical operations and calculations
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Math
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Mathematical operations and calculations
+*/
 class Math {
+    /**
+    * Iterated value used in loops
+    * 
+    * @var int
+    */
     public static $iterator = 0;
     
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Even or odd Boolean value
+    * 
+    * @var Bool
+    */
     private static $bool = TRUE;
     
     // -------------------------------------------------------------------------
@@ -49,6 +65,7 @@ class Math {
     * 
     * @param String $value_1
     * @param String $value_2
+    * @param Bool $bool
     * 
     * @return String
     */

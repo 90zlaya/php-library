@@ -1,16 +1,25 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| OPERATING SYSTEM
-| -------------------------------------------------------------------
-|
-| Working with Operating System related data
-|
-| -------------------------------------------------------------------
+/**
+* Operating_System
+*
+* Working with Operating System related data
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Data
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Working with Operating System related data
+*/
 class Operating_System {
+    /**
+    * List of operating systems
+    * 
+    * @var Array
+    */
     protected static $operating_systems = array(
         array(
             'name' => 'Windows',

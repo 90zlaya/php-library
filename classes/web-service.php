@@ -1,15 +1,19 @@
 <?php
-/*
-| -------------------------------------------------------------------
-| WEB SERVICE
-| -------------------------------------------------------------------
-|
-| Web service related data
-|
-| -------------------------------------------------------------------
+/**
+* Web_Service
+*
+* Web service related data
+*
+* @package      PHP Library
+* @subpackage   phplibrary
+* @category     Services
+* @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+/**
+* Web service related data
+*/
 class Web_Service {
     
     // -------------------------------------------------------------------------
