@@ -314,10 +314,10 @@ class Format {
     /**
     * Formats price for user
     * 
-    * @param Float $price
+    * @param float $price
     * @param int $decimal
     * 
-    * @return Float
+    * @return float $price_format
     */
     public static function price_format($price, $decimal=2)
     {

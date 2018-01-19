@@ -16,8 +16,8 @@ require_once 'third-party/geoplugin.class/geoplugin.class.php';
 use geoPlugin as geoPlugin;
 
 class Geo_Plugin extends geoPlugin{
-    protected $data = array();
-    protected $server_indices = array('PHP_SELF',
+    protected $data             = array();
+    protected $server_indices   = array('PHP_SELF',
         'argv',
         'argc',
         'GATEWAY_INTERFACE',
