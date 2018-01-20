@@ -42,7 +42,18 @@
                     <?php
                         foreach ($php_library['hyperlinks']['buttons'] as $button)
                         {
-                            echo '<span onclick="window.location=\'' . $button['url'] . '\';" class="main-button" role="button">' . $button['name'] . '</span>&nbsp;';
+                            echo '<span onclick="';
+                            
+                            if ($button['method'] == '_blank')
+                            {
+                                echo 'window.open(\'' . $button['url'] . '\', \'' . $button['method'] . '\')';
+                            }
+                            else
+                            {
+                                echo 'window.location=\'' . $button['url'] . '\'';
+                            }
+                            
+                            echo ';" class="main-button" role="button">' . $button['name'] . '</span>&nbsp;';
                         }
                     ?>
                 </h5>

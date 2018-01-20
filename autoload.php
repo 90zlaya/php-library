@@ -106,12 +106,19 @@ $php_library = array(
         ),
         'buttons'       => array(
             array(
-                'name'  => 'Demo',
-                'url'   => 'view.php?page=demo',
+                'name'   => 'Demo',
+                'url'    => 'view.php?page=demo',
+                'method' => '',
             ),
             array(
-                'name'  => 'Log',
-                'url'   => 'view.php?page=log',
+                'name'   => 'Log',
+                'url'    => 'view.php?page=log',
+                'method' => '',
+            ),
+            array(
+                'name'   => 'API',
+                'url'    => 'api/index.html',
+                'method' => '_blank',
             ),
         ),
         'images'        => array(

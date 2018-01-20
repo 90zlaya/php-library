@@ -8,6 +8,7 @@
 # custom
 files
 versions
+phpDocumentor.phar
 images.php
 composer.lock
 classes/third-party/vendor
