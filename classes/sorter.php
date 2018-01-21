@@ -171,7 +171,7 @@ class Sorter {
             
             if ( ! file_exists($folder))
             {
-                if (mkdir($folder))
+                if (@mkdir($folder))
                 {
                     $this->report['folders']['number']['created']++;
                     array_push($this->report['folders']['report']['created'], $folder);

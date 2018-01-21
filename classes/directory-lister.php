@@ -206,11 +206,13 @@ class Directory_Lister {
     {
         $display = '';
         
-        if (!empty($list))
+        if ( ! empty($list))
         {
             foreach ($list as $item)
             {
-                $display .= '<script>window.open("' . $item['location'] . '");</script>';
+                $display .= '<script>window.open("';
+				$display .= $item['location'];
+				$display .= '");</script>';
             }
         }
         
@@ -229,7 +231,7 @@ class Directory_Lister {
     */
     private static function depth($list, $types=array())
     {
-        if (!empty($list))
+        if ( ! empty($list))
         {
             $list_of_paths = $list_of_folders = $list_of_files = array();
             
@@ -268,14 +270,14 @@ class Directory_Lister {
     {
         empty($directory) ? $directory = self::$directory : self::$directory = $directory;
         
-        $files = scandir($directory);
+        $files = is_dir($directory) ? scandir($directory) : array();
         $arr_folder = $arr_path = array();
         $counter = 1;
         foreach ($files as $folder)
         {
             $folder_first_character = substr($folder, 0, 1);
             
-            if (!in_array($folder_first_character, self::$forbidden_characters))
+            if ( ! in_array($folder_first_character, self::$forbidden_characters))
             {
                 if ($counter > 2)
                 {
@@ -556,7 +558,7 @@ class Directory_Lister {
                         }
                     }
                     
-                    if (!empty($checked))
+                    if ( ! empty($checked))
                     {
                         array_push($searched, $checked);
                     }
