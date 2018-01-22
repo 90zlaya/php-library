@@ -14,7 +14,7 @@ phpDocumentor.phar
 api
 assets
 output
-classes/third-party/vendor
+third-party/vendor
 
 # System Files
 .DS_Store
