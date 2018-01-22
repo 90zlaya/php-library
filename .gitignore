@@ -11,6 +11,8 @@ versions
 phpDocumentor.phar
 images.php
 composer.lock
+api
+output
 classes/third-party/vendor
 
 # System Files
