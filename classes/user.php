@@ -29,7 +29,7 @@ class User {
     * 
     * @var String
     */
-    protected static $image_default  = 'assets/img/user.png';
+    protected static $image_default  = 'https://php-library.zlatanstajic.com/assets/img/user.png';
     
     // -------------------------------------------------------------------------
     
@@ -54,7 +54,7 @@ class User {
             $image_link = &$default;
         }
         
-        return $image_link;    
+        return $image_link;
     }
     
     // -------------------------------------------------------------------------

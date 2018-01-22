@@ -121,8 +121,8 @@ class Website {
     * @var Array
     */
     private $images = array(
-        'icon' => 'assets/images/icon.png',
-        'logo' => 'assets/images/logo.png',
+        'icon' => 'https://php-library.zlatanstajic.com/assets/images/icon.png',
+        'logo' => 'https://php-library.zlatanstajic.com/assets/images/logo.png',
     );
     
     // -------------------------------------------------------------------------

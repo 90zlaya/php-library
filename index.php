@@ -12,17 +12,17 @@
     <meta content="<?=$php_library['meta']['title']?>" property="og:title">
     <meta content="<?=$php_library['meta']['description']?>" name="description">
     <!-- jQuery Load -->
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://php-library.zlatanstajic.com/assets/js/jquery.min.js"></script>
     <!-- Flatdoc -->
-    <script src="assets/js/legacy.js"></script>
-    <script src="assets/js/flatdoc.js"></script>
+    <script src="https://php-library.zlatanstajic.com/assets/js/legacy.js"></script>
+    <script src="https://php-library.zlatanstajic.com/assets/js/flatdoc.js"></script>
     <!-- Flatdoc theme -->
-    <link  href="assets/css/style.css" rel="stylesheet">
-    <script src="assets/js/script.js"></script>
-    <link href="assets/css/theme.css" rel="stylesheet">
-    <script src="assets/js/theme.js"></script>
+    <link  href="https://php-library.zlatanstajic.com/assets/css/style.css" rel="stylesheet">
+    <script src="https://php-library.zlatanstajic.com/assets/js/script.js"></script>
+    <link href="https://php-library.zlatanstajic.com/assets/css/theme.css" rel="stylesheet">
+    <script src="https://php-library.zlatanstajic.com/assets/js/theme.js"></script>
     <!-- Custom PHP Library style -->
-	<link href="assets/css/custom.css" rel="stylesheet">
+	<link href="https://php-library.zlatanstajic.com/assets/css/custom.css" rel="stylesheet">
     <!-- Initializer -->
     <script>
         Flatdoc.run({

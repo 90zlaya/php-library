@@ -12,6 +12,7 @@ phpDocumentor.phar
 images.php
 composer.lock
 api
+assets
 output
 classes/third-party/vendor
 

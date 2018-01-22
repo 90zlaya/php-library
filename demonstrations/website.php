@@ -38,7 +38,7 @@ $website->add_to_head(
             'type' => 'link-custom',
         ),
         array(
-            'path' => '../assets/js/jquery.min.js',
+            'path' => 'https://php-library.zlatanstajic.com/assets/js/jquery.min.js',
             'type' => 'script',
         ),
         array(
@@ -65,7 +65,7 @@ $website->add_to_bottom(
 // Adding images to website
 $website->add_to_images(
     array(
-        'php-logo' => 'assets/img/elephpant.png',
+        'php-logo' => 'https://php-library.zlatanstajic.com/assets/img/elephpant.png',
     ),
     TRUE
 );

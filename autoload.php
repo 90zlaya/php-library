@@ -117,12 +117,12 @@ $php_library = array(
             ),
             array(
                 'name'   => 'API',
-                'url'    => 'api/index.html',
+                'url'    => 'https://php-library.zlatanstajic.com/api/',
                 'method' => '_blank',
             ),
         ),
         'images'        => array(
-            'icon'       => 'assets/img/elephpant.png',
+            'icon'       => 'https://php-library.zlatanstajic.com/assets/img/elephpant.png',
         ),
         'url'           => array(
             'latest_release' => 'https://github.com/90zlaya/php-library/releases/latest',
