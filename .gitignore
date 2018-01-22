@@ -5,12 +5,12 @@
 /tmp
 /out-tsc
 
-# custom
-files
-versions
-phpDocumentor.phar
+# custom files
 images.php
 composer.lock
+phpDocumentor.phar
+
+# custom folders
 api
 assets
 output
