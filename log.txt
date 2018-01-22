@@ -18,6 +18,11 @@ Geo_Plugin: removed protected collect method
 User_Agent: list_crawlers method created
 User_Agent: is_crawler method created
 
+Development:
+
+Date_Time_Format: days_after
+
+
 -------------------------------------------
 Since php-library v1.1.0
 -------------------------------------------
