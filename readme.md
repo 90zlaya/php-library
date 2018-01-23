@@ -21,9 +21,6 @@ Every native class call should have phplibrary\ namespace call in front.
 
 ``` php
 phplibrary\Class_Name
-
-``` php
-phplibrary\module\Class_Name
 ```
 
 List of classes
