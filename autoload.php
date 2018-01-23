@@ -21,7 +21,6 @@ $php_library = array(
     'folders'       => array(
         'classes'           => 'classes',
         'demonstrations'    => 'demonstrations',
-        'modules'           => 'modules',
     ),
     'list'          => array(
         'classes' => array(
@@ -39,6 +38,9 @@ $php_library = array(
             ),
             array(
                 'name' => 'file',
+            ),
+            array(
+                'name' => 'file-version',
             ),
             array(
                 'name' => 'format',

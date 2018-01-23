@@ -15,13 +15,15 @@ include_once 'autoload.php';
 
 * All classes are inside /classes folder.
 * All class demonstrations are inside /demonstrations folder.
-* All modules are inside /modules folder and contain subfolders for every module.
-* All third-party classes are inside /third-party folder including composer vendors.
+* All third-party classes are inside /third-party folder including Composer vendors.
 
-Every class call should have phplibrary namespace call in front.
+Every native class call should have phplibrary\ namespace call in front.
 
 ``` php
 phplibrary\Class_Name
+
+``` php
+phplibrary\module\Class_Name
 ```
 
 List of classes
@@ -46,6 +48,10 @@ Export files using customisation class of PHPOffice/PHPExcel. Location: https://
 * File
 
 File-related operations.
+
+* File_Version
+
+Checking for changed files and creating file version numbers.
 
 * Format
 
@@ -99,18 +105,6 @@ Web service related data.
 
 Use this class when working with website related data.
 Instantiate it only once (great solution is Singleton design pattern) and call public parameters and methods across entire website.
-
-List of modules
-----------------
-
-* file-version
-
-This script looks up for files inside given path for those which are changed since certain point in time.
-If or when it finds them, then creates two files, or updates them, with informations about date, version and changed files.
-
-* mysql-dump
-
-This script works on MySQL databases backup
 
 List of third-party
 ----------------
