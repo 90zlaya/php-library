@@ -8,6 +8,6 @@
 |
 | -------------------------------------------------------------------
 */
-use phplibrary\module\File_Version as file_version;
+use phplibrary\File_Version as file_version;
 
 file_version::dump();
