@@ -16,7 +16,7 @@ include_once 'autoload.php';
 * All classes are inside /classes folder.
 * All class demonstrations are inside /demonstrations folder.
 * All modules are inside /modules folder and contain subfolders for every module.
-* All third-party classes are inside /classes/third-party folder and contain subfolders.
+* All third-party classes are inside /third-party folder including composer vendors.
 
 Every class call should have phplibrary namespace call in front.
 
@@ -147,6 +147,13 @@ Inspiration
 
 Idea behind creation of this repository is making everyday Web Development process faster and easier.
 
+Customers
+----------------
+
+This library if powering following Websites/Web Applications:
+
+* [www.zlatanstajic.com]
+
 Acknowledgements
 ----------------
 
@@ -157,3 +164,4 @@ Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
 [MIT License]: http://www.opensource.org/licenses/mit-license.php
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
+[www.zlatanstajic.com]: https://www.zlatanstajic.com/
