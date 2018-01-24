@@ -9,6 +9,7 @@ Password: new method is now called new_unreadable method
 New: 
 
 File_Version: new class File_Version developed from file-version module
+File_Version: development of dump method broken to three private methods
 
 Modified:
 
@@ -29,7 +30,6 @@ Development:
 
 Date_Time_Format: days_after
 Directory_Lister: array of years crawl option
-File_Version: development of dump method
 
 -------------------------------------------
 Since php-library v1.1.0

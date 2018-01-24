@@ -10,4 +10,9 @@
 */
 use phplibrary\File_Version as file_version;
 
-file_version::dump();
+file_version::dump(array(
+    'listing' => array(
+        'directory'  => 'D:/Zlatan/Browser/phpmailer/',
+        'method'     => 'crawl',
+    ),
+));
