@@ -10,6 +10,7 @@ New:
 
 File_Version: new class File_Version developed from file-version module
 File_Version: development of dump method broken to three private methods
+File_Version: added option to set file_names from dump method
 
 Modified:
 

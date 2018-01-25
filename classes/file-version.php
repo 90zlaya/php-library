@@ -64,6 +64,13 @@ class File_Version {
     */
     public static function dump($params)
     {
+        isset($params['file_names']['log_files']) 
+            ? self::$file_names['log_files'] = $params['file_names']['log_files'] 
+            : NULL;
+        isset($params['file_names']['log_versions']) 
+            ? self::$file_names['log_versions'] = $params['file_names']['log_versions'] 
+            : NULL;
+        
         $read_data = self::read_data();
         
         self::create_files(
