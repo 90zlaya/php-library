@@ -17,17 +17,7 @@
 */
 namespace phplibrary;
 
-$composer_autoload_file = __DIR__ . '../../third-party/vendor/autoload.php';
-
-if (file_exists($composer_autoload_file))
-{
-    require_once $composer_autoload_file;
-}
-else
-{
-    echo 'Please run composer install command upon PHP Library\'s ';
-    echo 'root directory for export class to work properly.<br/>';
-}
+require_once __DIR__ . '../../third-party/vendor/autoload.php';
 
 use PHPExcel as PHPExcel;
 use PHPExcel_IOFactory as PHPExcel_IOFactory;

@@ -11,17 +11,7 @@
 */
 namespace phplibrary;
 
-$autoload_file = __DIR__ . '../../autoload.php';
-
-if (file_exists($autoload_file))
-{
-    require_once $autoload_file;
-}
-else
-{
-    echo 'Please check PHP Library\'s autoload file ';
-    echo 'for file_version class to work properly.<br/>';
-}
+require_once __DIR__ . '../../autoload.php';
 
 use phplibrary\File as file;
 use phplibrary\Directory_Lister as directory_lister;
@@ -162,7 +152,7 @@ class File_Version {
         {
             if ($is_new)
             {
-                $latest_version = FIRST_VERSION;
+                $latest_version = self::FIRST_VERSION;
             }
             else
             {

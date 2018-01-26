@@ -269,9 +269,9 @@ class Website {
     {
         $meta = '';
         
-        isset($params['title']) ? $title = $params['title'] : $title = '';
-        isset($params['shortcut_icon']) ? $shortcut_icon = $params['shortcut_icon'] : $shortcut_icon = $this->images['icon'];
-        isset($params['touch_icon']) ? $touch_icon = $params['touch_icon'] : $touch_icon = $this->images['icon'];
+        $title = isset($params['title']) ? $params['title'] : '';
+        $shortcut_icon = isset($params['shortcut_icon']) ? $params['shortcut_icon'] : $this->images['icon'];
+        $touch_icon = isset($params['touch_icon']) ? $params['touch_icon'] : $this->images['icon'];
         isset($params['google_site_verification']) ? $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>' . PHP_EOL : NULL;
         
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
@@ -484,8 +484,10 @@ class Website {
     {
         $current_year = date('Y');
         
-        $current_year == $this->made || $always_made_year ? $since = $current_year : $since = $this->made . '-' . $current_year;
-        $show_licence ? $licence = ' | ' . ' All Rights Reserved' : $licence = '';
+        $since = $current_year == $this->made || $always_made_year 
+            ? $current_year : $this->made . '-' . $current_year;
+        
+        $licence = $show_licence ? ' | ' . ' All Rights Reserved' : '';
         
         return 'Copyright &#169; ' . $since . ' | <a href="' . $this->creator['website'] . '" target="_blank">' .  $this->creator['name'] . '</a>' . $licence;
     }
@@ -539,7 +541,7 @@ class Website {
     */
     public function redirect_to_page($page, $is_url=FALSE, $to_exit=TRUE)
     {
-        $is_url ? $url = $page : $url = $this->host . $page;
+        $url = $is_url ? $page : $this->host . $page;
         
         if ( ! headers_sent())
         {

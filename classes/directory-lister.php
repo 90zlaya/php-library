@@ -378,9 +378,9 @@ class Directory_Lister {
     */
     protected static function crawl($params)
     {
-        isset($params['directory']) ? $directory = $params['directory'] : $directory = '';
-        isset($params['types']) ? $types = $params['types'] : $types = array();
-        isset($params['data']) ? $data = $params['data'] : $data = array();
+        $directory = isset($params['directory']) ? $params['directory'] : '';
+        $types     = isset($params['types']) ? $params['types'] : array();
+        $data      = isset($params['data']) ? $params['data'] : array();
         
         if (empty($data))
         {
@@ -470,14 +470,14 @@ class Directory_Lister {
         $directory  = $params['directory'];
         $method     = $params['method'];
         
-        isset($params['print']) ? $print = $params['print'] : $print = FALSE;
-        isset($params['display']) ? $display = $params['display'] : $display = FALSE;
-        isset($params['reverse']) ? $reverse = $params['reverse'] : $reverse = '';
-        isset($params['delimiter']) ? $delimiter = $params['delimiter'] : $delimiter = '';
-        isset($params['date_start']) ? $date_start = $params['date_start'] : $date_start = '';
-        isset($params['date_end']) ? $date_end = $params['date_end'] : $date_end = '';
-        isset($params['year']) ? $year = $params['year'] : $year = '';
-        isset($params['types']) ? $types = $params['types'] : $types = array();
+        $print      = isset($params['print']) ? $params['print'] : FALSE;
+        $display    = isset($params['display']) ? $params['display'] : FALSE;
+        $reverse    = isset($params['reverse']) ? $params['reverse'] : '';
+        $delimiter  = isset($params['delimiter']) ? $params['delimiter'] : '';
+        $date_start = isset($params['date_start']) ? $params['date_start'] : '';
+        $date_end   = isset($params['date_end']) ? $params['date_end'] : '';
+        $year       = isset($params['year']) ? $params['year'] : '';
+        $types      = isset($params['types']) ? $params['types'] : array();
         
         $list = $searched = array();
         
