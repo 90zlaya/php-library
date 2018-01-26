@@ -19,6 +19,7 @@ Email: show method created
 Email: script method created
 Email: split method created
 Export: output buffering added for csv and osp export
+File: force_download method created
 Format: in_wizard method created
 Geo_Plugin: removed protected collect method
 User_Agent: list_crawlers method created

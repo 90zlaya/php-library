@@ -126,5 +126,26 @@ class File {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Force file download
+    * 
+    * @param String $file_name
+    * @param String $url
+    * 
+    * @return void
+    */
+    public function force_download($file_name, $url)
+    {
+        header('Content-Type: application/octet-stream');
+        header("Content-Transfer-Encoding: Binary"); 
+        header("Content-disposition: attachment; filename=\"" . $file_name . "\""); 
+        
+        readfile($url);
+        
+        exit;
+    }
+    
+    // -------------------------------------------------------------------------
 }
 ?>
