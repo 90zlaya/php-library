@@ -197,7 +197,7 @@ class Sorter {
     */
     protected function transport_files($files, $operation)
     {
-        if (isset($files))
+        if ( ! empty($files))
         {
             foreach ($files as $item)
             {
@@ -214,10 +214,7 @@ class Sorter {
                 {
                     switch ($operation)
                     {
-                        case 'm':
-                            {
-                                $this->move_files($location_from, $location_to, $item['file']);
-                            } break;
+                        case 'm': $this->move_files($location_from, $location_to, $item['file']); break;
                         default: $this->copy_files($location_from, $location_to, $item['file']);
                     }
                 }

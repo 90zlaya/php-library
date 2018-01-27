@@ -313,11 +313,16 @@ class Date_Time_Format {
     */
     public static function hours_to_minutes($time)
     {
+        $minutes = '';
+        
         if (strpos($time, ':') !== FALSE)
         {
             $exploded = explode(':', $time);
-          
+            
+            $hours = $minutes = 0;
+            
             $hours_first = TRUE;
+            
             foreach ($exploded as $row)
             {
                   $number = $row;
@@ -332,11 +337,8 @@ class Date_Time_Format {
                       $minutes = $number; 
                   }                           
             }               
+            
             $minutes += $hours * 60;
-        }
-        else
-        {
-            $minutes = '';
         }
         
         return $minutes; 

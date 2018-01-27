@@ -9,6 +9,7 @@
 | -------------------------------------------------------------------
 */
 use phplibrary\Validation as validation;
+use phplibrary\Format as format;
 
 $name = '90zlaya.jpeg';
 $valid_extensions = array("jpeg");

@@ -374,7 +374,7 @@ class Directory_Lister {
     * 
     * @param Array $params
     * 
-    * @return void
+    * @return mixed
     */
     protected static function crawl($params)
     {
@@ -463,7 +463,7 @@ class Directory_Lister {
     * 
     * @param Array $params
     * 
-    * @return Array $data
+    * @return mixed
     */
     public static function listing($params)
     {

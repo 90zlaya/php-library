@@ -168,7 +168,7 @@ class Export {
     /**
     * Export files to Text (osp)
     * 
-    * @param Object $objPHPExcel
+    * @param PHPExcel $objPHPExcel
     * @param String $file_name
     * 
     * @return void
@@ -221,7 +221,7 @@ class Export {
     /**
     * Export files to Excel 5 (xls)
     * 
-    * @param Object $objPHPExcel
+    * @param PHPExcel $objPHPExcel
     * @param String $file_name
     * 
     * @return void
@@ -246,7 +246,7 @@ class Export {
     /**
     * Export files to Excel 2007 (xlsx)
     * 
-    * @param Object $objPHPExcel
+    * @param PHPExcel $objPHPExcel
     * @param String $file_name
     * 
     * @return void
@@ -324,7 +324,7 @@ class Export {
     /**
     * Arrange data in cells for export
     * 
-    * @param Object $objPHPExcel
+    * @param PHPExcel $objPHPExcel
     * @param Array $head
     * @param Array $data
     * 
@@ -338,7 +338,7 @@ class Export {
             $iteration = 1;
             foreach ($head as $item)
             {
-                $objPHPExcel->getActiveSheet(0)->getColumnDimension(self::$cells[$iteration])->setAutoSize(TRUE);
+                $objPHPExcel->getActiveSheet()->getColumnDimension(self::$cells[$iteration])->setAutoSize(TRUE);
                 $objPHPExcel->setActiveSheetIndex(0)->setCellValue(self::$cells[$iteration] . '1', $item);
                 
                 $iteration++;

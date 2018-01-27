@@ -46,7 +46,7 @@ class Validation {
     */
     public static function variables($variable)
     {
-        if (isset($variable) && ! empty($variable))
+        if ( ! empty($variable))
         {
             return TRUE;
         }
@@ -119,7 +119,7 @@ class Validation {
     */
     public static function clear_number($variable)
     {
-        return is_numeric($variable) ? $variable : 0;
+        return is_numeric($variable) ? (int) $variable : 0;
     }
     
     // -------------------------------------------------------------------------

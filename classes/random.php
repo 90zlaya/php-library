@@ -84,59 +84,62 @@ class Random {
     * @param int $length
     * @param String $type
     * 
-    * @return String $random_generated
+    * @return mixed
     */
     public static function generate($length=4, $type='INT')
     {
         switch ($type)
         {
             case 'INT':
+            {
+                $c = self::$numbers;
+                $random_integer = NULL;
+                
+                for ($i=0; $i<$length; $i++)
                 {
-                    $c = self::$numbers;
-                    $random_integer = NULL;
-                    
-                    for ($i=0; $i<$length; $i++)
-                    {
-                        $random_integer .= $c[rand()%strlen($c)];
-                    }
-                    
-                    return $random_integer;
+                    $random_integer .= $c[rand()%strlen($c)];
                 }
+                
+                return $random_integer;
+            }
+            
             case 'STRING':
+            {
+                $c = self::$alphanumeric;
+                $random_string = '';
+                
+                for ($i=0; $i<$length; $i++)
                 {
-                    $c = self::$alphanumeric;
-                    $random_string = '';
-                    
-                    for ($i=0; $i<$length; $i++)
-                    {
-                        $random_string .= $c[rand()%strlen($c)];
-                    }
-                    
-                    return $random_string;
+                    $random_string .= $c[rand()%strlen($c)];
                 }
+                
+                return $random_string;
+            }
+            
             case 'STRING_ADVANCED':
+            {
+                $conso = self::$consonant;
+                $vocal = self::$vocal;
+                $max = $length/2;           
+                $readable_random_string = '';
+                
+                for ($i=1; $i<=$max; $i++)
                 {
-                    $conso = self::$consonant;
-                    $vocal = self::$vocal;
-                    $max = $length/2;           
-                    $readable_random_string = '';
-                    
-                    for ($i=1; $i<=$max; $i++)
+                    if ($i == 1)
                     {
-                        if ($i == 1)
-                        {
-                            $readable_random_string .= strtoupper($conso[rand(0,19)]);
-                            $readable_random_string .= $vocal[rand(0,4)]; ;
-                        }
-                        else
-                        {
-                            $readable_random_string .= $conso[rand(0,19)];
-                            $readable_random_string .= $vocal[rand(0,4)];
-                        }
+                        $readable_random_string .= strtoupper($conso[rand(0,19)]);
+                        $readable_random_string .= $vocal[rand(0,4)]; ;
                     }
-                    
-                    return $readable_random_string;
+                    else
+                    {
+                        $readable_random_string .= $conso[rand(0,19)];
+                        $readable_random_string .= $vocal[rand(0,4)];
+                    }
                 }
+                
+                return $readable_random_string;
+            }
+            
             default: return FALSE;
         }
     }
