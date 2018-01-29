@@ -32,7 +32,8 @@ echo $database_date_format . '<br/>' . $user_date_format . '<br/>';
 echo date_time_format::minutes_to_hours(61) . '<br/>';
 echo date_time_format::hours_to_minutes('61:55') . '<br/>';
 
-echo date_time_format::days_before(75);
+format::pre(date_time_format::days_before(7));
+format::pre(date_time_format::days_after(7));
 
 $list_of_days = date_time_format::get_days('serbian', 3, FALSE);
 format::pre($list_of_days);

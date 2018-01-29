@@ -14,7 +14,8 @@ File_Version: added option to set file_names from dump method
 
 Modified:
 
-Date_Time_Format: number_to_day
+Date_Time_Format: number_to_day method created
+Date_Time_Format: days_after method created
 Email: show method created
 Email: script method created
 Email: split method created
@@ -30,7 +31,6 @@ file-version: entire module removed and replaced with File_Version class
 
 Development:
 
-Date_Time_Format: days_after
 Directory_Lister: array of years crawl option
 
 -------------------------------------------
