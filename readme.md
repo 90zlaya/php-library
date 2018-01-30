@@ -1,3 +1,6 @@
+[![License](https://poser.pugx.org/phpstan/phpstan/license)](https://opensource.org/licenses/MIT)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
+
 PHP Library
 =======
 
