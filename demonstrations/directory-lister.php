@@ -12,7 +12,8 @@
 | to the $forbidden_characters variable.
 |
 | To enable local file links you should use some kind of browser extension:
-| Firefox: https://addons.mozilla.org/en-US/firefox/addon/local-filesystem-links/
+| Firefox: https://addons.
+mozilla.org/en-US/firefox/addon/local-filesystem-links/
 | Chrome: https://chrome.google.com/webstore/detail/enable-local-file-links/nikfmfgobenbhmocjaaboihbeocackld
 |
 | -------------------------------------------------------------------
@@ -32,4 +33,4 @@ $params = array(
     'types'      => array(),
 );
 $listing = directory_lister::listing($params);
-format::pre($listing, 0);
+format::pre($listing, FALSE);

@@ -15,6 +15,6 @@ $email      = 'Contact@ZlatanStajic.com';
 $mailto     = email::mailto($email);
 $validated  = empty(email::validate($email)) ? 'Invalid' : 'Valid';
 
-format::pre($validated, 1);
-format::pre(email::show($email), 1);
-format::pre($mailto, 1);
+format::pre($validated, TRUE);
+format::pre(email::show($email), TRUE);
+format::pre($mailto, TRUE);

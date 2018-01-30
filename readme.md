@@ -145,6 +145,16 @@ This library if powering following Websites/Web Applications:
 
 * [www.zlatanstajic.com]
 
+Bug analysis
+----------------
+
+This library has been tested with [PHP Stan] and approved as bug-free for all classes and demonstrations.
+
+API documentation
+----------------
+
+Official PHP Library API has been documented by [phpDocumentor].
+
 Acknowledgements
 ----------------
 
@@ -156,3 +166,5 @@ Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 [MIT License]: http://www.opensource.org/licenses/mit-license.php
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
 [www.zlatanstajic.com]: https://www.zlatanstajic.com/
+[PHP Stan]: https://github.com/phpstan/phpstan
+[phpDocumentor]: https://www.phpdoc.org/

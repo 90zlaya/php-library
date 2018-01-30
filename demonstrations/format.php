@@ -11,7 +11,7 @@
 use phplibrary\Format as format;
 
 $bytes = format::bytes(715000, TRUE, 2);
-format::pre($bytes, 1);
+format::pre($bytes, TRUE);
 
 $website = format::website('google.com');
 format::pre($website);

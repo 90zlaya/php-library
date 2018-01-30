@@ -506,7 +506,7 @@ class Format {
     * Merge specific item with source array
     * 
     * @param Array $source
-    * @param Array $item
+    * @param mixed $item
     * 
     * @return Array $new
     */
