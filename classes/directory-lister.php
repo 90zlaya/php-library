@@ -25,33 +25,6 @@ class Directory_Lister {
     // -------------------------------------------------------------------------
     
     /**
-    * Slash variable
-    * 
-    * @var String
-    */
-    private static $trailing_slash = '/';
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Dash variable
-    * 
-    * @var String
-    */
-    private static $dash = '-';
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Dot variable
-    * 
-    * @var String
-    */
-    private static $dot = '.';
-    
-    // -------------------------------------------------------------------------
-    
-    /**
     * Number of files counter
     * 
     * @var int
@@ -114,7 +87,7 @@ class Directory_Lister {
     * 
     * @var Array
     */
-    protected static $forbidden_characters  = array(
+    protected static $forbidden_characters = array(
         '-', 
         '+', 
         '!', 
@@ -155,8 +128,8 @@ class Directory_Lister {
         }
         else
         {
-            empty($date_start) ? NULL : $date_start = $year . self::$dash . $date_start;
-            empty($date_end) ? NULL : $date_end = $year . self::$dash . $date_end;
+            empty($date_start) ? NULL : $date_start = $year . '-' . $date_start;
+            empty($date_end) ? NULL : $date_end = $year . '-' . $date_end;
         }
         
         if (empty($date_start))
@@ -237,7 +210,7 @@ class Directory_Lister {
             
             foreach ($list as $folder)
             {
-                $location = $folder . self::$trailing_slash;
+                $location = $folder . '/';
                 
                 $depth_folders = self::folders($location);
                 $depth_files   = self::files($location, $types);
@@ -337,7 +310,7 @@ class Directory_Lister {
                             $date      = date(self::$date_format, @filemtime($location));
                             $time      = date(self::$time_format, @filemtime($location));
                             $open      = '<a href="' . $location . '" target="_blank">' . $file . '</a>';
-                            $title     = basename($file, self::$dot . $extension);
+                            $title     = basename($file, '.' . $extension);
                             $size      = filesize($location);
                             
                             $data = array(
@@ -479,27 +452,9 @@ class Directory_Lister {
         $year       = isset($params['year']) ? $params['year'] : '';
         $types      = isset($params['types']) ? $params['types'] : array();
         
-        $list = $searched = array();
+        $searched = array();
         
-        switch ($method)
-        {
-            case self::$method_calls['folders']:
-                {
-                    $list = self::folders($directory);
-                } break;
-            case self::$method_calls['files']:
-                {
-                    $list = self::files($directory, $types);
-                } break;
-            case self::$method_calls['crawl']:
-                {
-                    self::crawl(array(
-                        'directory' => $directory, 
-                        'types'     => $types,
-                    ));
-                    $list = self::$crawled;
-                } break;
-        }
+        $list = self::method_to_list($method, $directory, $types);
         
         if ($method !== self::$method_calls['folders'])
         {
@@ -570,6 +525,71 @@ class Directory_Lister {
             $searched = $list;
         }
         
+        self::form_of_view($searched, $print, $display);
+        
+        $data = array(
+            'listing' => $searched,
+            'count'   => count($searched),
+            'max'     => self::$number_of_files,
+        );
+        
+        self::$number_of_files = 0;
+        
+        return $data;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Convert method call to list of items
+    * 
+    * @param String $method
+    * @param String $directory
+    * @param Array $types
+    * 
+    * @return Array
+    */
+    private static function method_to_list($method, $directory, $types)
+    {
+        switch ($method)
+        {
+            case self::$method_calls['folders']: 
+            {
+                return self::folders($directory);
+            }
+            
+            case self::$method_calls['files']:
+            {
+                return self::files($directory, $types);
+            }
+            
+            case self::$method_calls['crawl']:
+            {
+                self::crawl(array(
+                    'directory' => $directory, 
+                    'types'     => $types,
+                ));
+                
+                return self::$crawled;
+            }
+            
+            default: return array();
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Form of directory listing view
+    * 
+    * @param Array $searched
+    * @param Bool $print
+    * @param Bool $display
+    * 
+    * @return void
+    */
+    private static function form_of_view($searched, $print, $display)
+    {
         if ($print || $display)
         {
             if ($print)
@@ -584,18 +604,6 @@ class Directory_Lister {
                 print_r(self::display($searched));
             }
         }
-        
-        $searched_count = count($searched);
-        
-        $data = array(
-            'listing' => $searched,
-            'count'   => $searched_count,
-            'max'     => self::$number_of_files,
-        );
-        
-        self::$number_of_files = 0;
-        
-        return $data;
     }
     
     // -------------------------------------------------------------------------

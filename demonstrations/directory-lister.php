@@ -18,12 +18,12 @@
 | -------------------------------------------------------------------
 */
 use phplibrary\Directory_Lister as directory_lister;
+use phplibrary\Format as format;
 
 $params = array(
     'directory'  => 'D:/Zlatan/Browser/phpmailer/',
     'method'     => 'crawl',
     'print'      => 1,
-    'display'    => 0,
     'reverse'    => 0,
     'delimiter'  => '',
     'date_start' => '',
@@ -32,3 +32,4 @@ $params = array(
     'types'      => array(),
 );
 $listing = directory_lister::listing($params);
+format::pre($listing, 0);

@@ -51,7 +51,7 @@
                             
                             if ($button['method'] == '_blank')
                             {
-                                foreach($api_directories as $directory)
+                                foreach ($api_directories as $directory)
                                 {
                                     if (is_dir($directory))
                                     {
