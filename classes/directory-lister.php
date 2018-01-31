@@ -464,60 +464,7 @@ class Directory_Lister {
             }
             else
             {
-                foreach ($list as $item)
-                {
-                    if (isset($item['date']))
-                    {
-                        $date = $item['date'];
-                    }
-                    else
-                    {
-                        $date = NULL;
-                    }
-                    
-                    $params = array(
-                        'item'       => $item,
-                        'date'       => $date,
-                        'date_start' => $date_start,
-                        'date_end'   => $date_end,
-                        'year'       => $year,
-                    );
-                    
-                    if (empty($delimiter))
-                    {
-                        $checked = self::check_date($params);
-                    }
-                    else
-                    {
-                        if ($reverse)
-                        {
-                            if (stripos($item['title'], $delimiter) === FALSE)
-                            {
-                                $checked = self::check_date($params);
-                            }
-                            else
-                            {
-                                $checked = array();
-                            }
-                        }
-                        else
-                        {
-                            if (stripos($item['title'], $delimiter) !== FALSE)
-                            {
-                                $checked = self::check_date($params);
-                            }
-                            else
-                            {
-                                $checked = array();
-                            }
-                        }
-                    }
-                    
-                    if ( ! empty($checked))
-                    {
-                        array_push($searched, $checked);
-                    }
-                }
+                $searched = self::filtering_by_date($list, $params);
             }
         }    
         else
@@ -607,5 +554,67 @@ class Directory_Lister {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Files filtering by date
+    * 
+    * @param Array $list
+    * @param Array $params
+    * 
+    * @return Array $searched
+    */
+    private static function filtering_by_date($list, $params)
+    {
+        $delimiter  = $params['delimiter'];
+        $reverse    = $params['reverse'];
+        $date_start = $params['date_start'];
+        $date_end   = $params['date_end'];
+        $year       = $params['year'];
+        
+        $searched = $checked = array();
+        
+        foreach ($list as $item)
+        {
+            $date = isset($item['date']) ? $item['date'] : NULL;
+            
+            $params = array(
+                'item'       => $item,
+                'date'       => $date,
+                'date_start' => $date_start,
+                'date_end'   => $date_end,
+                'year'       => $year,
+            );
+            
+            if (empty($delimiter))
+            {
+                $checked = self::check_date($params);
+            }
+            else
+            {
+                if ($reverse)
+                {
+                    if (stripos($item['title'], $delimiter) === FALSE)
+                    {
+                        $checked = self::check_date($params);
+                    }
+                }
+                else
+                {
+                    if (stripos($item['title'], $delimiter) !== FALSE)
+                    {
+                        $checked = self::check_date($params);
+                    }
+                }
+            }
+            
+            if ( ! empty($checked))
+            {
+                array_push($searched, $checked);
+            }
+        }
+        
+        return $searched;
+    }
+    
+    // -------------------------------------------------------------------------
 }
-?>
