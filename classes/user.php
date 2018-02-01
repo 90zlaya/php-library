@@ -15,6 +15,9 @@ namespace phplibrary;
 * Works with user related data
 */
 class User {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Default location of images folder
     * 
@@ -29,7 +32,7 @@ class User {
     * 
     * @var String
     */
-    protected static $image_default  = 'https://php-library.zlatanstajic.com/assets/img/user.png';
+    protected static $image_default = 'data/users/user.png';
     
     // -------------------------------------------------------------------------
     
@@ -44,12 +47,17 @@ class User {
     */
     public static function image($image, $image_location='', $image_default='')
     {
-        $location = empty($image_location) ? self::$image_location : $image_location;
-        $default  = empty($image_default) ? self::$image_default : $image_default;
+        $location = empty($image_location)
+            ? self::$image_location 
+            : $image_location;
+        
+        $default = empty($image_default)
+            ? self::$image_default 
+            : $image_default;
         
         $image_link = $location . $image;
         
-        if ( ! @getimagesize($image_link) || empty($image))
+        if ( ! getimagesize($image_link) || empty($image))
         {
             $image_link = &$default;
         }

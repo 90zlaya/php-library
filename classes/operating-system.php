@@ -15,6 +15,9 @@ namespace phplibrary;
 * Working with Operating System related data
 */
 class Operating_System {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * List of operating systems
     * 
