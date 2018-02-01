@@ -32,5 +32,6 @@ $params = array(
     'year'       => '',
     'types'      => array('txt'),
 );
+
 $listing = directory_lister::listing($params);
 format::pre($listing, TRUE);

@@ -26,6 +26,9 @@ use PHPExcel_IOFactory as PHPExcel_IOFactory;
 * Export files using customisation class of PHPOffice/PHPExcel
 */
 class Export {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * File name
     * 
@@ -108,17 +111,17 @@ class Export {
     * 
     * @return void
     */
-    public static function export($params)
+    public static function export_file($params)
     {
-        $head           = isset($params['head']) ? $params['head'] : array();
-        $data           = isset($params['data']) ? $params['data'] : array();
-        $type           = isset($params['type']) ? $params['type'] : FALSE;
-        $file_name      = isset($params['file_name']) ? $params['file_name'] : self::$file_name;
-        $creator        = isset($params['document_properties']['creator']) ? $params['document_properties']['creator'] : self::$document_properties['creator'];
-        $title          = isset($params['document_properties']['title']) ? $params['document_properties']['title'] : self::$document_properties['title'];
-        $description    = isset($params['document_properties']['description']) ? $params['document_properties']['description'] : self::$document_properties['description'];
-        $keywords       = isset($params['document_properties']['keywords']) ? $params['document_properties']['keywords'] : self::$document_properties['keywords'];
-        $category       = isset($params['document_properties']['category']) ? $params['document_properties']['category'] : self::$document_properties['category'];
+        $head        = isset($params['head']) ? $params['head'] : array();
+        $data        = isset($params['data']) ? $params['data'] : array();
+        $type        = isset($params['type']) ? $params['type'] : FALSE;
+        $file_name   = isset($params['file_name']) ? $params['file_name'] : self::$file_name;
+        $creator     = isset($params['document_properties']['creator']) ? $params['document_properties']['creator'] : self::$document_properties['creator'];
+        $title       = isset($params['document_properties']['title']) ? $params['document_properties']['title'] : self::$document_properties['title'];
+        $description = isset($params['document_properties']['description']) ? $params['document_properties']['description'] : self::$document_properties['description'];
+        $keywords    = isset($params['document_properties']['keywords']) ? $params['document_properties']['keywords'] : self::$document_properties['keywords'];
+        $category    = isset($params['document_properties']['category']) ? $params['document_properties']['category'] : self::$document_properties['category'];
         
         // Create new PHPExcel object
         $objPHPExcel = new PHPExcel();
@@ -136,29 +139,33 @@ class Export {
         switch ($type)
         {
             case 'osp':
-                {
-                    self::line_arrangement($objPHPExcel, $head, $data);
-                    self::for_ie_ssl();
-                    self::to_osp($objPHPExcel, $file_name);
-                } break;
+            {
+                self::line_arrangement($data);
+                self::for_ie_ssl();
+                self::to_osp($objPHPExcel, $file_name);
+                break;
+            }
             case 'csv':
-                {
-                    $csv = self::line_arrangement($objPHPExcel, $head, $data);
-                    self::for_ie_ssl();
-                    self::to_csv($csv, $file_name);
-                } break;
+            {
+                $csv = self::line_arrangement($data);
+                self::for_ie_ssl();
+                self::to_csv($csv, $file_name);
+                break;
+            }
             case 'xls':
-                {
-                    self::cell_arrangement($objPHPExcel, $head, $data);
-                    self::for_ie_ssl();
-                    self::to_xls($objPHPExcel, $file_name);
-                } break;
+            {
+                self::cell_arrangement($objPHPExcel, $head, $data);
+                self::for_ie_ssl();
+                self::to_xls($objPHPExcel, $file_name);
+                break;
+            }
             case 'xlsx':
-                {
-                    self::cell_arrangement($objPHPExcel, $head, $data);
-                    self::for_ie_ssl();
-                    self::to_xlsx($objPHPExcel, $file_name);
-                } break;
+            {
+                self::cell_arrangement($objPHPExcel, $head, $data);
+                self::for_ie_ssl();
+                self::to_xlsx($objPHPExcel, $file_name);
+                break;
+            }
             default: NULL;
         }
     }
@@ -286,23 +293,22 @@ class Export {
     /**
     * Arrange data in line for export
     * 
-    * @param Object $objPHPExcel
-    * @param Array $head
     * @param Array $data
     * 
     * @return mixed
     */
-    private static function line_arrangement($objPHPExcel, $head, $data)
+    private static function line_arrangement($data)
     {
         if ( ! empty($data))
         {
             ob_start();
             
-            $iteration  = 1;
+            $iteration = 1;
+            
             foreach ($data as $item)
             {
-                $item_indexed       = array_values($item);
-                $item_indexed_size  = sizeof($item_indexed);
+                $item_indexed      = array_values($item);
+                $item_indexed_size = count($item_indexed);
                 
                 $value = '';
                 for ($i=0; $i<$item_indexed_size; $i++)
@@ -345,7 +351,7 @@ class Export {
             }
             
             // Number of cells
-            $number_of_cells = sizeof($head);
+            $number_of_cells = count($head);
             
             // Print data
             $iteration = 2;

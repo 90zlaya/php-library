@@ -16,7 +16,7 @@ format::pre($bytes, TRUE);
 $website = format::website('google.com');
 format::pre($website);
 
-$text = '<b>Lorem Ipsum</b> is simply <i>dummy</i> text of the printing and typesetting industry.';
+$text   = '<b>Lorem Ipsum</b> is simply <i>dummy</i> text of the printing and typesetting industry.';
 $string = format::string($text, 0, 50);
 echo $string . '<br/>';
 

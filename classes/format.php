@@ -15,6 +15,9 @@ namespace phplibrary;
 * Format related methods
 */
 class Format {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * UTF-8 value
     * 
@@ -29,7 +32,7 @@ class Format {
     * 
     * @var String
     */
-    protected static $windows_1250  = 'windows-1250';
+    protected static $windows_1250 = 'windows-1250';
     
     // -------------------------------------------------------------------------
     
@@ -44,7 +47,7 @@ class Format {
             'name'      => 'Localhost',
             'addresses' => array(
                 '::1', 
-                '127.0.0.1'
+                '127.0.0.1',
             ),
         ),
     );
@@ -77,7 +80,7 @@ class Format {
         'kB', 
         'MB', 
         'GB', 
-        'TB'
+        'TB',
     );
     
     // -------------------------------------------------------------------------
@@ -142,7 +145,7 @@ class Format {
         
         $exploded_telephone = explode(' ', $telephone);
             
-        if (!empty($exploded_telephone))
+        if ( ! empty($exploded_telephone))
         {
             $telephone_print = '';
             
@@ -150,6 +153,7 @@ class Format {
             {
                 $telephone = trim($row);
                 $telephone = preg_replace('/[^0-9,.]/', '', $telephone);
+                
                 $telephone_print .= $telephone; 
             }        
 
@@ -177,18 +181,24 @@ class Format {
     {
         if (preg_match(self::$website['regex'], $location))
         {
-            if (strpos($location, self::$website['protocol']['safe']) !== FALSE || strpos($location, self::$website['protocol']['unsafe']) !== FALSE)
+            if 
+            (
+                strpos($location, self::$website['protocol']['safe']) !== FALSE || 
+                strpos($location, self::$website['protocol']['unsafe']) !== FALSE)
             {
                 $location_final = $location;
             }
-            else if (strpos($location, self::$website['web']) !== FALSE)
+            elseif (strpos($location, self::$website['web']) !== FALSE)
             {
                 $prefix = self::$website['protocol']['unsafe'];
+                
                 $location_final = $prefix . $location;
             }
             else
             {
-                $prefix = self::$website['protocol']['unsafe'] . self::$website['web'] . '.';
+                $prefix  = self::$website['protocol']['unsafe'];
+                $prefix .= self::$website['web'] . '.';
+                
                 $location_final = $prefix . $location;
             }
                          
@@ -335,7 +345,7 @@ class Format {
     */
     public static function string($string, $start=0, $length=15)
     {
-        $string = strip_tags($string);
+        $string        = strip_tags($string);
         $string_length = strlen($string);
         
         if ($string_length > $length)
@@ -387,7 +397,7 @@ class Format {
         
         if ( ! empty($array))
         {
-            $array_size = sizeof($array);
+            $array_size = count($array);
             
             for ($i=0; $i<$array_size; $i++)
             {
@@ -432,7 +442,7 @@ class Format {
         if ( ! empty($term) && ! empty($fields))
         {
             $term_counter = $field_counter = TRUE;
-            $term_array = explode(' ', $term);
+            $term_array   = explode(' ', $term);
             
             $html = " AND( ";
             
@@ -441,6 +451,7 @@ class Format {
                 if( $term_counter)
                 {
                     $term_counter = FALSE;
+                    
                     $html .= " ( ";
                 }
                 else
@@ -455,6 +466,7 @@ class Format {
                     if ($field_counter)
                     {
                         $field_counter = FALSE;
+                        
                         $html .= "
                             $field_item LIKE('%" . $term_item . "%') 
                         ";
@@ -522,7 +534,10 @@ class Format {
             }
             else
             {
-                $new = array($row, $item);
+                $new = array(
+                    $row,
+                    $item,
+                );
             }
         }
         

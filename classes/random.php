@@ -15,6 +15,9 @@ namespace phplibrary;
 * Random-related data
 */
 class Random {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Numeric caracters
     * 
@@ -93,6 +96,7 @@ class Random {
             case 'INT':
             {
                 $c = self::$numbers;
+                
                 $random_integer = NULL;
                 
                 for ($i=0; $i<$length; $i++)
@@ -102,10 +106,10 @@ class Random {
                 
                 return $random_integer;
             }
-            
             case 'STRING':
             {
                 $c = self::$alphanumeric;
+                
                 $random_string = '';
                 
                 for ($i=0; $i<$length; $i++)
@@ -115,31 +119,31 @@ class Random {
                 
                 return $random_string;
             }
-            
             case 'STRING_ADVANCED':
             {
                 $conso = self::$consonant;
                 $vocal = self::$vocal;
+                
                 $max = $length/2;           
+                
                 $readable_random_string = '';
                 
                 for ($i=1; $i<=$max; $i++)
                 {
                     if ($i == 1)
                     {
-                        $readable_random_string .= strtoupper($conso[rand(0,19)]);
-                        $readable_random_string .= $vocal[rand(0,4)]; ;
+                        $readable_random_string .= strtoupper($conso[rand(0, 19)]);
+                        $readable_random_string .= $vocal[rand(0, 4)];
                     }
                     else
                     {
-                        $readable_random_string .= $conso[rand(0,19)];
-                        $readable_random_string .= $vocal[rand(0,4)];
+                        $readable_random_string .= $conso[rand(0, 19)];
+                        $readable_random_string .= $vocal[rand(0, 4)];
                     }
                 }
                 
                 return $readable_random_string;
             }
-            
             default: return FALSE;
         }
     }
@@ -156,14 +160,25 @@ class Random {
     */
     public static function element($list, $dose='')
     {
-        $list_size = sizeof($list);
+        $list_size = count($list);
         
-        ($dose === 'DAY' && $list_size < 7) || ($dose === 'MONTH' && $list_size < 31) ? $dose = '' : NULL;
+        ($dose === 'DAY' && $list_size < 7) || 
+        ($dose === 'MONTH' && $list_size < 31) 
+            ? $dose = '' 
+            : NULL;
         
         switch ($dose)
         {
-            case 'DAY': $index = date('N') - 1; break;
-            case 'MONTH': $index = date('j') - 1; break;
+            case 'DAY':
+            {
+                $index = date('N') - 1; 
+                break;
+            }
+            case 'MONTH':
+            {
+                $index = date('j') - 1; 
+                break;
+            }
             default: $index = rand(0, $list_size - 1);
         }
         

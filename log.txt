@@ -5,6 +5,7 @@ Since php-library v1.2.0
 Important:
 
 Password: new method is now called new_unreadable method
+Export: export method is now called export_file method
 
 New: 
 

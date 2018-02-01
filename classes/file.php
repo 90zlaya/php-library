@@ -16,7 +16,7 @@ namespace phplibrary;
 */
 class File {
 
-    // -------------------------------------------------------------------------    
+    // -------------------------------------------------------------------------
     
     /**
     * Writing data to file
@@ -37,21 +37,23 @@ class File {
         {
             $new_data = $write_data . PHP_EOL;
             
-            if (@file_exists($file_location))
+            if (file_exists($file_location))
             {
-                $file     = @fopen($file_location, 'r');
-                $old_data = @fread($file, @filesize($file_location));
+                $file     = fopen($file_location, 'r');
+                $old_data = fread($file, filesize($file_location));
                 
-                $data = $last_in ? $old_data . $new_data : $new_data . $old_data;
-                
-                @fclose($file);
-                $file = @fopen($file_location, 'w');
-                @fwrite($file, $data);
+                $data = $last_in 
+                    ? $old_data . $new_data 
+                    : $new_data . $old_data;
+                                
+                fclose($file);
+                $file = fopen($file_location, 'w');
+                fwrite($file, $data);
             }
             else
             {
-                $file = @fopen($file_location, 'w');
-                @fwrite($file, $new_data);
+                $file = fopen($file_location, 'w');
+                fwrite($file, $new_data);
             }
         }
     }
@@ -67,24 +69,25 @@ class File {
     */
     public static function read_from_file($file_location)
     {
-        $f = @fopen($file_location, 'r');
+        $f = fopen($file_location, 'r');
+        
         $cursor = -1;
 
-        @fseek($f, $cursor, SEEK_END);
-        $char = @fgetc($f);
+        fseek($f, $cursor, SEEK_END);
+        $char = fgetc($f);
         
         while ($char === "\n" || $char === "\r")
         {
-            @fseek($f, $cursor--, SEEK_END);
-            $char = @fgetc($f);
+            fseek($f, $cursor--, SEEK_END);
+            $char = fgetc($f);
         }
         
         $line = '';
-        while ($char !== false && $char !== "\n" && $char !== "\r")
+        while ($char !== FALSE && $char !== "\n" && $char !== "\r")
         {
             $line = $char . $line;
-            @fseek($f, $cursor--, SEEK_END);
-            $char = @fgetc($f);
+            fseek($f, $cursor--, SEEK_END);
+            $char = fgetc($f);
         }
         
         return $line;                 
@@ -130,16 +133,16 @@ class File {
     /**
     * Force file download
     * 
-    * @param String $file_name
+    * @param String $file
     * @param String $url
     * 
     * @return void
     */
-    public function force_download($file_name, $url)
+    public function force_download($file, $url)
     {
         header('Content-Type: application/octet-stream');
         header("Content-Transfer-Encoding: Binary"); 
-        header("Content-disposition: attachment; filename=\"" . $file_name . "\""); 
+        header("Content-disposition: attachment; filename=\"" . $file . "\""); 
         
         readfile($url);
         

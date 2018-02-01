@@ -147,16 +147,39 @@ Customers
 This library if powering following Websites/Web Applications:
 
 * [www.zlatanstajic.com]
-
-Bug analysis
-----------------
-
-This library has been tested with [PHP Stan] and approved as bug-free for all classes and demonstrations.
+* [cms.dis.rs]
 
 API documentation
 ----------------
 
-Official PHP Library API has been documented by [phpDocumentor].
+Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied [online].
+
+Bug analysis
+----------------
+
+This library has been tested with [PHP Stan] and approved as bug-free for all classes and demonstrations. Only exception to this rule might present files included from third-party folder. It's recommended' to run following command to check for buggs in project.
+
+```
+third-party/vendor/bin/phpstan analyse classes --level 7
+```
+
+Please note that PHP Stan is enabled in composer file only for development versions of PHP Library.
+
+Coding standard
+----------------
+
+PHP Library has it's own coding standard which deviates from PSR-2 standard with no much exceptions. To contribute to development of this project, you must follow this standard. PHP CodeSniffer does this job for you in development versions of PHP Library.
+
+```
+third-party/vendor/bin/phpcs classes/directory-lister.php --standard='phplibrary_ruleset.xml' --colors -s
+```
+
+If you want to find out more about specific rules, open "phplibrary_ruleset.xml" file which is located in root directory.
+
+Migration
+----------------
+
+When you update library version from older to newer, it's recommended to consult changelog file, which is located under the name "log.txt" in root directory.
 
 Acknowledgements
 ----------------
@@ -168,6 +191,8 @@ Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
 [MIT License]: http://www.opensource.org/licenses/mit-license.php
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
+[online]: https://php-library.zlatanstajic.com/api/
 [www.zlatanstajic.com]: https://www.zlatanstajic.com/
+[cms.dis.rs]: https://cms.dis.rs/
 [PHP Stan]: https://github.com/phpstan/phpstan
 [phpDocumentor]: https://www.phpdoc.org/

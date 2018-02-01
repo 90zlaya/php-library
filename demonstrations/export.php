@@ -30,7 +30,9 @@ $data = array(
         'title2' => 'Value32',
     ),
 );
+
 $data = array();
+
 $params = array(
     'head' => $head, 
     'data' => $data, 

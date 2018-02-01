@@ -29,13 +29,13 @@ class Operating_System {
         ),
         array(
             'name' => 'BlackBerry',
-        ), 
+        ),
         array(
             'name' => 'Android',
-        ), 
+        ),
         array(
             'name' => 'iOS',
-        ), 
+        ),
         array(
             'name' => 'Linux',
         ),
@@ -45,7 +45,7 @@ class Operating_System {
     
     /**
     * Gets operating systems list
-    *
+    * 
     * @return Array
     */
     public static function get_list()

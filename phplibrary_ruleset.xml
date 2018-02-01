@@ -2,28 +2,27 @@
 <ruleset name="PHP Library Coding Standards"> 
     <description>PHP Library Coding Standards enforcement rule set for PHP_CodeSniffer</description> 
     
+    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" /> 
+    <rule ref="Generic.Commenting.Fixme" /> 
+    <rule ref="Generic.Commenting.Todo" /> 
+    <rule ref="Generic.Files.OneClassPerFile" /> 
+    <rule ref="Generic.Files.OneInterfacePerFile" /> 
+    <rule ref="Generic.VersionControl.SubversionProperties" /> 
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent" /> 
+    
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing" /> 
+    <rule ref="Squiz.Arrays.ArrayDeclaration" /> 
+    <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops" />  
+    
     <rule ref="PSR2.Classes.PropertyDeclaration" /> 
     <rule ref="PSR2.ControlStructures.ElseIfDeclaration" /> 
     <rule ref="PSR2.Files.EndFileNewline" /> 
     <rule ref="PSR2.Methods.MethodDeclaration" /> 
     <rule ref="PSR2.Namespaces.NamespaceDeclaration" />    
     <rule ref="PSR2.Namespaces.UseDeclaration" />  
-    <rule ref="Squiz.Arrays.ArrayBracketSpacing" /> 
-    <rule ref="Squiz.Arrays.ArrayDeclaration" /> 
-    <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops" />  
     
-    <!-- Removing Sniffs from Generic as we do not want these -->
+    <!-- Excluded Sniffs-->
     <rule ref="Generic"> 
-        <!--<exclude name="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />       
-        <exclude name="Generic.Commenting.Fixme" /> 
-        <exclude name="Generic.Commenting.Todo" /> 
-        <exclude name="Generic.Files.LineLength" /> 
-        <exclude name="Generic.Files.OneClassPerFile" /> 
-        <exclude name="Generic.Files.OneInterfacePerFile" /> 
-        <exclude name="Generic.Formatting.NoSpaceAfterCast" /> 
-        <exclude name="Generic.VersionControl.SubversionProperties" /> 
-        <exclude name="Generic.WhiteSpace.DisallowTabIndent" /> -->
-        
         <exclude name="Generic.PHP.ClosingPHPTag" /> 
         <exclude name="Generic.NamingConventions.CamelCapsFunctionName" /> 
         <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie" /> 
@@ -31,11 +30,14 @@
         <exclude name="Generic.Files.LineEndings" /> 
         <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" /> 
         <exclude name="Generic.PHP.LowerCaseConstant" /> 
-        
+        <exclude name="Generic.Files.LineLength" /> 
+        <exclude name="Generic.Formatting.NoSpaceAfterCast" /> 
         <exclude name="Generic.Files.LowercasedFilename" /> 
         <exclude name="Generic.Commenting.DocComment.TagValueIndent" /> 
         <exclude name="Generic.Arrays.DisallowLongArraySyntax.Found" /> 
+        
         <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned" /> 
+        <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned" /> 
         <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed" /> 
         <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned" /> 
     </rule> 

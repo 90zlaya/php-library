@@ -59,7 +59,7 @@ class Date_Time_Format {
             'Wednesday', 
             'Thursday', 
             'Friday', 
-            'Saturday'
+            'Saturday',
         ),
         'serbian' => array(
             'Nedelja', 
@@ -68,7 +68,7 @@ class Date_Time_Format {
             'Sreda', 
             'Četvrtak', 
             'Petak', 
-            'Subota'
+            'Subota',
         ),
     );
     
@@ -92,7 +92,7 @@ class Date_Time_Format {
             'September', 
             'October', 
             'November', 
-            'December'
+            'December',
         ),
         'serbian' => array(
             'Januar', 
@@ -106,7 +106,7 @@ class Date_Time_Format {
             'Septembar', 
             'Oktobar', 
             'Novembar', 
-            'Decembar'
+            'Decembar',
         ),
     );
     
@@ -235,13 +235,15 @@ class Date_Time_Format {
         switch ($format)
         {
             case self::$types['user']['placeholder']:
-                {
-                    $regex = self::$types['user']['regex'];
-                } break;
+            {
+                $regex = self::$types['user']['regex'];
+                break;
+            }
             case self::$types['database']['placeholder']:
-                {
-                    $regex = self::$types['database']['regex'];
-                } break;
+            {
+                $regex = self::$types['database']['regex'];
+                break;
+            }
             default: $regex = '';
         }
         
@@ -325,17 +327,18 @@ class Date_Time_Format {
             
             foreach ($exploded as $row)
             {
-                  $number = $row;
-                        
-                  if ($hours_first)
-                  {
-                      $hours = $number; 
-                      $hours_first = FALSE;
-                  }
-                  else
-                  {
-                      $minutes = $number; 
-                  }                           
+                $number = $row;
+                      
+                if ($hours_first)
+                {
+                    $hours = $number; 
+                    
+                    $hours_first = FALSE;
+                }
+                else
+                {
+                    $minutes = $number; 
+                }                           
             }               
             
             $minutes += $hours * 60;
@@ -408,6 +411,7 @@ class Date_Time_Format {
         if ( ! empty($string))
         {
             $date_time = date(self::$types['unfriendly']['datetime']);
+            
             $string_with_prefix = $date_time . '_' . $string;
             
             return $string_with_prefix;
@@ -433,9 +437,14 @@ class Date_Time_Format {
             $date_month = substr($jmbg, 2, 2);
             $date_year  = substr($jmbg, 4, 3);
             
-            substr($date_day, 0, 1) == 0 ? $date_day = substr($date_day, 1, 2) : NULL;
-            substr($date_month, 0, 1) == 0 ? $date_month = substr($date_month, 1, 2) : NULL;
-
+            substr($date_day, 0, 1) == 0 
+                ? $date_day = substr($date_day, 1, 2) 
+                : NULL;
+            
+            substr($date_month, 0, 1) == 0 
+                ? $date_month = substr($date_month, 1, 2) 
+                : NULL;
+            
             $number_year = $date_year > 100 ? 1 : 2;
             
             return $date_day . '. ' . $date_month . '. ' . $number_year . $date_year . '.';

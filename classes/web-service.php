@@ -31,7 +31,11 @@ class Web_Service {
         
         switch ($code)
         {
-            case 200: $status = TRUE; break;
+            case 200:
+            {
+                $status = TRUE; 
+                break;
+            }
         }
         
         return array(
@@ -61,7 +65,7 @@ class Web_Service {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json', 
-            'Content-Length: ' . strlen($data_string)
+            'Content-Length: ' . strlen($data_string),
         ));
         $result = curl_exec($ch);
         curl_close($ch);

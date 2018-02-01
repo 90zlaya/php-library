@@ -15,6 +15,9 @@ namespace phplibrary;
 * Working with temperature conversions
 */
 class Temperature {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Absolute zero value
     * 

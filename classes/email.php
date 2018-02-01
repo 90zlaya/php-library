@@ -15,6 +15,9 @@ namespace phplibrary;
 * Email-related operations
 */
 class Email {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Valid email regex
     * 
@@ -142,16 +145,16 @@ class Email {
     */
     private static function script($data)
     {
-        $scripted   = '';
+        $scripted = '';
         
-        $scripted  .= '<script type="text/javascript">';
+        $scripted .= '<script type="text/javascript">';
         
         foreach ($data as $item)
         {
             $scripted .= "document.write('$item');";
         }
         
-        $scripted  .= '</script>';
+        $scripted .= '</script>';
         
         return $scripted;
     }

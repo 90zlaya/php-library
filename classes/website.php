@@ -18,12 +18,15 @@ namespace phplibrary;
 * Use this class when working with website related data
 */
 class Website {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Server data holder
     * 
     * @var Array
     */
-    public $server      = array(
+    public $server = array(
         'location' => '',
         'referer'  => '',
         'host'     => '',
@@ -145,7 +148,7 @@ class Website {
     * 
     * @var Array
     */
-    private $calls= array(
+    private $calls = array(
         'css' => array(
             'ordinary' => 'link',
             'custom'   => 'link-custom',
@@ -176,10 +179,21 @@ class Website {
         $this->host = $params['host'];
         $this->made = $params['made'];
         
-        empty($params['language']) ? NULL : $this->language = $params['language'];
-        empty($params['charset']) ? NULL : $this->charset = $params['charset'];
-        empty($params['description']) ? NULL : $this->charset = $params['description'];
-        empty($params['keywords']) ? NULL : $this->charset = $params['keywords'];
+        empty($params['language']) 
+            ? NULL 
+            : $this->language = $params['language'];
+        
+        empty($params['charset']) 
+            ? NULL 
+            : $this->charset = $params['charset'];
+        
+        empty($params['description']) 
+            ? NULL 
+            : $this->charset = $params['description'];
+        
+        empty($params['keywords']) 
+            ? NULL 
+            : $this->charset = $params['keywords'];
     }        
     
     // -------------------------------------------------------------------------
@@ -269,10 +283,21 @@ class Website {
     {
         $meta = '';
         
-        $title = isset($params['title']) ? $params['title'] : '';
-        $shortcut_icon = isset($params['shortcut_icon']) ? $params['shortcut_icon'] : $this->images['icon'];
-        $touch_icon = isset($params['touch_icon']) ? $params['touch_icon'] : $this->images['icon'];
-        isset($params['google_site_verification']) ? $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>' . PHP_EOL : NULL;
+        $title = isset($params['title']) 
+            ? $params['title'] 
+            : '';
+        
+        $shortcut_icon = isset($params['shortcut_icon']) 
+            ? $params['shortcut_icon'] 
+            : $this->images['icon'];
+        
+        $touch_icon = isset($params['touch_icon']) 
+            ? $params['touch_icon'] 
+            : $this->images['icon'];
+        
+        isset($params['google_site_verification']) 
+            ? $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>' . PHP_EOL 
+            : NULL;
         
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
         $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
@@ -280,7 +305,7 @@ class Website {
         $meta .= '<meta name="description" content="' . $this->description . '">' . PHP_EOL;
         $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
         $meta .= '<meta name="author" content="' . $this->creator['name'] . '">' . PHP_EOL;
-		$meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
+        $meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
         $meta .= '<link rel="apple-touch-icon" sizes="' . $this->image_size($touch_icon)['width_height'] . '" href="' . $touch_icon . '"/>' . PHP_EOL;
         $meta .= '<link rel="shortcut icon" href="' . $shortcut_icon . '" type="image/png">' . PHP_EOL;
         
@@ -317,29 +342,33 @@ class Website {
                 switch ($head['type'])
                 {
                     case $this->calls['css']['ordinary']:
-                        {
-                            $return .= '<link rel="stylesheet" href="';
-                            $return .= $head['path'];
-                            $return .= '">' . PHP_EOL;
-                        } break;
+                    {
+                        $return .= '<link rel="stylesheet" href="';
+                        $return .= $head['path'];
+                        $return .= '">' . PHP_EOL;
+                        break;
+                    }
                     case $this->calls['javascript']['ordinary']:
-                        {
-                            $return .= '<script src="';
-                            $return .= $head['path'];
-                            $return .= '"></script>' . PHP_EOL;
-                        } break;
+                    {
+                        $return .= '<script src="';
+                        $return .= $head['path'];
+                        $return .= '"></script>' . PHP_EOL;
+                        break;
+                    }
                     case $this->calls['css']['custom']:
-                        {
-                            $return .= '<style>';
-                            $return .= $head['path'];
-                            $return .= '</style>' . PHP_EOL;
-                        } break;
+                    {
+                        $return .= '<style>';
+                        $return .= $head['path'];
+                        $return .= '</style>' . PHP_EOL;
+                        break;
+                    }
                     case $this->calls['javascript']['custom']:
-                        {
-                            $return .= '<script>';
-                            $return .= $head['path'];
-                            $return .= '</script>' . PHP_EOL;
-                        } break;
+                    {
+                        $return .= '<script>';
+                        $return .= $head['path'];
+                        $return .= '</script>' . PHP_EOL;
+                        break;
+                    }
                     default: NULL;
                 }    
             }
@@ -374,29 +403,33 @@ class Website {
                 switch ($bottom['type'])
                 {
                     case $this->calls['css']['ordinary']:
-                        {
-                            $return .= '<link rel="stylesheet" href="';
-                            $return .= $bottom['path'];
-                            $return .= '">' . PHP_EOL;
-                        } break;
+                    {
+                        $return .= '<link rel="stylesheet" href="';
+                        $return .= $bottom['path'];
+                        $return .= '">' . PHP_EOL;
+                        break;
+                    }
                     case $this->calls['javascript']['ordinary']:
-                        {
-                            $return .= '<script src="';
-                            $return .= $bottom['path'];
-                            $return .= '"></script>' . PHP_EOL;
-                        } break;
+                    {
+                        $return .= '<script src="';
+                        $return .= $bottom['path'];
+                        $return .= '"></script>' . PHP_EOL;
+                        break;
+                    }
                     case $this->calls['css']['custom']:
-                        {
-                            $return .= '<style>';
-                            $return .= $bottom['path'];
-                            $return .= '</style>' . PHP_EOL;
-                        } break;
+                    {
+                        $return .= '<style>';
+                        $return .= $bottom['path'];
+                        $return .= '</style>' . PHP_EOL;
+                        break;
+                    }
                     case $this->calls['javascript']['custom']:
-                        {
-                            $return .= '<script>';
-                            $return .= $bottom['path'];
-                            $return .= '</script>' . PHP_EOL;
-                        } break;
+                    {
+                        $return .= '<script>';
+                        $return .= $bottom['path'];
+                        $return .= '</script>' . PHP_EOL;
+                        break;
+                    }
                     default: NULL;
                 }   
             }
@@ -487,7 +520,7 @@ class Website {
         $since = $current_year == $this->made || $always_made_year 
             ? $current_year : $this->made . '-' . $current_year;
         
-        $licence = $show_licence ? ' | ' . ' All Rights Reserved' : '';
+        $licence = $show_licence ? ' | All Rights Reserved' : '';
         
         return 'Copyright &#169; ' . $since . ' | <a href="' . $this->creator['website'] . '" target="_blank">' .  $this->creator['name'] . '</a>' . $licence;
     }
@@ -513,9 +546,10 @@ class Website {
         switch ($language)
         {
             case 'EN':
-                {
-                    $signature_hidden .= 'Proudly built by: ' . $this->creator['name'] . '; Find me on ' . $this->creator['website'];
-                } break;
+            {
+                $signature_hidden .= 'Proudly built by: ' . $this->creator['name'] . '; Find me on ' . $this->creator['website'];
+                break;
+            }
             default: $signature_hidden .= 'Ponosno izradio: ' . $this->creator['name'] . '; Pronadjite me na ' . $this->creator['website'];
         }
         

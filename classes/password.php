@@ -15,6 +15,9 @@ namespace phplibrary;
 * Works with password related data
 */
 class Password {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Minimum password size
     * 
@@ -62,6 +65,7 @@ class Password {
     public static function new_unreadable($size_optimum=0, $letters='')
     {
         empty($size_optimum) ? $size_optimum = self::$size_optimum : NULL;
+        
         empty($letters) ? $letters = self::$letters : NULL;
             
         return substr(str_shuffle($letters), 0, $size_optimum);
@@ -80,17 +84,24 @@ class Password {
     public static function new_readable($size_optimum=0, $words='')
     {
         empty($size_optimum) ? $size_optimum = self::$size_optimum : NULL;
+        
         empty($words) ? $words = self::$words : NULL;
         
-        $words          = explode(',', $words);
-        $new_password   = '';
-        while (strlen($new_password) < $size_optimum)
+        $words               = explode(',', $words);
+        $new_password        = '';
+        $new_password_length = 0;
+        
+        while ($new_password_length < $size_optimum)
         {
-          $r = mt_rand(0, count($words)-1);
-          $new_password .= $words[$r];
+            $r = mt_rand(0, count($words)-1);
+          
+            $new_password .= $words[$r];
+            
+            $new_password_length = strlen($new_password);
         }
         
         $number = mt_rand(1000, 9999);
+        
         if ($size_optimum > 2)
         {
             return substr($new_password, 0, $size_optimum-strlen($number)) . $number;
@@ -114,18 +125,19 @@ class Password {
     */
     public static function strength($string, $return_boolean=TRUE, $minimum_strength_percent=60)
     {
-        $h = 0;
+        $h    = 0;
         $size = strlen($string);
         
         if ($size >= self::$size_minimum)
         {
             foreach (count_chars($string, 1) as $v)
             {
-                $p = $v / $size;
+                $p  = $v / $size;
                 $h -= $p * log($p) / log(2);
             }
             
             $strength = ($h / 4) * 100;
+            
             $strength > 100 ? $strength = 100 : NULL;
         }
         else

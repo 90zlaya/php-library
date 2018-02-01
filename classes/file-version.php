@@ -20,11 +20,15 @@ use phplibrary\Directory_Lister as directory_lister;
 * Checking for changed files and creating file version numbers
 */
 class File_Version {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * First version value to start with
     */
     const FIRST_VERSION = '1.0.0';
     
+    // -------------------------------------------------------------------------
     
     /**
     * Names of files to be created to store data
@@ -36,6 +40,8 @@ class File_Version {
         'log_versions'  => 'versions',
     );
     
+    // -------------------------------------------------------------------------
+        
     /**
     * Default date format
     * 
@@ -44,7 +50,7 @@ class File_Version {
     protected static $date_format = 'Y-m-d';
     
     // -------------------------------------------------------------------------
-
+    
     /**
     * Dump files
     * 
@@ -57,6 +63,7 @@ class File_Version {
         isset($params['file_names']['log_files']) 
             ? self::$file_names['log_files'] = $params['file_names']['log_files'] 
             : NULL;
+        
         isset($params['file_names']['log_versions']) 
             ? self::$file_names['log_versions'] = $params['file_names']['log_versions'] 
             : NULL;

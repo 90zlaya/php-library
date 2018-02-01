@@ -20,7 +20,10 @@ use geoPlugin as geoPlugin;
 * Customisation of third-party class geoPlugin 
 * Location: http://www.geoplugin.com/
 */
-class Geo_Plugin extends geoPlugin{
+class Geo_Plugin extends geoPlugin {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Geo_Plugin data is stored here
     * 
@@ -78,7 +81,7 @@ class Geo_Plugin extends geoPlugin{
         'ORIG_PATH_INFO',
     );
     
-	// -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     
     /**
     * Returns all data
@@ -109,9 +112,9 @@ class Geo_Plugin extends geoPlugin{
             $this->data['server'] = array_merge($this->data['server'], array(strtolower($item) => isset($_SERVER[$item]) ? $_SERVER[$item] : ''));
         }
         
-		$this->data['service'] = array(
-            'location'				=> $this->host,
-			'ip'                    => $this->ip,
+        $this->data['service'] = array(
+            'location'              => $this->host,
+            'ip'                    => $this->ip,
             'city'                  => $this->city,
             'region'                => $this->region,
             'longitude'             => $this->longitude,

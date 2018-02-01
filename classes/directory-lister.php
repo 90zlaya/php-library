@@ -15,6 +15,9 @@ namespace phplibrary;
 * Directory content retrieval
 */
 class Directory_Lister {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Local file path prefix
     * 
@@ -128,8 +131,13 @@ class Directory_Lister {
         }
         else
         {
-            empty($date_start) ? NULL : $date_start = $year . '-' . $date_start;
-            empty($date_end) ? NULL : $date_end = $year . '-' . $date_end;
+            empty($date_start) 
+                ? NULL 
+                : $date_start = $year . '-' . $date_start;
+            
+            empty($date_end) 
+                ? NULL 
+                : $date_end = $year . '-' . $date_end;
         }
         
         if (empty($date_start))
@@ -148,7 +156,7 @@ class Directory_Lister {
                 }
             }
         }
-        else if (empty($date_end))
+        elseif (empty($date_end))
         {
             if ($date == $date_start)
             {
@@ -184,8 +192,8 @@ class Directory_Lister {
             foreach ($list as $item)
             {
                 $display .= '<script>window.open("';
-				$display .= $item['location'];
-				$display .= '");</script>';
+                $display .= $item['location'];
+                $display .= '");</script>';
             }
         }
         
@@ -243,9 +251,10 @@ class Directory_Lister {
     {
         empty($directory) ? $directory = self::$directory : self::$directory = $directory;
         
-        $files = is_dir($directory) ? scandir($directory) : array();
+        $files      = is_dir($directory) ? scandir($directory) : array();
         $arr_folder = $arr_path = array();
-        $counter = 1;
+        $counter    = 1;
+        
         foreach ($files as $folder)
         {
             $folder_first_character = substr($folder, 0, 1);
@@ -291,8 +300,9 @@ class Directory_Lister {
         
         if (file_exists($directory))
         {
-            $files = scandir($directory);
+            $files   = scandir($directory);
             $counter = 1;
+            
             foreach ($files as $file)
             {
                 if ($counter > 2)
@@ -307,8 +317,8 @@ class Directory_Lister {
                             $path      = $directory . $file;
                             $location  = self::$open_inside_browser . $path;
                             $directory = self::$directory;
-                            $date      = date(self::$date_format, @filemtime($location));
-                            $time      = date(self::$time_format, @filemtime($location));
+                            $date      = date(self::$date_format, filemtime($location));
+                            $time      = date(self::$time_format, filemtime($location));
                             $open      = '<a href="' . $location . '" target="_blank">' . $file . '</a>';
                             $title     = basename($file, '.' . $extension);
                             $size      = filesize($location);
@@ -440,8 +450,8 @@ class Directory_Lister {
     */
     public static function listing($params)
     {
-        $directory  = $params['directory'];
-        $method     = $params['method'];
+        $directory = $params['directory'];
+        $method    = $params['method'];
         
         $print      = isset($params['print']) ? $params['print'] : FALSE;
         $display    = isset($params['display']) ? $params['display'] : FALSE;

@@ -15,6 +15,9 @@ namespace phplibrary;
 * Mathematical operations and calculations
 */
 class Math {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Iterated value used in loops
     * 

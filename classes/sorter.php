@@ -15,12 +15,15 @@ namespace phplibrary;
 * Sortes files to multiple folders
 */
 class Sorter {
+    
+    // -------------------------------------------------------------------------
+    
     /**
     * Sorter class report
     * 
     * @var Array
     */
-    protected $report   = array(
+    protected $report = array(
         'folders' => array(
             'number' => array(
                 'created'     => 0,
@@ -122,9 +125,9 @@ class Sorter {
         
         if (file_exists($this->deploy['where_to_read_files']))
         {
-            $files              = scandir($this->deploy['where_to_read_files']);
-            $number_of_files    = 0;
-            $counter            = 1;
+            $files           = scandir($this->deploy['where_to_read_files']);
+            $number_of_files = 0;
+            $counter         = 1;
             
             foreach ($files as $file)
             {
@@ -171,7 +174,7 @@ class Sorter {
             
             if ( ! file_exists($folder))
             {
-                if (@mkdir($folder))
+                if (mkdir($folder))
                 {
                     $this->report['folders']['number']['created']++;
                     array_push($this->report['folders']['report']['created'], $folder);
@@ -204,17 +207,21 @@ class Sorter {
                 $location_from  = $this->deploy['where_to_read_files'];
                 $location_from .= $item['file'];
                 
-                $location_to    = $this->deploy['where_to_create_directories'];
-                $location_to   .= substr($item['file'], 0, 3);
-                $location_to   .= $this->deploy['folder_sufix'];
-                $location_to   .= '/';
-                $location_to   .= $item['file'];
+                $location_to  = $this->deploy['where_to_create_directories'];
+                $location_to .= substr($item['file'], 0, 3);
+                $location_to .= $this->deploy['folder_sufix'];
+                $location_to .= '/';
+                $location_to .= $item['file'];
                 
                 if ( ! file_exists($location_to))
                 {
                     switch ($operation)
                     {
-                        case 'm': $this->move_files($location_from, $location_to, $item['file']); break;
+                        case 'm':
+                        {
+                            $this->move_files($location_from, $location_to, $item['file']); 
+                            break;
+                        }
                         default: $this->copy_files($location_from, $location_to, $item['file']);
                     }
                 }
@@ -270,17 +277,20 @@ class Sorter {
         switch (strlen($i))
         {
             case 1:
-                {
-                    $folder_prefix = '00' . $i;
-                } break;
+            {
+                $folder_prefix = '00' . $i;
+                break;
+            }
             case 2:
-                {
-                    $folder_prefix = '0' . $i;
-                } break;
+            {
+                $folder_prefix = '0' . $i;
+                break;
+            }
             case 3:
-                {
-                    $folder_prefix = $i;
-                } break;
+            {
+                $folder_prefix = $i;
+                break;
+            }
             default: $folder_prefix = '';
         }
         
