@@ -575,11 +575,25 @@ class Directory_Lister {
     */
     private static function filtering_by_date($list, $params)
     {
-        $delimiter  = $params['delimiter'];
-        $reverse    = $params['reverse'];
-        $date_start = $params['date_start'];
-        $date_end   = $params['date_end'];
-        $year       = $params['year'];
+        $delimiter = isset($params['delimiter']) 
+            ? $params['delimiter'] 
+            : FALSE;
+        
+        $reverse = isset($params['reverse'])
+            ? $params['reverse']
+            : FALSE;
+        
+        $date_start = isset($params['date_start'])
+            ? $params['date_start']
+            : FALSE;
+        
+        $date_end = isset($params['date_end'])
+            ? $params['date_end']
+            : FALSE;
+        
+        $year = isset($params['year'])
+            ? $params['year']
+            : FALSE;
         
         $searched = $checked = array();
         
