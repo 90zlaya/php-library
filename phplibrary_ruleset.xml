@@ -35,10 +35,13 @@
         <exclude name="Generic.Files.LowercasedFilename" /> 
         <exclude name="Generic.Commenting.DocComment.TagValueIndent" /> 
         <exclude name="Generic.Arrays.DisallowLongArraySyntax.Found" /> 
+        <exclude name="Generic.Files.InlineHTML.Found" /> 
+        <exclude name="Generic.PHP.DisallowShortOpenTag.EchoFound" /> 
+        <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact" /> 
         
         <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned" /> 
         <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned" /> 
         <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed" /> 
-        <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned" /> 
+        <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned" />
     </rule> 
 </ruleset> 

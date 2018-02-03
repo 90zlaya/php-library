@@ -82,14 +82,6 @@ $php_library = array(
                 'name' => 'website',
             ),
         ),
-        'modules' => array(
-            array(
-                'name' => 'file-version',
-            ),
-            array(
-                'name' => 'mysql-dump',
-            ),
-        ),
     ),
     'hyperlinks'    => array(
         'php_library'   => array(

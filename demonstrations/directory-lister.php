@@ -29,8 +29,8 @@ $params = array(
     'delimiter'  => '',
     'date_start' => '',
     'date_end'   => '',
-    'year'       => '',
-    'types'      => array('txt'),
+    'years'      => array(2013),
+    'types'      => array('php'),
 );
 
 $listing = directory_lister::listing($params);

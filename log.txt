@@ -17,6 +17,7 @@ Modified:
 
 Date_Time_Format: number_to_day method created
 Date_Time_Format: days_after method created
+Directory_Lister: array of years can be passed to listing method
 Email: show method created
 Email: script method created
 Email: split method created
@@ -32,7 +33,7 @@ file-version: entire module removed and replaced with File_Version class
 
 Development:
 
-Directory_Lister: array of years crawl option
+Sorter: mkdir() warning fix
 
 -------------------------------------------
 Since php-library v1.1.0

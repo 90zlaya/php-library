@@ -22,7 +22,7 @@
     <link href="https://php-library.zlatanstajic.com/assets/css/theme.css" rel="stylesheet">
     <script src="https://php-library.zlatanstajic.com/assets/js/theme.js"></script>
     <!-- Custom PHP Library style -->
-	<link href="https://php-library.zlatanstajic.com/assets/css/custom.css" rel="stylesheet">
+    <link href="https://php-library.zlatanstajic.com/assets/css/custom.css" rel="stylesheet">
     <!-- Initializer -->
     <script>
         Flatdoc.run({
@@ -61,14 +61,22 @@
                                     }
                                 }
                                 
-                                echo 'window.open(\'' . $button['url'] . '\', \'' . $button['method'] . '\')';
+                                echo 'window.open(\'';
+                                echo $button['url'];
+                                echo '\', \'';
+                                echo $button['method'];
+                                echo '\')';
                             }
                             else
                             {
-                                echo 'window.location=\'' . $button['url'] . '\'';
+                                echo 'window.location=\'';
+                                echo $button['url'];
+                                echo '\'';
                             }
                             
-                            echo ';" class="main-button" role="button">' . $button['name'] . '</span>&nbsp;';
+                            echo ';" class="main-button" role="button">';
+                            echo $button['name'];
+                            echo '</span>&nbsp;';
                         }
                     ?>
                 </h5>
@@ -83,7 +91,11 @@
                 <?php
                     foreach ($php_library['hyperlinks']['php_library'] as $link)
                     {
-                      echo '<li><a href="' . $link['url'] . '" target="_blank">' . $link['name'] . '</a></li>';
+                        echo '<li><a href="';
+                        echo $link['url'];
+                        echo '" target="_blank">';
+                        echo $link['name'];
+                        echo '</a></li>';
                     }
                 ?>
             </ul>
@@ -100,4 +112,5 @@
         <div role="flatdoc-content" class="content"></div>
     </div>
 </body>
+
 </html>

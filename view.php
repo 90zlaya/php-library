@@ -15,10 +15,14 @@
 
 <body>
 <?php
-    $home_page  = 'index.php';
-    $location   = isset($_GET['page']) ? $_GET['page'] : header('Location: ' . $home_page);
-    $page       = $location . '.php';
+    $home_page = 'index.php';
     
+    $location = isset($_GET['page']) 
+        ? $_GET['page'] 
+        : header('Location: ' . $home_page);
+        
+    $page = $location . '.php';
+
     if (file_exists($page))
     {
         include $page;
@@ -44,27 +48,38 @@
                         foreach ($php_library['list']['classes'] as $item)
                         {
                             echo '<li>';
-                            echo '<a href="view.php?page=' . $php_library['folders']['demonstrations'] . '/' . $item['name'] . '">'; 
+                            echo '<a href="view.php?page=';
+                            echo $php_library['folders']['demonstrations'];
+                            echo '/';
+                            echo $item['name'];
+                            echo '">'; 
                             echo $item['name'];
                             echo '</a>';
-                            echo '</li>' . PHP_EOL;
+                            echo '</li>';
+                            echo PHP_EOL;
                         }
                     echo '</ol>' . PHP_EOL;
                     
                     echo '<h2/>';
-                } break;
-                
+                    
+                    break;
+                }
                 case 'log':
                 {
-                    $fh = fopen('log.txt','r');
-        
-                    while ($line = fgets($fh))
+                    $fh = fopen('log.txt', 'r');
+                    
+                    do
                     {
+                        $line = fgets($fh);
+                        
                         echo $line . '<br>';
                     }
+                    while ($line);
+                    
                     fclose($fh);
-                } break;
-                
+                    
+                    break;
+                }
                 default: header('Location: ' . $home_page);
             }
         }

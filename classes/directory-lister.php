@@ -121,28 +121,31 @@ class Directory_Lister {
         $date       = $params['date'];
         $date_start = $params['date_start'];
         $date_end   = $params['date_end'];
-        $year       = $params['year'];
+        $years      = $params['years'];
         
         $searched = array();
         
-        if (empty($year))
+        if (empty($years))
         {
             $date = substr($date, 5);
         }
         else
         {
-            empty($date_start) 
-                ? NULL 
-                : $date_start = $year . '-' . $date_start;
-            
-            empty($date_end) 
-                ? NULL 
-                : $date_end = $year . '-' . $date_end;
+            foreach ($years as $given_year)
+            {
+                empty($date_start) 
+                    ? NULL 
+                    : $date_start = $given_year . '-' . $date_start;
+                
+                empty($date_end) 
+                    ? NULL 
+                    : $date_end = $given_year . '-' . $date_end;
+            }
         }
         
         if (empty($date_start))
         {
-            if (empty($year))
+            if (empty($years))
             {
                 $searched = array_merge($searched, $item);
             }
@@ -150,9 +153,12 @@ class Directory_Lister {
             {
                 $date = substr($date, 0, 4);
                 
-                if ($date == $year)
+                foreach ($years as $given_year)
                 {
-                    $searched = array_merge($searched, $item);
+                    if ($date == $given_year)
+                    {
+                        $searched = array_merge($searched, $item);
+                    }
                 }
             }
         }
@@ -453,14 +459,9 @@ class Directory_Lister {
         $directory = $params['directory'];
         $method    = $params['method'];
         
-        $print      = isset($params['print']) ? $params['print'] : FALSE;
-        $display    = isset($params['display']) ? $params['display'] : FALSE;
-        $reverse    = isset($params['reverse']) ? $params['reverse'] : '';
-        $delimiter  = isset($params['delimiter']) ? $params['delimiter'] : '';
-        $date_start = isset($params['date_start']) ? $params['date_start'] : '';
-        $date_end   = isset($params['date_end']) ? $params['date_end'] : '';
-        $year       = isset($params['year']) ? $params['year'] : '';
-        $types      = isset($params['types']) ? $params['types'] : array();
+        $print   = isset($params['print']) ? $params['print'] : FALSE;
+        $display = isset($params['display']) ? $params['display'] : FALSE;
+        $types   = isset($params['types']) ? $params['types'] : array();
         
         $searched = array();
         
@@ -591,8 +592,8 @@ class Directory_Lister {
             ? $params['date_end']
             : FALSE;
         
-        $year = isset($params['year'])
-            ? $params['year']
+        $years = isset($params['years'])
+            ? $params['years']
             : FALSE;
         
         $searched = $checked = array();
@@ -606,7 +607,7 @@ class Directory_Lister {
                 'date'       => $date,
                 'date_start' => $date_start,
                 'date_end'   => $date_end,
-                'year'       => $year,
+                'years'      => $years,
             );
             
             if (empty($delimiter))
