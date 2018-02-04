@@ -145,11 +145,11 @@ This library if powering following Websites/Web Applications:
 
 * [zlatanstajic.com]
 
-![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg)
+![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg)
 
 * [cms.dis.rs]
 
-![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/cms.dis.jpg)
+![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/cms.dis.jpg)
 
 API documentation
 ----------------
@@ -173,7 +173,7 @@ Coding standard
 PHP Library has it's own coding standard which deviates from PSR-2 standard with no much exceptions. To contribute to development of this project, you must follow this standard. PHP CodeSniffer does this job for you in development versions of PHP Library.
 
 ```
-third-party/vendor/bin/phpcs classes/directory-lister.php --standard='phplibrary_ruleset.xml' --colors -s
+third-party/vendor/bin/phpcs autoload.php --standard='phplibrary_ruleset.xml'
 ```
 
 If you want to find out more about specific rules, open "phplibrary_ruleset.xml" file which is located in root directory.
