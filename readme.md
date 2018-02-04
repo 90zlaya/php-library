@@ -136,9 +136,6 @@ composer require 90zlaya/php-library
 Misc
 =======
 
-Inspiration
-----------------
-
 Idea behind creation of this repository is making everyday Web Development process faster and easier.
 
 Customers
@@ -146,13 +143,13 @@ Customers
 
 This library if powering following Websites/Web Applications:
 
-* [www.zlatanstajic.com]
+* [zlatanstajic.com]
 
-[![Homepage of www.zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg)
+![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg)
 
 * [cms.dis.rs]
 
-[![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/cms.dis.jpg)
+![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/cms.dis.jpg)
 
 API documentation
 ----------------
@@ -197,7 +194,7 @@ Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 [MIT License]: http://www.opensource.org/licenses/mit-license.php
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
 [online]: https://php-library.zlatanstajic.com/api/
-[www.zlatanstajic.com]: https://www.zlatanstajic.com/
+[zlatanstajic.com]: https://www.zlatanstajic.com/
 [cms.dis.rs]: https://cms.dis.rs/
 [PHP Stan]: https://github.com/phpstan/phpstan
 [phpDocumentor]: https://www.phpdoc.org/
