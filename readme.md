@@ -147,7 +147,12 @@ Customers
 This library if powering following Websites/Web Applications:
 
 * [www.zlatanstajic.com]
+
+[![Homepage of www.zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg)
+
 * [cms.dis.rs]
+
+[![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/cms.dis.jpg)
 
 API documentation
 ----------------
