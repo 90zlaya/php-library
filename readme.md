@@ -136,6 +136,9 @@ composer require 90zlaya/php-library
 Misc
 =======
 
+Inspiration
+----------------
+
 Idea behind creation of this repository is making everyday Web Development process faster and easier.
 
 Customers
