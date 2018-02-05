@@ -622,12 +622,20 @@ class Directory_Lister {
                     {
                         $checked = self::check_date($params);
                     }
+                    else
+                    {
+                        $checked = array();
+                    }
                 }
                 else
                 {
                     if (stripos($item['title'], $delimiter) !== FALSE)
                     {
                         $checked = self::check_date($params);
+                    }
+                    else
+                    {
+                        $checked = array();
                     }
                 }
             }
