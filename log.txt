@@ -31,10 +31,6 @@ User_Agent: is_crawler method created
 Removed:
 file-version: entire module removed and replaced with File_Version class
 
-Development:
-
-Sorter: mkdir() warning fix
-
 -------------------------------------------
 Since php-library v1.1.0
 -------------------------------------------

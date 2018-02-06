@@ -65,32 +65,37 @@ class File {
     * 
     * @param String $file_location
     * 
-    * @return String $line
+    * @return mixed
     */
     public static function read_from_file($file_location)
     {
-        $f = fopen($file_location, 'r');
-        
-        $cursor = -1;
+        if (file_exists($file_location))
+        {
+            $f = fopen($file_location, 'r');
+            
+            $cursor = -1;
 
-        fseek($f, $cursor, SEEK_END);
-        $char = fgetc($f);
-        
-        while ($char === "\n" || $char === "\r")
-        {
-            fseek($f, $cursor--, SEEK_END);
+            fseek($f, $cursor, SEEK_END);
             $char = fgetc($f);
+            
+            while ($char === "\n" || $char === "\r")
+            {
+                fseek($f, $cursor--, SEEK_END);
+                $char = fgetc($f);
+            }
+            
+            $line = '';
+            while ($char !== FALSE && $char !== "\n" && $char !== "\r")
+            {
+                $line = $char . $line;
+                fseek($f, $cursor--, SEEK_END);
+                $char = fgetc($f);
+            }
+            
+            return $line;
         }
         
-        $line = '';
-        while ($char !== FALSE && $char !== "\n" && $char !== "\r")
-        {
-            $line = $char . $line;
-            fseek($f, $cursor--, SEEK_END);
-            $char = fgetc($f);
-        }
-        
-        return $line;                 
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------

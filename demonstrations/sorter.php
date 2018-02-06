@@ -13,8 +13,8 @@ use phplibrary\Format as format;
 
 $sorter = new sorter();
 $report = $sorter->deploy(array(
-    'where_to_read_files'           => 'D:/Browser/sorter/source/',
-    'where_to_create_directories'   => 'D:/Browser/sorter/destination/',
+    'where_to_read_files'           => 'D:/Zlatan/Browser/sorter/source/',
+    'where_to_create_directories'   => 'D:/Zlatan/Browser/sorter/destination/',
     'folder_sufix'                  => '000',
     'number_of_directories'         => 10,
     'operation'                     => 'c',

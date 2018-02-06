@@ -48,6 +48,7 @@ class Sorter {
                 'not_moved'  => array(),
             ),
         ),
+        'errors' => array(),
     );
     
     // -------------------------------------------------------------------------
@@ -123,9 +124,11 @@ class Sorter {
     {
         $arr_files = array();
         
-        if (file_exists($this->deploy['where_to_read_files']))
+        $files_param = 'where_to_read_files';
+        
+        if (file_exists($this->deploy[$files_param]))
         {
-            $files           = scandir($this->deploy['where_to_read_files']);
+            $files           = scandir($this->deploy[$files_param]);
             $number_of_files = 0;
             $counter         = 1;
             
@@ -141,8 +144,8 @@ class Sorter {
                         if (empty($this->deploy['types']) || in_array($extension_lowered, $this->deploy['types']))
                         {
                             array_push($arr_files, array(
-                                'path'      => $this->deploy['where_to_read_files'] . $file,
-                                'directory' => $this->deploy['where_to_read_files'],
+                                'path'      => $this->deploy[$files_param] . $file,
+                                'directory' => $this->deploy[$files_param],
                                 'file'      => $file,
                                 'title'     => basename($file, '.' . $extension),
                             ));
@@ -154,6 +157,13 @@ class Sorter {
                 
                 $counter++;
             }
+        }
+        else
+        {
+            $this->report['errors'] = array_merge(
+                $this->report['errors'],
+                array('Improperly set ' . $files_param . ' parameter.')
+            );
         }
         
         return $arr_files;
@@ -168,23 +178,35 @@ class Sorter {
     */
     protected function create_directories()
     {
-        for ($i=0; $i<$this->deploy['number_of_directories']; $i++)
+        $directories_param = 'where_to_create_directories';
+        
+        if (file_exists($this->deploy[$directories_param]))
         {
-            $folder = $this->folder_name($i);
-            
-            if ( ! file_exists($folder))
+            for ($i=0; $i<$this->deploy['number_of_directories']; $i++)
             {
-                if (mkdir($folder))
+                $folder = $this->folder_name($i);
+                
+                if ( ! file_exists($folder))
                 {
-                    $this->report['folders']['number']['created']++;
-                    array_push($this->report['folders']['report']['created'], $folder);
-                }
-                else
-                {
-                    $this->report['folders']['number']['not_created']++;
-                    array_push($this->report['folders']['report']['not_created'], $folder);
+                    if (mkdir($folder))
+                    {
+                        $this->report['folders']['number']['created']++;
+                        array_push($this->report['folders']['report']['created'], $folder);
+                    }
+                    else
+                    {
+                        $this->report['folders']['number']['not_created']++;
+                        array_push($this->report['folders']['report']['not_created'], $folder);
+                    }
                 }
             }
+        }
+        else
+        {
+            $this->report['errors'] = array_merge(
+                $this->report['errors'],
+                array('Improperly set ' . $directories_param . ' parameter.')
+            );
         }
     }
     
