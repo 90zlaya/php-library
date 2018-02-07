@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="third-party/vendor/autoload.php"
+<phpunit bootstrap="third-party/autoload.php"
         colors="true"
         verbose="true"
         stopOnFailure="false">

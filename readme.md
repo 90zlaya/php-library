@@ -74,7 +74,7 @@ Bug analysis
 This library has been tested with [PHP Stan] and approved as bug-free for all classes and demonstrations. Only exception to this rule might present files included from third-party folder. It's recommended' to run following command to check for buggs in project.
 
 ```
-third-party/vendor/bin/phpstan analyse classes --level 7
+third-party/bin/phpstan analyse classes --level 7
 ```
 
 Please note that PHP Stan is enabled in composer file only for development versions of PHP Library.
@@ -85,10 +85,10 @@ Coding standard
 PHP Library has it's own coding standard which deviates from PSR-2 standard with no much exceptions. To contribute to development of this project, you must follow this standard. PHP CodeSniffer does this job for you in development versions of PHP Library.
 
 ```
-third-party/vendor/bin/phpcs autoload.php --standard='phplibrary_ruleset.xml'
+third-party/bin/phpcs data.php --standard='ruleset.xml'
 ```
 
-If you want to find out more about specific rules, open "phplibrary_ruleset.xml" file which is located in root directory.
+If you want to find out more about specific rules, open "ruleset.xml" file which is located in root directory.
 
 Migration
 ----------------

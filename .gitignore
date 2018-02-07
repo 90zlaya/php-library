@@ -6,8 +6,6 @@
 /out-tsc
 
 # custom files
-files
-versions
 images.php
 composer.lock
 phpDocumentor.phar
@@ -16,7 +14,10 @@ phpDocumentor.phar
 api
 assets
 output
-third-party/vendor
+third-party
+
+# include custom subfolder
+!/third-party/geoplugin.class
 
 # System Files
 .DS_Store

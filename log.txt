@@ -1,4 +1,14 @@
 -------------------------------------------
+Since php-library v1.3.0
+-------------------------------------------
+
+Important: 
+
+PHP files for classes and demonstrations changed to match class names
+Composer vendors are stored directly into third-party folder
+Using composer autoloader instead of native one
+
+-------------------------------------------
 Since php-library v1.2.0
 -------------------------------------------
 

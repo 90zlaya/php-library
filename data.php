@@ -1,14 +1,11 @@
 <?php
 /*
 | -------------------------------------------------------------------
-| AUTOLOAD
+| DATA
 | -------------------------------------------------------------------
 |
-| This is file where all classes are autoloaded.
-| This file also contains global data for some pages.
-| 
-| Include this file if you want all classes 
-| at once in your project.
+| All important data for front-end
+| views are contained here
 |
 | -------------------------------------------------------------------
 */
@@ -123,13 +120,3 @@ $php_library = array(
         ),
     ),
 );
-
-foreach ($php_library['list']['classes'] as $item)
-{
-    $file_location  = $php_library['folders']['classes'];
-    $file_location .= '/';
-    $file_location .= $item['name'];
-    $file_location .= '.php';
-    
-    require_once $file_location;
-}
