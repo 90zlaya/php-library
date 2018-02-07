@@ -25,61 +25,61 @@ $php_library = array(
     'list'          => array(
         'classes' => array(
             array(
-                'name' => 'date-time-format',
+                'name' => 'Date_Time_Format',
             ),
             array(
-                'name' => 'directory-lister',
+                'name' => 'Directory_Lister',
             ),
             array(
-                'name' => 'email',
+                'name' => 'Email',
             ),
             array(
-                'name' => 'export',
+                'name' => 'Export',
             ),
             array(
-                'name' => 'file',
+                'name' => 'File',
             ),
             array(
-                'name' => 'file-version',
+                'name' => 'File_Version',
             ),
             array(
-                'name' => 'format',
+                'name' => 'Format',
             ),
             array(
-                'name' => 'geo-plugin',
+                'name' => 'Geo_Plugin',
             ),
             array(
-                'name' => 'math',
+                'name' => 'Math',
             ),
             array(
-                'name' => 'operating-system',
+                'name' => 'Operating_System',
             ),
             array(
-                'name' => 'password',
+                'name' => 'Password',
             ),
             array(
-                'name' => 'random',
+                'name' => 'Random',
             ),
             array(
-                'name' => 'sorter',
+                'name' => 'Sorter',
             ),
             array(
-                'name' => 'temperature',
+                'name' => 'Temperature',
             ),
             array(
-                'name' => 'user',
+                'name' => 'User',
             ),
             array(
-                'name' => 'user-agent',
+                'name' => 'User_Agent',
             ),
             array(
-                'name' => 'validation',
+                'name' => 'Validation',
             ),
             array(
-                'name' => 'web-service',
+                'name' => 'Web_Service',
             ),
             array(
-                'name' => 'website',
+                'name' => 'Website',
             ),
         ),
     ),
