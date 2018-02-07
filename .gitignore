@@ -13,10 +13,9 @@ phpDocumentor.phar
 # custom folders
 api
 assets
-output
 third-party
 
-# include custom subfolder
+# exclude
 !/third-party/geoplugin.class
 
 # System Files

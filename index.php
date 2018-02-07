@@ -41,26 +41,13 @@
                 <p><?=$php_library['meta']['tagline']?></p>
                 <h5>
                     <?php
-                        $api_directories = array(
-                            'api',
-                            'output',
-                        );
-                        
                         foreach ($php_library['hyperlinks']['buttons'] as $button)
                         {
                             echo '<span onclick="';
                             
                             if ($button['method'] == '_blank')
                             {
-                                foreach ($api_directories as $directory)
-                                {
-                                    if (is_dir($directory))
-                                    {
-                                        $button['url'] = $directory;
-                                        
-                                        break;
-                                    }
-                                }
+                                is_dir('api') ? $button['url'] = 'api' : NULL;
                                 
                                 echo 'window.open(\'';
                                 echo $button['url'];

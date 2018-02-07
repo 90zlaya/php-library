@@ -10,21 +10,17 @@ Project is open-sourced under MIT licence on [GitHub]. Available over Composer a
 Organisation
 =======
 
-Autoload file is inside root directory. It contains calls to every class inside php-library.
+Every native class call should have phplibrary\ namespace call in front.
 
 ``` php
-include_once 'autoload.php';
+phplibrary\Class_Name
 ```
 
 * All classes are inside /classes folder.
 * All class demonstrations are inside /demonstrations folder.
 * All third-party classes are inside /third-party folder including Composer vendors.
 
-Every native class call should have phplibrary\ namespace call in front.
-
-``` php
-phplibrary\Class_Name
-```
+Autoloading file is created by Composer and it's located inside third-party folder.
 
 Installation
 =======
@@ -36,7 +32,7 @@ If you want the latest stable version, get the [latest release] from the release
 Composer
 ----------------
 
-Install stable php-library version by using standard commands or if you wish to test latest development version of php-library, just add dev-master in extension.
+Install stable php-library version by using standard commands or if you wish to test latest development version of php-library, just add :dev-master in extension.
 
 ```
 composer require 90zlaya/php-library
