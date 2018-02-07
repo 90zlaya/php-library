@@ -22,18 +22,20 @@ class Website {
     // -------------------------------------------------------------------------
     
     /**
+    * Filled if something unpredicted occurs
+    * 
+    * @var Array
+    */
+    public $errors = array();
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Server data holder
     * 
     * @var Array
     */
-    public $server = array(
-        'location' => '',
-        'referer'  => '',
-        'host'     => '',
-        'uri'      => '',
-        'path'     => '',
-        'page'     => '',
-    );
+    public $server = array();
     
     // -------------------------------------------------------------------------
     
@@ -96,7 +98,7 @@ class Website {
     * 
     * @var String
     */
-    public $keywords = 'siple, website';
+    public $keywords = 'simple, website';
     
     // -------------------------------------------------------------------------
     
@@ -168,16 +170,46 @@ class Website {
     */
     public function __construct($params)
     {
-        $this->server['location'] = $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-        $this->server['referer']  = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL;
-        $this->server['host']     = $_SERVER['HTTP_HOST'];
-        $this->server['uri']      = $_SERVER['REQUEST_URI'];
-        $this->server['path']     = dirname($_SERVER['PHP_SELF']);
-        $this->server['page']     = basename($_SERVER['PHP_SELF']);
+        $host = isset($_SERVER['HTTP_HOST'])
+            ? $_SERVER['HTTP_HOST']
+            : NULL;
         
-        $this->name = $params['name'];
-        $this->host = $params['host'];
-        $this->made = $params['made'];
+        $self = isset($_SERVER['PHP_SELF'])
+            ? $_SERVER['PHP_SELF']
+            : NULL;
+        
+        $request_uri = isset($_SERVER['REQUEST_URI'])
+            ? $_SERVER['REQUEST_URI']
+            : NULL;
+        
+        $referer = isset($_SERVER['HTTP_REFERER'])
+            ? $_SERVER['HTTP_REFERER']
+            : NULL;
+                
+        $this->server['location'] = $host . $self;
+        $this->server['referer']  = $referer;
+        $this->server['host']     = $host;
+        $this->server['uri']      = $request_uri;
+        $this->server['path']     = dirname($self);
+        $this->server['page']     = basename($self);
+        
+        isset($params['name'])
+            ? $this->name = $params['name']
+            : array_push($this->errors, array(
+                'Please set "name" parameter when using class constructor',
+            ));
+        
+        isset($params['host'])
+            ? $this->host = $params['host']
+            : array_push($this->errors, array(
+                'Please set "host" parameter when using class constructor',
+            ));
+        
+        isset($params['made'])
+            ? $this->made = $params['made']
+            : array_push($this->errors, array(
+                'Please set "made" parameter when using class constructor',
+            ));
         
         empty($params['language']) 
             ? NULL 
@@ -189,11 +221,11 @@ class Website {
         
         empty($params['description']) 
             ? NULL 
-            : $this->charset = $params['description'];
+            : $this->description = $params['description'];
         
         empty($params['keywords']) 
             ? NULL 
-            : $this->charset = $params['keywords'];
+            : $this->keywords = $params['keywords'];
     }        
     
     // -------------------------------------------------------------------------
