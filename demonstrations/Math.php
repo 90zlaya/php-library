@@ -16,7 +16,10 @@ format::pre($percentage);
 
 for ($i=0; $i<10; $i++)
 {
-    echo math::iterate() . '. ' . math::even_or_odd('first', 'second') . '<br/>';
+    echo math::iterate();
+    echo '. ';
+    echo math::even_or_odd('first', 'second');
+    echo '<br/>';
 }
 
 echo 'Number of items: ' . math::$iterator . '<br/>';

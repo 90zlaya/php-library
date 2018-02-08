@@ -4,7 +4,7 @@
 | OPERATING SYSTEM
 | -------------------------------------------------------------------
 |
-| Developing and testing Operating System class
+| Developing and testing Operating_System class
 |
 | -------------------------------------------------------------------
 */
