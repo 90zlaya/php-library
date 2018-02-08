@@ -7,6 +7,7 @@ Important:
 PHP files for classes and demonstrations changed to match class names
 Entire third-party folder removed and composer vendors are stored directly into root
 Using composer autoloader instead of native one
+Classes folder is renamed with src
 
 Geo_Plugin: not extending geoPlugin from third-party folder, geoPlugin removed
 

@@ -16,7 +16,7 @@ Every native class call should have phplibrary\ namespace call in front.
 phplibrary\Class_Name
 ```
 
-* All classes are inside /classes folder.
+* All classes are inside /src folder.
 * All class demonstrations are inside /demonstrations folder.
 * All unit tests are inside /tests folder.
 
@@ -74,7 +74,7 @@ Bug analysis
 This library has been tested with [PHP Stan] and approved as bug-free for all classes and demonstrations. It's recommended to run following command to check for buggs in project.
 
 ```
-vendor/bin/phpstan analyse classes --level 7
+vendor/bin/phpstan analyse src --level 7
 ```
 
 Please note that PHP Stan is enabled in composer file only for development versions of PHP Library.

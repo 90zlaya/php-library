@@ -16,7 +16,7 @@ $php_library = array(
         'tagline'       => 'Set of classes containing most useful methods and variables for Web Development',
     ),
     'folders'       => array(
-        'classes'           => 'classes',
+        'classes'           => 'src',
         'demonstrations'    => 'demonstrations',
     ),
     'list'          => array(
