@@ -17,7 +17,7 @@ $php_library = array(
     ),
     'folders'       => array(
         'classes'           => 'src',
-        'demonstrations'    => 'demonstrations',
+        'demonstrations'    => 'demo',
     ),
     'list'          => array(
         'classes' => array(

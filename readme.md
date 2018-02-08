@@ -17,7 +17,7 @@ phplibrary\Class_Name
 ```
 
 * All classes are inside /src folder.
-* All class demonstrations are inside /demonstrations folder.
+* All class demonstrations are inside /demo folder.
 * All unit tests are inside /tests folder.
 
 ``` php
