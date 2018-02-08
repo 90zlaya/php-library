@@ -2,7 +2,7 @@
 /**
 * Geo_Plugin
 *
-* Customisation of third-party class geoPlugin 
+* It was once customisation of third-party class geoPlugin 
 * Location: http://www.geoplugin.com/
 *
 * @package      PHP Library
@@ -12,15 +12,11 @@
 */
 namespace phplibrary;
 
-require_once __DIR__ . '../../third-party/geoplugin.class/geoplugin.class.php';
-
-use geoPlugin as geoPlugin;
-
 /**
-* Customisation of third-party class geoPlugin 
+* It was once customisation of third-party class geoPlugin 
 * Location: http://www.geoplugin.com/
 */
-class Geo_Plugin extends geoPlugin {
+class Geo_Plugin {
     
     // -------------------------------------------------------------------------
     
@@ -109,39 +105,13 @@ class Geo_Plugin extends geoPlugin {
         
         foreach ($this->server_indices as $item)
         {
-            $this->data['server'] = array_merge($this->data['server'], array(strtolower($item) => isset($_SERVER[$item]) ? $_SERVER[$item] : ''));
+            $this->data['server'] = array_merge(
+                $this->data['server'], 
+                array(strtolower($item) => isset($_SERVER[$item]) ? $_SERVER[$item] : '')
+            );
         }
         
-        $this->data['service'] = array(
-            'location'              => $this->host,
-            'ip'                    => $this->ip,
-            'city'                  => $this->city,
-            'region'                => $this->region,
-            'longitude'             => $this->longitude,
-            'latitude'              => $this->latitude,
-            'area_code'             => $this->areaCode,
-            'dma_code'              => $this->dmaCode,
-            'country_name'          => $this->countryName,
-            'country_code'          => $this->countryCode,
-            'continent_code'        => $this->continentCode,
-            'currency_symbol'       => $this->currencySymbol,
-            'currency_converter'    => $this->currencyConverter,
-            'currency_code'         => $this->currencyCode,
-        );
-        
         return $this->data;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Checks if service returned ip
-    * 
-    * @return Bool
-    */
-    public function is_active_service()
-    {
-        return ! empty($this->data()['service']['ip']);
     }
     
     // -------------------------------------------------------------------------

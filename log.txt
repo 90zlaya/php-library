@@ -5,8 +5,10 @@ Since php-library v1.3.0
 Important: 
 
 PHP files for classes and demonstrations changed to match class names
-Composer vendors are stored directly into third-party folder
+Entire third-party folder removed and composer vendors are stored directly into root
 Using composer autoloader instead of native one
+
+Geo_Plugin: not extending geoPlugin from third-party folder, geoPlugin removed
 
 -------------------------------------------
 Since php-library v1.2.0

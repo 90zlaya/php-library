@@ -1,6 +1,6 @@
 <?php
     include_once 'data.php';
-    include_once 'third-party/autoload.php';
+    include_once 'vendor/autoload.php';
 ?>
 <!DOCTYPE html>
 <html>

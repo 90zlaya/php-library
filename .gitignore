@@ -15,10 +15,7 @@ phpDocumentor.phar
 # custom folders
 api
 assets
-third-party
-
-# exclude
-!/third-party/geoplugin.class
+vendor
 
 # System Files
 .DS_Store

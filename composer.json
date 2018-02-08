@@ -22,9 +22,6 @@
         }
     },
     "minimum-stability": "stable",
-    "config": {
-        "vendor-dir": "third-party"
-    },
     "require": {
         "PHPOffice/PHPExcel": "^1.8"
     },

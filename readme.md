@@ -18,9 +18,13 @@ phplibrary\Class_Name
 
 * All classes are inside /classes folder.
 * All class demonstrations are inside /demonstrations folder.
-* All third-party classes are inside /third-party folder including Composer vendors.
+* All unit tests are inside /tests folder.
 
-Autoloading file is created by Composer and it's located inside third-party folder.
+``` php
+include_once 'vendor/autoload.php';
+```
+
+Autoload file is created by Composer and it's located inside /vendor folder.
 
 Installation
 =======
@@ -67,10 +71,10 @@ Official PHP Library API documentation has been documented by [phpDocumentor] an
 Bug analysis
 ----------------
 
-This library has been tested with [PHP Stan] and approved as bug-free for all classes and demonstrations. Only exception to this rule might present files included from third-party folder. It's recommended' to run following command to check for buggs in project.
+This library has been tested with [PHP Stan] and approved as bug-free for all classes and demonstrations. It's recommended to run following command to check for buggs in project.
 
 ```
-third-party/bin/phpstan analyse classes --level 7
+vendor/bin/phpstan analyse classes --level 7
 ```
 
 Please note that PHP Stan is enabled in composer file only for development versions of PHP Library.
@@ -81,7 +85,7 @@ Coding standard
 PHP Library has it's own coding standard which deviates from PSR-2 standard with no much exceptions. To contribute to development of this project, you must follow this standard. PHP CodeSniffer does this job for you in development versions of PHP Library.
 
 ```
-third-party/bin/phpcs data.php --standard='ruleset.xml'
+vendor/bin/phpcs data.php --standard='ruleset.xml'
 ```
 
 If you want to find out more about specific rules, open "ruleset.xml" file which is located in root directory.
