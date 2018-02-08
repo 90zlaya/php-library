@@ -17,9 +17,6 @@
         }
     ],
     "autoload": {
-        "classmap": [
-            "classes"
-        ],
         "psr-4": {
             "phplibrary\\": "classes"
         }

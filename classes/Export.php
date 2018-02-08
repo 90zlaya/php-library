@@ -5,19 +5,12 @@
 * Export files using customisation class of PHPOffice/PHPExcel
 * Location: https://github.com/PHPOffice/PHPExcel
 *
-* Don't forget to call composer update from command line in 
-* root folder for latest PHPOffice/PHPExcel library.
-* Otherwise it will throw an error after trying to interpret 
-* require_once on Composer's autoload file.
-*
 * @package      PHP Library
 * @subpackage   phplibrary
 * @category     Files
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
-
-require_once __DIR__ . '../../third-party/autoload.php';
 
 use PHPExcel as PHPExcel;
 use PHPExcel_IOFactory as PHPExcel_IOFactory;
