@@ -15,6 +15,7 @@ phpDocumentor.phar
 # custom folders
 api
 assets
+demo
 vendor
 
 # System Files

@@ -17,29 +17,41 @@ phplibrary\Class_Name
 ```
 
 * All classes are inside /src folder.
-* All class demonstrations are inside /demo folder.
 * All unit tests are inside /tests folder.
+```
+
+Autoload file is created by Composer and it's located inside /vendor folder.
 
 ``` php
 include_once 'vendor/autoload.php';
 ```
 
-Autoload file is created by Composer and it's located inside /vendor folder.
-
 Installation
 =======
 
+There are two ways of using PHP Library. First one is to install it inside another project, let's say framework like CodeIgniter. Second one is to install it for development. Either way, you need PHP 7 and Composer to do it.
+
 Manual
 ----------------
-If you want the latest stable version, get the [latest release] from the releases page.
+
+If you want the stable version, get the [latest release] from the releases page.
 
 Composer
 ----------------
 
-Install stable php-library version by using standard commands or if you wish to test latest development version of php-library, just add :dev-master in extension.
+Install stable php-library version by using standard commands.
 
 ```
-composer require 90zlaya/php-library
+$ composer require 90zlaya/php-library
+```
+
+GitHub
+----------------
+
+If you want to develop this library, and use GitHub instead of manual download, just clone repository to your hard drive.
+
+```
+$ git clone https://github.com/90zlaya/php-library.git
 ```
 
 Misc
@@ -71,10 +83,10 @@ Official PHP Library API documentation has been documented by [phpDocumentor] an
 Bug analysis
 ----------------
 
-This library has been tested with [PHP Stan] and approved as bug-free for all classes and demonstrations. It's recommended to run following command to check for buggs in project.
+This library has been tested with [PHP Stan] and approved as bug-free for all classes. It's recommended to run following command to check for buggs in project.
 
 ```
-vendor/bin/phpstan analyse src --level 7
+$ vendor/bin/phpstan analyse src --level 7
 ```
 
 Please note that PHP Stan is enabled in composer file only for development versions of PHP Library.
@@ -85,7 +97,7 @@ Coding standard
 PHP Library has it's own coding standard which deviates from PSR-2 standard with no much exceptions. To contribute to development of this project, you must follow this standard. PHP CodeSniffer does this job for you in development versions of PHP Library.
 
 ```
-vendor/bin/phpcs data.php --standard='ruleset.xml'
+$ vendor/bin/phpcs index.php --standard='ruleset.xml'
 ```
 
 If you want to find out more about specific rules, open "ruleset.xml" file which is located in root directory.

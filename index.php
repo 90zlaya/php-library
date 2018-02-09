@@ -1,6 +1,24 @@
 <?php
-    include_once 'data.php';
     include_once 'vendor/autoload.php';
+    
+    $php_library = array(
+        'hyperlinks' => array(
+            'php_library' => array(
+                'on_github'    => array(
+                    'name'  => 'View on GitHub',
+                    'url'   => 'https://github.com/90zlaya/php-library',
+                ),
+                'on_packagist' => array(
+                    'name'  => 'View on Packagist',
+                    'url'   => 'https://packagist.org/packages/90zlaya/php-library',
+                ),
+                'issues'       => array(
+                    'name'  => 'Issues',
+                    'url'   => 'https://github.com/90zlaya/php-library/issues',
+                ),
+            ),
+        ),
+    );
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,10 +26,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-    <link rel="shortcut icon" href="<?=$php_library['hyperlinks']['images']['icon']?>" type="image/png">
-    <title><?=$php_library['meta']['title']?></title>
-    <meta content="<?=$php_library['meta']['title']?>" property="og:title">
-    <meta content="<?=$php_library['meta']['description']?>" name="description">
+    <link rel="shortcut icon" href="https://php-library.zlatanstajic.com/assets/img/elephpant.png" type="image/png">
+    <title>PHP Library</title>
+    <meta content="PHP Library" property="og:title">
+    <meta content="PHP Library is set of classes containing most useful methods and variables for Web Development" name="description">
     <!-- jQuery Load -->
     <script src="https://php-library.zlatanstajic.com/assets/js/jquery.min.js"></script>
     <!-- Flatdoc -->
@@ -37,44 +55,15 @@
     <div class="title-area title-card title-image">
         <div class="in">
             <div class="headline">
-                <h1><?=$php_library['meta']['title']?></h1>
-                <p><?=$php_library['meta']['tagline']?></p>
-                <h5>
-                    <?php
-                        foreach ($php_library['hyperlinks']['buttons'] as $button)
-                        {
-                            echo '<span onclick="';
-                            
-                            if ($button['method'] == '_blank')
-                            {
-                                is_dir('api') ? $button['url'] = 'api' : NULL;
-                                
-                                echo 'window.open(\'';
-                                echo $button['url'];
-                                echo '\', \'';
-                                echo $button['method'];
-                                echo '\')';
-                            }
-                            else
-                            {
-                                echo 'window.location=\'';
-                                echo $button['url'];
-                                echo '\'';
-                            }
-                            
-                            echo ';" class="main-button" role="button">';
-                            echo $button['name'];
-                            echo '</span>&nbsp;';
-                        }
-                    ?>
-                </h5>
+                <h1>PHP Library</h1>
+                <p>Set of classes containing most useful methods and variables for Web Development</p>
             </div>
         </div>
     </div>
     <!-- HEADER -->
     <div class="header">
         <div class="left">
-            <h1><?=$php_library['meta']['title']?></h1>
+            <h1>PHP Library</h1>
             <ul>
                 <?php
                     foreach ($php_library['hyperlinks']['php_library'] as $link)
@@ -93,7 +82,7 @@
     <div class="content-root">
         <div class="menubar">
             <div class="section">
-                <a class="big button" href="<?=$php_library['hyperlinks']['url']['latest_release']?>" target="_blank">Download</a>
+                <a class="big button" href="https://github.com/90zlaya/php-library/releases/latest" target="_blank">Download</a>
             </div>
             <div class="menu section" role="flatdoc-menu"></div>
         </div>
