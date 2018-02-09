@@ -18,7 +18,6 @@ phplibrary\Class_Name
 
 * All classes are inside /src folder.
 * All unit tests are inside /tests folder.
-```
 
 Autoload file is created by Composer and it's located inside /vendor folder.
 
