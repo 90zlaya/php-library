@@ -2,6 +2,8 @@
 /**
 * Operating_System
 *
+* Working with Operating System related data
+*
 * @package      PHP Library
 * @subpackage   phplibrary
 * @category     Data

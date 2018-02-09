@@ -2,6 +2,8 @@
 /**
 * Website_Test
 *
+* Use this class when working with website related data.
+*
 * @package      PHP Library
 * @subpackage   phplibrary
 * @category     Website

@@ -2,6 +2,8 @@
 /**
 * User
 *
+* Works with user related data
+*
 * @package      PHP Library
 * @subpackage   phplibrary
 * @category     Files

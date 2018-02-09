@@ -2,6 +2,8 @@
 /**
 * Math
 *
+* Mathematical operations and calculations
+*
 * @package      PHP Library
 * @subpackage   phplibrary
 * @category     Math
