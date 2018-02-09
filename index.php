@@ -1,6 +1,4 @@
 <?php
-    include_once 'vendor/autoload.php';
-    
     $php_library = array(
         'hyperlinks' => array(
             'php_library' => array(
