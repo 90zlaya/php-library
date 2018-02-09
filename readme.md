@@ -1,6 +1,6 @@
-[![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg)
-[![Composer](https://img.shields.io/badge/composer-required-yellow.svg)
-[![License](https://poser.pugx.org/phpstan/phpstan/license)](https://opensource.org/licenses/MIT)
+![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg)
+![Composer](https://img.shields.io/badge/composer-required-yellow.svg)
+![License](https://poser.pugx.org/phpstan/phpstan/license)](https://opensource.org/licenses/MIT)
 
 PHP Library
 =======
