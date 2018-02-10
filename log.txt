@@ -10,7 +10,12 @@ classes folder renamed to src
 demonstrations folder removed
 third-party folder removed
 
-Geo_Plugin: not extending geoPlugin from third-party folder, geoPlugin removed
+Geo_Plugin: service is now built in instead of extending geoPlugin class
+
+Development:
+
+function_exists
+init_get
 
 -------------------------------------------
 Since php-library v1.2.0

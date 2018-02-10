@@ -2,21 +2,32 @@
 /**
 * Geo_Plugin
 *
-* It was once customisation of third-party class geoPlugin 
-* Location: http://www.geoplugin.com/
+* Geography location and other server and browser
+* data collected from visitor
 *
 * @package      PHP Library
 * @subpackage   phplibrary
-* @category     Geography
+* @category     Data
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 namespace phplibrary;
 
+use phplibrary\Web_Service as web_service;
+
 /**
-* It was once customisation of third-party class geoPlugin 
-* Location: http://www.geoplugin.com/
+* Geography location and other server and browser
+* data collected from visitor
 */
 class Geo_Plugin {
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Service code for geoPlugin
+    * 
+    * @var int
+    */
+    public $code = 0;
     
     // -------------------------------------------------------------------------
     
@@ -80,38 +91,148 @@ class Geo_Plugin {
     // -------------------------------------------------------------------------
     
     /**
+    * Service for Geo_Plugin
+    * 
+    * @var String
+    */
+    protected $geo_plugin_service = 'http://www.geoplugin.net/php.gp?ip={IP}';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Visitor IP address
+    * 
+    * @var String
+    */
+    protected $visitor_ip = '';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Returns all data
     * 
     * @return Array
     */
     public function data()
     {
-        $prefix = isset($_SERVER['HTTPS']) && ! empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+        $this->data['base']   = $this->base_information();
+        $this->data['server'] = $this->server_information();
+        $this->data['geo']    = $this->geo_information();
         
-        $this->data['base'] = array(
-            'location'  => $prefix . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
-            'referer'   => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL,
+        return $this->data;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Base information from visitor
+    * 
+    * @return Array
+    */
+    protected function base_information()
+    {
+        $prefix = isset($_SERVER['HTTPS']) && ! empty($_SERVER['HTTPS'])
+            ? 'https://' 
+            : 'http://';
+                
+        $http_host = isset($_SERVER['HTTP_HOST'])
+            ? $_SERVER['HTTP_HOST']
+            : NULL;
+        
+        $php_self = isset($_SERVER['PHP_SELF'])
+            ? $_SERVER['PHP_SELF']
+            : NULL;
+        
+        $http_referer = isset($_SERVER['HTTP_REFERER'])
+            ? $_SERVER['HTTP_REFERER']
+            : NULL;
+        
+        $http_user_agent = isset($_SERVER['HTTP_USER_AGENT'])
+            ? $_SERVER['HTTP_USER_AGENT']
+            : NULL;
+        
+        $remote_addr = isset($_SERVER['REMOTE_ADDR'])
+            ? $_SERVER['REMOTE_ADDR']
+            : NULL;
+        
+        $this->visitor_ip = $remote_addr;
+        
+        return array(
+            'location'  => $prefix . $http_host . $php_self,
+            'referer'   => $http_referer,
             'prefix'    => $prefix,
-            'host'      => $_SERVER['HTTP_HOST'],
-            'path'      => dirname($_SERVER['PHP_SELF']),
-            'page'      => basename($_SERVER['PHP_SELF']),
+            'host'      => $http_host,
+            'path'      => dirname($php_self),
+            'page'      => basename($php_self),
             'date'      => date('Y-m-d'),
             'time'      => date('H:i:s'),
-            'agent'     => $_SERVER['HTTP_USER_AGENT'],
-            'address'   => $_SERVER['REMOTE_ADDR'],
+            'agent'     => $http_user_agent,
+            'address'   => $remote_addr,
         );
-        
-        $this->data['server'] = array();
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Server indices information
+    * 
+    * @return Array $server
+    */
+    protected function server_information()
+    {
+        $server = array();
         
         foreach ($this->server_indices as $item)
         {
-            $this->data['server'] = array_merge(
-                $this->data['server'], 
+            $server = array_merge(
+                $server,
                 array(strtolower($item) => isset($_SERVER[$item]) ? $_SERVER[$item] : '')
             );
         }
         
-        return $this->data;
+        return $server;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Information from geoPlugin
+    * 
+    * @param String $ip
+    * 
+    * @return mixed
+    */
+    public function geo_information($ip='')
+    {
+        $response = array();
+        
+        empty($ip) ? $ip = $this->visitor_ip : NULL;
+        
+        $host = str_replace('{IP}', $ip, $this->geo_plugin_service);
+        
+        if (function_exists('curl_init'))
+        {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $host);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Geo_Plugin class from bit.ly/php-library');
+            $response = curl_exec($ch);
+            curl_close ($ch);   
+        }
+        elseif(ini_get('allow_url_fopen'))
+        {
+            $response = file_get_contents($host, 'r');
+        }
+        else
+        {
+            return FALSE;
+        }
+        
+        $geo_information = unserialize($response);
+        
+        $this->code = $geo_information['geoplugin_status'];
+        
+        return $geo_information;
     }
     
     // -------------------------------------------------------------------------
