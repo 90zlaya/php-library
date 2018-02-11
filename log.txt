@@ -16,6 +16,7 @@ Development:
 
 function_exists
 init_get
+Directory_Lister: refactoring check_date method
 
 -------------------------------------------
 Since php-library v1.2.0

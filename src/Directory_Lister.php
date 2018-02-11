@@ -123,57 +123,102 @@ class Directory_Lister {
         $date_end   = $params['date_end'];
         $years      = $params['years'];
         
-        $searched = array();
+        $searched = $dates = array();
         
         if (empty($years))
         {
             $date = substr($date, 5);
-        }
-        else
-        {
-            foreach ($years as $given_year)
+            
+            if (empty($date_start))
             {
-                empty($date_start) 
-                    ? NULL 
-                    : $date_start = $given_year . '-' . $date_start;
-                
-                empty($date_end) 
-                    ? NULL 
-                    : $date_end = $given_year . '-' . $date_end;
+                if (empty($years))
+                {
+                    $searched = array_merge($searched, $item);
+                }
+                else
+                {
+                    $date = substr($date, 0, 4);
+                    
+                    foreach ($years as $given_year)
+                    {
+                        if ($date == $given_year)
+                        {
+                            $searched = array_merge($searched, $item);
+                        }
+                    }
+                }
             }
-        }
-        
-        if (empty($date_start))
-        {
-            if (empty($years))
+            elseif (empty($date_end))
             {
-                $searched = array_merge($searched, $item);
+                if ($date == $date_start)
+                {
+                    $searched = array_merge($searched, $item);
+                }
             }
             else
             {
-                $date = substr($date, 0, 4);
-                
-                foreach ($years as $given_year)
+                if ($date >= $date_start && $date <= $date_end)
                 {
-                    if ($date == $given_year)
+                    $searched = array_merge($searched, $item);
+                }
+            }
+        }
+        else
+        {          
+            foreach ($years as $given_year)
+            {
+                $start = empty($date_start) 
+                    ? ''
+                    : $given_year . '-' . $date_start;
+                
+                $end = empty($date_end) 
+                    ? ''
+                    : $given_year . '-' . $date_end;
+                
+                $dates[] = array(
+                    'date_start' => $start,
+                    'date_end'   => $end,
+                );
+            }
+            
+            foreach ($dates as $date_item)
+            {
+                $date_start = $date_item['date_start'];
+                $date_end   = $date_item['date_end'];
+                
+                if (empty($date_start))
+                {
+                    if (empty($years))
+                    {
+                        $searched = array_merge($searched, $item);
+                    }
+                    else
+                    {
+                        $date = substr($date, 0, 4);
+                        
+                        foreach ($years as $given_year)
+                        {
+                            if ($date == $given_year)
+                            {
+                                $searched = array_merge($searched, $item);
+                            }
+                        }
+                    }
+                }
+                elseif (empty($date_end))
+                {
+                    if ($date == $date_start)
                     {
                         $searched = array_merge($searched, $item);
                     }
                 }
-            }
-        }
-        elseif (empty($date_end))
-        {
-            if ($date == $date_start)
-            {
-                $searched = array_merge($searched, $item);
-            }
-        }
-        else
-        {
-            if ($date >= $date_start && $date <= $date_end)
-            {
-                $searched = array_merge($searched, $item);
+                else
+                {
+                    if ($date >= $date_start && $date <= $date_end)
+                    {
+                        $searched = array_merge($searched, $item);
+                    }
+                }
             }
         }
         
