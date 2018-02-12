@@ -184,10 +184,10 @@ class Geo_Plugin {
         
         foreach ($this->server_indices as $item)
         {
-            $server = array_merge(
-                $server,
-                array(strtolower($item) => isset($_SERVER[$item]) ? $_SERVER[$item] : '')
-            );
+            $key   = strtolower($item);
+            $value = isset($_SERVER[$item]) ? $_SERVER[$item] : '';
+            
+            $server = array_merge($server, array($key => $value));
         }
         
         return $server;
@@ -219,7 +219,7 @@ class Geo_Plugin {
             $response = curl_exec($ch);
             curl_close ($ch);   
         }
-        elseif(ini_get('allow_url_fopen'))
+        elseif (ini_get('allow_url_fopen'))
         {
             $response = file_get_contents($host, 'r');
         }
@@ -229,8 +229,7 @@ class Geo_Plugin {
         }
         
         $geo_information = unserialize($response);
-        
-        $this->code = $geo_information['geoplugin_status'];
+        $this->code      = $geo_information['geoplugin_status'];
         
         return $geo_information;
     }

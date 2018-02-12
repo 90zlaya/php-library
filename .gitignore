@@ -6,8 +6,6 @@
 /out-tsc
 
 # custom files
-files
-versions
 images.php
 composer.lock
 phpDocumentor.phar
