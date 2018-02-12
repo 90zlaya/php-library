@@ -105,16 +105,18 @@ If you want to find out more about specific rules, open "ruleset.xml" file which
 Automatic tests
 ----------------
 
-You can run automatic check at once in development version.
+You can run all possible automatic tests at once with one simple command.
 
 ```
 $ bash auto.bat
 ```
 
-* Creating API documentation (download phpDocumentor.phar file to root)
-* Bug analysis with PHPStan (already in vendor folder)
-* Coding statndard with PHP_CodeSniffer (already in vendor folder)
-* Unit tests with PHPUnit (already in vendor folder)
+* Coding standard with PHP_CodeSniffer
+* Bug analysis with PHPStan
+* Running unit tests with PHPUnit
+* Creating API documentation
+
+You should test entire library before making commit.
 
 
 Migration

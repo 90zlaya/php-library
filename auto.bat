@@ -1,7 +1,5 @@
 clear
 
-vendor/bin/phpstan analyse src --level 7
-
 echo Started PHP_CodeSniffer for src folder
 vendor/bin/phpcs index.php --standard='ruleset.xml'
 vendor/bin/phpcs src/Date_Time_Format.php --standard='ruleset.xml'
@@ -34,6 +32,8 @@ vendor/bin/phpcs tests/User_Test.php --standard='ruleset.xml'
 vendor/bin/phpcs tests/Web_Service_Test.php --standard='ruleset.xml'
 vendor/bin/phpcs tests/Website_Test.php --standard='ruleset.xml'
 echo Finished PHP_CodeSniffer for tests folder
+
+vendor/bin/phpstan analyse src --level 7
 
 vendor/bin/phpunit
 
