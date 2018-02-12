@@ -100,7 +100,7 @@ PHP Library has it's own coding standard which deviates from PSR-2 standard with
 $ vendor/bin/phpcs index.php --standard='ruleset.xml'
 ```
 
-If you want to find out more about specific rules, open "ruleset.xml" file which is located in root directory.
+If you want to find out more about specific rules, open ruleset.xml file which is located in root directory. Please note that PHP_CodeSniffer is enabled in composer file only for development versions of PHP Library.
 
 Automatic tests
 ----------------
@@ -117,7 +117,6 @@ $ bash auto.bat
 * Creating API documentation
 
 You should test entire library before making commit.
-
 
 Migration
 ----------------
