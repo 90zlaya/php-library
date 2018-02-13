@@ -108,7 +108,7 @@ Automatic tests
 You can run all possible automatic tests at once with one simple command.
 
 ```
-$ bash auto.bat
+$ bash autotest
 ```
 
 * Coding standard with PHP_CodeSniffer
