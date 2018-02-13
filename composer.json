@@ -23,6 +23,8 @@
     },
     "minimum-stability": "stable",
     "require": {
+        "php": ">=7.0.0",
+        "composer": "^1.4",
         "PHPOffice/PHPExcel": "^1.8"
     },
     "require-dev": {
