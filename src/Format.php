@@ -292,7 +292,7 @@ class Format {
     * @param mixed $data
     * @param Bool $to_print
     * 
-    * @return mixed
+    * @return void
     */
     public static function pre($data, $to_print=TRUE)
     {

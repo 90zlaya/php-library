@@ -32,7 +32,7 @@ class Random {
     * 
     * @var String
     */
-    protected static $alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    protected static $alphanumeric = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     
     // -------------------------------------------------------------------------
     
@@ -42,26 +42,26 @@ class Random {
     * @var Array
     */
     protected static $consonant = array(
-        "b",
-        "c",
-        "d",
-        "f",
-        "g",
-        "h",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "p",
-        "r",
-        "s",
-        "t",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
+        'b',
+        'c',
+        'd',
+        'f',
+        'g',
+        'h',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'p',
+        'r',
+        's',
+        't',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z',
     );
     
     // -------------------------------------------------------------------------
@@ -72,11 +72,11 @@ class Random {
     * @var Array
     */
     protected static $vocal = array(
-        "a",
-        "e",
-        "i",
-        "o",
-        "u",
+        'a',
+        'e',
+        'i',
+        'o',
+        'u',
     );
     
     // -------------------------------------------------------------------------
@@ -162,8 +162,8 @@ class Random {
     {
         $list_size = count($list);
         
-        ($dose === 'DAY' && $list_size < 7) || 
-        ($dose === 'MONTH' && $list_size < 31) 
+        ($dose === 'DAY' && $list_size < 7) ||
+        ($dose === 'MONTH' && $list_size < 31)
             ? $dose = '' 
             : NULL;
         

@@ -118,15 +118,15 @@ class Password {
     * Calculates password strength
     * 
     * @param String $string
-    * @param Bool $return_boolean
     * @param int $minimum_strength_percent
     * 
-    * @return mixed
+    * @return Array
     */
-    public static function strength($string, $return_boolean=TRUE, $minimum_strength_percent=60)
+    public static function strength($string, $minimum_strength_percent=60)
     {
-        $h    = 0;
-        $size = strlen($string);
+        $strength = 0;
+        $h        = 0;
+        $size     = strlen($string);
         
         if ($size >= self::$size_minimum)
         {
@@ -140,12 +140,11 @@ class Password {
             
             $strength > 100 ? $strength = 100 : NULL;
         }
-        else
-        {
-            $strength = 0;    
-        }
         
-        return $return_boolean ? $strength > $minimum_strength_percent : $strength;
+        return array(
+            'status'   => $strength > $minimum_strength_percent,
+            'strength' => $strength,
+        );
     }    
     
     // -------------------------------------------------------------------------

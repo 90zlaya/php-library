@@ -10,8 +10,12 @@ classes folder renamed to src
 demonstrations folder removed
 third-party folder removed
 
-Geo_Plugin: service is now built in instead of extending geoPlugin class
+Password: strength method returns array instead of mixed value and not accepting second parameter anymore
+
+Modified:
+
 Directory_Lister: created prepare_date method after refactoring check_date method
+Geo_Plugin: service is now built in instead of extending geoPlugin class
 
 Development:
 

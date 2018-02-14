@@ -59,7 +59,9 @@ class Temperature {
                 $celsius = round($celsius);
             }
             
-            $celsius_with_sign = $celsius . ' ' . self::$signs['celsius'];
+            $celsius_with_sign  = $celsius;
+            $celsius_with_sign .= ' ';
+            $celsius_with_sign .= self::$signs['celsius'];
             
             return array(
                 'value' => $celsius,
@@ -91,7 +93,9 @@ class Temperature {
                 $fahrenheit = round($fahrenheit);
             }
             
-            $fahrenheit_with_sign = $fahrenheit . ' ' . self::$signs['fahrenheit'];
+            $fahrenheit_with_sign  = $fahrenheit;
+            $fahrenheit_with_sign .= ' ';
+            $fahrenheit_with_sign .= self::$signs['fahrenheit'];
             
             return array(
                 'value' => $fahrenheit,
@@ -123,7 +127,9 @@ class Temperature {
                 $celsius = round($celsius);
             }
             
-            $celsius_with_sign = $celsius . ' ' . self::$signs['celsius'];
+            $celsius_with_sign  = $celsius;
+            $celsius_with_sign .= ' ';
+            $celsius_with_sign .= self::$signs['celsius'];
         
             return array(
                 'value' => $celsius,
@@ -155,7 +161,9 @@ class Temperature {
                 $kelvin = round($kelvin);
             }
             
-            $kelvin_with_sign = $kelvin . ' ' . self::$signs['kelvin'];
+            $kelvin_with_sign  = $kelvin;
+            $kelvin_with_sign .= ' ';
+            $kelvin_with_sign .= self::$signs['kelvin'];
         
             return array(
                 'value' => $kelvin,
@@ -187,7 +195,9 @@ class Temperature {
                 $fahrenheit = round($fahrenheit);
             }
             
-            $fahrenheit_with_sign = $fahrenheit . ' ' . self::$signs['fahrenheit'];
+            $fahrenheit_with_sign  = $fahrenheit;
+            $fahrenheit_with_sign .= ' ';
+            $fahrenheit_with_sign .= self::$signs['fahrenheit'];
         
             return array(
                 'value' => $fahrenheit,
@@ -219,7 +229,9 @@ class Temperature {
                 $kelvin = round($kelvin);
             }
             
-            $kelvin_with_sign = $kelvin . ' ' . self::$signs['kelvin'];
+            $kelvin_with_sign  = $kelvin;
+            $kelvin_with_sign .= ' ';
+            $kelvin_with_sign .= self::$signs['kelvin'];
         
             return array(
                 'value' => $kelvin,
