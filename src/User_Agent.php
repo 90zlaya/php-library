@@ -251,12 +251,7 @@ class User_Agent {
     */
     public static function is_crawler($user_agent)
     {
-        if (in_array($user_agent, self::$crawlers))
-        {
-            return TRUE;
-        }
-        
-        return FALSE;
+        return in_array($user_agent, self::$crawlers);
     }
     
     // -------------------------------------------------------------------------

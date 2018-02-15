@@ -1,23 +1,23 @@
 clear
 
-echo -e "Started autotest\n"
+echo -e "$(tput setaf 0)$(tput setab 2)Started autotest$(tput sgr 0)\n"
 
-vendor/bin/phpcs index.php --standard='ruleset.xml'
-echo -e "Finished PHP_CodeSniffer for custom files"
+vendor/bin/phpcs index.php --standard='ruleset.xml' --colors
+echo -e "$(tput setaf 0)$(tput setab 2)Finished PHP_CodeSniffer for custom files$(tput sgr 0)"
 
-vendor/bin/phpcs src --standard='ruleset.xml'
-echo -e "Finished PHP_CodeSniffer for src folder"
+vendor/bin/phpcs src --standard='ruleset.xml' --colors
+echo -e "$(tput setaf 0)$(tput setab 2)Finished PHP_CodeSniffer for src folder$(tput sgr 0)"
 
-vendor/bin/phpcs tests --standard='ruleset.xml'
-echo -e "Finished PHP_CodeSniffer for tests folder"
+vendor/bin/phpcs tests --standard='ruleset.xml' --colors
+echo -e "$(tput setaf 0)$(tput setab 2)Finished PHP_CodeSniffer for tests folder$(tput sgr 0)"
 
 vendor/bin/phpstan analyse src --level 7
-echo -e "Finished PHPStan for src folder\n"
+echo -e "$(tput setaf 0)$(tput setab 2)Finished PHPStan for src folder$(tput sgr 0)\n"
 
-vendor/bin/phpunit
-echo -e "Finished PHPUnit for test folder\n"
+vendor/bin/phpunit --colors
+echo -e "$(tput setaf 0)$(tput setab 2)Finished PHPUnit for test folder$(tput sgr 0)\n"
 
 php phpDocumentor.phar -d src -t api
-echo -e "Finished phpDocumentor.phar for API documentation\n"
+echo -e "$(tput setaf 0)$(tput setab 2)Finished phpDocumentor.phar for API documentation$(tput sgr 0)\n"
 
-echo -e "Finished autotest"
+echo -e "$(tput setaf 0)$(tput setab 2)Finished autotest$(tput sgr 0)"

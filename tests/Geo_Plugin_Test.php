@@ -14,8 +14,7 @@ use PHPUnit\Framework\TestCase as Test_Case;
 use phplibrary\Geo_Plugin as geo_plugin;
 
 /**
-* Geography location and other server and browser
-* data collected from visitor
+* Testing Geo_Plugin class
 */
 class Geo_Plugin_Test extends Test_Case {
     
