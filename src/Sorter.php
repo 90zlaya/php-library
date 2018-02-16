@@ -58,14 +58,7 @@ class Sorter {
     * 
     * @var Array
     */
-    protected $deploy = array(
-        'where_to_read_files'           => '',
-        'where_to_create_directories'   => '',
-        'number_of_directories'         => 0,
-        'folder_suffix'                 => '',
-        'operation'                     => '',
-        'types'                         => array(),
-    );
+    protected $deploy = array();
     
     // -------------------------------------------------------------------------
     
@@ -107,6 +100,22 @@ class Sorter {
     {
         $this->deploy = $params;
         
+        isset($this->deploy['where_to_read_files'])
+            ? NULL
+            : $this->deploy['where_to_read_files'] = '';
+        
+        isset($this->deploy['where_to_create_directories'])
+            ? NULL
+            : $this->deploy['where_to_create_directories'] = '';
+        
+        isset($this->deploy['folder_sufix'])
+            ? NULL
+            : $this->deploy['folder_sufix'] = '';
+        
+        isset($this->deploy['operation'])
+            ? NULL
+            : $this->deploy['operation'] = '';
+        
         $this->create_directories();
         $this->transport_files($this->get_files(), $this->deploy['operation']);
         
@@ -141,7 +150,11 @@ class Sorter {
                         $extension         = pathinfo($file, PATHINFO_EXTENSION);
                         $extension_lowered = strtolower($extension);
                         
-                        if (empty($this->deploy['types']) || in_array($extension_lowered, $this->deploy['types']))
+                        if
+                        (
+                            empty($this->deploy['types']) || 
+                            in_array($extension_lowered, $this->deploy['types'])
+                        )
                         {
                             array_push($arr_files, array(
                                 'path'      => $this->deploy[$files_param] . $file,
@@ -182,23 +195,36 @@ class Sorter {
         
         if (file_exists($this->deploy[$directories_param]))
         {
-            for ($i=0; $i<$this->deploy['number_of_directories']; $i++)
+            $number_of_directories = 'number_of_directories';
+            
+            if (empty($this->deploy[$number_of_directories]))
             {
-                $folder = $this->folder_name($i);
-                
-                if ( ! file_exists($folder))
+                $this->report['errors'] = array_merge(
+                    $this->report['errors'],
+                    array('Please set ' . $number_of_directories . ' parameter.')
+                );
+            }
+            else
+            {
+                for ($i=0; $i<$this->deploy['number_of_directories']; $i++)
                 {
-                    if (mkdir($folder))
+                    $folder = $this->folder_name($i);
+                    
+                    if ( ! file_exists($folder))
                     {
-                        $this->report['folders']['number']['created']++;
-                        array_push($this->report['folders']['report']['created'], $folder);
-                    }
-                    else
-                    {
-                        $this->report['folders']['number']['not_created']++;
-                        array_push($this->report['folders']['report']['not_created'], $folder);
+                        if (mkdir($folder))
+                        {
+                            $this->report['folders']['number']['created']++;
+                            array_push($this->report['folders']['report']['created'], $folder);
+                        }
+                        else
+                        {
+                            $this->report['folders']['number']['not_created']++;
+                            array_push($this->report['folders']['report']['not_created'], $folder);
+                        }
                     }
                 }
+                
             }
         }
         else
