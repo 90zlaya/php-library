@@ -324,24 +324,48 @@ class Website {
             ? $params['touch_icon'] 
             : $this->images['icon'];
         
-        isset($params['google_site_verification']) 
-            ? $meta .= '<meta name="google-site-verification" content="' . $params['google_site_verification'] . '"/>' . PHP_EOL 
-            : NULL;
+        if (isset($params['google_site_verification']))
+        {
+            $meta .= '<meta name="google-site-verification" content="';
+            $meta .= $params['google_site_verification'];
+            $meta .= '"/>';
+            $meta .= PHP_EOL;
+        }
         
-        $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $this->charset . '">' . PHP_EOL;
-        $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . PHP_EOL;
-        $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">' . PHP_EOL;
-        $meta .= '<meta name="description" content="' . $this->description . '">' . PHP_EOL;
-        $meta .= '<meta name="keywords" content="' . $this->keywords . '">' . PHP_EOL;
-        $meta .= '<meta name="author" content="' . $this->creator['name'] . '">' . PHP_EOL;
-        $meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>' .PHP_EOL;
-        $meta .= '<link rel="apple-touch-icon" sizes="' . $this->image_size($touch_icon)['width_height'] . '" href="' . $touch_icon . '"/>' . PHP_EOL;
-        $meta .= '<link rel="shortcut icon" href="' . $shortcut_icon . '" type="image/png">' . PHP_EOL;
-        
+        $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=';
+        $meta .= $this->charset;
+        $meta .= '">';
+        $meta .= PHP_EOL;
+        $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
+        $meta .= PHP_EOL;
+        $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">';
+        $meta .= PHP_EOL;
+        $meta .= '<meta name="description" content="';
+        $meta .= $this->description;
+        $meta .= '">';
+        $meta .= PHP_EOL;
+        $meta .= '<meta name="keywords" content="';
+        $meta .= $this->keywords;
+        $meta .= '">';
+        $meta .= PHP_EOL;
+        $meta .= '<meta name="author" content="';
+        $meta .= $this->creator['name'];
+        $meta .= '">';
+        $meta .= PHP_EOL;
+        $meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>';
+        $meta .= PHP_EOL;
+        $meta .= '<link rel="apple-touch-icon" sizes="';
+        $meta .= $this->image_size($touch_icon)['width_height'];
+        $meta .= '" href="';
+        $meta .= $touch_icon;
+        $meta .= '"/>';
+        $meta .= PHP_EOL;
+        $meta .= '<link rel="shortcut icon" href="';
+        $meta .= $shortcut_icon;
+        $meta .= '" type="image/png">';
+        $meta .= PHP_EOL;
         $meta .= '<title>';
-        
-        empty($title) ? $meta .= $this->name : $meta .= $title;
-        
+        $meta .= empty($title) ? $this->name : $title;
         $meta .= '</title>' . PHP_EOL;
         
         return $meta;
@@ -511,22 +535,27 @@ class Website {
     */
     public function image_size($image)
     {
-        $image_size = getimagesize($image);
-        
-        if ( ! empty($image_size))
+        try
         {
-            return array(
-                'width'         => $image_size[0],
-                'height'        => $image_size[1],
-                'width_height'  => $image_size[0] . 'x' . $image_size[1],
-                'type'          => $image_size[2],
-                'size'          => $image_size[3],
-                'bits'          => $image_size['bits'],
-                'mime'          => $image_size['mime'],
-            );
+            $image_size = getimagesize($image);
         }
-        
-        return FALSE;
+        finally
+        {
+            if ( ! empty($image_size))
+            {
+                return array(
+                    'width'         => $image_size[0],
+                    'height'        => $image_size[1],
+                    'width_height'  => $image_size[0] . 'x' . $image_size[1],
+                    'type'          => $image_size[2],
+                    'size'          => $image_size[3],
+                    'bits'          => $image_size['bits'],
+                    'mime'          => $image_size['mime'],
+                );
+            }
+            
+            return FALSE;
+        }
     }
     
     // -------------------------------------------------------------------------
@@ -544,14 +573,23 @@ class Website {
     */
     public function signature($always_made_year=FALSE, $show_licence=FALSE)
     {
+        $licence      = '';
         $current_year = date('Y');
         
         $since = $current_year == $this->made || $always_made_year 
-            ? $current_year : $this->made . '-' . $current_year;
+            ? $current_year 
+            : $this->made . '-' . $current_year;
         
-        $licence = $show_licence ? ' | All Rights Reserved' : '';
+        $show_licence ? $licence = ' | All Rights Reserved' : NULL;
         
-        return 'Copyright &#169; ' . $since . ' | <a href="' . $this->creator['website'] . '" target="_blank">' .  $this->creator['name'] . '</a>' . $licence;
+        return 'Copyright &#169; ' . 
+            $since . 
+            ' | <a href="' . 
+            $this->creator['website'] . 
+            '" target="_blank">' .  
+            $this->creator['name'] . 
+            '</a>' . 
+            $licence;
     }
     
     // -------------------------------------------------------------------------
@@ -568,21 +606,36 @@ class Website {
     */
     public function signature_hidden($language='')
     {
+        $signature_hidden = '';
+        
         empty($language) ? $language = $this->language : NULL;
         
-        $signature_hidden = PHP_EOL . '<!-- ';
+        $signature_hidden .= PHP_EOL;
+        $signature_hidden .= '<!-- ';
         
         switch ($language)
         {
             case 'EN':
+            case 'english':
             {
-                $signature_hidden .= 'Proudly built by: ' . $this->creator['name'] . '; Find me on ' . $this->creator['website'];
+                $signature_hidden .= 'Proudly built by: ';
+                $signature_hidden .= $this->creator['name'];
+                $signature_hidden .= '; Find me on ';
+                $signature_hidden .= $this->creator['website'];
+                
                 break;
             }
-            default: $signature_hidden .= 'Ponosno izradio: ' . $this->creator['name'] . '; Pronadjite me na ' . $this->creator['website'];
+            default: 
+            {
+                $signature_hidden .= 'Ponosno izradio: ';
+                $signature_hidden .= $this->creator['name'];
+                $signature_hidden .= '; Pronadjite me na ';
+                $signature_hidden .= $this->creator['website'];
+            }
         }
         
-        $signature_hidden .=  ' -->' . PHP_EOL;
+        $signature_hidden .= ' -->';
+        $signature_hidden .= PHP_EOL;
         
         return $signature_hidden;
     }   
@@ -615,23 +668,23 @@ class Website {
         
         echo '<html>';
         echo '<head><title>Redirecting you...</title>';
-        echo '<meta http-equiv="Refresh" content="0;url=' . $url . '" />';
+        echo '<meta http-equiv="Refresh" content="0;url=';
+        echo $url;
+        echo '" />';
         echo '</head>';
-        echo '<body onload="location.replace(\''.$url.'\')">';
-        
+        echo '<body onload="location.replace(\'';
+        echo $url;
+        echo '\')">';
         echo 'You should be redirected to this URL:<br />';
-        echo "<a href=\"$url\">$url</a><br /><br />";
-
+        echo '<a href="';
+        echo $url . '">';
+        echo $url;
+        echo '</a><br /><br />';
         echo 'If you are not, please click on the link above.<br />';
-
         echo '</body>';
         echo '</html>';
-
         
-        if ($to_exit)
-        {
-            exit;
-        }
+        $to_exit ? exit : NULL;
     }
     
     // -------------------------------------------------------------------------
