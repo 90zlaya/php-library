@@ -180,4 +180,55 @@ class Website_Test extends Test_Case {
     }
 
     // -------------------------------------------------------------------------
+
+    /**
+    * Testing return value of signature method
+    */
+    public function test_signature_method()
+    {
+        $parameters = array(
+            array(
+                'always_made_year' => FALSE,
+                'show_licence'     => FALSE,
+            ),
+            array(
+                'always_made_year' => FALSE,
+                'show_licence'     => TRUE,
+            ),
+            array(
+                'always_made_year' => TRUE,
+                'show_licence'     => FALSE,
+            ),
+            array(
+                'always_made_year' => TRUE,
+                'show_licence'     => TRUE,
+            ),
+        );
+        
+        foreach ($parameters as $parameter)
+        {
+            $result = $this->website_object->signature(
+                $parameter['always_made_year'],
+                $parameter['show_licence']
+            );
+
+            $this->assertNotEmpty($result);
+            $this->assertInternalType('string', $result);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing return value of signature_hidden method
+    */
+    public function test_signature_hidden_method()
+    {
+        $result = $this->website_object->signature_hidden('english');
+
+        $this->assertNotEmpty($result);
+        $this->assertInternalType('string', $result);
+    }
+
+    // -------------------------------------------------------------------------
 }
