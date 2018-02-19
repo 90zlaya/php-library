@@ -68,11 +68,11 @@ This library if powering following Websites/Web Applications:
 
 * [zlatanstajic.com]
 
-![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg)
+![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg?clear_cache=1)
 
 * [cms.dis.rs]
 
-![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/cms.dis.jpg)
+![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/cms.dis.jpg?clear_cache=1)
 
 API documentation
 ----------------
