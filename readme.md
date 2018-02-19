@@ -68,7 +68,7 @@ This library if powering following Websites/Web Applications:
 
 * [zlatanstajic.com]
 
-![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg?clear_cache=1)
+![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg)
 
 * [cms.dis.rs]
 
