@@ -516,7 +516,7 @@ class Website {
     */
     public function images($image)
     {
-        if ( ! empty($image))
+        if ( ! empty($image) && array_key_exists($image, $this->images))
         {
             return $this->images[$image];
         }

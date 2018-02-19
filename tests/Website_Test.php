@@ -16,9 +16,9 @@ use phplibrary\Website as website;
 * Testing Website class
 */
 class Website_Test extends Test_Case {
-
+    
     // -------------------------------------------------------------------------
-
+    
     /**
     * Website object data
     *
@@ -27,7 +27,7 @@ class Website_Test extends Test_Case {
     private $website_object;
 
     // -------------------------------------------------------------------------
-
+    
     /**
     * Website constructor data
     *
@@ -42,9 +42,9 @@ class Website_Test extends Test_Case {
         'description' => 'PHP Library is set of classes containing most useful methods and variables for Web Development.',
         'keywords'    => 'php, library, oop, php7',
     );
-
+    
     // -------------------------------------------------------------------------
-
+    
     /**
     * Website test setup method
     */
@@ -60,9 +60,9 @@ class Website_Test extends Test_Case {
             'keywords'    => $this->website_data['keywords'],
         ));
     }
-
+    
     // -------------------------------------------------------------------------
-
+    
     /**
     * Whether or not is possible to retrieve
     * properties from constructor
@@ -95,9 +95,9 @@ class Website_Test extends Test_Case {
 
         $this->assertEmpty($this->website_object->errors);
     }
-
+    
     // -------------------------------------------------------------------------
-
+    
     /**
     * Testing public properties of class
     * after instantiating empty website object
@@ -120,9 +120,9 @@ class Website_Test extends Test_Case {
         $this->assertEquals($website->description, 'Simple website');
         $this->assertEquals($website->keywords, 'simple, website');
     }
-
+    
     // -------------------------------------------------------------------------
-
+    
     /**
     * Testing image_size method with existent image
     */
@@ -150,9 +150,9 @@ class Website_Test extends Test_Case {
             $this->assertArrayHasKey($value, $result);
         }
     }
-
+    
     // -------------------------------------------------------------------------
-
+    
     /**
     * Testing image_size method with nonexistent image
     */
@@ -165,9 +165,9 @@ class Website_Test extends Test_Case {
         $this->assertFalse($result);
         $this->assertInternalType('bool', $result);
     }
-
+    
     // -------------------------------------------------------------------------
-
+    
     /**
     * Testing return value of meta method
     */
@@ -178,9 +178,9 @@ class Website_Test extends Test_Case {
         $this->assertNotEmpty($result);
         $this->assertInternalType('string', $result);
     }
-
+    
     // -------------------------------------------------------------------------
-
+    
     /**
     * Testing return value of signature method
     */
@@ -216,9 +216,9 @@ class Website_Test extends Test_Case {
             $this->assertInternalType('string', $result);
         }
     }
-
+    
     // -------------------------------------------------------------------------
-
+    
     /**
     * Testing return value of signature_hidden method
     */
@@ -229,6 +229,64 @@ class Website_Test extends Test_Case {
         $this->assertNotEmpty($result);
         $this->assertInternalType('string', $result);
     }
-
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing add_to_images method and return values
+    * of images method and evaluating them
+    */
+    public function test_add_to_images_and_images_methods()
+    {
+        $name_nothing     = 'nothing';
+        $name_php_logo    = 'php-logo';
+        $name_background  = 'backgorund';
+        $image_nothing    = 'http://www.example.com/nothing.png';
+        $image_php_logo   = 'https://php-library.zlatanstajic.com/assets/img/elephpant.png';
+        $image_background = 'https://php-library.zlatanstajic.com/assets/img/background.png';
+        
+        $this->website_object->add_to_images(
+            array(
+                $name_php_logo   => $image_php_logo,
+                $name_background => $image_background,
+            ),
+            TRUE
+        );
+        
+        $this->assertNotFalse($this->website_object->images($name_php_logo));
+        $this->assertNotFalse($this->website_object->images($name_background));
+        $this->assertFalse($this->website_object->images($name_nothing));
+        
+        $this->assertEquals(
+            $image_php_logo,
+            $this->website_object->images($name_php_logo)
+        );
+        
+        $this->assertEquals(
+            $image_background,
+            $this->website_object->images($name_background)
+        );
+        
+        $this->assertNotEquals(
+            $image_nothing,
+            $this->website_object->images($name_nothing)
+        );
+        
+        $this->assertInternalType(
+            'string',
+            $this->website_object->images($name_php_logo)
+        );
+        
+        $this->assertInternalType(
+            'string',
+            $this->website_object->images($name_background)
+        );
+        
+        $this->assertInternalType(
+            'bool',
+            $this->website_object->images($name_nothing)
+        );
+    }
+    
     // -------------------------------------------------------------------------
 }
