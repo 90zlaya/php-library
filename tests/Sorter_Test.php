@@ -30,8 +30,8 @@ class Sorter_Test extends Test_Case {
     {
         $sorter = new sorter();
         $report = $sorter->deploy(array(
-            'where_to_read_files'         => 'D:/Zlatan/Browser/sorter/source/',
-            'where_to_create_directories' => 'D:/Zlatan/Browser/sorter/destination/',
+            'where_to_read_files'         => __DIR__ . '../../outsource/sorter/source/',
+            'where_to_create_directories' => __DIR__ . '../../outsource/sorter/source/',
             'number_of_directories'       => 10,
             'folder_sufix'                => '000',
             'operation'                   => 'c',

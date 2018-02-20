@@ -29,11 +29,7 @@ class File {
     */
     public static function write_to_file($file_location, $write_data, $last_in=TRUE)
     {
-        if (empty($file_location) || empty($write_data))
-        {
-            return FALSE;
-        }
-        else
+        if ( ! empty($file_location) || ! empty($write_data))
         {
             $new_data = $write_data . PHP_EOL;
             
@@ -56,6 +52,8 @@ class File {
                 fwrite($file, $new_data);
             }
         }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -138,18 +136,18 @@ class File {
     /**
     * Force file download
     * 
-    * @param String $file
-    * @param String $url
+    * @param String $file_name
+    * @param String $full_url
     * 
     * @return void
     */
-    public function force_download($file, $url)
+    public function force_download($file_name, $full_url)
     {
         header('Content-Type: application/octet-stream');
-        header("Content-Transfer-Encoding: Binary"); 
-        header("Content-disposition: attachment; filename=\"" . $file . "\""); 
+        header('Content-Transfer-Encoding: Binary'); 
+        header('Content-disposition: attachment; filename="' . $file_name . '"'); 
         
-        readfile($url);
+        readfile($full_url);
         
         exit;
     }

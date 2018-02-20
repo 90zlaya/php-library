@@ -15,6 +15,7 @@ api
 assets
 demo
 vendor
+outsource
 
 # System Files
 .DS_Store

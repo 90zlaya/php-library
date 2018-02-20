@@ -27,18 +27,17 @@ class Validation {
     */
     public static function year($year)
     {
-        if (is_numeric($year) && strlen($year) === 4)
-        {
-            return TRUE;
-        }
-        
-        return FALSE;
+        return is_numeric($year) && strlen($year) === strlen(date('Y'));
     }
     
     // -------------------------------------------------------------------------
     
     /**
-    * Checks if variable is set and non-empty
+    * Checks if variable is set
+    * 
+    * This method is marked as deprecated and soon will
+    * be removed from this class. You are strongly encouraged
+    * to avoid usage of this method.
     * 
     * @param String $variable
     * 
@@ -46,12 +45,7 @@ class Validation {
     */
     public static function variables($variable)
     {
-        if ( ! empty($variable))
-        {
-            return TRUE;
-        }
-        
-        return FALSE;
+        return ! empty($variable);
     }
     
     // -------------------------------------------------------------------------
@@ -216,7 +210,11 @@ class Validation {
         if 
         (
             in_array($extension, $allowed_extensions) && 
-            (empty($type) || empty($allowed_types) || in_array($type, $allowed_types))
+            (
+                empty($type) ||
+                empty($allowed_types) ||
+                in_array($type, $allowed_types)
+            )
         )
         {
             return TRUE;

@@ -498,11 +498,18 @@ class Website {
     /**
     * Printing creator data
     * 
-    * @return Array
+    * @param String $creator
+    * 
+    * @return mixed
     */
-    public function creator()
+    public function creator($creator)
     {
-        return $this->creator;
+        if ( ! empty($creator) && array_key_exists($creator, $this->creator))
+        {
+            return $this->creator[$creator];
+        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------

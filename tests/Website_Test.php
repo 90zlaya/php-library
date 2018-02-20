@@ -245,47 +245,200 @@ class Website_Test extends Test_Case {
         $image_php_logo   = 'https://php-library.zlatanstajic.com/assets/img/elephpant.png';
         $image_background = 'https://php-library.zlatanstajic.com/assets/img/background.png';
         
-        $this->website_object->add_to_images(
-            array(
-                $name_php_logo   => $image_php_logo,
-                $name_background => $image_background,
-            ),
-            TRUE
-        );
+        $this->website_object->add_to_images(array(
+            $name_php_logo   => $image_php_logo,
+            $name_background => $image_background,
+        ));
         
         $this->assertNotFalse($this->website_object->images($name_php_logo));
         $this->assertNotFalse($this->website_object->images($name_background));
         $this->assertFalse($this->website_object->images($name_nothing));
-        
         $this->assertEquals(
             $image_php_logo,
             $this->website_object->images($name_php_logo)
         );
-        
         $this->assertEquals(
             $image_background,
             $this->website_object->images($name_background)
         );
-        
         $this->assertNotEquals(
             $image_nothing,
             $this->website_object->images($name_nothing)
         );
-        
         $this->assertInternalType(
             'string',
             $this->website_object->images($name_php_logo)
         );
-        
         $this->assertInternalType(
             'string',
             $this->website_object->images($name_background)
         );
-        
         $this->assertInternalType(
             'bool',
             $this->website_object->images($name_nothing)
         );
+        
+        $name_random  = 'random';
+        $image_random = 'http://www.example.com/random.png';
+        
+        $this->website_object->add_to_images(array(
+            $name_random => $image_random,
+        ), TRUE);
+        
+        $this->assertNotFalse($this->website_object->images($name_php_logo));
+        $this->assertNotFalse($this->website_object->images($name_background));
+        $this->assertFalse($this->website_object->images($name_nothing));
+        $this->assertNotFalse($this->website_object->images($name_random));
+        $this->assertEquals(
+            $image_random,
+            $this->website_object->images($name_random)
+        );
+        $this->assertInternalType(
+            'string',
+            $this->website_object->images($name_random)
+        );
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing add_to_creator method and return values
+    * of creator method and evaluating them
+    */
+    public function test_add_to_creator_and_creator_methods()
+    {
+        $name_nothing  = 'nothing';
+        $name_name     = 'name';
+        $name_website  = 'website';
+        $name_email    = 'email';
+        $value_nothing = 'Nothing important';
+        $value_name    = 'John Doe';
+        $value_website = 'http://www.example.com/';
+        $value_email   = 'john.doe@example.com';
+        
+        $this->website_object->add_to_creator(array(
+            $name_name    => $value_name,
+            $name_website => $value_website,
+            $name_email   => $value_email,
+        ));
+        
+        $this->assertNotFalse($this->website_object->creator($name_name));
+        $this->assertNotFalse($this->website_object->creator($name_website));
+        $this->assertNotFalse($this->website_object->creator($name_email));
+        $this->assertFalse($this->website_object->creator($name_nothing));
+        $this->assertEquals(
+            $value_name,
+            $this->website_object->creator($name_name)
+        );
+        $this->assertEquals(
+            $value_website,
+            $this->website_object->creator($name_website)
+        );
+        $this->assertEquals(
+            $value_email,
+            $this->website_object->creator($name_email)
+        );
+        $this->assertNotEquals(
+            $value_nothing,
+            $this->website_object->creator($name_nothing)
+        );
+        $this->assertInternalType(
+            'string',
+            $this->website_object->creator($name_name)
+        );
+        $this->assertInternalType(
+            'string',
+            $this->website_object->creator($name_website)
+        );
+        $this->assertInternalType(
+            'string',
+            $this->website_object->creator($name_email)
+        );
+        $this->assertInternalType(
+            'bool',
+            $this->website_object->creator($name_nothing)
+        );
+        
+        $name_random  = 'random';
+        $value_random = 'http://www.example.com/random.png';
+        
+        $this->website_object->add_to_creator(array(
+            $name_random => $value_random,
+        ), TRUE);
+        
+        $this->assertNotFalse($this->website_object->creator($name_name));
+        $this->assertNotFalse($this->website_object->creator($name_website));
+        $this->assertNotFalse($this->website_object->creator($name_email));
+        $this->assertFalse($this->website_object->creator($name_nothing));
+        $this->assertNotFalse($this->website_object->creator($name_random));
+        $this->assertEquals(
+            $value_random,
+            $this->website_object->creator($name_random)
+        );
+        $this->assertInternalType(
+            'string',
+            $this->website_object->creator($name_random)
+        );
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Test add_to_head and head methods
+    */
+    public function test_add_to_head_and_head_methods()
+    {
+        $this->website_object->add_to_head(
+            array(
+                array(
+                    'path' => 'custom.css',
+                    'type' => 'link',
+                ),
+                array(
+                    'path' => 'body {background-color: powderblue;}',
+                    'type' => 'link-custom',
+                ),
+                array(
+                    'path' => 'https://php-library.zlatanstajic.com/assets/js/jquery.min.js',
+                    'type' => 'script',
+                ),
+                array(
+                    'path' => 'alert("Head custom script loaded");',
+                    'type' => 'script-custom',
+                ),
+            )
+        );
+        
+        $head = $this->website_object->head();
+        
+        $this->assertNotEmpty($head);
+        $this->assertInternalType('string', $head);
+    }
+                                                                                
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Test add_to_bottom and bottom methods
+    */
+    public function test_add_to_bottom_and_bottom_methods()
+    {
+        $this->website_object->add_to_bottom(
+            array(
+                array(
+                    'path' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+                    'type' => 'script',
+                ),
+                array(
+                    'path' => 'alert("Bottom custom script loaded");',
+                    'type' => 'script-custom',
+                ),
+            )
+        );
+        
+        $bottom = $this->website_object->bottom();
+        
+        $this->assertNotEmpty($bottom);
+        $this->assertInternalType('string', $bottom);
     }
     
     // -------------------------------------------------------------------------

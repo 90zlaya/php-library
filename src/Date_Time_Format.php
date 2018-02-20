@@ -133,7 +133,9 @@ class Date_Time_Format {
     */
     public static function current($format='')
     {
-        empty($format) ? $format = self::$types['unfriendly']['datetime'] : NULL;
+        empty($format)
+            ? $format = self::$types['unfriendly']['datetime']
+            : NULL;
         
         return date($format);
     }
@@ -149,16 +151,8 @@ class Date_Time_Format {
     */
     public static function compare($date)
     {
-        if 
-        (
-            self::current(self::$types['database']['format']) > 
-            date(self::$types['database']['format'], strtotime($date))
-        )
-        {
-            return TRUE;
-        }
-        
-        return FALSE;
+        return self::current(self::$types['database']['format']) > 
+            date(self::$types['database']['format'], strtotime($date));
     }
     
     // -------------------------------------------------------------------------
@@ -173,7 +167,9 @@ class Date_Time_Format {
     */
     public static function format($date, $without_time=FALSE)
     {
-        $type = $without_time ? self::$types['friendly']['date'] : self::$types['friendly']['datetime'];
+        $type = $without_time
+            ? self::$types['friendly']['date']
+            : self::$types['friendly']['datetime'];
         
         return date($type, strtotime($date));
     } 
