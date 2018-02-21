@@ -406,11 +406,7 @@ class Date_Time_Format {
     {
         if ( ! empty($string))
         {
-            $date_time = date(self::$types['unfriendly']['datetime']);
-            
-            $string_with_prefix = $date_time . '_' . $string;
-            
-            return $string_with_prefix;
+            return date(self::$types['unfriendly']['datetime']) . '_' . $string;
         }
         
         return FALSE;
@@ -443,7 +439,13 @@ class Date_Time_Format {
             
             $number_year = $date_year > 100 ? 1 : 2;
             
-            return $date_day . '. ' . $date_month . '. ' . $number_year . $date_year . '.';
+            return $date_day . 
+                '. ' . 
+                $date_month . 
+                '. ' . 
+                $number_year . 
+                $date_year . 
+                '.';
         }
         
         return FALSE;
@@ -485,8 +487,10 @@ class Date_Time_Format {
     {
         if ( ! empty($number_of_days))
         {
-            empty($format) ? $format = self::$types['database']['format'] : NULL;
-        
+            empty($format)
+                ? $format = self::$types['database']['format']
+                : NULL;
+            
             return date($format, strtotime(' -' . $number_of_days . ' day'));
         }
         

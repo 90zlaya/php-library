@@ -28,10 +28,18 @@ class Sorter_Test extends Test_Case {
     */
     public function test_deploy_method_for_existent_parameters()
     {
+        $where_to_read_files         = __DIR__ . '../../outsource/sorter/source/';
+        $where_to_create_directories = __DIR__ . '../../outsource/sorter/destination/';
+        
+        $this->assertDirectoryExists($where_to_read_files);
+        $this->assertDirectoryExists($where_to_create_directories);
+        $this->assertDirectoryIsReadable($where_to_read_files);
+        $this->assertDirectoryIsWritable($where_to_create_directories);
+        
         $sorter = new sorter();
         $report = $sorter->deploy(array(
-            'where_to_read_files'         => __DIR__ . '../../outsource/sorter/source/',
-            'where_to_create_directories' => __DIR__ . '../../outsource/sorter/source/',
+            'where_to_read_files'         => $where_to_read_files,
+            'where_to_create_directories' => $where_to_create_directories,
             'number_of_directories'       => 10,
             'folder_sufix'                => '000',
             'operation'                   => 'c',
