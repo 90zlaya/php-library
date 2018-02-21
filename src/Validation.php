@@ -33,24 +33,6 @@ class Validation {
     // -------------------------------------------------------------------------
     
     /**
-    * Checks if variable is set
-    * 
-    * This method is marked as deprecated and soon will
-    * be removed from this class. You are strongly encouraged
-    * to avoid usage of this method.
-    * 
-    * @param String $variable
-    * 
-    * @return Bool
-    */
-    public static function variables($variable)
-    {
-        return ! empty($variable);
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
     * Replaces comma with dot
     * 
     * @param String $param

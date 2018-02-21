@@ -11,6 +11,7 @@ demonstrations folder removed
 third-party folder removed
 
 Password: strength method returns array instead of mixed value and not accepting second parameter anymore
+Validation: variables method removed from class
 
 Modified:
 
@@ -20,7 +21,7 @@ Geo_Plugin: service is now built in instead of extending geoPlugin class
 Development:
 
 function_exists
-init_get
+ini_get
 
 -------------------------------------------
 Since php-library v1.2.0
