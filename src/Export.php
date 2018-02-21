@@ -169,7 +169,7 @@ class Export {
     /**
     * Export files to Text (osp)
     * 
-    * @param PhpSpreadsheet $spreadsheet
+    * @param Spreadsheet $spreadsheet
     * @param String $file_name
     * 
     * @return void
@@ -222,7 +222,7 @@ class Export {
     /**
     * Export files to Excel 5 (xls)
     * 
-    * @param PhpSpreadsheet $spreadsheet
+    * @param Spreadsheet $spreadsheet
     * @param String $file_name
     * 
     * @return void
@@ -247,7 +247,7 @@ class Export {
     /**
     * Export files to Excel 2007 (xlsx)
     * 
-    * @param PhpSpreadsheet $spreadsheet
+    * @param Spreadsheet $spreadsheet
     * @param String $file_name
     * 
     * @return void
@@ -324,7 +324,7 @@ class Export {
     /**
     * Arrange data in cells for export
     * 
-    * @param PhpSpreadsheet $spreadsheet
+    * @param Spreadsheet $spreadsheet
     * @param Array $head
     * @param Array $data
     * 
