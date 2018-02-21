@@ -2,8 +2,8 @@
 /**
 * Export
 *
-* Export files using customisation class of PHPOffice/PHPExcel
-* Location: https://github.com/PHPOffice/PHPExcel
+* Export files using customisation class of PHPOffice/PhpSpreadsheet
+* Location: https://github.com/PHPOffice/PhpSpreadsheet
 *
 * @package      PHP Library
 * @subpackage   phplibrary
@@ -12,11 +12,12 @@
 */
 namespace phplibrary;
 
-use PHPExcel as PHPExcel;
-use PHPExcel_IOFactory as PHPExcel_IOFactory;
+use PhpOffice\PhpSpreadsheet\Helper\Sample as Sample;
+use PhpOffice\PhpSpreadsheet\IOFactory as IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet as Spreadsheet;
 
 /**
-* Export files using customisation class of PHPOffice/PHPExcel
+* Export files using customisation class of PHPOffice/PhpSpreadsheet
 */
 class Export {
     
@@ -116,17 +117,17 @@ class Export {
         $keywords    = isset($params['document_properties']['keywords']) ? $params['document_properties']['keywords'] : self::$document_properties['keywords'];
         $category    = isset($params['document_properties']['category']) ? $params['document_properties']['category'] : self::$document_properties['category'];
         
-        // Create new PHPExcel object
-        $objPHPExcel = new PHPExcel();
+        // Create new Spreadsheet object
+        $spreadsheet = new Spreadsheet();
 
         // Set document properties
-        $objPHPExcel->getProperties()->setCreator($creator);
-        $objPHPExcel->getProperties()->setLastModifiedBy($creator);
-        $objPHPExcel->getProperties()->setTitle($title);
-        $objPHPExcel->getProperties()->setSubject($title);
-        $objPHPExcel->getProperties()->setDescription($description);
-        $objPHPExcel->getProperties()->setKeywords($keywords);
-        $objPHPExcel->getProperties()->setCategory($category);
+        $spreadsheet->getProperties()->setCreator($creator);
+        $spreadsheet->getProperties()->setLastModifiedBy($creator);
+        $spreadsheet->getProperties()->setTitle($title);
+        $spreadsheet->getProperties()->setSubject($title);
+        $spreadsheet->getProperties()->setDescription($description);
+        $spreadsheet->getProperties()->setKeywords($keywords);
+        $spreadsheet->getProperties()->setCategory($category);
         
         // Export type
         switch ($type)
@@ -135,7 +136,7 @@ class Export {
             {
                 self::line_arrangement($data);
                 self::for_ie_ssl();
-                self::to_osp($objPHPExcel, $file_name);
+                self::to_osp($spreadsheet, $file_name);
                 break;
             }
             case 'csv':
@@ -147,16 +148,16 @@ class Export {
             }
             case 'xls':
             {
-                self::cell_arrangement($objPHPExcel, $head, $data);
+                self::cell_arrangement($spreadsheet, $head, $data);
                 self::for_ie_ssl();
-                self::to_xls($objPHPExcel, $file_name);
+                self::to_xls($spreadsheet, $file_name);
                 break;
             }
             case 'xlsx':
             {
-                self::cell_arrangement($objPHPExcel, $head, $data);
+                self::cell_arrangement($spreadsheet, $head, $data);
                 self::for_ie_ssl();
-                self::to_xlsx($objPHPExcel, $file_name);
+                self::to_xlsx($spreadsheet, $file_name);
                 break;
             }
             default: NULL;
@@ -168,12 +169,12 @@ class Export {
     /**
     * Export files to Text (osp)
     * 
-    * @param PHPExcel $objPHPExcel
+    * @param PhpSpreadsheet $spreadsheet
     * @param String $file_name
     * 
     * @return void
     */
-    private static function to_osp($objPHPExcel, $file_name)
+    private static function to_osp($spreadsheet, $file_name)
     {
         // Redirect output to a client’s web browser (CSV)
         header('Content-Type: text/txt');
@@ -184,8 +185,8 @@ class Export {
         
         ob_end_flush();
         
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
-        $objWriter->save('php://output');
+        $writer = IOFactory::createWriter($spreadsheet, 'CSV');
+        $writer->save('php://output');
         
         exit;
     }
@@ -221,12 +222,12 @@ class Export {
     /**
     * Export files to Excel 5 (xls)
     * 
-    * @param PHPExcel $objPHPExcel
+    * @param PhpSpreadsheet $spreadsheet
     * @param String $file_name
     * 
     * @return void
     */
-    private static function to_xls($objPHPExcel, $file_name)
+    private static function to_xls($spreadsheet, $file_name)
     {
         // Redirect output to a client’s web browser (Excel5)
         header('Content-Type: application/vnd.ms-excel');
@@ -235,8 +236,8 @@ class Export {
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
         
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-        $objWriter->save('php://output');
+        $writer = IOFactory::createWriter($spreadsheet, 'Excel5');
+        $writer->save('php://output');
         
         exit;
     }
@@ -246,12 +247,12 @@ class Export {
     /**
     * Export files to Excel 2007 (xlsx)
     * 
-    * @param PHPExcel $objPHPExcel
+    * @param PhpSpreadsheet $spreadsheet
     * @param String $file_name
     * 
     * @return void
     */
-    private static function to_xlsx($objPHPExcel, $file_name)
+    private static function to_xlsx($spreadsheet, $file_name)
     {
         // Redirect output to a client’s web browser (Excel2007)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -260,8 +261,8 @@ class Export {
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
         
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-        $objWriter->save('php://output');
+        $writer = IOFactory::createWriter($spreadsheet, 'xlsx');
+        $writer->save('php://output');
         
         exit;
     }
@@ -323,13 +324,13 @@ class Export {
     /**
     * Arrange data in cells for export
     * 
-    * @param PHPExcel $objPHPExcel
+    * @param PhpSpreadsheet $spreadsheet
     * @param Array $head
     * @param Array $data
     * 
     * @return mixed
     */
-    private static function cell_arrangement($objPHPExcel, $head, $data)
+    private static function cell_arrangement($spreadsheet, $head, $data)
     {
         if ( ! empty($data))
         {
@@ -337,8 +338,8 @@ class Export {
             $iteration = 1;
             foreach ($head as $item)
             {
-                $objPHPExcel->getActiveSheet()->getColumnDimension(self::$cells[$iteration])->setAutoSize(TRUE);
-                $objPHPExcel->setActiveSheetIndex(0)->setCellValue(self::$cells[$iteration] . '1', $item);
+                $spreadsheet->getActiveSheet()->getColumnDimension(self::$cells[$iteration])->setAutoSize(TRUE);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue(self::$cells[$iteration] . '1', $item);
                 
                 $iteration++;
             }
@@ -354,7 +355,7 @@ class Export {
                 
                 for ($i=1; $i<=$number_of_cells; $i++)
                 {
-                    $objPHPExcel->setActiveSheetIndex(0)->setCellValue(self::$cells[$i] . $iteration, $item_indexed[$i-1]);
+                    $spreadsheet->setActiveSheetIndex(0)->setCellValue(self::$cells[$i] . $iteration, $item_indexed[$i-1]);
                 }
                 
                 $iteration++;
