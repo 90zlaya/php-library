@@ -185,7 +185,7 @@ class Export {
         
         ob_end_flush();
         
-        $writer = IOFactory::createWriter($spreadsheet, 'CSV');
+        $writer = IOFactory::createWriter($spreadsheet, 'Csv');
         $writer->save('php://output');
         
         exit;
@@ -236,7 +236,7 @@ class Export {
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
         
-        $writer = IOFactory::createWriter($spreadsheet, 'Excel5');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xls');
         $writer->save('php://output');
         
         exit;
@@ -261,7 +261,7 @@ class Export {
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
         
-        $writer = IOFactory::createWriter($spreadsheet, 'xlsx');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
         
         exit;
