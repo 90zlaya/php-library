@@ -28,8 +28,8 @@ class Sorter_Test extends Test_Case {
     */
     public function test_deploy_method_for_existent_parameters()
     {
-        $where_to_read_files         = __DIR__ . '../../outsource/sorter/source/';
-        $where_to_create_directories = __DIR__ . '../../outsource/sorter/destination/';
+        $where_to_read_files         = realpath('outsource/sorter/source/');
+        $where_to_create_directories = realpath('outsource/sorter/destination/');
         
         $this->assertDirectoryExists($where_to_read_files);
         $this->assertDirectoryExists($where_to_create_directories);
