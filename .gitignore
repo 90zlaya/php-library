@@ -5,17 +5,15 @@
 /tmp
 /out-tsc
 
-# custom files
-images.php
+# custom
 composer.lock
 phpDocumentor.phar
-
-# custom folders
-api
-assets
-demo
-vendor
-outsource
+/api
+/assets
+/demo
+/deploy
+/vendor
+/outsource
 
 # System Files
 .DS_Store

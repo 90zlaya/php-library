@@ -34,7 +34,7 @@
     <script src="https://php-library.zlatanstajic.com/assets/js/legacy.js"></script>
     <script src="https://php-library.zlatanstajic.com/assets/js/flatdoc.js"></script>
     <!-- Flatdoc theme -->
-    <link  href="https://php-library.zlatanstajic.com/assets/css/style.css" rel="stylesheet">
+    <link href="https://php-library.zlatanstajic.com/assets/css/style.css" rel="stylesheet">
     <script src="https://php-library.zlatanstajic.com/assets/js/script.js"></script>
     <link href="https://php-library.zlatanstajic.com/assets/css/theme.css" rel="stylesheet">
     <script src="https://php-library.zlatanstajic.com/assets/js/theme.js"></script>

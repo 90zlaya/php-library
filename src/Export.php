@@ -129,38 +129,41 @@ class Export {
         $spreadsheet->getProperties()->setKeywords($keywords);
         $spreadsheet->getProperties()->setCategory($category);
         
-        // Export type
-        switch ($type)
+        if ( ! headers_sent())
         {
-            case 'osp':
+            // Export type
+            switch ($type)
             {
-                self::line_arrangement($data);
-                self::for_ie_ssl();
-                self::to_osp($spreadsheet, $file_name);
-                break;
+                case 'osp':
+                {
+                    self::line_arrangement($data);
+                    self::for_ie_ssl();
+                    self::to_osp($spreadsheet, $file_name);
+                    break;
+                }
+                case 'csv':
+                {
+                    $csv = self::line_arrangement($data);
+                    self::for_ie_ssl();
+                    self::to_csv($csv, $file_name);
+                    break;
+                }
+                case 'xls':
+                {
+                    self::cell_arrangement($spreadsheet, $head, $data);
+                    self::for_ie_ssl();
+                    self::to_xls($spreadsheet, $file_name);
+                    break;
+                }
+                case 'xlsx':
+                {
+                    self::cell_arrangement($spreadsheet, $head, $data);
+                    self::for_ie_ssl();
+                    self::to_xlsx($spreadsheet, $file_name);
+                    break;
+                }
+                default: NULL;
             }
-            case 'csv':
-            {
-                $csv = self::line_arrangement($data);
-                self::for_ie_ssl();
-                self::to_csv($csv, $file_name);
-                break;
-            }
-            case 'xls':
-            {
-                self::cell_arrangement($spreadsheet, $head, $data);
-                self::for_ie_ssl();
-                self::to_xls($spreadsheet, $file_name);
-                break;
-            }
-            case 'xlsx':
-            {
-                self::cell_arrangement($spreadsheet, $head, $data);
-                self::for_ie_ssl();
-                self::to_xlsx($spreadsheet, $file_name);
-                break;
-            }
-            default: NULL;
         }
     }
     
