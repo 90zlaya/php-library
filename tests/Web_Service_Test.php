@@ -72,7 +72,10 @@ class Web_Service_Test extends Test_Case {
         $this->assertArrayHasKey('status', $result);
         $this->assertArrayHasKey('code', $result);
         $this->assertFalse($result['status']);
-        $this->assertEquals($result['code'], 404);
+        $this->assertContains($result['code'], array(
+            404,
+            0,
+        ));
     }
     
     // -------------------------------------------------------------------------
