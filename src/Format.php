@@ -174,10 +174,11 @@ class Format {
     * Formats website URL
     * 
     * @param String $location
+    * @param Bool $is_ssl
     * 
     * @return mixed
     */
-    public static function website($location)
+    public static function website($location, $is_ssl=FALSE)
     {
         if (preg_match(self::$website['regex'], $location))
         {
@@ -196,7 +197,10 @@ class Format {
             }
             else
             {
-                $prefix  = self::$website['protocol']['unsafe'];
+                $prefix = $is_ssl
+                    ? self::$website['protocol']['safe']
+                    : self::$website['protocol']['unsafe'];
+                
                 $prefix .= self::$website['web'] . '.';
                 
                 $location_final = $prefix . $location;
@@ -218,20 +222,18 @@ class Format {
     * 
     * @param String $ip
     * 
-    * @return String $converted
+    * @return String
     */
     public static function ip($ip)
     {
         if (in_array($ip, self::$ip['localhost']['addresses']))
         {
-            $converted = self::$ip['localhost']['name'];
+            return self::$ip['localhost']['name'];
         }
         else
         {
-            $converted = '<a href="' . self::$ip['locator'] . $ip . '" target="_blank">' . $ip . '</a>';
+            return '<a href="' . self::$ip['locator'] . $ip . '" target="_blank">' . $ip . '</a>';
         }
-        
-        return $converted;
     }
     
     // -------------------------------------------------------------------------
