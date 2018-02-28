@@ -1,7 +1,7 @@
 ![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg)
 ![Composer](https://img.shields.io/badge/composer-required-yellow.svg)
 
-![Official logo of php-library](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png)
+![Official logo of php-library](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1)
 =======
 
 PHP Library is set of custom made PHP classes containing most useful methods and variables for Web Development.
