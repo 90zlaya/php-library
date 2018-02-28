@@ -1,4 +1,8 @@
 <?php
+    $assets_location_prefix = basename(getcwd()) === 'assets'
+        ? ''
+        : 'https://php-library.zlatanstajic.com/assets/';
+    
     $php_library = array(
         'hyperlinks' => array(
             'php_library' => array(
@@ -24,22 +28,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-    <link rel="shortcut icon" href="https://php-library.zlatanstajic.com/assets/img/elephpant.png" type="image/png">
+    <link rel="shortcut icon" href="<?=$assets_location_prefix?>img/phplibrary-icon.png" type="image/png">
     <title>PHP Library</title>
     <meta content="PHP Library" property="og:title">
     <meta content="PHP Library is set of classes containing most useful methods and variables for Web Development" name="description">
     <!-- jQuery Load -->
-    <script src="https://php-library.zlatanstajic.com/assets/js/jquery.min.js"></script>
+    <script src="<?=$assets_location_prefix?>js/jquery.min.js"></script>
     <!-- Flatdoc -->
-    <script src="https://php-library.zlatanstajic.com/assets/js/legacy.js"></script>
-    <script src="https://php-library.zlatanstajic.com/assets/js/flatdoc.js"></script>
+    <script src="<?=$assets_location_prefix?>js/legacy.js"></script>
+    <script src="<?=$assets_location_prefix?>js/flatdoc.js"></script>
     <!-- Flatdoc theme -->
-    <link href="https://php-library.zlatanstajic.com/assets/css/style.css" rel="stylesheet">
-    <script src="https://php-library.zlatanstajic.com/assets/js/script.js"></script>
-    <link href="https://php-library.zlatanstajic.com/assets/css/theme.css" rel="stylesheet">
-    <script src="https://php-library.zlatanstajic.com/assets/js/theme.js"></script>
+    <link href="<?=$assets_location_prefix?>css/style.css" rel="stylesheet">
+    <script src="<?=$assets_location_prefix?>js/script.js"></script>
+    <link href="<?=$assets_location_prefix?>css/theme.css" rel="stylesheet">
+    <script src="<?=$assets_location_prefix?>js/theme.js"></script>
     <!-- Custom PHP Library style -->
-    <link href="https://php-library.zlatanstajic.com/assets/css/custom.css" rel="stylesheet">
+    <link href="<?=$assets_location_prefix?>css/custom.css" rel="stylesheet">
     <!-- Initializer -->
     <script>
         Flatdoc.run({

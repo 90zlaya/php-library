@@ -79,13 +79,13 @@ This library if powering following Websites/Web Applications:
 
 ![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/cms.dis.jpg?clear_cache=1)
 
+Development
+=======
+
 API documentation
 ----------------
 
 Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied [online].
-
-Development
-=======
 
 Bug analysis
 ----------------
