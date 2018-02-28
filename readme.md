@@ -2,8 +2,6 @@
 ![Composer](https://img.shields.io/badge/composer-required-yellow.svg)
 
 ![Official logo of php-library](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png)
-
-PHP Library
 =======
 
 PHP Library is set of custom made PHP classes containing most useful methods and variables for Web Development.
