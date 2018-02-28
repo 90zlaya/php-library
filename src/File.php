@@ -29,14 +29,22 @@ class File {
     */
     public static function write_to_file($file_location, $write_data, $last_in=TRUE)
     {
-        if ( ! empty($file_location) || ! empty($write_data))
+        if (empty($file_location) || empty($write_data))
+        {
+            return FALSE;
+        }
+        else
         {
             $new_data = $write_data . PHP_EOL;
             
             if (file_exists($file_location))
             {
+                $file_size = filesize($file_location) === 0
+                    ? 1
+                    : filesize($file_location);
+                
                 $file     = fopen($file_location, 'r');
-                $old_data = fread($file, filesize($file_location));
+                $old_data = fread($file, $file_size);
                 
                 $data = $last_in 
                     ? $old_data . $new_data 
@@ -52,14 +60,12 @@ class File {
                 fwrite($file, $new_data);
             }
         }
-        
-        return FALSE;
     }
     
     // -------------------------------------------------------------------------
     
     /**
-    * Reading last data from file
+    * Reading last data item from file
     * 
     * @param String $file_location
     * 
@@ -92,8 +98,10 @@ class File {
             
             return $line;
         }
-        
-        return FALSE;
+        else
+        {
+            return FALSE;
+        }
     }
     
     // -------------------------------------------------------------------------
@@ -143,13 +151,16 @@ class File {
     */
     public function force_download($file_name, $full_url)
     {
-        header('Content-Type: application/octet-stream');
-        header('Content-Transfer-Encoding: Binary'); 
-        header('Content-disposition: attachment; filename="' . $file_name . '"'); 
-        
-        readfile($full_url);
-        
-        exit;
+        if ( ! headers_sent())
+        {
+            header('Content-Type: application/octet-stream');
+            header('Content-Transfer-Encoding: Binary'); 
+            header('Content-disposition: attachment; filename="' . $file_name . '"'); 
+            
+            readfile($full_url);
+            
+            exit;
+        }
     }
     
     // -------------------------------------------------------------------------

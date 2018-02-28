@@ -189,4 +189,150 @@ class Format_Test extends Test_Case {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Testing string method
+    */
+    public function test_string_method()
+    {
+        $string  = 'Lorem Ipsum is simply dummy text of the printing';
+        $string .= ' and typesetting industry.';
+        
+        $result = format::string($string);
+        
+        $this->assertEquals('Lorem Ipsum is ...', $result);
+        
+        $result = format::string($string, 6, 9);
+        
+        $this->assertEquals('Ipsum is ...', $result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing price_format method
+    */
+    public function test_price_format_method()
+    {
+        $result = format::price_format(108.985);
+        
+        $this->assertEquals('108,99', $result);
+        
+        $result = format::price_format('108.985', 3);
+        
+        $this->assertEquals('108,985', $result);
+        
+        $result = format::price_format('108,985', 3);
+        
+        $this->assertFalse($result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing array_to_string method
+    */
+    public function test_array_to_string_method()
+    {
+        $result = format::array_to_string(array(
+            2017,
+            2018,
+        ));
+        
+        $this->assertEquals('2017|2018', $result);
+        
+        $result = format::array_to_string(array(
+            2017,
+            2018,
+        ), ', ');
+        
+        $this->assertEquals('2017, 2018', $result);
+        
+        $result = format::array_to_string('2017|2018');
+        
+        $this->assertEquals('', $result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing fullname method
+    */
+    public function test_fullname_method()
+    {
+        $result = format::fullname('John', 'Doe');
+        
+        $this->assertEquals('John Doe', $result);
+        
+        $result = format::fullname('John', 'Doe', ' - ');
+        
+        $this->assertEquals('John - Doe', $result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing search_wizard method
+    */
+    public function test_search_wizard_method()
+    {
+        $result = format::search_wizard(
+            'php-library',
+            array(
+                'name',
+                'title',
+                'text',
+            )
+        );
+        
+        $this->assertNotFalse($result);
+        
+        $result = format::search_wizard('', array());
+        
+        $this->assertFalse($result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing language_value method
+    */
+    public function test_language_value_method()
+    {
+        $result = format::language_value('english', 'Elephant');
+        
+        $this->assertEquals('Elephant', $result);
+        
+        $result = format::language_value('serbian', 'Elephant', 'Slon');
+        
+        $this->assertEquals('Slon', $result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing in_wizard method
+    */
+    public function test_in_wizard_method()
+    {
+        $result = format::in_wizard(
+            'field',
+            array(
+                'first',
+                'second',
+                'third',
+            )
+        );
+        
+        $this->assertEquals(
+            ' AND field IN ("first", "second", "third")',
+            $result
+        );
+        
+        $result = format::in_wizard('', array());
+        
+        $this->assertFalse($result);
+    }
+    
+    // -------------------------------------------------------------------------
 }

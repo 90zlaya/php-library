@@ -11,6 +11,7 @@ demonstrations folder removed
 third-party folder removed
 
 Export: phpoffice/phpexcel replaced with phpoffice/phpspreadsheet
+Format: add_to_array method removed
 Password: strength method returns array instead of mixed value and not accepting second parameter anymore
 Validation: variables method removed from class
 

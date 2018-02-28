@@ -370,17 +370,21 @@ class Format {
     * @param float $price
     * @param int $decimal
     * 
-    * @return float $price_format
+    * @return mixed
     */
     public static function price_format($price, $decimal=2)
     {
-        $price_format = number_format($price, $decimal);
+        if (stripos($price, ',') === FALSE)
+        {
+            $price_format = number_format($price, $decimal);
+            $price_format = str_replace('.', '?', $price_format);
+            $price_format = str_replace(',', '.', $price_format);
+            $price_format = str_replace('?', ',', $price_format);
+            
+            return $price_format;
+        }    
         
-        $price_format = str_replace('.', '?', $price_format);
-        $price_format = str_replace(',', '.', $price_format);
-        $price_format = str_replace('?', ',', $price_format);
-        
-        return $price_format;
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
@@ -397,7 +401,7 @@ class Format {
     {
         $string = '';
         
-        if ( ! empty($array))
+        if ( ! empty($array) && is_array($array))
         {
             $array_size = count($array);
             
@@ -423,6 +427,8 @@ class Format {
     * @param String $name
     * @param String $surname
     * @param String $delimiter
+    * 
+    * @return String
     */
     public static function fullname($name, $surname, $delimiter=' ')
     {
@@ -439,7 +445,7 @@ class Format {
     * 
     * @return mixed
     */
-    public static function search_wizard($term='', $fields=array())
+    public static function search_wizard($term, $fields)
     {
         if ( ! empty($term) && ! empty($fields))
         {
@@ -514,39 +520,7 @@ class Format {
         }
     }
     
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Merge specific item with source array
-    * 
-    * @param Array $source
-    * @param mixed $item
-    * 
-    * @return Array $new
-    */
-    public static function add_to_array($source, $item)
-    {
-        $new = array();
-        
-        foreach ($source as $row)
-        {
-            if (is_array($row))
-            {
-                $new[] = array_merge($row, $item);
-            }
-            else
-            {
-                $new = array(
-                    $row,
-                    $item,
-                );
-            }
-        }
-        
-        return $new;
-    }
-    
-    // -------------------------------------------------------------------------
+    // --------------------------------------------------------------------------
     
     /**
     * Prepares SQL statement
@@ -556,7 +530,7 @@ class Format {
     * 
     * @return mixed
     */
-    public static function in_wizard($term='', $fields=array())
+    public static function in_wizard($term, $fields)
     {
         if ( ! empty($term) && ! empty($fields))
         {

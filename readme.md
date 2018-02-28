@@ -1,6 +1,8 @@
 ![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg)
 ![Composer](https://img.shields.io/badge/composer-required-yellow.svg)
 
+![Official logo of php-library](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png)
+
 PHP Library
 =======
 
@@ -55,6 +57,11 @@ $ git clone https://github.com/90zlaya/php-library.git
 
 Misc
 =======
+
+Logo
+----------------
+
+Official PHP Library logo is designed by [designseed.co] - an unlimited custom graphic design service.
 
 Inspiration
 ----------------
@@ -138,3 +145,4 @@ Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 [PHP Stan]: https://github.com/phpstan/phpstan
 [phpDocumentor]: https://www.phpdoc.org/
 [PHP_CodeSniffer]: https://github.com/squizlabs/PHP_CodeSniffer
+[designseed.com]: https://designseedco.com/en/
