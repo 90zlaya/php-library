@@ -53,18 +53,18 @@ If you want to develop this library and use GitHub instead of manual download, j
 $ git clone https://github.com/90zlaya/php-library.git
 ```
 
-Misc
+References
 =======
-
-Logo
-----------------
-
-Official PHP Library logo is designed by [designseed.co] - an unlimited custom graphic design service.
 
 Inspiration
 ----------------
 
 Idea behind creation of this repository is making everyday Web Development process faster and easier.
+
+Logo
+----------------
+
+Official PHP Library logo is designed by [designseed.co] - an unlimited custom graphic design service.
 
 Customers
 ----------------
@@ -83,6 +83,9 @@ API documentation
 ----------------
 
 Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied [online].
+
+Development
+=======
 
 Bug analysis
 ----------------
@@ -143,4 +146,4 @@ Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 [PHP Stan]: https://github.com/phpstan/phpstan
 [phpDocumentor]: https://www.phpdoc.org/
 [PHP_CodeSniffer]: https://github.com/squizlabs/PHP_CodeSniffer
-[designseed.com]: https://designseedco.com/en/
+[designseed.co]: https://designseedco.com/en/
