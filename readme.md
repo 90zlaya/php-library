@@ -93,7 +93,7 @@ Bug analysis
 This library has been tested with [PHP Stan] and approved as bug-free for all classes. It's recommended to run following command to check for buggs in project.
 
 ```
-$ vendor/bin/phpstan analyse src --level 7
+$ vendor/bin/phpstan analyse src --level max
 ```
 
 Please note that PHP Stan is enabled in composer file only for development versions of PHP Library.
@@ -107,7 +107,7 @@ PHP Library has it's own coding standard which deviates from PSR-2 standard with
 $ vendor/bin/phpcs index.php --standard='ruleset.xml'
 ```
 
-If you want to find out more about specific rules, open ruleset.xml file which is located in root directory. Please note that PHP_CodeSniffer is enabled in composer file only for development versions of PHP Library.
+If you want to find out more about specific rules, open ruleset.xml file which is located in root directory.
 
 Automatic tests
 ----------------
@@ -123,7 +123,19 @@ $ bash autotest
 * Running unit tests with PHPUnit
 * Creating API documentation
 
-You should test entire library before making commit.
+Precondition for running all tests above is having composer vendors updated.
+
+```
+$ composer update
+```
+
+For unit tests to run as expected, you will need to download outsource.zip file and unzip it inside root directory.
+
+```
+$ wget https://link.zlatanstajic.com/software/php-library/outsource.zip
+$ unzip outsource.zip
+$ sudo rm -rf outsource.zip
+```
 
 Migration
 ----------------

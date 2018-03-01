@@ -11,7 +11,7 @@ echo -e "$(tput setaf 0)$(tput setab 2)Finished PHP_CodeSniffer for src folder$(
 vendor/bin/phpcs tests --standard='ruleset.xml' --colors
 echo -e "$(tput setaf 0)$(tput setab 2)Finished PHP_CodeSniffer for tests folder$(tput sgr 0)"
 
-vendor/bin/phpstan analyse src --level 7
+vendor/bin/phpstan analyse src --level max
 echo -e "$(tput setaf 0)$(tput setab 2)Finished PHPStan for src folder$(tput sgr 0)\n"
 
 vendor/bin/phpunit --colors
