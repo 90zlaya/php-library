@@ -109,7 +109,7 @@ class Export {
     {
         $head        = isset($params['head']) ? $params['head'] : array();
         $data        = isset($params['data']) ? $params['data'] : array();
-        $type        = isset($params['type']) ? $params['type'] : FALSE;
+        $type        = isset($params['type']) ? $params['type'] : 'xlsx';
         $file_name   = isset($params['file_name']) ? $params['file_name'] : self::$file_name;
         $creator     = isset($params['document_properties']['creator']) ? $params['document_properties']['creator'] : self::$document_properties['creator'];
         $title       = isset($params['document_properties']['title']) ? $params['document_properties']['title'] : self::$document_properties['title'];
