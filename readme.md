@@ -53,6 +53,37 @@ If you want to develop this library and use GitHub instead of manual download, j
 $ git clone https://github.com/90zlaya/php-library.git
 ```
 
+References
+=======
+
+Inspiration
+----------------
+
+Idea behind creation of this repository is making everyday Web Development process faster and easier.
+
+Logo
+----------------
+
+Official PHP Library logo is designed by [designseed.co] - an unlimited custom graphic design service.
+
+Customers
+----------------
+
+This library if powering following Websites/Web Applications:
+
+* [zlatanstajic.com]
+
+![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg?clear_cache=1)
+
+* [cms.dis.rs]
+
+![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/cms.dis.jpg?clear_cache=1)
+
+API documentation
+----------------
+
+Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied [online].
+
 Development
 =======
 
@@ -106,10 +137,25 @@ $ bash autotest
 
 Precondition for running all tests above is having composer vendors updated and outsource repository cloned from GitHub.
 
-References
-=======
-
-Inspiration
+Migration
 ----------------
 
-Idea behind creation of this repository is making everyday W
+When you update library version from older to newer, it's recommended to consult changelog file, which is located under the name log.txt in root directory.
+
+Acknowledgements
+----------------
+
+Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
+
+[Zlatan Stajic]: https://www.zlatanstajic.com/
+[GitHub]: https://github.com/90zlaya/php-library
+[Packagist]: https://packagist.org/packages/90zlaya/php-library
+[MIT License]: http://www.opensource.org/licenses/mit-license.php
+[latest release]: https://github.com/90zlaya/php-library/releases/latest
+[online]: https://php-library.zlatanstajic.com/api/
+[zlatanstajic.com]: https://www.zlatanstajic.com/
+[cms.dis.rs]: https://cms.dis.rs/
+[PHP Stan]: https://github.com/phpstan/phpstan
+[phpDocumentor]: https://www.phpdoc.org/
+[PHP_CodeSniffer]: https://github.com/squizlabs/PHP_CodeSniffer
+[designseed.co]: https://designseedco.com/en/
