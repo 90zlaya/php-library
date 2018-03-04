@@ -14,10 +14,7 @@ echo -e "$(tput setaf 0)$(tput setab 2)Finished PHP_CodeSniffer for tests folder
 vendor/bin/phpstan analyse src --level max
 echo -e "$(tput setaf 0)$(tput setab 2)Finished PHPStan for src folder$(tput sgr 0)\n"
 
-vendor/bin/phpunit --colors
+vendor/bin/phpunit
 echo -e "$(tput setaf 0)$(tput setab 2)Finished PHPUnit for test folder$(tput sgr 0)\n"
-
-php phpDocumentor.phar -d src -t api --title="PHP Library API Documentation"
-echo -e "$(tput setaf 0)$(tput setab 2)Finished phpDocumentor.phar for API documentation$(tput sgr 0)\n"
 
 echo -e "$(tput setaf 0)$(tput setab 2)Finished autotest$(tput sgr 0)"

@@ -79,24 +79,13 @@ This library if powering following Websites/Web Applications:
 
 ![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/cms.dis.jpg?clear_cache=1)
 
-Development
-=======
-
 API documentation
 ----------------
 
 Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied [online].
 
-Bug analysis
-----------------
-
-This library has been tested with [PHP Stan] and approved as bug-free for all classes. It's recommended to run following command to check for buggs in project.
-
-```
-$ vendor/bin/phpstan analyse src --level max
-```
-
-Please note that PHP Stan is enabled in composer file only for development versions of PHP Library.
+Development
+=======
 
 Coding standard
 ----------------
@@ -108,6 +97,30 @@ $ vendor/bin/phpcs index.php --standard='ruleset.xml'
 ```
 
 If you want to find out more about specific rules, open ruleset.xml file which is located in root directory.
+
+Bug analysis
+----------------
+
+This library has been tested with [PHP Stan] and approved as bug-free for all classes. It's recommended to run following command to check for buggs in project.
+
+```
+$ vendor/bin/phpstan analyse src --level max
+```
+
+Unit testing
+---------------
+
+All tests are covered with PHPUnit framework and stored inside tests folder. They need outsource folder to perform specific tests, which you have to clone from GitHub to PHP Library's root directory.
+
+```
+$ git clone https://github.com/php-library-league/outsource.git
+```
+
+Command for running unit tests will target phpunit.xml file which is located inside root directory.
+
+```
+$ vendor/bin/phpunit
+```
 
 Automatic tests
 ----------------
@@ -121,21 +134,8 @@ $ bash autotest
 * Coding standard with PHP_CodeSniffer
 * Bug analysis with PHPStan
 * Running unit tests with PHPUnit
-* Creating API documentation
 
-Precondition for running all tests above is having composer vendors updated.
-
-```
-$ composer update
-```
-
-For unit tests to run as expected, you will need to download outsource.zip file and unzip it inside root directory.
-
-```
-$ wget https://link.zlatanstajic.com/software/php-library/outsource.zip
-$ unzip outsource.zip
-$ sudo rm -rf outsource.zip
-```
+Precondition for running all tests above is having composer vendors updated and outsource repository cloned from GitHub.
 
 Migration
 ----------------
