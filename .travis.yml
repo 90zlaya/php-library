@@ -2,12 +2,9 @@ language: php
 php:
     - 7.1
     - 7.2
+    - 7.3
 before_script:
     - composer install --no-interaction
 script:
     - git clone https://github.com/php-library-league/outsource.git
-    - vendor/bin/phpcs index.php --standard='ruleset.xml' --colors
-    - vendor/bin/phpcs src --standard='ruleset.xml' --colors
-    - vendor/bin/phpcs tests --standard='ruleset.xml' --colors
-    - vendor/bin/phpstan analyse src --level max
-    - vendor/bin/phpunit
+    - bash autotest
