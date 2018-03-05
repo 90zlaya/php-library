@@ -1,4 +1,4 @@
-![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-blue.svg)
+![PHP Version](https://img.shields.io/badge/php-%3E%3D7.1-blue.svg)
 ![Composer](https://img.shields.io/badge/composer-required-yellow.svg)
 
 ![Official logo of php-library](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1)

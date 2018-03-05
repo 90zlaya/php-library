@@ -5,5 +5,9 @@ php:
 before_script:
     - composer install --no-interaction
 script:
+    - git clone https://github.com/php-library-league/outsource.zip
+    - vendor/bin/phpcs index.php --standard='ruleset.xml' --colors
+    - vendor/bin/phpcs src --standard='ruleset.xml' --colors
+    - vendor/bin/phpcs tests --standard='ruleset.xml' --colors
     - vendor/bin/phpstan analyse src --level max
     - vendor/bin/phpunit
