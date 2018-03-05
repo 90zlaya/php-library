@@ -53,37 +53,6 @@ If you want to develop this library and use GitHub instead of manual download, j
 $ git clone https://github.com/90zlaya/php-library.git
 ```
 
-References
-=======
-
-Inspiration
-----------------
-
-Idea behind creation of this repository is making everyday Web Development process faster and easier.
-
-Logo
-----------------
-
-Official PHP Library logo is designed by [designseed.co] - an unlimited custom graphic design service.
-
-Customers
-----------------
-
-This library if powering following Websites/Web Applications:
-
-* [zlatanstajic.com]
-
-![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg?clear_cache=1)
-
-* [cms.dis.rs]
-
-![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/cms.dis.jpg?clear_cache=1)
-
-API documentation
-----------------
-
-Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied [online].
-
 Development
 =======
 
@@ -135,7 +104,38 @@ $ bash autotest
 * Bug analysis with PHPStan
 * Running unit tests with PHPUnit
 
-Precondition for running all tests above is having composer vendors updated and outsource repository cloned from GitHub.
+Precondition for running all tests above is having Composer vendors updated and outsource repository cloned from GitHub.
+
+References
+=======
+
+Inspiration
+----------------
+
+Idea behind creation of this repository is making everyday Web Development process faster and easier.
+
+Logo
+----------------
+
+Official PHP Library logo is designed by [designseed.co] - an unlimited custom graphic design service.
+
+Customers
+----------------
+
+This library if powering following Websites/Web Applications:
+
+* [zlatanstajic.com]
+
+![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg?clear_cache=1)
+
+* [cms.dis.rs]
+
+![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/cms.dis.jpg?clear_cache=1)
+
+API documentation
+----------------
+
+Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied [online].
 
 Migration
 ----------------

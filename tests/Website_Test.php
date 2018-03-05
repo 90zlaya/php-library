@@ -129,7 +129,7 @@ class Website_Test extends Test_Case {
     public function test_image_size_method_with_existent_image()
     {
         $result = $this->website_object->image_size(
-            'https://php-library.zlatanstajic.com/assets/img/elephpant.png'
+            'https://php-library.zlatanstajic.com/assets/img/phplibrary-icon.png'
         );
 
         $this->assertNotFalse($result);
