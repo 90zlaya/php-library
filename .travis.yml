@@ -5,5 +5,6 @@ php:
 before_script:
     - composer install --no-interaction
 script:
-    - git clone https://github.com/php-library-league/outsource.git
+    - wget https://link.zlatanstajic.com/software/php-library/outsource.zip
+    - unzip outsource.zip
     - bash autotest

@@ -80,10 +80,12 @@ $ vendor/bin/phpstan analyse src --level max
 Unit testing
 ---------------
 
-All tests are covered with PHPUnit framework and stored inside tests folder. They need outsource folder to perform specific tests, which you have to clone from GitHub to PHP Library's root directory.
+All tests are covered with PHPUnit framework and stored inside tests folder. They need outsource folder to perform specific tests, which you have to download and unzip in PHP Library's root directory.
 
 ```
-$ git clone https://github.com/php-library-league/outsource.git
+$ wget https://link.zlatanstajic.com/software/php-library/outsource.zip
+$ unzip outsource.zip
+$ sudo rm -rf outsource.zip
 ```
 
 Command for running unit tests will target phpunit.xml file which is located inside root directory.
@@ -105,7 +107,7 @@ $ bash autotest
 * Bug analysis with PHPStan
 * Running unit tests with PHPUnit
 
-Precondition for running all tests above is having Composer vendors updated and outsource repository cloned from GitHub.
+Precondition for running all tests above is having Composer vendors updated and outsource directory downloaded.
 
 References
 =======
