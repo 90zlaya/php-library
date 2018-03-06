@@ -212,12 +212,7 @@ class Geo_Plugin {
         
         if (function_exists('curl_init'))
         {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $host);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_USERAGENT, 'Geo_Plugin class from bit.ly/php-library');
-            $response = curl_exec($ch);
-            curl_close ($ch);   
+            $response = web_service::response($host);
         }
         elseif (ini_get('allow_url_fopen'))
         {

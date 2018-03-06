@@ -79,6 +79,7 @@ Format: language_value method created
 Format: add_to_array method created
 Geo_Plugin: collect method base sub-array location parameter prefixed with https/http query and added as a special parameter in base sub-array
 User: image method refactoring
+Web_Service: response method created
 
 Removed: 
 

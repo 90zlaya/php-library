@@ -19,6 +19,57 @@ class Web_Service {
     // -------------------------------------------------------------------------
     
     /**
+    * Response from webservice
+    * 
+    * @param String $web_service_url
+    * @param Array $params
+    * 
+    * @return mixed
+    */
+    public static function response($web_service_url, $params=array())
+    {
+        if
+        (
+            function_exists('curl_init') &&
+            self::check_file($web_service_url)['status']
+        )
+        {
+            /*
+            $ch = curl_init ($path);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $raw = curl_exec($ch);
+            curl_close ($ch);
+            */
+            $ch = curl_init($web_service_url);
+            
+            isset($params['header'])
+                ? curl_setopt($ch, CURLOPT_HEADER, $params['header'])
+                : NULL;
+            
+            isset($params['user_agent'])
+                ? curl_setopt($ch, CURLOPT_USERAGENT, $params['user_agent'])
+                : NULL;
+            
+            isset($params['binary_trasfer'])
+                ? curl_setopt($ch, CURLOPT_BINARYTRANSFER, $params['binary_trasfer'])
+                : NULL;
+            
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            
+            $response = curl_exec($ch);
+            curl_close ($ch);
+            
+            return $response;
+        }
+        
+        return FALSE;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Convert response code to service status
     * 
     * @param int $code
@@ -57,7 +108,11 @@ class Web_Service {
     */
     public static function response_body($web_service_url, $data=array())
     {
-        if (self::check_file($web_service_url)['status'])
+        if
+        (
+            function_exists('curl_init') &&
+            self::check_file($web_service_url)['status']
+        )
         {
             $data_string = json_encode($data);
             
@@ -85,20 +140,25 @@ class Web_Service {
     * 
     * @param String $url
     * 
-    * @return Array
+    * @return mixed
     */
     public static function check_file($url)
     {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-        curl_exec($ch);
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+        if (function_exists('curl_init'))
+        {
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+            curl_exec($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            
+            return array(
+                'status' => self::response_code($code)['status'],
+                'code'   => $code,
+            );
+        }
         
-        return array(
-            'status' => self::response_code($code)['status'],
-            'code'   => $code,
-        );
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
