@@ -20,11 +20,6 @@ Modified:
 Directory_Lister: created prepare_date method after refactoring check_date method
 Geo_Plugin: service is now built in instead of extending geoPlugin class
 
-Development:
-
-function_exists
-ini_get
-
 -------------------------------------------
 Since php-library v1.2.0
 -------------------------------------------
