@@ -212,7 +212,9 @@ class Geo_Plugin {
         
         if (function_exists('curl_init'))
         {
-            $response = web_service::response($host);
+            $response = web_service::response($host, array(
+                'user_agent' => 'Geo_Plugin class from bit.ly/php-library',
+            ));
         }
         elseif (ini_get('allow_url_fopen'))
         {

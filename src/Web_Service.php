@@ -34,14 +34,6 @@ class Web_Service {
             self::check_file($web_service_url)['status']
         )
         {
-            /*
-            $ch = curl_init ($path);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $raw = curl_exec($ch);
-            curl_close ($ch);
-            */
             $ch = curl_init($web_service_url);
             
             isset($params['header'])
@@ -59,7 +51,7 @@ class Web_Service {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             
             $response = curl_exec($ch);
-            curl_close ($ch);
+            curl_close($ch);
             
             return $response;
         }
