@@ -220,6 +220,45 @@ class Website_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Testing signature method when we 
+    * only want to see always made year
+    */
+    public function test_signature_method_always_made_year_parameter()
+    {
+        $string  = 'Copyright &#169; ';
+        $string .= $this->website_data['made'];
+        $string .= ' | ';
+        $string .= '<a href="https://www.zlatanstajic.com/" ';
+        $string .= 'target="_blank">Zlatan Stajić</a>';
+        
+        $result = $this->website_object->signature(TRUE);
+        
+        $this->assertEquals($string, $result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing signature method for years span
+    */
+    public function test_signature_method_for_years_span()
+    {
+        $string  = 'Copyright &#169; ';
+        $string .= $this->website_data['made'];
+        $string .= '-';
+        $string .= date('Y');
+        $string .= ' | ';
+        $string .= '<a href="https://www.zlatanstajic.com/" ';
+        $string .= 'target="_blank">Zlatan Stajić</a>';
+        
+        $result = $this->website_object->signature();
+        
+        $this->assertEquals($string, $result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Testing return value of signature_hidden method
     */
     public function test_signature_hidden_method()

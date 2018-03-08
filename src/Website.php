@@ -123,8 +123,8 @@ class Website {
     * @var Array
     */
     private $images = array(
-        'icon' => 'https://php-library.zlatanstajic.com/assets/images/icon.png',
-        'logo' => 'https://php-library.zlatanstajic.com/assets/images/logo.png',
+        'icon' => 'https://php-library.zlatanstajic.com/assets/img/phplibrary-icon.png',
+        'logo' => 'https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png',
     );
     
     // -------------------------------------------------------------------------
@@ -580,12 +580,18 @@ class Website {
     */
     public function signature($always_made_year=FALSE, $show_licence=FALSE)
     {
-        $licence      = '';
-        $current_year = date('Y');
+        $licence = '';
         
-        $since = $current_year == $this->made || $always_made_year 
-            ? $current_year 
-            : $this->made . '-' . $current_year;
+        $since = $current_year = date('Y');
+        
+        if ($always_made_year)
+        {
+            $since = $this->made;
+        }
+        elseif ($current_year != $this->made)
+        {
+            $since = $this->made . '-' . $current_year;
+        }
         
         $show_licence ? $licence = ' | All Rights Reserved' : NULL;
         
