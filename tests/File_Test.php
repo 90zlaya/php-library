@@ -102,7 +102,10 @@ class File_Test extends Test_Case {
         
         foreach ($result['items'] as $item)
         {
-            $this->assertEquals($this->line . "\r\n", $item[0]);
+            $this->assertContains($item[0], array(
+                $this->line . "\r\n",
+                $this->line . "\n",
+            ));
         }
     }
     
