@@ -4,21 +4,21 @@ Since php-library v1.3.0
 Important
 ----------------
 
-using composer autoloader instead of native one
-composer vendors are stored directly into root
-classes folder renamed to src
-demonstrations folder removed
-third-party folder removed
-Export: phpoffice/phpexcel replaced with phpoffice/phpspreadsheet
-Format: add_to_array method removed
-Password: strength method returns array instead of mixed value and not accepting second parameter anymore
-Validation: variables method removed from class
+* using composer autoloader instead of native one
+* composer vendors are stored directly into root
+* classes folder renamed to src
+* demonstrations folder removed
+* third-party folder removed
+* Export: phpoffice/phpexcel replaced with phpoffice/phpspreadsheet
+* Format: add_to_array method removed
+* Password: strength method returns array instead of mixed value and not accepting second parameter anymore
+* Validation: variables method removed from class
 
 Modified
 ----------------
 
-Directory_Lister: created prepare_date method after refactoring check_date method
-Geo_Plugin: service is now built in instead of extending geoPlugin class
+* Directory_Lister: created prepare_date method after refactoring check_date method
+* Geo_Plugin: service is now built in instead of extending geoPlugin class
 
 Since php-library v1.2.0
 =======
@@ -26,36 +26,36 @@ Since php-library v1.2.0
 Important
 ----------------
 
-Password: new method is now called new_unreadable method
-Export: export method is now called export_file method
+* Password: new method is now called new_unreadable method
+* Export: export method is now called export_file method
 
 New
 ----------------
 
-File_Version: new class File_Version developed from file-version module
-File_Version: development of dump method broken to three private methods
-File_Version: added option to set file_names from dump method
+* File_Version: new class File_Version developed from file-version module
+* File_Version: development of dump method broken to three private methods
+* File_Version: added option to set file_names from dump method
 
 Modified
 ----------------
 
-Date_Time_Format: number_to_day method created
-Date_Time_Format: days_after method created
-Directory_Lister: array of years can be passed to listing method
-Email: show method created
-Email: script method created
-Email: split method created
-Export: output buffering added for csv and osp export
-File: force_download method created
-Format: in_wizard method created
-Geo_Plugin: removed protected collect method
-User_Agent: list_crawlers method created
-User_Agent: is_crawler method created
+* Date_Time_Format: number_to_day method created
+* Date_Time_Format: days_after method created
+* Directory_Lister: array of years can be passed to listing method
+* Email: show method created
+* Email: script method created
+* Email: split method created
+* Export: output buffering added for csv and osp export
+* File: force_download method created
+* Format: in_wizard method created
+* Geo_Plugin: removed protected collect method
+* User_Agent: list_crawlers method created
+* User_Agent: is_crawler method created
 
 Removed
 ----------------
 
-file-version: entire module removed and replaced with File_Version class
+* file-version: entire module removed and replaced with File_Version class
 
 Since php-library v1.1.0
 =======
@@ -63,32 +63,32 @@ Since php-library v1.1.0
 New
 ----------------
 
-Sorter: new class Sorter developed from image-sorter module
-mysql-dump: new module added
+* Sorter: new class Sorter developed from image-sorter module
+* mysql-dump: new module added
 
 Modified
 ----------------
 
-Date_Time_Format: get_days and get_months methods created
-Date_Time_Format: get_days and get_months methods php and json return values
-Date_Time_Format: refactoring class
-Directory_Lister: avoiding case of empty directory in files method
-Export: export file column dimension auto size
-Export: csv export set to avoid PHPExcel output because of double quotes
-File: read_file_contents method created
-File: write_to_file method - added new parameter to determine if file is written to top or bottom
-Format: array_to_string method created
-Format: fullname method created
-Format: search_wizard method created
-Format: language_value method created
-Format: add_to_array method created
-Geo_Plugin: collect method base sub-array location parameter prefixed with https/http query and added as a special parameter in base sub-array
-User: image method refactoring
-Web_Service: response method created
+* Date_Time_Format: get_days and get_months methods created
+* Date_Time_Format: get_days and get_months methods php and json return values
+* Date_Time_Format: refactoring class
+* Directory_Lister: avoiding case of empty directory in files method
+* Export: export file column dimension auto size
+* Export: csv export set to avoid PHPExcel output because of double quotes
+* File: read_file_contents method created
+* File: write_to_file method - added new parameter to determine if file is written to top or bottom
+* Format: array_to_string method created
+* Format: fullname method created
+* Format: search_wizard method created
+* Format: language_value method created
+* Format: add_to_array method created
+* Geo_Plugin: collect method base sub-array location parameter prefixed with https/http query and added as a special parameter in base sub-array
+* User: image method refactoring
+* Web_Service: response method created
 
 Removed
 ----------------
 
-Pagination: entire class removed from php-library because of it's redundancy
-image-sorter: entire module removed and replaced with Sorter class
-spider: entire module removed from php-library
+* Pagination: entire class removed from php-library because of it's redundancy
+* image-sorter: entire module removed and replaced with Sorter class
+* spider: entire module removed from php-library
