@@ -143,7 +143,7 @@ Official PHP Library API documentation has been documented by [phpDocumentor] an
 Migration
 ----------------
 
-When you update library version from older to newer, it's recommended to consult changelog file, which is located under the name log.txt in root directory.
+When you update library version from older to newer, it's recommended to consult changelog file, which is located under the name changelog.md in root directory.
 
 Acknowledgements
 ----------------

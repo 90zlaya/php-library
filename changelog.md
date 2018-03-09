@@ -1,41 +1,43 @@
--------------------------------------------
 Since php-library v1.3.0
--------------------------------------------
+=======
 
-Important: 
+Important
+----------------
 
 using composer autoloader instead of native one
 composer vendors are stored directly into root
 classes folder renamed to src
 demonstrations folder removed
 third-party folder removed
-
 Export: phpoffice/phpexcel replaced with phpoffice/phpspreadsheet
 Format: add_to_array method removed
 Password: strength method returns array instead of mixed value and not accepting second parameter anymore
 Validation: variables method removed from class
 
-Modified:
+Modified
+----------------
 
 Directory_Lister: created prepare_date method after refactoring check_date method
 Geo_Plugin: service is now built in instead of extending geoPlugin class
 
--------------------------------------------
 Since php-library v1.2.0
--------------------------------------------
+=======
 
-Important:
+Important
+----------------
 
 Password: new method is now called new_unreadable method
 Export: export method is now called export_file method
 
-New: 
+New
+----------------
 
 File_Version: new class File_Version developed from file-version module
 File_Version: development of dump method broken to three private methods
 File_Version: added option to set file_names from dump method
 
-Modified:
+Modified
+----------------
 
 Date_Time_Format: number_to_day method created
 Date_Time_Format: days_after method created
@@ -50,19 +52,22 @@ Geo_Plugin: removed protected collect method
 User_Agent: list_crawlers method created
 User_Agent: is_crawler method created
 
-Removed:
+Removed
+----------------
+
 file-version: entire module removed and replaced with File_Version class
 
--------------------------------------------
 Since php-library v1.1.0
--------------------------------------------
+=======
 
-New:
+New
+----------------
 
 Sorter: new class Sorter developed from image-sorter module
 mysql-dump: new module added
 
-Modified:
+Modified
+----------------
 
 Date_Time_Format: get_days and get_months methods created
 Date_Time_Format: get_days and get_months methods php and json return values
@@ -81,7 +86,8 @@ Geo_Plugin: collect method base sub-array location parameter prefixed with https
 User: image method refactoring
 Web_Service: response method created
 
-Removed: 
+Removed
+----------------
 
 Pagination: entire class removed from php-library because of it's redundancy
 image-sorter: entire module removed and replaced with Sorter class
