@@ -1,4 +1,4 @@
-Since php-library v1.3.0
+Since php-library v1.3.0 (06-Feb-2018)
 =======
 
 Important
@@ -20,7 +20,7 @@ Modified
 * Directory_Lister: created prepare_date method after refactoring check_date method
 * Geo_Plugin: service is now built in instead of extending geoPlugin class
 
-Since php-library v1.2.0
+Since php-library v1.2.0 (06-Jan-2018)
 =======
 
 Important
@@ -57,7 +57,7 @@ Removed
 
 * file-version: entire module removed and replaced with File_Version class
 
-Since php-library v1.1.0
+Since php-library v1.1.0 (02-Dec-2017)
 =======
 
 New
@@ -92,3 +92,31 @@ Removed
 * Pagination: entire class removed from php-library because of it's redundancy
 * image-sorter: entire module removed and replaced with Sorter class
 * spider: entire module removed from php-library
+
+Since php-library v1.0.0 (26-Oct-2017)
+=======
+
+Important
+----------------
+
+* Namespace phplibrary added to every class and home page edits
+
+New
+----------------
+* Spider module added
+* Math class created
+* Geo_Plugin class created as third-party geoPlugin extension
+* Module image-sorter added
+* PHPExcel added
+
+Modified
+----------------
+
+* Date_Time_Format: Variables reformated to $types array
+* Date_Time_Format: days_before method added
+* Directory_Lister: file size added to file method
+* Export: allowed_types method added
+* Math: static keyword added to percentage method
+* User_Agent: class development and refactoring
+* Web_Service: New methodes developed
+* Website: creator method added
