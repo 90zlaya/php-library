@@ -146,7 +146,7 @@ class Validation_Test extends Test_Case {
         );
         
         $ordinary = validation::rewrite('');
-        $special  = validation::rewrite('');
+        $special  = validation::rewrite_special('');
         
         $this->assertFalse($ordinary);
         $this->assertFalse($special);

@@ -191,12 +191,8 @@ class Validation {
         
         if 
         (
-            in_array($extension, $allowed_extensions) && 
-            (
-                empty($type) ||
-                empty($allowed_types) ||
-                in_array($type, $allowed_types)
-            )
+            in_array($extension, $allowed_extensions) &&
+            in_array($type, $allowed_types)
         )
         {
             return TRUE;

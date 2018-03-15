@@ -94,6 +94,10 @@ class Math_Test extends Test_Case {
         
         $this->assertEquals($percentage['value'], $expected_value);
         $this->assertEquals($percentage['sign'], $expected_value . '%');
+        
+        $percentage = math::percentage(NULL, NULL);
+        
+        $this->assertEquals(NULL, $percentage['value']);
     }
     
     // -------------------------------------------------------------------------

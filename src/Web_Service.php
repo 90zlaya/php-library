@@ -44,8 +44,8 @@ class Web_Service {
                 ? curl_setopt($ch, CURLOPT_USERAGENT, $params['user_agent'])
                 : NULL;
             
-            isset($params['binary_trasfer'])
-                ? curl_setopt($ch, CURLOPT_BINARYTRANSFER, $params['binary_trasfer'])
+            isset($params['binary_transfer'])
+                ? curl_setopt($ch, CURLOPT_BINARYTRANSFER, $params['binary_transfer'])
                 : NULL;
             
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -132,25 +132,20 @@ class Web_Service {
     * 
     * @param String $url
     * 
-    * @return mixed
+    * @return Array
     */
     public static function check_file($url)
     {
-        if (function_exists('curl_init'))
-        {
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-            curl_exec($ch);
-            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-            
-            return array(
-                'status' => self::response_code($code)['status'],
-                'code'   => $code,
-            );
-        }
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+        curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
         
-        return FALSE;
+        return array(
+            'status' => self::response_code($code)['status'],
+            'code'   => $code,
+        );
     }
     
     // -------------------------------------------------------------------------

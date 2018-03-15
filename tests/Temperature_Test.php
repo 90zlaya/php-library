@@ -20,6 +20,15 @@ class Temperature_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Random data to pass to conversion methods
+    * 
+    * @var String
+    */
+    private $non_numeric_value = 'This is definitely not numeric value!';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Test conversion from kelvin to celsius and
     * from kelvin to fahrenheit
     */
@@ -39,6 +48,12 @@ class Temperature_Test extends Test_Case {
         $this->assertInternalType('string', $celsius['sign']);
         $this->assertEquals($celsius['value'], $celsius_expected);
         
+        $celsius = temperature::k_to_c($kelvin_value, TRUE);
+        $this->assertEquals($celsius['value'], round($celsius_expected));
+        
+        $celsius = temperature::k_to_c($this->non_numeric_value);
+        $this->assertFalse($celsius);
+        
         $fahrenheit = temperature::k_to_f($kelvin_value);
         
         $this->assertNotFalse($fahrenheit);
@@ -48,6 +63,12 @@ class Temperature_Test extends Test_Case {
         $this->assertInternalType('float', $fahrenheit['value']);
         $this->assertInternalType('string', $fahrenheit['sign']);
         $this->assertEquals($fahrenheit['value'], $fahrenheit_expected);
+        
+        $fahrenheit = temperature::k_to_f($kelvin_value, TRUE);
+        $this->assertEquals($fahrenheit['value'], round($fahrenheit_expected));
+        
+        $fahrenheit = temperature::k_to_f($this->non_numeric_value);
+        $this->assertFalse($fahrenheit);
     }
     
     // -------------------------------------------------------------------------
@@ -72,6 +93,12 @@ class Temperature_Test extends Test_Case {
         $this->assertInternalType('string', $celsius['sign']);
         $this->assertEquals($celsius['value'], $celsius_expected);
         
+        $celsius = temperature::f_to_c($fahrenheit_value, TRUE);
+        $this->assertEquals($celsius['value'], round($celsius_expected));
+        
+        $celsius = temperature::f_to_c($this->non_numeric_value);
+        $this->assertFalse($celsius);
+        
         $kelvin = temperature::f_to_k($fahrenheit_value);
         
         $this->assertNotFalse($kelvin);
@@ -81,6 +108,12 @@ class Temperature_Test extends Test_Case {
         $this->assertInternalType('float', $kelvin['value']);
         $this->assertInternalType('string', $kelvin['sign']);
         $this->assertEquals($kelvin['value'], $kelvin_expected);
+        
+        $kelvin = temperature::f_to_k($fahrenheit_value, TRUE);
+        $this->assertEquals($kelvin['value'], round($kelvin_expected));
+        
+        $kelvin = temperature::f_to_k($this->non_numeric_value);
+        $this->assertFalse($kelvin);
     }
     
     // -------------------------------------------------------------------------
@@ -103,7 +136,13 @@ class Temperature_Test extends Test_Case {
         $this->assertArrayHasKey('sign', $fahrenheit);
         $this->assertInternalType('float', $fahrenheit['value']);
         $this->assertInternalType('string', $fahrenheit['sign']);
-        $this->assertEquals($fahrenheit['value'], $fahrenheit_expected);        
+        $this->assertEquals($fahrenheit['value'], $fahrenheit_expected);
+        
+        $fahrenheit = temperature::c_to_f($celsius_value, TRUE);
+        $this->assertEquals($fahrenheit['value'], round($fahrenheit_expected));
+        
+        $fahrenheit = temperature::c_to_f($this->non_numeric_value);
+        $this->assertFalse($fahrenheit);
         
         $kelvin = temperature::c_to_k($celsius_value);
         
@@ -114,6 +153,12 @@ class Temperature_Test extends Test_Case {
         $this->assertInternalType('float', $kelvin['value']);
         $this->assertInternalType('string', $kelvin['sign']);
         $this->assertEquals($kelvin['value'], $kelvin_expected);
+        
+        $kelvin = temperature::c_to_k($celsius_value, TRUE);
+        $this->assertEquals($kelvin['value'], round($kelvin_expected));
+        
+        $kelvin = temperature::c_to_k($this->non_numeric_value);
+        $this->assertFalse($kelvin);
     }
     
     // -------------------------------------------------------------------------

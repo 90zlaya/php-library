@@ -173,10 +173,24 @@ class Website_Test extends Test_Case {
     */
     public function test_meta_method()
     {
-        $result = $this->website_object->meta();
+        $items = array(
+            NULL,
+            array(),
+            array(
+                'title'                    => 'PHP Library',
+                'shortcut_icon'            => 'phplibrary-icon.png',
+                'touch_icon'               => 'phplibrary-logo-blue.png',
+                'google_site_verification' => '123456789abcdefghijklmn',
+            ),
+        );
+        
+        foreach ($items as $item)
+        {
+            $result = $this->website_object->meta($item);
 
-        $this->assertNotEmpty($result);
-        $this->assertInternalType('string', $result);
+            $this->assertNotEmpty($result);
+            $this->assertInternalType('string', $result);
+        }
     }
     
     // -------------------------------------------------------------------------
@@ -263,10 +277,22 @@ class Website_Test extends Test_Case {
     */
     public function test_signature_hidden_method()
     {
-        $result = $this->website_object->signature_hidden('english');
-
-        $this->assertNotEmpty($result);
-        $this->assertInternalType('string', $result);
+        $items = array(
+            'english',
+            'EN',
+            'serbian',
+            'SR',
+            '',
+            NULL,
+        );
+        
+        foreach ($items as $item)
+        {
+            $result = $this->website_object->signature_hidden($item);
+        
+            $this->assertNotEmpty($result);
+            $this->assertInternalType('string', $result);
+        }
     }
     
     // -------------------------------------------------------------------------
@@ -427,7 +453,9 @@ class Website_Test extends Test_Case {
     */
     public function test_add_to_head_and_head_methods()
     {
-        $this->website_object->add_to_head(
+        $items = array(
+            NULL,
+            array(),
             array(
                 array(
                     'path' => 'custom.css',
@@ -445,13 +473,17 @@ class Website_Test extends Test_Case {
                     'path' => 'alert("Head custom script loaded");',
                     'type' => 'script-custom',
                 ),
-            )
+            ),
         );
         
-        $head = $this->website_object->head();
-        
-        $this->assertNotEmpty($head);
-        $this->assertInternalType('string', $head);
+        foreach ($items as $item)
+        {
+            $this->website_object->add_to_head($item);
+            $head = $this->website_object->head();
+            
+            $this->assertNotEmpty($head);
+            $this->assertInternalType('string', $head);
+        }
     }
                                                                                 
     // -------------------------------------------------------------------------
@@ -461,8 +493,18 @@ class Website_Test extends Test_Case {
     */
     public function test_add_to_bottom_and_bottom_methods()
     {
-        $this->website_object->add_to_bottom(
+        $items = array(
+            NULL,
+            array(),
             array(
+                array(
+                    'path' => 'https://php-library.zlatanstajic.com/assets/css/style.css',
+                    'type' => 'link',
+                ),
+                array(
+                    'path' => '<style>background: red;</style>',
+                    'type' => 'link-custom',
+                ),
                 array(
                     'path' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
                     'type' => 'script',
@@ -471,13 +513,35 @@ class Website_Test extends Test_Case {
                     'path' => 'alert("Bottom custom script loaded");',
                     'type' => 'script-custom',
                 ),
-            )
+            ),
         );
         
-        $bottom = $this->website_object->bottom();
+        foreach ($items as $item)
+        {
+            $this->website_object->add_to_bottom($item);
+            $bottom = $this->website_object->bottom();
+            
+            $this->assertNotEmpty($bottom);
+            $this->assertInternalType('string', $bottom);
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Test redirect_to_page method
+    */
+    public function test_redirect_to_page_method()
+    {
+        ob_start();
         
-        $this->assertNotEmpty($bottom);
-        $this->assertInternalType('string', $bottom);
+        $this->assertNull($this->website_object->redirect_to_page(
+            'https://google.com/',
+            TRUE,
+            FALSE
+        ));
+        
+        ob_end_clean();
     }
     
     // -------------------------------------------------------------------------

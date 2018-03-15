@@ -20,6 +20,15 @@ class Web_Service_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Existent URL/Webservice
+    * 
+    * @var String
+    */
+    private $existent_url = 'http://www.geoplugin.net/php.gp?ip=109.93.204.177';    
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Nonexistent URL/Webservice
     * 
     * @var String
@@ -54,6 +63,18 @@ class Web_Service_Test extends Test_Case {
         $this->assertInternalType('array', $result);
         $this->assertArrayHasKey('status', $result);
         $this->assertFalse($result['status']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * What happens in response_body method for existent webservice
+    */
+    public function test_response_body_for_existent_webservice()
+    {
+        $result = web_service::response_body($this->existent_url);
+        
+        $this->assertNotFalse($result);
     }
     
     // -------------------------------------------------------------------------
@@ -94,12 +115,22 @@ class Web_Service_Test extends Test_Case {
     */
     public function test_response_method_for_existent_webservice()
     {
-        $result = web_service::response(
-            'http://www.geoplugin.net/php.gp?ip=109.93.204.177'
+        $items = array(
+            array(),
+            array(
+                'header'          => 0,
+                'user_agent'      => 'PHP Library: Web_Service class test',
+                'binary_transfer' => 1,
+            ),
         );
         
-        $this->assertNotFalse($result);
-        $this->assertInternalType('string', $result);
+        foreach ($items as $item)
+        {
+            $result = web_service::response($this->existent_url, $item);
+            
+            $this->assertNotFalse($result);
+            $this->assertInternalType('string', $result);
+        }
     }
     
     // -------------------------------------------------------------------------

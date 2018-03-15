@@ -10,6 +10,7 @@ composer.lock
 phpDocumentor.phar
 /api
 /assets
+/coverage
 /demo
 /deploy
 /vendor

@@ -64,6 +64,14 @@ class Password_Test extends Test_Case {
         
         $this->assertNotEmpty($result);
         $this->assertNotFalse($result);
+        
+        $words  = 'Furnace,Benign,Rusted,One,Daybreak,Nine,';
+        $words .= 'Longing,Seventeen,Homecoming,Freight Car';
+        
+        $result = password::new_readable(1, $words);
+        
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($result);
     }
     
     // -------------------------------------------------------------------------

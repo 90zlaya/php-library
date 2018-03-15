@@ -70,13 +70,14 @@ class Random_Test extends Test_Case {
         );
         
         $types = array(
+            '',
             'DAY',
             'MONTH',
         );
         
         foreach ($types as $type)
         {
-            $result = random::element($list, 'DAY');
+            $result = random::element($list, $type);
         
             $this->assertNotEmpty($result);
             $this->assertInternalType('array', $result);
@@ -95,16 +96,26 @@ class Random_Test extends Test_Case {
     */
     public function test_element_method_onedimensional_array()
     {
-        $list = array(
-            '1st',
-            '2nd',
-            '3rd',
+        $list = array();
+        
+        for ($i=0; $i<31; $i++)
+        {
+            $list = array_merge($list, array('element ' . $i));
+        }
+        
+        $types = array(
+            '',
+            'DAY',
+            'MONTH',
         );
         
-        $result = random::element($list);
-        
-        $this->assertNotEmpty($result);
-        $this->assertInternalType('string', $result);
+        foreach ($types as $type)
+        {
+            $result = random::element($list, $type);
+            
+            $this->assertNotEmpty($result);
+            $this->assertInternalType('string', $result);
+        }
     }
     
     // -------------------------------------------------------------------------
