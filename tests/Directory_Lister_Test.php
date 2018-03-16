@@ -199,4 +199,71 @@ class Directory_Lister_Test extends Test_Case {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Included display parameter to listing method
+    */
+    public function test_lister_on_display_input()
+    {
+        ob_start();
+        
+        $listing = directory_lister::listing(array(
+            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'     => 'crawl',
+            'years'      => array(
+                2013,
+                2016,
+                2017,
+            ),
+            'types'      => array(
+                'png',
+            ),
+            'date_start' => '01-12',
+            'date_end'   => '01-14',
+            'delimiter'  => 'mysql',
+            'reverse'    => TRUE,
+            'display'    => TRUE,
+        ));
+        
+        ob_end_clean();
+        
+        $this->assertEquals(10, $listing['count']);
+        $this->assertEquals(25, $listing['max']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Included print parameter to listing method
+    */
+    public function test_lister_on_print_input()
+    {
+        ob_start();
+        
+        $listing = directory_lister::listing(array(
+            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'     => 'crawl',
+            'years'      => array(
+                2013,
+                2016,
+                2017,
+            ),
+            'types'      => array(
+                'png',
+            ),
+            'date_start' => '01-12',
+            'date_end'   => '01-14',
+            'delimiter'  => 'mysql',
+            'reverse'    => TRUE,
+            'display'    => TRUE,
+            'print'      => TRUE,
+        ));
+        
+        ob_end_clean();
+        
+        $this->assertEquals(10, $listing['count']);
+        $this->assertEquals(25, $listing['max']);
+    }
+    
+    // -------------------------------------------------------------------------
 }

@@ -100,7 +100,7 @@ class Date_Time_Format_Test extends Test_Case {
         
         $result = date_time_format::format_to_user('1970-01-01');
         
-        $this->assertNotFalse($result);
+        $this->assertFalse($result);
     }
     
     // -------------------------------------------------------------------------
@@ -249,6 +249,10 @@ class Date_Time_Format_Test extends Test_Case {
             
             $this->assertFalse($date);
         }
+        
+        $date = date_time_format::date_from_jmbg('0910990123456');
+        
+        $this->assertEquals('9. 10. 1990.', $date);
     }
     
     // -------------------------------------------------------------------------
@@ -302,6 +306,10 @@ class Date_Time_Format_Test extends Test_Case {
             
             $this->assertFalse($day);
         }
+        
+        $result = date_time_format::days_before($number_of_days, 'd-m-Y');
+        
+        $this->assertNotFalse($result);
     }
     
     // -------------------------------------------------------------------------
@@ -350,6 +358,10 @@ class Date_Time_Format_Test extends Test_Case {
             $days['json'],
             json_encode($days['php'])
         );
+        
+        $days = date_time_format::get_days(NULL, 3);
+        
+        $this->assertNotEmpty($days);
     }
     
     // -------------------------------------------------------------------------
@@ -371,6 +383,10 @@ class Date_Time_Format_Test extends Test_Case {
             $months['json'],
             json_encode($months['php'])
         );
+        
+        $months = date_time_format::get_months(NULL, 3);
+        
+        $this->assertNotEmpty($months);
     }
     
     // -------------------------------------------------------------------------

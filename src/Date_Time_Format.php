@@ -118,7 +118,8 @@ class Date_Time_Format {
     * @var Array
     */
     protected static $invalid_dates = array(
-        '1970-01-01', 
+        '01.01.1970',
+        '1970-01-01',
         '0000-00-00',
     );
     
@@ -185,10 +186,13 @@ class Date_Time_Format {
     */
     public static function format_to_database($date)
     {
-        $format_to_database = date(self::$types['database']['format'], strtotime($date));
-        
-        if (self::not_empty($format_to_database))
+        if (self::not_empty($date))
         {
+            $format_to_database = date(
+                self::$types['database']['format'],
+                strtotime($date)
+            );
+            
             return $format_to_database;
         }
         
@@ -206,46 +210,14 @@ class Date_Time_Format {
     */
     public static function format_to_user($date)
     {
-        $format_to_user = date(self::$types['user']['format'], strtotime($date));
-        
-        if (self::not_empty($format_to_user))
+        if (self::not_empty($date))
         {
+            $format_to_user = date(
+                self::$types['user']['format'],
+                strtotime($date)
+            );
+            
             return $format_to_user;
-        }
-        
-        return FALSE;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Validates date to certain format type
-    * 
-    * @param String $date
-    * @param String $format
-    * 
-    * @return Bool
-    */
-    protected static function validate($date, $format)
-    {
-        switch ($format)
-        {
-            case self::$types['user']['placeholder']:
-            {
-                $regex = self::$types['user']['regex'];
-                break;
-            }
-            case self::$types['database']['placeholder']:
-            {
-                $regex = self::$types['database']['regex'];
-                break;
-            }
-            default: $regex = '';
-        }
-        
-        if (preg_match($regex, $date))
-        {
-            return TRUE;
         }
         
         return FALSE;

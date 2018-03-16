@@ -658,10 +658,6 @@ class Website {
     /**
     * Page redirection
     * 
-    * IMPORTANT: Please note that this method works with headers
-    * and that it modifies them. When you test this method be 
-    * careful because browser might get confused by mixed headers data.
-    * 
     * @param String $page
     * @param Bool $is_url
     * @param Bool $to_exit
@@ -676,7 +672,7 @@ class Website {
         {
             header('HTTP/1.1 301 Moved Permanently');
             header('Location: ' . $url);
-            header("Connection: close");
+            header('Connection: close');
         }
         
         echo '<html>';

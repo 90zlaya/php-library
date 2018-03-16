@@ -67,6 +67,10 @@ class Format_Test extends Test_Case {
         $telephone = format::telephone('', '01234/567-890');
         
         $this->assertEquals('012/34-56-7890', $telephone);
+        
+        $telephone = format::telephone(NULL);
+        
+        $this->assertFalse($telephone);
     }
     
     // -------------------------------------------------------------------------
@@ -76,13 +80,19 @@ class Format_Test extends Test_Case {
     */
     public function test_website_method()
     {
+        $expected  = '<a href="http://www.zlatanstajic.com"';
+        $expected .= ' target="_blank">zlatanstajic.com</a>';
+        
         $result = format::website('zlatanstajic.com');
         
         $this->assertInternalType('array', $result);
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('anchor', $result);
         $this->assertEquals('http://www.zlatanstajic.com', $result['name']);
-        $this->assertEquals('<a href="http://www.zlatanstajic.com" target="_blank">zlatanstajic.com</a>', $result['anchor']);
+        $this->assertEquals($expected, $result['anchor']);
+        
+        $expected  = '<a href="https://www.zlatanstajic.com"';
+        $expected .= ' target="_blank">zlatanstajic.com</a>';
         
         $result = format::website('zlatanstajic.com', TRUE);
         
@@ -90,7 +100,23 @@ class Format_Test extends Test_Case {
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('anchor', $result);
         $this->assertEquals('https://www.zlatanstajic.com', $result['name']);
-        $this->assertEquals('<a href="https://www.zlatanstajic.com" target="_blank">zlatanstajic.com</a>', $result['anchor']);
+        $this->assertEquals($expected, $result['anchor']);
+        
+        $result = format::website(NULL);
+        
+        $this->assertFalse($result);
+        
+        $address = 'http://www.zlatanstajic.com';
+        
+        $result = format::website($address);
+        
+        $this->assertEquals($address, $result['name']);
+        
+        $url = 'www.zlatanstajic.com';
+        
+        $result = format::website($url);
+        
+        $this->assertEquals($address, $result['name']);
     }
     
     // -------------------------------------------------------------------------
@@ -100,9 +126,29 @@ class Format_Test extends Test_Case {
     */
     public function test_ip_method()
     {
+        $expected  = '<a href="http://www.geoplugin.net/';
+        $expected .= 'php.gp?ip=172.168.150.15" target="_blank">';
+        $expected .= '172.168.150.15</a>';
+        
         $result = format::ip('172.168.150.15');
         
-        $this->assertEquals('<a href="http://www.geoplugin.net/php.gp?ip=172.168.150.15" target="_blank">172.168.150.15</a>', $result);
+        $this->assertEquals($expected, $result);
+        
+        $localhosts = array(
+            '::1', 
+            '127.0.0.1',
+        );
+        
+        foreach ($localhosts as $localhost)
+        {
+            $result = format::ip($localhost);
+            
+            $this->assertEquals('Localhost', $result);
+        }
+        
+        $result = format::ip(NULL);
+        
+        $this->assertFalse($result);
     }
     
     // -------------------------------------------------------------------------
@@ -153,6 +199,10 @@ class Format_Test extends Test_Case {
         $result = format::number(1234567.89, FALSE);
         
         $this->assertEquals(1, $result);
+        
+        $result = format::number(NULL);
+        
+        $this->assertEmpty($result);
     }
     
     // -------------------------------------------------------------------------
@@ -205,6 +255,10 @@ class Format_Test extends Test_Case {
         $result = format::string($string, 6, 9);
         
         $this->assertEquals('Ipsum is ...', $result);
+        
+        $result = format::string($string, 6, 90);
+        
+        $this->assertEquals($string, $result);
     }
     
     // -------------------------------------------------------------------------
@@ -278,6 +332,17 @@ class Format_Test extends Test_Case {
     {
         $result = format::search_wizard(
             'php-library',
+            array(
+                'name',
+                'title',
+                'text',
+            )
+        );
+        
+        $this->assertNotFalse($result);
+        
+        $result = format::search_wizard(
+            'PHP Library',
             array(
                 'name',
                 'title',

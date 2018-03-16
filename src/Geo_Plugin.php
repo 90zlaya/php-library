@@ -210,20 +210,9 @@ class Geo_Plugin {
         
         $host = str_replace('{IP}', $ip, $this->geo_plugin_service);
         
-        if (function_exists('curl_init'))
-        {
-            $response = web_service::response($host, array(
-                'user_agent' => 'Geo_Plugin class from bit.ly/php-library',
-            ));
-        }
-        elseif (ini_get('allow_url_fopen'))
-        {
-            $response = file_get_contents($host, 'r');
-        }
-        else
-        {
-            return FALSE;
-        }
+        $response = web_service::response($host, array(
+            'user_agent' => 'Geo_Plugin class from bit.ly/php-library',
+        ));
         
         $geo_information = unserialize($response);
         $this->code      = $geo_information['geoplugin_status'];

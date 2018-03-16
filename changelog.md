@@ -1,3 +1,11 @@
+Since php-library v1.4.0 (10-Mar-2018)
+=======
+
+Removed
+----------------
+
+* Date_Time_Format: protected validate method removed
+
 Since php-library v1.3.0 (06-Feb-2018)
 =======
 

@@ -143,11 +143,10 @@ class Format {
             $telephone = $telephone_backup;
         }
         
-        $exploded_telephone = explode(' ', $telephone);
-            
-        if ( ! empty($exploded_telephone))
+        if ( ! empty($telephone))
         {
-            $telephone_print = '';
+            $telephone_print    = '';
+            $exploded_telephone = explode(' ', $telephone);
             
             foreach ($exploded_telephone as $row)
             {
@@ -222,18 +221,28 @@ class Format {
     * 
     * @param String $ip
     * 
-    * @return String
+    * @return mixed
     */
     public static function ip($ip)
     {
-        if (in_array($ip, self::$ip['localhost']['addresses']))
+        if ( ! empty($ip))
         {
-            return self::$ip['localhost']['name'];
+            if (in_array($ip, self::$ip['localhost']['addresses']))
+            {
+                return self::$ip['localhost']['name'];
+            }
+            else
+            {
+                return '<a href="' .
+                    self::$ip['locator'] .
+                    $ip .
+                    '" target="_blank">' .
+                    $ip .
+                    '</a>';
+            }
         }
-        else
-        {
-            return '<a href="' . self::$ip['locator'] . $ip . '" target="_blank">' . $ip . '</a>';
-        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
