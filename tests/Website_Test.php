@@ -50,6 +50,20 @@ class Website_Test extends Test_Case {
     */
     public function setUp()
     {
+        $localhost = 'http://localhost/_develop/php-library';
+        
+        $_SERVER['HTTP_HOST'] = isset($_SERVER['HTTP_HOST'])
+            ? $_SERVER['HTTP_HOST']
+            : $localhost;
+        
+        $_SERVER['REQUEST_URI'] = isset($_SERVER['REQUEST_URI'])
+            ? $_SERVER['REQUEST_URI']
+            : $localhost;
+        
+        $_SERVER['HTTP_REFERER'] = isset($_SERVER['HTTP_REFERER'])
+            ? $_SERVER['HTTP_REFERER']
+            : $localhost . '/tests/Website_Test.php';
+        
         $this->website_object = new website(array(
             'name'        => $this->website_data['name'],
             'host'        => $this->website_data['host'],

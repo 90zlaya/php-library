@@ -37,6 +37,15 @@ class Directory_Lister {
     // -------------------------------------------------------------------------
     
     /**
+    * Number of folders counter
+    * 
+    * @var int
+    */
+    private static $number_of_folders = 0;
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Report variable
     * 
     * @var Array
@@ -143,15 +152,16 @@ class Directory_Lister {
                 }
             }
         }
-        elseif (empty($date_end))
-        {
-            if ($date == $date_start)
-            {
-                $searched = array_merge($searched, $item);
-            }
-        }
         else
         {
+            if (empty($date_end))
+            {
+                if ($date == $date_start)
+                {
+                    $searched = array_merge($searched, $item);
+                }
+            }
+            
             if ($date >= $date_start && $date <= $date_end)
             {
                 $searched = array_merge($searched, $item);
@@ -312,6 +322,8 @@ class Directory_Lister {
                     {
                         array_push($arr_path, $path);
                         array_push($arr_folder, $folder);
+                            
+                        self::$number_of_folders += 1;
                     }
                 }
                 
@@ -425,11 +437,7 @@ class Directory_Lister {
                 
                 self::$crawled = $files;
                 
-                if (empty($paths))
-                {
-                    return TRUE;
-                }
-                else
+                if ( ! empty($paths))
                 {
                     self::crawl(array(
                         'types' => $types,
@@ -448,11 +456,7 @@ class Directory_Lister {
             
             self::$crawled = $files;
             
-            if (empty($paths))
-            {
-                return TRUE;
-            }
-            else
+            if ( ! empty($paths))
             {
                 $depth = self::depth($paths, $types);
             
@@ -466,16 +470,6 @@ class Directory_Lister {
                     if (empty($paths))
                     {
                         return TRUE;
-                    }
-                    else
-                    {
-                        self::crawl(array(
-                            'types' => $types,
-                            'data'  => array(
-                                'paths' => $paths,
-                                'files' => $files,
-                            ),
-                        ));
                     }
                 }
             }
@@ -522,14 +516,25 @@ class Directory_Lister {
         
         self::form_of_view($searched, $print, $display);
         
+        if (array_key_exists('folder', $searched))
+        {
+            $count = count($searched['folder']);
+            $max   = self::$number_of_folders;
+        }
+        else
+        {
+            $count = count($searched);
+            $max   = self::$number_of_files;
+        }
+        
         $data = array(
             'listing' => $searched,
-            'count'   => count($searched),
-            'max'     => self::$number_of_files,
+            'count'   => $count,
+            'max'     => $max,
         );
         
-        self::$number_of_files = 0;
-        
+        self::$number_of_folders = self::$number_of_files = 0;
+                
         return $data;
     }
     

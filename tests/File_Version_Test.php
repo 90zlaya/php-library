@@ -20,35 +20,117 @@ class File_Version_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Parameters for test
+    * 
+    * @var Array
+    */
+    private $params = array();
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Create file version files for testing purposes
+    * 
+    * @return void
+    */
+    private function create_file_version_files()
+    {
+        file_version::dump(array(
+            'file_names' => array(
+                'log_files'    => $this->params['folders']['file_version'] . 
+                    DIRECTORY_SEPARATOR .
+                    $this->params['files']['files'],
+                'log_versions' => $this->params['folders']['file_version'] . 
+                    DIRECTORY_SEPARATOR .
+                    $this->params['files']['versions'],
+            ),
+            'listing'    => array(
+                'directory'  => $this->params['folders']['directory_lister'] . 
+                    DIRECTORY_SEPARATOR,
+                'method'     => 'crawl',
+            ),
+        ));
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Unlink existent files for testing
+    * 
+    * @return void
+    */
+    private function unlink_existent_files()
+    {
+        $locations = array(
+            $this->params['folders']['file_version'] . DIRECTORY_SEPARATOR . $this->params['files']['files'],
+            $this->params['folders']['file_version'] . DIRECTORY_SEPARATOR . $this->params['files']['versions'],
+        );
+        
+        foreach ($locations as $location)
+        {
+            if (file_exists($location))
+            {
+                unlink($location);
+            }
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * File_Version test setup method
+    */
+    public function setUp()
+    {
+        $this->params['folders']['file_version']     = realpath('outsource/file_version/');
+        $this->params['folders']['directory_lister'] = realpath('outsource/directory_lister/');
+        $this->params['files']['files']              = 'files';
+        $this->params['files']['versions']           = 'versions';
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Testing dump method
     */
     public function test_dump_method()
     {
-        $file_version_folder     = realpath('outsource/file_version/');
-        $directory_lister_folder = realpath('outsource/directory_lister/');
+        $this->assertDirectoryExists($this->params['folders']['file_version']);
+        $this->assertDirectoryIsWritable($this->params['folders']['file_version']);
+        $this->assertDirectoryExists($this->params['folders']['directory_lister']);
+        $this->assertDirectoryIsReadable($this->params['folders']['directory_lister']);
         
-        $this->assertDirectoryExists($file_version_folder);
-        $this->assertDirectoryIsWritable($file_version_folder);
-        $this->assertDirectoryExists($directory_lister_folder);
-        $this->assertDirectoryIsReadable($directory_lister_folder);
-        
+        $this->assertNull($this->create_file_version_files());
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing dump method file_names are not set
+    */
+    public function test_dump_method_file_names_are_not_set()
+    {
         $this->assertNull(
             file_version::dump(array(
-                'file_names' => array(
-                    'log_files'    => $file_version_folder . 
-                        DIRECTORY_SEPARATOR .
-                        'files',
-                    'log_versions' => $file_version_folder . 
-                        DIRECTORY_SEPARATOR .
-                        'versions',
-                ),
+                'file_names' => array(),
                 'listing'    => array(
-                    'directory'  => $directory_lister_folder . 
+                    'directory'  => $this->params['folders']['directory_lister'] . 
                         DIRECTORY_SEPARATOR,
                     'method'     => 'crawl',
                 ),
             ))
         );
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * File_Version test tear down method 
+    */
+    public function tearDown()
+    {
+        $this->create_file_version_files();
+        $this->unlink_existent_files();
     }
     
     // -------------------------------------------------------------------------

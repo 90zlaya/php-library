@@ -123,4 +123,21 @@ class File_Test extends Test_Case {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Testing write_to_file method when no file is present
+    */
+    public function test_write_to_file_method_when_no_file_is_present()
+    {
+        unlink(realpath('outsource/file/file.txt'));
+        
+        $this->assertNull(file::write_to_file(
+            $this->file['location'] . $this->file['name'],
+            $this->line
+        ));
+        
+        $this->assertFalse(file::write_to_file('', ''));
+    }
+    
+    // -------------------------------------------------------------------------
 }

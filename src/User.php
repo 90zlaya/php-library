@@ -23,7 +23,7 @@ class User {
     * 
     * @var String
     */
-    protected static $image_location = 'data/users/';
+    public static $image_location = 'data/users/';
     
     // -------------------------------------------------------------------------
     
@@ -32,7 +32,7 @@ class User {
     * 
     * @var String
     */
-    protected static $image_default = 'data/users/user.png';
+    public static $image_default = 'data/users/user.png';
     
     // -------------------------------------------------------------------------
     

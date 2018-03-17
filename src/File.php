@@ -39,12 +39,8 @@ class File {
             
             if (file_exists($file_location))
             {
-                $file_size = filesize($file_location) === 0
-                    ? 1
-                    : filesize($file_location);
-                
                 $file     = fopen($file_location, 'r');
-                $old_data = fread($file, $file_size);
+                $old_data = fread($file, filesize($file_location));
                 
                 $data = $last_in 
                     ? $old_data . $new_data 

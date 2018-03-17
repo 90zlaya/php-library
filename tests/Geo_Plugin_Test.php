@@ -27,6 +27,32 @@ class Geo_Plugin_Test extends Test_Case {
     {
         $geo_plugin = new geo_plugin();
         
+        $localhost = 'http://localhost/_develop/php-library';
+        
+        $_SERVER['HTTPS'] = isset($_SERVER['HTTPS'])
+            ? $_SERVER['HTTPS']
+            : $localhost;
+        
+        $_SERVER['HTTP_HOST'] = isset($_SERVER['HTTP_HOST'])
+            ? $_SERVER['HTTP_HOST']
+            : $localhost;
+        
+        $_SERVER['REQUEST_URI'] = isset($_SERVER['REQUEST_URI'])
+            ? $_SERVER['REQUEST_URI']
+            : $localhost;
+        
+        $_SERVER['HTTP_REFERER'] = isset($_SERVER['HTTP_REFERER'])
+            ? $_SERVER['HTTP_REFERER']
+            : $localhost . '/tests/Geo_Plugin_Test.php';
+        
+        $_SERVER['HTTP_USER_AGENT'] = isset($_SERVER['HTTP_USER_AGENT'])
+            ? $_SERVER['HTTP_USER_AGENT']
+            : 'Geo_Plugin_Test for bit.ly/php-library';
+                
+        $_SERVER['REMOTE_ADDR'] = isset($_SERVER['REMOTE_ADDR'])
+            ? $_SERVER['REMOTE_ADDR']
+            : '127.0.0.1';
+        
         $this->assertEmpty($geo_plugin->code);
         
         $data = $geo_plugin->data();

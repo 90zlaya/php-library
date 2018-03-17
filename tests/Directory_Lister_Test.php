@@ -266,4 +266,85 @@ class Directory_Lister_Test extends Test_Case {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Only files within given folder
+    */
+    public function test_lister_on_files_call()
+    {
+        $listing = directory_lister::listing(array(
+            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'     => 'files',
+        ));
+        
+        $this->assertEquals(1, $listing['count']);
+        $this->assertEquals(1, $listing['max']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Only folders within given folder
+    */
+    public function test_lister_on_folders_call()
+    {
+        $listing = directory_lister::listing(array(
+            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'     => 'folders',
+        ));
+        
+        $this->assertEquals(3, $listing['count']);
+        $this->assertEquals(3, $listing['max']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Nonexistent method parameter passed
+    */
+    public function test_lister_when_nonexistent_method_parameter_passed()
+    {
+        $listing = directory_lister::listing(array(
+            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'     => 'php-library',
+        ));
+        
+        $this->assertEquals(0, $listing['count']);
+        $this->assertEquals(0, $listing['max']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Crawling nonexistent files inside folder
+    */
+    public function test_lister_to_nonexistent_files_inside_folder()
+    {
+        $listing = directory_lister::listing(array(
+            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'     => 'crawl',
+            'types'      => array(
+                'php',
+            ),
+        ));
+        
+        $this->assertFalse($listing);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Crawling nonexistent files inside folder
+    */
+    public function test_lister_for_folder_without_depth()
+    {
+        $listing = directory_lister::listing(array(
+            'directory'  => realpath($this->directory. 'SQL/') . DIRECTORY_SEPARATOR,
+            'method'     => 'crawl',
+        ));
+        
+        $this->assertFalse($listing);
+    }
+    
+    // -------------------------------------------------------------------------
 }

@@ -20,24 +20,50 @@ class User_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Image parameters
+    * 
+    * @var Array
+    */
+    public $params = array(
+        'show'        => 'background.jpg',
+        'do_not_show' => 'no-background.jpg',
+        'location'    => 'https://php-library.zlatanstajic.com/assets/img/',
+        'default'     => 'elephpant.png',
+    );
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Image method return values
     */
     public function test_image_method()
     {
-        $image_show     = 'background.jpg';
-        $image_location = 'https://php-library.zlatanstajic.com/assets/img/';
-        $image_default  = 'elephpant.png';
-        
         $image = user::image(
-            $image_show,
-            $image_location,
-            $image_default
+            $this->params['show'],
+            $this->params['location'],
+            $this->params['default']
         );
         
         $this->assertNotEmpty($image);
         $this->assertInternalType('string', $image);
-        $this->assertEquals($image, $image_location . $image_show);
-        $this->assertNotEquals($image, $image_location . $image_default);
+        $this->assertEquals($image, $this->params['location'] . $this->params['show']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Image method with default image and image location
+    */
+    public function test_image_method_setting_default_image_and_location()
+    {
+        user::$image_location = $this->params['location'];
+        user::$image_default  = $this->params['default'];
+        
+        $image = user::image($this->params['do_not_show']);
+        
+        $this->assertNotEmpty($image);
+        $this->assertInternalType('string', $image);
+        $this->assertEquals($image, $this->params['default']);
     }
     
     // -------------------------------------------------------------------------

@@ -11,6 +11,8 @@
 */
 namespace phplibrary;
 
+use Exception as Exception;
+
 /**
 * Use this class when working with website related data
 */
@@ -546,23 +548,27 @@ class Website {
         {
             $image_size = getimagesize($image);
         }
-        finally
+        catch (Exception $e)
         {
-            if ( ! empty($image_size))
-            {
-                return array(
-                    'width'         => $image_size[0],
-                    'height'        => $image_size[1],
-                    'width_height'  => $image_size[0] . 'x' . $image_size[1],
-                    'type'          => $image_size[2],
-                    'size'          => $image_size[3],
-                    'bits'          => $image_size['bits'],
-                    'mime'          => $image_size['mime'],
-                );
-            }
-            
-            return FALSE;
+            array_push($this->errors, array(
+                $e->getMessage(),
+            ));
         }
+        
+        if ( ! empty($image_size))
+        {
+            return array(
+                'width'         => $image_size[0],
+                'height'        => $image_size[1],
+                'width_height'  => $image_size[0] . 'x' . $image_size[1],
+                'type'          => $image_size[2],
+                'size'          => $image_size[3],
+                'bits'          => $image_size['bits'],
+                'mime'          => $image_size['mime'],
+            );
+        }
+        
+        return FALSE;
     }
     
     // -------------------------------------------------------------------------
