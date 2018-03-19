@@ -8,7 +8,7 @@
 * @package      PHP Library
 * @subpackage   phplibrary
 * @category     Files
-* @author       Zlatan Stajić <contact@zlatanstajic.com>
+* @author       Ivan Skokić <iskokic@zgmail.com>
 */
 namespace phplibrary;
 
