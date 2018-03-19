@@ -20,6 +20,18 @@ class File_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Locations for test setup
+    * 
+    * @var Array
+    */
+    protected static $locations = array(
+        'folder'    => 'outsource/',
+        'subfolder' => 'file/',
+    );
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * File parameters
     * 
     * @var Array
@@ -38,15 +50,40 @@ class File_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * File test setup before class method
+    */
+    public static function setUpBeforeClass()
+    {
+        $path_to_testing_folder  = realpath(self::$locations['folder']);
+        $path_to_testing_folder .= DIRECTORY_SEPARATOR;
+        $path_to_testing_folder .= self::$locations['subfolder'];
+        
+        if ( ! file_exists($path_to_testing_folder))
+        {
+            mkdir($path_to_testing_folder);
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * File_Test setup method
     */
-    public function setUp()
+    protected function setUp()
     {
         $this->file = array(
             'location' => realpath('outsource/file/') . DIRECTORY_SEPARATOR,
             'name'     => 'file.txt',
         );
-        
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * File_Test precondition method
+    */
+    protected function assertPreConditions()
+    {
         $this->assertDirectoryIsReadable($this->file['location']);
         $this->assertDirectoryIsWritable($this->file['location']);
     }
@@ -129,7 +166,7 @@ class File_Test extends Test_Case {
     */
     public function test_write_to_file_method_when_no_file_is_present()
     {
-        unlink(realpath('outsource/file/file.txt'));
+        unlink(realpath($this->file['location'] . $this->file['name']));
         
         $this->assertNull(file::write_to_file(
             $this->file['location'] . $this->file['name'],
@@ -137,6 +174,22 @@ class File_Test extends Test_Case {
         ));
         
         $this->assertFalse(file::write_to_file('', ''));
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * File test tear down after class method
+    */
+    public static function tearDownAfterClass()
+    {
+        $file_directory  = realpath(self::$locations['folder']);
+        $file_directory .= DIRECTORY_SEPARATOR;
+        $file_directory .= self::$locations['subfolder'];
+        $file_document   = 'file.txt';
+        
+        unlink($file_directory . $file_document);
+        rmdir($file_directory);
     }
     
     // -------------------------------------------------------------------------

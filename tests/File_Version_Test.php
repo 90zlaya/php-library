@@ -20,11 +20,40 @@ class File_Version_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Locations for test setup
+    * 
+    * @var Array
+    */
+    protected static $locations = array(
+        'folder'    => 'outsource/',
+        'subfolder' => 'file_version/',
+    );
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Parameters for test
     * 
     * @var Array
     */
     private $params = array();
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * File_Version test setup before class method
+    */
+    public static function setUpBeforeClass()
+    {
+        $path_to_testing_folder  = realpath(self::$locations['folder']);
+        $path_to_testing_folder .= DIRECTORY_SEPARATOR;
+        $path_to_testing_folder .= self::$locations['subfolder'];
+        
+        if ( ! file_exists($path_to_testing_folder))
+        {
+            mkdir($path_to_testing_folder);
+        }
+    }
     
     // -------------------------------------------------------------------------
     
@@ -80,7 +109,7 @@ class File_Version_Test extends Test_Case {
     /**
     * File_Version test setup method
     */
-    public function setUp()
+    protected function setUp()
     {
         $this->params['folders']['file_version']     = realpath('outsource/file_version/');
         $this->params['folders']['directory_lister'] = realpath('outsource/directory_lister/');
@@ -127,10 +156,23 @@ class File_Version_Test extends Test_Case {
     /**
     * File_Version test tear down method 
     */
-    public function tearDown()
+    protected function tearDown()
     {
         $this->create_file_version_files();
         $this->unlink_existent_files();
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * File_Version test tear down after class method
+    */
+    public static function tearDownAfterClass()
+    {
+        rmdir(
+            realpath(self::$locations['folder'] . self::$locations['subfolder']) .
+            DIRECTORY_SEPARATOR
+        );
     }
     
     // -------------------------------------------------------------------------

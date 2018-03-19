@@ -11,11 +11,43 @@
 */
 use PHPUnit\Framework\TestCase as Test_Case;
 use phplibrary\Sorter as sorter;
+use phplibrary\Directory_Lister as directory_lister;
 
 /**
 * Testing Sorter class
 */
 class Sorter_Test extends Test_Case {
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Locations for test setup
+    * 
+    * @var Array
+    */
+    protected static $locations = array(
+        'folder'      => 'outsource/',
+        'subfolder'   => 'sorter/',
+        'destination' => 'destination/',
+    );
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Sorter test setup before class method
+    */
+    public static function setUpBeforeClass()
+    {
+        $path_to_testing_folder  = realpath(self::$locations['folder']);
+        $path_to_testing_folder .= DIRECTORY_SEPARATOR;
+        $path_to_testing_folder .= self::$locations['subfolder'];
+        $path_to_testing_folder .= self::$locations['destination'];
+        
+        if ( ! file_exists($path_to_testing_folder))
+        {
+            mkdir($path_to_testing_folder);
+        }
+    }
     
     // -------------------------------------------------------------------------
     
@@ -79,6 +111,32 @@ class Sorter_Test extends Test_Case {
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
         $this->assertNotEmpty($report['array']['result']['errors']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Sorter test tear down after class method
+    */
+    public static function tearDownAfterClass()
+    {
+        $file_directory  = realpath(self::$locations['folder']);
+        $file_directory .= DIRECTORY_SEPARATOR;
+        $file_directory .= self::$locations['subfolder'];
+        $file_directory .= self::$locations['destination'];
+        
+        $listing = directory_lister::listing(array(
+            'directory'  => $file_directory,
+            'method'     => 'crawl',
+        ));
+        
+        foreach ($listing['listing'] as $item)
+        {
+            unlink($item['path']);
+            rmdir($item['directory']);
+        }
+        
+        rmdir($file_directory);
     }
     
     // -------------------------------------------------------------------------
