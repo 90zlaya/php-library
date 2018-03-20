@@ -213,6 +213,33 @@ class Sorter_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Test deploy method only without setting number_of_directories parameter
+    */
+    public function test_deploy_method_without_number_of_directories()
+    {
+        $sorter = new sorter();
+        $report = $sorter->deploy(array(
+            'where_to_read_files'         => $this->params['folders']['movable'],
+            'where_to_create_directories' => $this->params['folders']['destination'],
+            'folder_sufix'                => '000',
+            'operation'                   => 'c',
+            'types'                       => array('jpg'),
+        ));
+        
+        $this->assertNotEmpty($report);
+        $this->assertInternalType('array', $report);
+        $this->assertArrayHasKey('string', $report);
+        $this->assertArrayHasKey('array', $report);
+        $this->assertInternalType('string', $report['string']);
+        $this->assertNotEmpty($report['string']);
+        $this->assertArrayHasKey('usage', $report['array']);
+        $this->assertArrayHasKey('result', $report['array']);
+        $this->assertNotEmpty($report['array']['result']['errors']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Sorter test tear down after class method
     */
     public static function tearDownAfterClass()
