@@ -91,8 +91,13 @@ class File_Version_Test extends Test_Case {
     private function unlink_existent_files()
     {
         $locations = array(
-            $this->params['folders']['file_version'] . DIRECTORY_SEPARATOR . $this->params['files']['files'],
-            $this->params['folders']['file_version'] . DIRECTORY_SEPARATOR . $this->params['files']['versions'],
+            $this->params['folders']['file_version'] .
+            DIRECTORY_SEPARATOR .
+            $this->params['files']['files'],
+            
+            $this->params['folders']['file_version'] .
+            DIRECTORY_SEPARATOR .
+            $this->params['files']['versions'],
         );
         
         foreach ($locations as $location)

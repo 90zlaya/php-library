@@ -342,7 +342,9 @@ class Sorter {
             default: $folder_prefix = '';
         }
         
-        return $this->deploy['where_to_create_directories'] . $folder_prefix . $this->deploy['folder_sufix'];
+        return $this->deploy['where_to_create_directories'] .
+            $folder_prefix .
+            $this->deploy['folder_sufix'];
     }
     
     // -------------------------------------------------------------------------

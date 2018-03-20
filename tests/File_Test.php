@@ -91,16 +91,28 @@ class File_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Write to file method used in testing purposes
+    * 
+    * @return void
+    */
+    protected function write_to_file()
+    {
+        file::write_to_file(
+            $this->file['location'] . $this->file['name'],
+            $this->line
+        );
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Testing write_to_file method
     */
     public function test_write_to_file_method()
     {
-        $this->assertNull(file::write_to_file(
-            $this->file['location'] . $this->file['name'],
-            $this->line
-        ));
-        
-        $this->assertFalse(file::write_to_file('', ''));
+        $this->assertNull($this->write_to_file());
+        $this->assertFalse(file::write_to_file(NULL, NULL));
+        $this->assertNull($this->write_to_file());
     }
     
     // -------------------------------------------------------------------------
@@ -116,7 +128,7 @@ class File_Test extends Test_Case {
         
         $this->assertEquals($this->line, $result);
         
-        $result = file::read_from_file('');
+        $result = file::read_from_file(NULL);
         
         $this->assertFalse($result);
     }
@@ -173,7 +185,7 @@ class File_Test extends Test_Case {
             $this->line
         ));
         
-        $this->assertFalse(file::write_to_file('', ''));
+        $this->assertFalse(file::write_to_file(NULL, NULL));
     }
     
     // -------------------------------------------------------------------------

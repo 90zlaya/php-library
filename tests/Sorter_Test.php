@@ -21,6 +21,15 @@ class Sorter_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Parameters for test
+    * 
+    * @var Array
+    */
+    private $params = array();
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Locations for test setup
     * 
     * @var Array
@@ -29,6 +38,9 @@ class Sorter_Test extends Test_Case {
         'folder'      => 'outsource/',
         'subfolder'   => 'sorter/',
         'destination' => 'destination/',
+        'source'      => 'source/',
+        'movable'     => 'movable/',
+        'paths'       => array(),
     );
     
     // -------------------------------------------------------------------------
@@ -38,46 +50,131 @@ class Sorter_Test extends Test_Case {
     */
     public static function setUpBeforeClass()
     {
-        $path_to_testing_folder  = realpath(self::$locations['folder']);
-        $path_to_testing_folder .= DIRECTORY_SEPARATOR;
-        $path_to_testing_folder .= self::$locations['subfolder'];
-        $path_to_testing_folder .= self::$locations['destination'];
+        self::$locations['paths']['source'] =
+            realpath(self::$locations['folder']) .
+            DIRECTORY_SEPARATOR .
+            self::$locations['subfolder'] .
+            self::$locations['source'];
         
-        if ( ! file_exists($path_to_testing_folder))
+        self::$locations['paths']['destination'] =
+            realpath(self::$locations['folder']) .
+            DIRECTORY_SEPARATOR .
+            self::$locations['subfolder'] .
+            self::$locations['destination'];
+        
+        self::$locations['paths']['movable'] =
+            realpath(self::$locations['folder']) .
+            DIRECTORY_SEPARATOR .
+            self::$locations['subfolder'] .
+            self::$locations['movable'];
+        
+        $paths = array(
+            self::$locations['paths']['destination'],
+            self::$locations['paths']['movable'],
+        );
+        
+        foreach ($paths as $path)
         {
-            mkdir($path_to_testing_folder);
+            if ( ! file_exists($path))
+            {
+                mkdir($path);
+            }
+        }
+        
+        $listing = directory_lister::listing(array(
+            'directory'  => self::$locations['paths']['source'],
+            'method'     => 'files',
+        ));
+        
+        foreach ($listing['listing'] as $source)
+        {
+            copy($source['path'], self::$locations['paths']['movable'] . $source['file']);
         }
     }
     
     // -------------------------------------------------------------------------
     
     /**
+    * Sorter test setup method
+    */
+    protected function setUp()
+    {
+        $this->params['folders']['source'] = 
+            realpath('outsource/sorter/source/') . DIRECTORY_SEPARATOR;
+        
+        $this->params['folders']['destination'] = 
+            realpath('outsource/sorter/destination/') . DIRECTORY_SEPARATOR;
+        
+        $this->params['folders']['movable'] = 
+            realpath('outsource/sorter/movable/') . DIRECTORY_SEPARATOR;
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Sorter precondition method
+    */
+    protected function assertPreConditions()
+    {
+        $this->assertDirectoryExists($this->params['folders']['source']);
+        $this->assertDirectoryExists($this->params['folders']['destination']);
+        $this->assertDirectoryIsReadable($this->params['folders']['source']);
+        $this->assertDirectoryIsWritable($this->params['folders']['destination']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Test deploy method for existent parameters
-    * 
-    * Check paths to folders because they might not 
-    * exist on your development environment,
-    * thus not working as expected.
     */
     public function test_deploy_method_for_existent_parameters()
+    {        
+        $sorter = new sorter();
+        
+        $numbers = array(
+            10,
+            100,
+            1000,
+            10000,
+        );
+        
+        foreach ($numbers as $number)
+        {
+            $report = $sorter->deploy(array(
+                'where_to_read_files'         => $this->params['folders']['source'],
+                'where_to_create_directories' => $this->params['folders']['destination'],
+                'number_of_directories'       => $number,
+                'folder_sufix'                => '000',
+                'operation'                   => 'c',
+                'types'                       => array('jpg'),
+            ));
+        }
+        
+        $this->assertNotEmpty($report);
+        $this->assertInternalType('array', $report);
+        $this->assertArrayHasKey('string', $report);
+        $this->assertArrayHasKey('array', $report);
+        $this->assertInternalType('string', $report['string']);
+        $this->assertNotEmpty($report['string']);
+        $this->assertArrayHasKey('usage', $report['array']);
+        $this->assertArrayHasKey('result', $report['array']);
+        $this->assertEmpty($report['array']['result']['errors']);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Testing deploy method for movable option
+    */
+    public function test_deploy_method_for_movable_option()
     {
-        $where_to_read_files  = realpath('outsource/sorter/source/');
-        $where_to_read_files .= DIRECTORY_SEPARATOR;
-        
-        $where_to_create_directories  = realpath('outsource/sorter/destination/');
-        $where_to_create_directories .= DIRECTORY_SEPARATOR;
-        
-        $this->assertDirectoryExists($where_to_read_files);
-        $this->assertDirectoryExists($where_to_create_directories);
-        $this->assertDirectoryIsReadable($where_to_read_files);
-        $this->assertDirectoryIsWritable($where_to_create_directories);
-        
         $sorter = new sorter();
         $report = $sorter->deploy(array(
-            'where_to_read_files'         => $where_to_read_files,
-            'where_to_create_directories' => $where_to_create_directories,
+            'where_to_read_files'         => $this->params['folders']['movable'],
+            'where_to_create_directories' => $this->params['folders']['destination'],
             'number_of_directories'       => 10,
-            'folder_sufix'                => '000',
-            'operation'                   => 'c',
+            'folder_sufix'                => '999',
+            'operation'                   => 'm',
             'types'                       => array('jpg'),
         ));
         
@@ -120,23 +217,42 @@ class Sorter_Test extends Test_Case {
     */
     public static function tearDownAfterClass()
     {
-        $file_directory  = realpath(self::$locations['folder']);
-        $file_directory .= DIRECTORY_SEPARATOR;
-        $file_directory .= self::$locations['subfolder'];
-        $file_directory .= self::$locations['destination'];
-        
         $listing = directory_lister::listing(array(
-            'directory'  => $file_directory,
+            'directory'  => self::$locations['paths']['destination'],
             'method'     => 'crawl',
         ));
         
         foreach ($listing['listing'] as $item)
         {
             unlink($item['path']);
-            rmdir($item['directory']);
         }
         
-        rmdir($file_directory);
+        $listing = directory_lister::listing(array(
+            'directory'  => self::$locations['paths']['destination'],
+            'method'     => 'folders',
+        ));
+        
+        foreach ($listing['listing']['path'] as $path)
+        {
+            rmdir($path);
+        }
+        
+        rmdir(self::$locations['paths']['destination']);
+        
+        $listing = directory_lister::listing(array(
+            'directory'  => self::$locations['paths']['movable'],
+            'method'     => 'files',
+        ));
+        
+        if ($listing['count'] > 0)
+        {
+            foreach ($listing['listing'] as $item)
+            {
+                unlink($item['path']);
+            }
+        }
+        
+        rmdir(self::$locations['paths']['movable']);
     }
     
     // -------------------------------------------------------------------------
