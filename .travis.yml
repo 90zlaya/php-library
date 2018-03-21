@@ -7,4 +7,9 @@ before_script:
 script:
     - wget https://link.zlatanstajic.com/software/php-library/outsource.zip
     - unzip outsource.zip
-    - bash autotest
+    - composer update
+    - vendor/bin/phpcs index.php --standard='ruleset.xml' --colors
+    - vendor/bin/phpcs src --standard='ruleset.xml' --colors
+    - vendor/bin/phpcs tests --standard='ruleset.xml' --colors
+    - vendor/bin/phpstan analyse src --level max
+    - vendor/bin/phpunit

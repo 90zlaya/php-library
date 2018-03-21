@@ -85,7 +85,7 @@ All tests are covered with PHPUnit framework and stored inside tests folder. The
 ```
 $ wget https://link.zlatanstajic.com/software/php-library/outsource.zip
 $ unzip outsource.zip
-$ sudo rm -rf outsource.zip
+$ rm outsource.zip
 ```
 
 Command for running unit tests will target phpunit.xml file which is located inside root directory.
