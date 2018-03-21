@@ -145,7 +145,7 @@ class File {
     * 
     * @return void
     */
-    public function force_download($file_name, $full_url)
+    public static function force_download($file_name, $full_url)
     {
         if ( ! headers_sent())
         {

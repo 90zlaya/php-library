@@ -5,6 +5,7 @@ Modified
 ----------------
 
 * Date_Time_Format: protected validate method removed
+* Format: static keyword added for force_download method
 * User: attributes $image_location and $image_default set as public
 
 Since php-library v1.3.0 (06-Feb-2018)
