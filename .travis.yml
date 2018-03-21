@@ -4,12 +4,7 @@ php:
     - 7.2
 before_script:
     - composer install --no-interaction
-install:
-  - composer require satooshi/php-coveralls:~0.6@stable
-before_script:
-  - mkdir -p build/logs
 script:
     - wget https://link.zlatanstajic.com/software/php-library/outsource.zip
     - unzip outsource.zip
     - bash autotest
-    - phpunit --coverage-clover build/logs/clover.xml
