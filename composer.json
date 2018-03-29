@@ -30,5 +30,10 @@
         "phpunit/phpunit": "^7",
         "phpstan/phpstan": "^0.9.1",
         "squizlabs/php_codesniffer": "^3.2"
-    }
+    },
+	"scripts": {
+		"phpunit": "bash vendor/bin/phpunit",
+		"phpstan": "bash vendor/bin/phpstan analyse src --level max",
+		"codesniffer": "bash vendor/bin/phpcs index.php src tests --standard='ruleset.xml'"
+	}
 }

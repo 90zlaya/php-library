@@ -63,10 +63,10 @@ Coding standard
 PHP Library has it's own coding standard which deviates from PSR-2 standard with no much exceptions. To contribute to development of this project, you must follow this standard. [PHP_CodeSniffer] does this job for you in development versions of PHP Library.
 
 ```
-$ vendor/bin/phpcs index.php --standard='ruleset.xml'
+$ composer codesniffer
 ```
 
-If you want to find out more about specific rules, open ruleset.xml file which is located in root directory.
+If you want to find out more about specific rules, open [ruleset.xml] file which is located in root directory.
 
 Bug analysis
 ----------------
@@ -74,7 +74,7 @@ Bug analysis
 This library has been tested with [PHP Stan] and approved as bug-free for all classes. It's recommended to run following command to check for buggs in project.
 
 ```
-$ vendor/bin/phpstan analyse src --level max
+$ composer phpstan
 ```
 
 Unit testing
@@ -85,13 +85,12 @@ All tests are covered with PHPUnit framework and stored inside tests folder. The
 ```
 $ wget https://link.zlatanstajic.com/software/php-library/outsource.zip
 $ unzip outsource.zip
-$ rm outsource.zip
 ```
 
-Command for running unit tests will target phpunit.xml file which is located inside root directory.
+Command for running unit tests will target [phpunit.xml] file which is located inside root directory.
 
 ```
-$ vendor/bin/phpunit
+$ composer phpunit
 ```
 
 Automatic tests
@@ -162,3 +161,6 @@ Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 [phpDocumentor]: https://www.phpdoc.org/
 [PHP_CodeSniffer]: https://github.com/squizlabs/PHP_CodeSniffer
 [designseed.co]: https://designseedco.com/en/
+
+[ruleset.xml]: https://github.com/90zlaya/php-library/blob/master/ruleset.xml
+[phpunit.xml]: https://github.com/90zlaya/php-library/blob/master/phpunit.xml
