@@ -13,3 +13,6 @@ script:
     - vendor/bin/phpcs tests --standard='ruleset.xml' --colors
     - vendor/bin/phpstan analyse src --level max
     - vendor/bin/phpunit
+    - vendor/bin/phpunit --coverage-clover tests/logs/clover.xml
+after_script:
+    - php vendor/bin/coveralls -v

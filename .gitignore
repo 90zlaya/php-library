@@ -13,6 +13,7 @@ phpDocumentor.phar
 /coverage
 /demo
 /deploy
+/tests/logs
 /vendor
 /outsource
 
