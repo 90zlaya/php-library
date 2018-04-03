@@ -2,8 +2,14 @@ language: php
 php:
     - 7.1
     - 7.2
+install:
+  - travis_retry composer install --no-interaction --no-suggest
+  - wget -c -nc --retry-connrefused --tries=0 https://github.com/php-coveralls/php-coveralls/releases/download/v2.0.0/php-coveralls.phar -O coveralls.phar
+  - chmod +x coveralls.phar
+  - php coveralls.phar --version    
 before_script:
-    - composer install --no-interaction
+    - mkdir -p build/logs
+    - ls -al
 script:
     - wget https://link.zlatanstajic.com/software/php-library/outsource.zip
     - unzip outsource.zip
@@ -12,4 +18,13 @@ script:
     - vendor/bin/phpcs src --standard='ruleset.xml' --colors
     - vendor/bin/phpcs tests --standard='ruleset.xml' --colors
     - vendor/bin/phpstan analyse src --level max
-    - vendor/bin/phpunit
+    - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+after_success:
+    - travis_retry php coveralls.phar -v
+    - bash <(curl -s https://codecov.io/bash)
+branches:
+  only: master
+cache:
+  directories:
+  - vendor
+  - $HOME/.cache/composer
