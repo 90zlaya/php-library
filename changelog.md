@@ -1,6 +1,11 @@
 Since php-library v1.4.0 (10-Mar-2018)
 =======
 
+New
+----------------
+
+* Import: new class Import created
+
 Modified
 ----------------
 

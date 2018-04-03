@@ -8,7 +8,7 @@
 * @package      PHP Library
 * @subpackage   phplibrary
 * @category     Files
-* @author       Zlatan Stajić <contact@zlatanstajic.com>
+* @author       Ivan Skokić <iskokic@gmail.com>
 */
 use PHPUnit\Framework\TestCase as Test_Case;
 use phplibrary\Import as import;
@@ -31,7 +31,7 @@ class Import_Test extends Test_Case {
         $this->assertInternalType('array', $types);
         $this->assertCount(3, $types);
         
-        foreach($types as $type)
+        foreach ($types as $type)
         {
             $this->assertInternalType('string', $type);    
         }
