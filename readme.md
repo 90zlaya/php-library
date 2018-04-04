@@ -64,7 +64,7 @@ Coding standard
 PHP Library has it's own coding standard which deviates from PSR-2 standard with no much exceptions. To contribute to development of this project, you must follow this standard. [PHP_CodeSniffer] does this job for you in development versions of PHP Library.
 
 ```
-$ composer codesniffer
+$ vendor/bin/phpcs index.php src tests --standard='ruleset.xml'
 ```
 
 If you want to find out more about specific rules, open [ruleset.xml] file which is located in root directory.
@@ -75,7 +75,7 @@ Bug analysis
 This library has been tested with [PHP Stan] and approved as bug-free for all classes. It's recommended to run following command to check for buggs in project.
 
 ```
-$ composer phpstan
+$ vendor/bin/phpstan analyse src --level max
 ```
 
 Unit testing
@@ -91,7 +91,7 @@ $ unzip outsource.zip
 Command for running unit tests will target [phpunit.xml] file which is located inside root directory.
 
 ```
-$ composer phpunit
+$ vendor/bin/phpunit
 ```
 
 Automatic tests
@@ -143,7 +143,7 @@ Official PHP Library API documentation has been documented by [phpDocumentor] an
 Migration
 ----------------
 
-When you update library version from older to newer, it's recommended to consult changelog file, which is located under the name changelog.md in root directory.
+When you update library version from older to newer, it's recommended to consult changelog file, which is located under the name [changelog.md] in root directory.
 
 Acknowledgements
 ----------------
@@ -165,3 +165,4 @@ Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 
 [ruleset.xml]: https://github.com/90zlaya/php-library/blob/master/ruleset.xml
 [phpunit.xml]: https://github.com/90zlaya/php-library/blob/master/phpunit.xml
+[changelog.md]: https://github.com/90zlaya/php-library/blob/master/changelog.md
