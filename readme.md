@@ -1,6 +1,6 @@
-![PHP Version](https://img.shields.io/badge/php-%3E%3D7.1-blue.svg)
-![Composer](https://img.shields.io/badge/composer-required-yellow.svg)
-![Travis](https://img.shields.io/travis/90zlaya/php-library.svg)
+[![Latest Stable Version](https://poser.pugx.org/90zlaya/php-library/v/stable)](https://packagist.org/packages/90zlaya/php-library)
+[![Total Downloads](https://poser.pugx.org/90zlaya/php-library/downloads)](https://packagist.org/packages/90zlaya/php-library)
+[![Travis](https://img.shields.io/travis/90zlaya/php-library.svg)](https://travis-ci.org/90zlaya/php-library)
 [![Coverage Status](https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master)](https://coveralls.io/github/90zlaya/php-library?branch=master)
 
 ![Official logo of php-library](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1)
