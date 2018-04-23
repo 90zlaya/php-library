@@ -82,7 +82,7 @@ class Directory_Lister {
     // -------------------------------------------------------------------------
     
     /**
-    * Method calss
+    * Method calls
     * 
     * @var Array
     */

@@ -53,32 +53,32 @@ class Export {
     * @var Array
     */
     protected static $cells = array(
-        '', 
-        'A', 
-        'B', 
-        'C', 
-        'D', 
-        'E', 
-        'F', 
-        'G', 
-        'H', 
-        'I', 
-        'J', 
-        'K', 
-        'L', 
-        'M', 
-        'N', 
-        'O', 
-        'P', 
-        'Q', 
-        'R', 
-        'S', 
-        'T', 
-        'U', 
-        'V', 
-        'W', 
-        'X', 
-        'Y', 
+        '',
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
         'Z',
     );
     
@@ -300,22 +300,18 @@ class Export {
         {
             ob_start();
             
-            $iteration = 1;
-            
             foreach ($data as $item)
             {
                 $item_indexed      = array_values($item);
                 $item_indexed_size = count($item_indexed);
+                $value             = '';
                 
-                $value = '';
                 for ($i=0; $i<$item_indexed_size; $i++)
                 {
                     $value .= $item_indexed[$i] . ';';
                 }
                 
                 echo $value . "\r\n";
-                
-                $iteration++;
             }
         }
         
@@ -339,6 +335,7 @@ class Export {
         {
             // Print head
             $iteration = 1;
+            
             foreach ($head as $item)
             {
                 $spreadsheet->getActiveSheet()->getColumnDimension(self::$cells[$iteration])->setAutoSize(TRUE);
@@ -352,6 +349,7 @@ class Export {
             
             // Print data
             $iteration = 2;
+            
             foreach ($data as $item)
             {
                 $item_indexed = array_values($item);

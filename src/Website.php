@@ -166,6 +166,8 @@ class Website {
     * Class constructor method
     *
     * @param Array $params
+    * 
+    * @return void
     */
     public function __construct($params)
     {
