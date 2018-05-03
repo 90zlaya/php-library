@@ -1,3 +1,11 @@
+Since php-library v1.5.0 (6-Apr-2018)
+=======
+
+Modified
+----------------
+
+* Sorter: multidimensional_array method added
+
 Since php-library v1.4.0 (10-Mar-2018)
 =======
 

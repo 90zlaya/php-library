@@ -398,4 +398,32 @@ class Sorter {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Sort multidimensional array by given item
+    * 
+    * @param Array $array
+    * @param int $sort_by_item
+    * @param int $order
+    * 
+    * @return Array $array
+    */
+    public static function multidimensional_array($array, $sort_by_item=0, $order=SORT_ASC)
+    {
+        foreach ($array as $key => $row)
+        {
+            $size = count($row);
+            
+            for ($i=0; $i<$size; $i++)
+            {
+                ${'column_' . $i}[$key] = $row[$i];
+            }
+        }
+        
+        array_multisort(${'column_' . $sort_by_item}, $order, $array);
+        
+        return $array;
+    }
+    
+    // -------------------------------------------------------------------------
 }

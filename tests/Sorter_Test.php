@@ -240,6 +240,53 @@ class Sorter_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Test multidimensional_array method
+    */
+    public function test_multidimensional_array_method()
+    {
+        $result = sorter::multidimensional_array(array(
+            array(
+                99,
+                58,
+                12,
+            ),
+            array(
+                25,
+                10,
+                11,
+            ),
+            array(
+                11,
+                25,
+                70,
+            ),
+        ), 2, SORT_DESC);
+        
+        $expected = array(
+            array(
+                11,
+                25,
+                70,
+            ),
+            array(
+                99,
+                58,
+                12,
+            ),
+            array(
+                25,
+                10,
+                11,
+            ),
+        );
+        
+        $this->assertInternalType('array', $result);
+        $this->assertEquals($expected, $result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Sorter test tear down after class method
     */
     public static function tearDownAfterClass()
