@@ -5,6 +5,7 @@ Modified
 ----------------
 
 * Sorter: multidimensional_array method added
+* Sorter: overwrite option added to deploy method
 
 Since php-library v1.4.0 (10-Mar-2018)
 =======

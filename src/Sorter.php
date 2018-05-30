@@ -116,8 +116,16 @@ class Sorter {
             ? NULL
             : $this->deploy['operation'] = '';
         
+        isset($this->deploy['overwrite'])
+            ? NULL
+            : $this->deploy['overwrite'] = FALSE;
+        
         $this->create_directories();
-        $this->transport_files($this->get_files(), $this->deploy['operation']);
+        $this->transport_files(
+            $this->get_files(),
+            $this->deploy['operation'],
+            $this->deploy['overwrite']
+        );
         
         return $this->report();
     }
@@ -243,10 +251,11 @@ class Sorter {
     * 
     * @param Array $files
     * @param String $operation
+    * @param Bool $overwrite
     * 
     * @return void
     */
-    protected function transport_files($files, $operation)
+    protected function transport_files($files, $operation, $overwrite)
     {
         if ( ! empty($files))
         {
@@ -261,22 +270,56 @@ class Sorter {
                 $location_to .= '/';
                 $location_to .= $item['file'];
                 
-                if ( ! file_exists($location_to))
+                if ($overwrite)
                 {
-                    switch ($operation)
+                    $this->execute_operation(
+                        $operation,
+                        $location_from,
+                        $location_to,
+                        $item['file']
+                    );
+                }
+                else
+                {
+                    if ( ! file_exists($location_to))
                     {
-                        case 'm':
-                        {
-                            $this->move_files($location_from, $location_to, $item['file']); 
-                            break;
-                        }
-                        default: $this->copy_files($location_from, $location_to, $item['file']);
+                        $this->execute_operation(
+                            $operation,
+                            $location_from,
+                            $location_to,
+                            $item['file']
+                        );
                     }
                 }
             }
         }
     }
 
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Execute operation
+    * 
+    * @param String $operation
+    * @param String $location_from
+    * @param String $location_to
+    * @param String $item
+    * 
+    * @return void
+    */
+    private function execute_operation($operation, $location_from, $location_to, $item)
+    {
+        switch ($operation)
+        {
+            case 'm':
+            {
+                $this->move_files($location_from, $location_to, $item); 
+                break;
+            }
+            default: $this->copy_files($location_from, $location_to, $item);
+        }
+    }
+    
     // -------------------------------------------------------------------------
     
     /**

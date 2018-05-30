@@ -146,6 +146,7 @@ class Sorter_Test extends Test_Case {
                 'number_of_directories'       => $number,
                 'folder_sufix'                => '000',
                 'operation'                   => 'c',
+                'overwrite'                   => TRUE,
                 'types'                       => array('jpg'),
             ));
         }
