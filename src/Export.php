@@ -38,11 +38,11 @@ class Export {
     * @var Array
     */
     protected static $document_properties = array(
-        'creator'       => 'Maarten Balliauw',
-        'title'         => 'Office 2007 XLSX Test Document',
-        'description'   => 'Test document for Office 2007 XLSX, generated using PHP classes.',
-        'keywords'      => 'office 2007 openxml php',
-        'category'      => 'Test result file',
+        'creator'     => 'Maarten Balliauw',
+        'title'       => 'Office 2007 XLSX Test Document',
+        'description' => 'Test document for Office 2007 XLSX, generated using PHP classes.',
+        'keywords'    => 'office 2007 openxml php',
+        'category'    => 'Test result file',
     );
     
     // -------------------------------------------------------------------------

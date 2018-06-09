@@ -150,7 +150,7 @@ class Website {
     * @var Array
     */
     private $calls = array(
-        'css' => array(
+        'css'        => array(
             'ordinary' => 'link',
             'custom'   => 'link-custom',
         ),
@@ -560,13 +560,13 @@ class Website {
         if ( ! empty($image_size))
         {
             return array(
-                'width'         => $image_size[0],
-                'height'        => $image_size[1],
-                'width_height'  => $image_size[0] . 'x' . $image_size[1],
-                'type'          => $image_size[2],
-                'size'          => $image_size[3],
-                'bits'          => $image_size['bits'],
-                'mime'          => $image_size['mime'],
+                'width'        => $image_size[0],
+                'height'       => $image_size[1],
+                'width_height' => $image_size[0] . 'x' . $image_size[1],
+                'type'         => $image_size[2],
+                'size'         => $image_size[3],
+                'bits'         => $image_size['bits'],
+                'mime'         => $image_size['mime'],
             );
         }
         

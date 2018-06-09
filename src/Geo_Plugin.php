@@ -158,16 +158,16 @@ class Geo_Plugin {
         $this->visitor_ip = $remote_addr;
         
         return array(
-            'location'  => $prefix . $http_host . $php_self,
-            'referer'   => $http_referer,
-            'prefix'    => $prefix,
-            'host'      => $http_host,
-            'path'      => dirname($php_self),
-            'page'      => basename($php_self),
-            'date'      => date('Y-m-d'),
-            'time'      => date('H:i:s'),
-            'agent'     => $http_user_agent,
-            'address'   => $remote_addr,
+            'location' => $prefix . $http_host . $php_self,
+            'referer'  => $http_referer,
+            'prefix'   => $prefix,
+            'host'     => $http_host,
+            'path'     => dirname($php_self),
+            'page'     => basename($php_self),
+            'date'     => date('Y-m-d'),
+            'time'     => date('H:i:s'),
+            'agent'    => $http_user_agent,
+            'address'  => $remote_addr,
         );
     }
     

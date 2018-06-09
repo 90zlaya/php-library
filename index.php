@@ -7,16 +7,16 @@
         'hyperlinks' => array(
             'php_library' => array(
                 'on_github'    => array(
-                    'name'  => 'View on GitHub',
-                    'url'   => 'https://github.com/90zlaya/php-library',
+                    'name' => 'View on GitHub',
+                    'url'  => 'https://github.com/90zlaya/php-library',
                 ),
                 'on_packagist' => array(
-                    'name'  => 'View on Packagist',
-                    'url'   => 'https://packagist.org/packages/90zlaya/php-library',
+                    'name' => 'View on Packagist',
+                    'url'  => 'https://packagist.org/packages/90zlaya/php-library',
                 ),
                 'issues'       => array(
-                    'name'  => 'Issues',
-                    'url'   => 'https://github.com/90zlaya/php-library/issues',
+                    'name' => 'Issues',
+                    'url'  => 'https://github.com/90zlaya/php-library/issues',
                 ),
             ),
         ),

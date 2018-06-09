@@ -87,9 +87,9 @@ class Directory_Lister {
     * @var Array
     */
     protected static $method_calls = array(
-        'files'    => 'files',
-        'folders'  => 'folders',
-        'crawl'    => 'crawl',
+        'files'   => 'files',
+        'folders' => 'folders',
+        'crawl'   => 'crawl',
     );
     
     // -------------------------------------------------------------------------

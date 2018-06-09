@@ -82,8 +82,8 @@ class Sorter_Test extends Test_Case {
         }
         
         $listing = directory_lister::listing(array(
-            'directory'  => self::$locations['paths']['source'],
-            'method'     => 'files',
+            'directory' => self::$locations['paths']['source'],
+            'method'    => 'files',
         ));
         
         foreach ($listing['listing'] as $source)
@@ -293,8 +293,8 @@ class Sorter_Test extends Test_Case {
     public static function tearDownAfterClass()
     {
         $listing = directory_lister::listing(array(
-            'directory'  => self::$locations['paths']['destination'],
-            'method'     => 'crawl',
+            'directory' => self::$locations['paths']['destination'],
+            'method'    => 'crawl',
         ));
         
         foreach ($listing['listing'] as $item)
@@ -303,8 +303,8 @@ class Sorter_Test extends Test_Case {
         }
         
         $listing = directory_lister::listing(array(
-            'directory'  => self::$locations['paths']['destination'],
-            'method'     => 'folders',
+            'directory' => self::$locations['paths']['destination'],
+            'method'    => 'folders',
         ));
         
         foreach ($listing['listing']['path'] as $path)
@@ -315,8 +315,8 @@ class Sorter_Test extends Test_Case {
         rmdir(self::$locations['paths']['destination']);
         
         $listing = directory_lister::listing(array(
-            'directory'  => self::$locations['paths']['movable'],
-            'method'     => 'files',
+            'directory' => self::$locations['paths']['movable'],
+            'method'    => 'files',
         ));
         
         if ($listing['count'] > 0)

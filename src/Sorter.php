@@ -34,7 +34,7 @@ class Sorter {
                 'not_created' => array(),
             ),
         ),
-        'files' => array(
+        'files'   => array(
             'number' => array(
                 'copied'     => 0,
                 'not_copied' => 0,
@@ -48,7 +48,7 @@ class Sorter {
                 'not_moved'  => array(),
             ),
         ),
-        'errors' => array(),
+        'errors'  => array(),
     );
     
     // -------------------------------------------------------------------------
@@ -350,7 +350,7 @@ class Sorter {
             'array'  => array(
                 'usage'  => getrusage(),
                 'result' => $this->report,
-            )
+            ),
         );
     }
     

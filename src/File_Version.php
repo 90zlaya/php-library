@@ -34,8 +34,8 @@ class File_Version {
     * @var Array
     */
     protected static $file_names = array(
-        'log_files'     => 'files',
-        'log_versions'  => 'versions',
+        'log_files'    => 'files',
+        'log_versions' => 'versions',
     );
     
     // -------------------------------------------------------------------------

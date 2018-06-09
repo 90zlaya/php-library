@@ -24,17 +24,17 @@ class Date_Time_Format {
     * @var Array
     */
     public static $types = array(
-        'user'     => array(
+        'user'       => array(
             'format'      => 'd.m.Y',
             'placeholder' => 'DD.MM.YYYY',
             'regex'       => '^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$^',
         ),
-        'database' => array(
+        'database'   => array(
             'format'      => 'Y-m-d',
             'placeholder' => 'YYYY-MM-DD',
             'regex'       => '^([0-9]{4})-([0-9]{2})-([0-9]{2})$^',
         ),
-        'friendly' => array(
+        'friendly'   => array(
             'date'     => 'd-M-Y',
             'datetime' => 'd-M-Y H:i:s',
         ),

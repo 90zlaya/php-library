@@ -74,9 +74,8 @@ class File_Version_Test extends Test_Case {
                     $this->params['files']['versions'],
             ),
             'listing'    => array(
-                'directory'  => $this->params['folders']['directory_lister'] . 
-                    DIRECTORY_SEPARATOR,
-                'method'     => 'crawl',
+                'directory' => $this->params['folders']['directory_lister'] . DIRECTORY_SEPARATOR,
+                'method'    => 'crawl',
             ),
         ));
     }
@@ -148,9 +147,8 @@ class File_Version_Test extends Test_Case {
             file_version::dump(array(
                 'file_names' => array(),
                 'listing'    => array(
-                    'directory'  => $this->params['folders']['directory_lister'] . 
-                        DIRECTORY_SEPARATOR,
-                    'method'     => 'crawl',
+                    'directory' => $this->params['folders']['directory_lister'] . DIRECTORY_SEPARATOR,
+                    'method'    => 'crawl',
                 ),
             ))
         );

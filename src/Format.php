@@ -60,9 +60,9 @@ class Format {
     * @var Array
     */
     protected static $website = array(
-        'regex'     => '/^(http(s?):\/\/)?[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/',
-        'web'       => 'www',
-        'protocol'  => array(
+        'regex'    => '/^(http(s?):\/\/)?[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/',
+        'web'      => 'www',
+        'protocol' => array(
             'unsafe' => 'http://',
             'safe'   => 'https://',
         ),
@@ -206,8 +206,8 @@ class Format {
             }
                          
             return array(
-                'name'      => $location_final,
-                'anchor'    => '<a href="' . $location_final . '" target="_blank">' . $location . '</a>',
+                'name'   => $location_final,
+                'anchor' => '<a href="' . $location_final . '" target="_blank">' . $location . '</a>',
             );
         }
         

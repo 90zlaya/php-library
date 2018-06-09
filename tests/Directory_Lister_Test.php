@@ -34,8 +34,8 @@ class Directory_Lister_Test extends Test_Case {
     public function test_lister_on_minimalistic_input()
     {
         $listing = directory_lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
-            'method'     => 'crawl',
+            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'    => 'crawl',
         ));
         
         $this->assertDirectoryExists($this->directory);
@@ -55,9 +55,9 @@ class Directory_Lister_Test extends Test_Case {
     public function test_lister_on_years_input()
     {
         $listing = directory_lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
-            'method'     => 'crawl',
-            'years'      => array(
+            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'    => 'crawl',
+            'years'     => array(
                 2013,
                 2016,
                 2017,
@@ -76,14 +76,14 @@ class Directory_Lister_Test extends Test_Case {
     public function test_lister_on_types_input()
     {
         $listing = directory_lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
-            'method'     => 'crawl',
-            'years'      => array(
+            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'    => 'crawl',
+            'years'     => array(
                 2013,
                 2016,
                 2017,
             ),
-            'types'      => array(
+            'types'     => array(
                 'png',
             ),
         ));
@@ -273,8 +273,8 @@ class Directory_Lister_Test extends Test_Case {
     public function test_lister_on_files_call()
     {
         $listing = directory_lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
-            'method'     => 'files',
+            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'    => 'files',
         ));
         
         $this->assertEquals(1, $listing['count']);
@@ -289,8 +289,8 @@ class Directory_Lister_Test extends Test_Case {
     public function test_lister_on_folders_call()
     {
         $listing = directory_lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
-            'method'     => 'folders',
+            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'    => 'folders',
         ));
         
         $this->assertEquals(3, $listing['count']);
@@ -305,8 +305,8 @@ class Directory_Lister_Test extends Test_Case {
     public function test_lister_when_nonexistent_method_parameter_passed()
     {
         $listing = directory_lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
-            'method'     => 'php-library',
+            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'    => 'php-library',
         ));
         
         $this->assertEquals(0, $listing['count']);
@@ -321,9 +321,9 @@ class Directory_Lister_Test extends Test_Case {
     public function test_lister_to_nonexistent_files_inside_folder()
     {
         $listing = directory_lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
-            'method'     => 'crawl',
-            'types'      => array(
+            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'method'    => 'crawl',
+            'types'     => array(
                 'php',
             ),
         ));
@@ -339,8 +339,8 @@ class Directory_Lister_Test extends Test_Case {
     public function test_lister_for_folder_without_depth()
     {
         $listing = directory_lister::listing(array(
-            'directory'  => realpath($this->directory. 'SQL/') . DIRECTORY_SEPARATOR,
-            'method'     => 'crawl',
+            'directory' => realpath($this->directory. 'SQL/') . DIRECTORY_SEPARATOR,
+            'method'    => 'crawl',
         ));
         
         $this->assertFalse($listing);
