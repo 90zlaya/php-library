@@ -7,6 +7,11 @@ Modified
 * Sorter: multidimensional_array method added
 * Sorter: overwrite option added to deploy method
 
+* Cosmetical edits to code
+* phpunit.xml 7.2 validation fix
+* Array arrow indentation fix for CodeSniffer v3.3
+* composer.json vendor versions update
+
 Since php-library v1.4.0 (10-Mar-2018)
 =======
 
