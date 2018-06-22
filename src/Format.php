@@ -326,7 +326,7 @@ class Format {
     */
     public static function windows1250_to_utf8($string)
     {
-        return iconv(self::$windows_1250, self::$utf_8, $string);
+        return iconv(self::$windows_1250, self::$utf_8, trim($string));
     }
     
     // -------------------------------------------------------------------------
@@ -340,7 +340,7 @@ class Format {
     */
     public static function utf8_to_windows1250($string)
     {
-        return iconv(self::$utf_8, self::$windows_1250, $string);
+        return iconv(self::$utf_8, self::$windows_1250, trim($string));
     }
     
     // -------------------------------------------------------------------------
