@@ -4,6 +4,7 @@ Since php-library v1.5.0 (6-Apr-2018)
 Modified
 ----------------
 
+* Export: setting cell data type
 * Sorter: multidimensional_array method added
 * Sorter: overwrite option added to deploy method
 

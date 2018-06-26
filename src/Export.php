@@ -15,6 +15,7 @@ namespace phplibrary;
 use PhpOffice\PhpSpreadsheet\Helper\Sample as Sample;
 use PhpOffice\PhpSpreadsheet\IOFactory as IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet as Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Cell\DataType as DataType;
 
 /**
 * Export files using customisation class of PHPOffice/PhpSpreadsheet
@@ -110,6 +111,7 @@ class Export {
         $head        = isset($params['head']) ? $params['head'] : array();
         $data        = isset($params['data']) ? $params['data'] : array();
         $type        = isset($params['type']) ? $params['type'] : 'xlsx';
+        $data_types  = isset($params['data_types']) ? $params['data_types'] : array();
         $file_name   = isset($params['file_name']) ? $params['file_name'] : self::$file_name;
         $creator     = isset($params['document_properties']['creator']) ? $params['document_properties']['creator'] : self::$document_properties['creator'];
         $title       = isset($params['document_properties']['title']) ? $params['document_properties']['title'] : self::$document_properties['title'];
@@ -150,14 +152,14 @@ class Export {
                 }
                 case 'xls':
                 {
-                    self::cell_arrangement($spreadsheet, $head, $data);
+                    self::cell_arrangement($spreadsheet, $head, $data, $data_types);
                     self::for_ie_ssl();
                     self::to_xls($spreadsheet, $file_name);
                     break;
                 }
                 case 'xlsx':
                 {
-                    self::cell_arrangement($spreadsheet, $head, $data);
+                    self::cell_arrangement($spreadsheet, $head, $data, $data_types);
                     self::for_ie_ssl();
                     self::to_xlsx($spreadsheet, $file_name);
                     break;
@@ -326,10 +328,11 @@ class Export {
     * @param Spreadsheet $spreadsheet
     * @param Array $head
     * @param Array $data
+    * @param Array $data_types
     * 
     * @return mixed
     */
-    private static function cell_arrangement($spreadsheet, $head, $data)
+    private static function cell_arrangement($spreadsheet, $head, $data, $data_types=array())
     {
         if ( ! empty($data))
         {
@@ -339,7 +342,11 @@ class Export {
             foreach ($head as $item)
             {
                 $spreadsheet->getActiveSheet()->getColumnDimension(self::$cells[$iteration])->setAutoSize(TRUE);
-                $spreadsheet->setActiveSheetIndex(0)->setCellValue(self::$cells[$iteration] . '1', $item);
+                $spreadsheet->getActiveSheet()->setCellValueExplicit(
+                    self::$cells[$iteration] . '1',
+                    $item,
+                    DataType::TYPE_STRING
+                );
                 
                 $iteration++;
             }
@@ -356,7 +363,31 @@ class Export {
                 
                 for ($i=1; $i<=$number_of_cells; $i++)
                 {
-                    $spreadsheet->setActiveSheetIndex(0)->setCellValue(self::$cells[$i] . $iteration, $item_indexed[$i-1]);
+                    $data_type = isset($data_types[$i-1]['index'])
+                        ? $data_types[$i-1]['type']
+                        : '';
+                    
+                    switch ($data_type)
+                    {
+                        case 'TEXT':
+                        {
+                            $spreadsheet->getActiveSheet()->setCellValueExplicit(
+                                self::$cells[$i] . $iteration,
+                                $item_indexed[$i-1],
+                                DataType::TYPE_STRING
+                            );
+                            
+                            break;
+                        }
+                        default:
+                        {
+                            $spreadsheet->setActiveSheetIndex(0)->setCellValue(
+                                self::$cells[$i] . $iteration,
+                                $item_indexed[$i-1]
+                            );
+                        }
+                    }
+                    
                 }
                 
                 $iteration++;

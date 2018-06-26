@@ -47,25 +47,31 @@ class Export_Test extends Test_Case {
     {
         $this->assertNull(
             export::export_file(array(
-                'head' => array(
-                    'Title1',
-                    'Title2',
-                ),
-                'data' => array(
+                'data_types' => array(
                     array(
-                        'title1' => 'Value11',
-                        'title2' => 'Value12',
-                    ),
-                    array(
-                        'title1' => 'Value21',
-                        'title2' => 'Value22',
-                    ),
-                    array(
-                        'title1' => 'Value31',
-                        'title2' => 'Value32',
+                        'index' => 0,
+                        'type'  => 'TEXT',
                     ),
                 ),
-                'type' => 'xlsx',
+                'head'       => array(
+                    'Title',
+                    'Number',
+                ),
+                'data'       => array(
+                    array(
+                        'title'  => 'Value11',
+                        'number' => '301234',
+                    ),
+                    array(
+                        'title'  => 'Value21',
+                        'number' => '852741963001',
+                    ),
+                    array(
+                        'title'  => 'Value31',
+                        'number' => '22.56',
+                    ),
+                ),
+                'type'       => 'xls',
             ))
         );
     }
