@@ -312,7 +312,7 @@ class Date_Time_Format {
             $minutes += $hours * 60;
         }
         
-        return $minutes; 
+        return $minutes;
     } 
     
     // -------------------------------------------------------------------------

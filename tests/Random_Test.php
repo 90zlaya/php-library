@@ -170,4 +170,18 @@ class Random_Test extends Test_Case {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Testing break_caching method
+    */
+    public function test_break_caching_method()
+    {
+        $result = random::break_caching();
+        
+        $this->assertNotFalse($result);
+        $this->assertNotEmpty($result);
+        $this->assertInternalType('string', $result);
+    }
+    
+    // -------------------------------------------------------------------------
 }

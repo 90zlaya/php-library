@@ -5,6 +5,7 @@ Modified
 ----------------
 
 * Export: setting cell data type
+* Random: break_caching method added
 * Sorter: multidimensional_array method added
 * Sorter: overwrite option added to deploy method
 

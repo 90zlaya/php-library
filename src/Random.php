@@ -186,4 +186,16 @@ class Random {
     }
     
     // -------------------------------------------------------------------------
+    
+    /**
+    * Break caching for URLs
+    * 
+    * @return String
+    */
+    public static function break_caching()
+    {
+        return '?break_caching=' . rand();
+    }
+    
+    // -------------------------------------------------------------------------
 }
