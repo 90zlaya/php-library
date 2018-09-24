@@ -135,10 +135,10 @@ class Validation {
         if ( ! empty($string))
         {
             $special_characters = array(
-                'Ć'  => 'ć',
-                'Č'  => 'č',
-                'Ž'  => 'ž',
-                'Š'  => 'š',
+                'Ć' => 'ć',
+                'Č' => 'č',
+                'Ž' => 'ž',
+                'Š' => 'š',
             );
             
             $string_replaced = strtr($string, $special_characters);
