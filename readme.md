@@ -139,6 +139,10 @@ This library is powering following Websites/Web Applications:
 
 ![Login page of kupci.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/kupci.dis.jpg?clear_cache=1)
 
+* [services.dis.rs]
+
+![Login page of kupci.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/services.dis.jpg?clear_cache=1)
+
 API documentation
 ----------------
 
@@ -162,7 +166,8 @@ Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
 [online]: https://php-library.zlatanstajic.com/api/
 [zlatanstajic.com]: https://www.zlatanstajic.com/
 [cms.dis.rs]: https://cms.dis.rs/
-[kupci.dis.rs]: http://kupci.dis.rs/
+[kupci.dis.rs]: https://kupci.dis.rs/
+[services.dis.rs]: http://services.dis.rs/
 [PHP Stan]: https://github.com/phpstan/phpstan
 [phpDocumentor]: https://www.phpdoc.org/
 [PHP_CodeSniffer]: https://github.com/squizlabs/PHP_CodeSniffer
