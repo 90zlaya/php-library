@@ -156,6 +156,32 @@ class User_Agent_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Testing detect_operating_system method
+    * for valid and invalid input
+    */
+    public function test_detect_operating_system_method()
+    {
+        $result = user_agent::detect_operating_system(
+            $this->user_agents['mobile_non_crawler']
+        );
+        
+        $this->assertInternalType('string', $result);
+        $this->assertNotEquals('', $result);
+        $this->assertEquals('Mac OS X', $result);
+        
+        $name_when_no_match = 'Unknown';
+        $result             = user_agent::detect_operating_system(
+            $this->user_agents['non_mobile_crawler'],
+            $name_when_no_match
+        );
+        
+        $this->assertInternalType('string', $result);
+        $this->assertEquals($name_when_no_match, $result);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Testing detect_device method for valid and invalid input
     */
     public function test_detect_device_method()
