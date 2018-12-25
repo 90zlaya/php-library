@@ -20,6 +20,24 @@ class Dump_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Command for dump execution    
+    * 
+    * @var String
+    */
+    private static $command = 'mysqldump';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Destination folder for dumped files
+    * 
+    * @var String
+    */
+    private static $destination = '';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Dump object data
     *
     * @var Object
@@ -29,38 +47,44 @@ class Dump_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Dump test setup before class method
+    */
+    public static function setUpBeforeClass()
+    {
+        $command = 'C:/xampp/mysql/bin/mysqldump.exe';
+
+        if (file_exists($command))
+        {
+            self::$command = $command;
+        }
+        
+        $destination  = realpath('outsource/');
+        $destination .= DIRECTORY_SEPARATOR;
+        $destination .= 'dump/';
+
+        if (file_exists($destination))
+        {
+            self::$destination = $destination;
+        }
+        else
+        {
+            if (mkdir($destination))
+            {
+                self::$destination = $destination;
+            }
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Dump test setup method
     */
     public function setUp()
     {
-        $command  = 'mysqldump';
-        $location = 'C:/xampp/mysql/bin/mysqldump.exe';
-
-        if (file_exists($location))
-        {
-            $command = $location;
-        }
-
-        $destination = '';
-        $location    = realpath('../outsource/');
-        $location   .= DIRECTORY_SEPARATOR;
-        $location   .= 'dump/';
-
-        if (file_exists($location))
-        {
-            $destination = $location;
-        }
-        else
-        {
-            if (mkdir($location))
-            {
-                $destination = $location;
-            }
-        }
-        
         $this->dump_object = new dump(array(
-            'command'     => $command,
-            'destination' => $destination,
+            'command'     => self::$command,
+            'destination' => self::$destination,
             'databases'   => array(
                 'phpmyadmin',
             ),
@@ -110,6 +134,16 @@ class Dump_Test extends Test_Case {
             $this->assertInternalType('array', $result);
             $this->assertEmpty($result);
         }
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Dump test tear down after class method
+    */
+    public static function tearDownAfterClass()
+    {
+        rmdir(self::$destination);
     }
     
     // -------------------------------------------------------------------------
