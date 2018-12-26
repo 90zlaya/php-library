@@ -21,7 +21,7 @@ class Dump {
     // -------------------------------------------------------------------------
     
     /**
-    * Command for dump execution
+    * Command for dump execution    
     * 
     * @var String
     */
@@ -35,6 +35,15 @@ class Dump {
     * @var String
     */
     private $destination = '';
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Override dumped files in destination folder
+    * 
+    * @var Bool
+    */
+    private $override = FALSE;
     
     // -------------------------------------------------------------------------
     
@@ -106,12 +115,6 @@ class Dump {
             ? $this->databases = $params['databases']
             : array_push($this->messages['error'],
                 'Set databases for dumping'
-            );
-            
-        function_exists('exec')
-            ? NULL
-            : array_push($this->messages['error'],
-                'exec function disabled in PHP'
             );
     }
     
@@ -263,20 +266,42 @@ class Dump {
     /**
     * MySQL dump
     * 
+    * @param Bool $override
+    * 
     * @return Bool
     */
-    public function mysql()
-    {
+    public function mysql($override=FALSE)
+    {   
+        $this->override = $override;
+        
+        function_exists('exec')
+        ? NULL
+        : array_push($this->messages['error'],
+            'exec function disabled in PHP'
+        );
+            
         if ($this->has_databases() && ! $this->has_errors())
         {
-            $folder_name = $this->create_folders('mysqldump');
+            if ($this->override)
+            {
+                $folder_name = $this->destination;
+            }
+            else
+            {
+                $folder_name = $this->create_folders('mysqldump');
+            }
             
             foreach ($this->databases as $database)
             {
                 $filename  = '"';
                 $filename .= $folder_name;
-                $filename .= date('ymdHis');
-                $filename .= '_-_';
+                
+                if ( ! $this->override)
+                {
+                    $filename .= date('ymdHis');
+                    $filename .= '_-_';
+                }
+                
                 $filename .= $database;
                 $filename .= '.sql';
                 $filename .= '"';
@@ -294,16 +319,9 @@ class Dump {
                 $command .= ' > ';
                 $command .= $filename;
                 
-                try
-                {
-                    exec($command);
+                exec($command);
                     
-                    $this->check_file($filename, $database);
-                }
-                catch (Exception $e)
-                {
-                    array_push($this->messages['error'], $e->getMessage());
-                }
+                $this->check_file($filename, $database);
             }
             
             if ( ! $this->has_errors())

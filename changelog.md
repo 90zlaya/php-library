@@ -3,7 +3,9 @@ Since php-library v1.5.1 (07-Dec-2018)
 
 New
 ----------------
+
 * User_Agent: detect_operating_system method added
+* Dump: new class developed and tested
 
 Since php-library v1.5.0 (6-Apr-2018)
 =======
