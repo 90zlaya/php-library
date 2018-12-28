@@ -314,6 +314,7 @@ class Sorter {
             case 'm':
             {
                 $this->move_files($location_from, $location_to, $item); 
+                
                 break;
             }
             default: $this->copy_files($location_from, $location_to, $item);
@@ -443,29 +444,13 @@ class Sorter {
     // -------------------------------------------------------------------------
     
     /**
-    * Sort multidimensional array by given item
+    * Check if class execution has errors
     * 
-    * @param Array $array
-    * @param int $sort_by_item
-    * @param int $order
-    * 
-    * @return Array $array
+    * @return Bool
     */
-    public static function multidimensional_array($array, $sort_by_item=0, $order=SORT_ASC)
+    public function has_errors()
     {
-        foreach ($array as $key => $row)
-        {
-            $size = count($row);
-            
-            for ($i=0; $i<$size; $i++)
-            {
-                ${'column_' . $i}[$key] = $row[$i];
-            }
-        }
-        
-        array_multisort(${'column_' . $sort_by_item}, $order, $array);
-        
-        return $array;
+        return ! empty($this->report['errors']);
     }
     
     // -------------------------------------------------------------------------

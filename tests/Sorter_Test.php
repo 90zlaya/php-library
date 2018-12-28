@@ -125,6 +125,31 @@ class Sorter_Test extends Test_Case {
     // -------------------------------------------------------------------------
     
     /**
+    * Test has_errors method
+    */
+    public function test_has_errors_method()
+    {        
+        $sorter = new sorter();
+        
+        $sorter->deploy(array(
+            'where_to_read_files'         => $this->params['folders']['source'],
+            'where_to_create_directories' => $this->params['folders']['destination'],
+            'number_of_directories'       => 10,
+            'folder_sufix'                => '000',
+            'operation'                   => 'c',
+            'overwrite'                   => TRUE,
+            'types'                       => array('jpg'),
+        ));
+        
+        $errors = $sorter->has_errors();
+        
+        $this->assertInternalType('bool', $errors);
+        $this->assertFalse($errors);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
     * Test deploy method for existent parameters
     */
     public function test_deploy_method_for_existent_parameters()
@@ -160,6 +185,11 @@ class Sorter_Test extends Test_Case {
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
         $this->assertEmpty($report['array']['result']['errors']);
+        
+        $errors = $sorter->has_errors();
+        
+        $this->assertInternalType('bool', $errors);
+        $this->assertFalse($errors);
     }
     
     // -------------------------------------------------------------------------
@@ -188,6 +218,11 @@ class Sorter_Test extends Test_Case {
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
         $this->assertEmpty($report['array']['result']['errors']);
+        
+        $errors = $sorter->has_errors();
+        
+        $this->assertInternalType('bool', $errors);
+        $this->assertFalse($errors);
     }
     
     // -------------------------------------------------------------------------
@@ -209,6 +244,11 @@ class Sorter_Test extends Test_Case {
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
         $this->assertNotEmpty($report['array']['result']['errors']);
+        
+        $errors = $sorter->has_errors();
+        
+        $this->assertInternalType('bool', $errors);
+        $this->assertTrue($errors);
     }
     
     // -------------------------------------------------------------------------
@@ -236,53 +276,11 @@ class Sorter_Test extends Test_Case {
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
         $this->assertNotEmpty($report['array']['result']['errors']);
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Test multidimensional_array method
-    */
-    public function test_multidimensional_array_method()
-    {
-        $result = sorter::multidimensional_array(array(
-            array(
-                99,
-                58,
-                12,
-            ),
-            array(
-                25,
-                10,
-                11,
-            ),
-            array(
-                11,
-                25,
-                70,
-            ),
-        ), 2, SORT_DESC);
         
-        $expected = array(
-            array(
-                11,
-                25,
-                70,
-            ),
-            array(
-                99,
-                58,
-                12,
-            ),
-            array(
-                25,
-                10,
-                11,
-            ),
-        );
+        $errors = $sorter->has_errors();
         
-        $this->assertInternalType('array', $result);
-        $this->assertEquals($expected, $result);
+        $this->assertInternalType('bool', $errors);
+        $this->assertTrue($errors);
     }
     
     // -------------------------------------------------------------------------

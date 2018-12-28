@@ -1,11 +1,17 @@
 Since php-library v1.5.1 (07-Dec-2018)
 =======
 
+Important
+----------------
+
+* Sorter: multidimensional_array method moved to Format class
+
 New
 ----------------
 
-* User_Agent: detect_operating_system method added
 * Dump: new class developed and tested
+* Sorter: new method has_errors added
+* User_Agent: detect_operating_system method added
 
 Since php-library v1.5.0 (6-Apr-2018)
 =======
