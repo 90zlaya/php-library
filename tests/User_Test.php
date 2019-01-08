@@ -16,13 +16,13 @@ use phplibrary\User as user;
 * Testing User class
 */
 class User_Test extends Test_Case {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Image parameters
     * 
-    * @var Array
+    * @var array
     */
     public $params = array(
         'show'        => 'background.jpg',
@@ -30,9 +30,9 @@ class User_Test extends Test_Case {
         'location'    => 'https://php-library.zlatanstajic.com/assets/img/',
         'default'     => 'elephpant.png',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Image method return values
     */
@@ -43,14 +43,14 @@ class User_Test extends Test_Case {
             $this->params['location'],
             $this->params['default']
         );
-        
+
         $this->assertNotEmpty($image);
         $this->assertInternalType('string', $image);
         $this->assertEquals($image, $this->params['location'] . $this->params['show']);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Image method with default image and image location
     */
@@ -58,13 +58,13 @@ class User_Test extends Test_Case {
     {
         user::$image_location = $this->params['location'];
         user::$image_default  = $this->params['default'];
-        
+
         $image = user::image($this->params['do_not_show']);
-        
+
         $this->assertNotEmpty($image);
         $this->assertInternalType('string', $image);
         $this->assertEquals($image, $this->params['default']);
     }
-    
+
     // -------------------------------------------------------------------------
 }

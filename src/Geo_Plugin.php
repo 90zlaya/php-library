@@ -19,31 +19,31 @@ use phplibrary\Web_Service as web_service;
 * data collected from visitor
 */
 class Geo_Plugin {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Service code for geoPlugin
-    * 
+    *
     * @var int
     */
     public $code = 0;
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Geo_Plugin data is stored here
-    * 
-    * @var Array
+    *
+    * @var array
     */
     protected $data = array();
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Server PHP indices
-    * 
-    * @var Array
+    *
+    * @var array
     */
     protected $server_indices = array(
         'PHP_SELF',
@@ -87,76 +87,76 @@ class Geo_Plugin {
         'PATH_INFO',
         'ORIG_PATH_INFO',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Service for Geo_Plugin
-    * 
-    * @var String
+    *
+    * @var string
     */
     protected $geo_plugin_service = 'http://www.geoplugin.net/php.gp?ip={IP}';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Visitor IP address
-    * 
-    * @var String
+    *
+    * @var string
     */
     protected $visitor_ip = '';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Returns all data
-    * 
-    * @return Array
+    *
+    * @return array
     */
     public function data()
     {
         $this->data['base']   = $this->base_information();
         $this->data['server'] = $this->server_information();
         $this->data['geo']    = $this->geo_information();
-        
+
         return $this->data;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Base information from visitor
-    * 
-    * @return Array
+    *
+    * @return array
     */
     protected function base_information()
     {
         $prefix = isset($_SERVER['HTTPS']) && ! empty($_SERVER['HTTPS'])
-            ? 'https://' 
+            ? 'https://'
             : 'http://';
-                
+
         $http_host = isset($_SERVER['HTTP_HOST'])
             ? $_SERVER['HTTP_HOST']
             : NULL;
-        
+
         $php_self = isset($_SERVER['PHP_SELF'])
             ? $_SERVER['PHP_SELF']
             : NULL;
-        
+
         $http_referer = isset($_SERVER['HTTP_REFERER'])
             ? $_SERVER['HTTP_REFERER']
             : NULL;
-        
+
         $http_user_agent = isset($_SERVER['HTTP_USER_AGENT'])
             ? $_SERVER['HTTP_USER_AGENT']
             : NULL;
-        
+
         $remote_addr = isset($_SERVER['REMOTE_ADDR'])
             ? $_SERVER['REMOTE_ADDR']
             : NULL;
-        
+
         $this->visitor_ip = $remote_addr;
-        
+
         return array(
             'location' => $prefix . $http_host . $php_self,
             'referer'  => $http_referer,
@@ -170,55 +170,55 @@ class Geo_Plugin {
             'address'  => $remote_addr,
         );
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Server indices information
-    * 
-    * @return Array $server
+    *
+    * @return array $server
     */
     protected function server_information()
     {
         $server = array();
-        
+
         foreach ($this->server_indices as $item)
         {
             $key   = strtolower($item);
             $value = isset($_SERVER[$item]) ? $_SERVER[$item] : '';
-            
+
             $server = array_merge($server, array($key => $value));
         }
-        
+
         return $server;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Information from geoPlugin
     * 
-    * @param String $ip
-    * 
+    * @param string $ip
+    *
     * @return mixed
     */
     public function geo_information($ip='')
     {
         $response = array();
-        
+
         empty($ip) ? $ip = $this->visitor_ip : NULL;
-        
+
         $host = str_replace('{IP}', $ip, $this->geo_plugin_service);
-        
+
         $response = web_service::response($host, array(
             'user_agent' => 'Geo_Plugin class from bit.ly/php-library',
         ));
-        
+
         $geo_information = unserialize($response);
         $this->code      = $geo_information['geoplugin_status'];
-        
+
         return $geo_information;
     }
-    
+
     // -------------------------------------------------------------------------
 }

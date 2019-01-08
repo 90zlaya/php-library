@@ -16,22 +16,22 @@ use phplibrary\Website as website;
 * Testing Website class
 */
 class Website_Test extends Test_Case {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website object data
     *
-    * @var Object
+    * @var object
     */
     private $website_object;
 
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website constructor data
-    *
-    * @var Array
+    * 
+    * @var array
     */
     private $website_data = array(
         'name'        => 'PHP Library',
@@ -42,28 +42,28 @@ class Website_Test extends Test_Case {
         'description' => 'PHP Library is set of classes containing most useful methods and variables for Web Development.',
         'keywords'    => 'php, library, oop, php7',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website test setup method
     */
     public function setUp()
     {
         $localhost = 'http://localhost/_develop/php-library';
-        
+
         $_SERVER['HTTP_HOST'] = isset($_SERVER['HTTP_HOST'])
             ? $_SERVER['HTTP_HOST']
             : $localhost;
-        
+
         $_SERVER['REQUEST_URI'] = isset($_SERVER['REQUEST_URI'])
             ? $_SERVER['REQUEST_URI']
             : $localhost;
-        
+
         $_SERVER['HTTP_REFERER'] = isset($_SERVER['HTTP_REFERER'])
             ? $_SERVER['HTTP_REFERER']
             : $localhost . '/tests/Website_Test.php';
-        
+
         $this->website_object = new website(array(
             'name'        => $this->website_data['name'],
             'host'        => $this->website_data['host'],
@@ -74,9 +74,9 @@ class Website_Test extends Test_Case {
             'keywords'    => $this->website_data['keywords'],
         ));
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Whether or not is possible to retrieve
     * properties from constructor
@@ -109,9 +109,9 @@ class Website_Test extends Test_Case {
 
         $this->assertEmpty($this->website_object->errors);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing public properties of class
     * after instantiating empty website object
@@ -134,9 +134,9 @@ class Website_Test extends Test_Case {
         $this->assertEquals($website->description, 'Simple website');
         $this->assertEquals($website->keywords, 'simple, website');
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing image_size method with existent image
     */
@@ -148,7 +148,7 @@ class Website_Test extends Test_Case {
 
         $this->assertNotFalse($result);
         $this->assertInternalType('array', $result);
-        
+
         $values = array(
             'width',
             'height',
@@ -164,9 +164,9 @@ class Website_Test extends Test_Case {
             $this->assertArrayHasKey($value, $result);
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing image_size method with nonexistent image
     */
@@ -179,9 +179,9 @@ class Website_Test extends Test_Case {
         $this->assertFalse($result);
         $this->assertInternalType('bool', $result);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing return value of meta method
     */
@@ -197,7 +197,7 @@ class Website_Test extends Test_Case {
                 'google_site_verification' => '123456789abcdefghijklmn',
             ),
         );
-        
+
         foreach ($items as $item)
         {
             $result = $this->website_object->meta($item);
@@ -206,9 +206,9 @@ class Website_Test extends Test_Case {
             $this->assertInternalType('string', $result);
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing return value of signature method
     */
@@ -232,7 +232,7 @@ class Website_Test extends Test_Case {
                 'show_licence'     => TRUE,
             ),
         );
-        
+
         foreach ($parameters as $parameter)
         {
             $result = $this->website_object->signature(
@@ -244,11 +244,11 @@ class Website_Test extends Test_Case {
             $this->assertInternalType('string', $result);
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
-    * Testing signature method when we 
+    * Testing signature method when we
     * only want to see always made year
     */
     public function test_signature_method_always_made_year_parameter()
@@ -258,14 +258,14 @@ class Website_Test extends Test_Case {
         $string .= ' | ';
         $string .= '<a href="https://www.zlatanstajic.com/" ';
         $string .= 'target="_blank">Zlatan Stajić</a>';
-        
+
         $result = $this->website_object->signature(TRUE);
-        
+
         $this->assertEquals($string, $result);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing signature method for years span
     */
@@ -278,14 +278,14 @@ class Website_Test extends Test_Case {
         $string .= ' | ';
         $string .= '<a href="https://www.zlatanstajic.com/" ';
         $string .= 'target="_blank">Zlatan Stajić</a>';
-        
+
         $result = $this->website_object->signature();
-        
+
         $this->assertEquals($string, $result);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing return value of signature_hidden method
     */
@@ -299,18 +299,18 @@ class Website_Test extends Test_Case {
             '',
             NULL,
         );
-        
+
         foreach ($items as $item)
         {
             $result = $this->website_object->signature_hidden($item);
-        
+
             $this->assertNotEmpty($result);
             $this->assertInternalType('string', $result);
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing add_to_images method and return values
     * of images method and evaluating them
@@ -323,12 +323,12 @@ class Website_Test extends Test_Case {
         $image_nothing    = 'http://www.example.com/nothing.png';
         $image_php_logo   = 'https://php-library.zlatanstajic.com/assets/img/elephpant.png';
         $image_background = 'https://php-library.zlatanstajic.com/assets/img/background.png';
-        
+
         $this->website_object->add_to_images(array(
             $name_php_logo   => $image_php_logo,
             $name_background => $image_background,
         ));
-        
+
         $this->assertNotFalse($this->website_object->images($name_php_logo));
         $this->assertNotFalse($this->website_object->images($name_background));
         $this->assertFalse($this->website_object->images($name_nothing));
@@ -356,14 +356,14 @@ class Website_Test extends Test_Case {
             'bool',
             $this->website_object->images($name_nothing)
         );
-        
+
         $name_random  = 'random';
         $image_random = 'http://www.example.com/random.png';
-        
+
         $this->website_object->add_to_images(array(
             $name_random => $image_random,
         ), TRUE);
-        
+
         $this->assertNotFalse($this->website_object->images($name_php_logo));
         $this->assertNotFalse($this->website_object->images($name_background));
         $this->assertFalse($this->website_object->images($name_nothing));
@@ -377,9 +377,9 @@ class Website_Test extends Test_Case {
             $this->website_object->images($name_random)
         );
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing add_to_creator method and return values
     * of creator method and evaluating them
@@ -394,13 +394,13 @@ class Website_Test extends Test_Case {
         $value_name    = 'John Doe';
         $value_website = 'http://www.example.com/';
         $value_email   = 'john.doe@example.com';
-        
+
         $this->website_object->add_to_creator(array(
             $name_name    => $value_name,
             $name_website => $value_website,
             $name_email   => $value_email,
         ));
-        
+
         $this->assertNotFalse($this->website_object->creator($name_name));
         $this->assertNotFalse($this->website_object->creator($name_website));
         $this->assertNotFalse($this->website_object->creator($name_email));
@@ -437,14 +437,14 @@ class Website_Test extends Test_Case {
             'bool',
             $this->website_object->creator($name_nothing)
         );
-        
+
         $name_random  = 'random';
         $value_random = 'http://www.example.com/random.png';
-        
+
         $this->website_object->add_to_creator(array(
             $name_random => $value_random,
         ), TRUE);
-        
+
         $this->assertNotFalse($this->website_object->creator($name_name));
         $this->assertNotFalse($this->website_object->creator($name_website));
         $this->assertNotFalse($this->website_object->creator($name_email));
@@ -459,9 +459,9 @@ class Website_Test extends Test_Case {
             $this->website_object->creator($name_random)
         );
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Test add_to_head and head methods
     */
@@ -489,19 +489,19 @@ class Website_Test extends Test_Case {
                 ),
             ),
         );
-        
+
         foreach ($items as $item)
         {
             $this->website_object->add_to_head($item);
             $head = $this->website_object->head();
-            
+
             $this->assertNotEmpty($head);
             $this->assertInternalType('string', $head);
         }
     }
-                                                                                
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Test add_to_bottom and bottom methods
     */
@@ -529,34 +529,34 @@ class Website_Test extends Test_Case {
                 ),
             ),
         );
-        
+
         foreach ($items as $item)
         {
             $this->website_object->add_to_bottom($item);
             $bottom = $this->website_object->bottom();
-            
+
             $this->assertNotEmpty($bottom);
             $this->assertInternalType('string', $bottom);
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Test redirect_to_page method
     */
     public function test_redirect_to_page_method()
     {
         ob_start();
-        
+
         $this->assertNull($this->website_object->redirect_to_page(
             'https://google.com/',
             TRUE,
             FALSE
         ));
-        
+
         ob_end_clean();
     }
-    
+
     // -------------------------------------------------------------------------
 }

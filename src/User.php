@@ -15,55 +15,55 @@ namespace phplibrary;
 * Works with user related data
 */
 class User {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Default location of images folder
-    * 
-    * @var String
+    *
+    * @var string
     */
     public static $image_location = 'data/users/';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Default image location
-    * 
-    * @var String
+    *
+    * @var string
     */
     public static $image_default = 'data/users/user.png';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Searches for user's image
+    *
+    * @param string $image
+    * @param string $image_location
+    * @param string $image_default
     * 
-    * @param String $image
-    * @param String $image_location
-    * @param String $image_default
-    * 
-    * @return String $image_link
+    * @return string $image_link
     */
     public static function image($image, $image_location='', $image_default='')
     {
         $location = empty($image_location)
-            ? self::$image_location 
+            ? self::$image_location
             : $image_location;
-        
+
         $default = empty($image_default)
-            ? self::$image_default 
+            ? self::$image_default
             : $image_default;
-        
+
         $image_link = $location . $image;
-        
+
         if ( ! getimagesize($image_link) || empty($image))
         {
             $image_link = &$default;
         }
-        
+
         return $image_link;
     }
-    
+
     // -------------------------------------------------------------------------
 }

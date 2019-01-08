@@ -17,76 +17,76 @@ use Exception as Exception;
 * Dump operations
 */
 class Dump {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
-    * Command for dump execution    
-    * 
-    * @var String
+    * Command for dump execution
+    *
+    * @var string
     */
     private $command = 'mysqldump';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Destination folder for dumped files
-    * 
-    * @var String
+    *
+    * @var string
     */
     private $destination = '';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Override dumped files in destination folder
-    * 
-    * @var Bool
+    *
+    * @var bool
     */
     private $override = FALSE;
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Database connection parameters
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private $connection = array(
         'host'     => 'localhost',
         'username' => 'root',
         'password' => '',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Databases for dumping
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private $databases = array();
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Dump messages
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private $messages = array(
         'success' => array(),
         'error'   => array(),
         'file'    => array(),
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Class constructor method
     *
-    * @param Array $params
-    * 
+    * @param array $params
+    *
     * @return void
     */
     public function __construct($params)
@@ -94,155 +94,155 @@ class Dump {
         isset($params['command'])
             ? $this->command = $params['command']
             : NULL;
-        
+
         isset($params['destination'])
             ? $this->destination = $params['destination']
             : NULL;
-            
+
         isset($params['connection']['host'])
             ? $this->connection['host'] = $params['connection']['host']
             : NULL;
-        
+
         isset($params['connection']['username'])
             ? $this->connection['username'] = $params['connection']['username']
             : NULL;
-        
+
         isset($params['connection']['password'])
             ? $this->connection['password'] = $params['connection']['password']
             : NULL;
-            
+
         isset($params['databases'])
             ? $this->databases = $params['databases']
             : array_push($this->messages['error'],
                 'Set databases for dumping'
             );
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Get class execution messages
-    * 
-    * @param String $type
-    * 
-    * @return Array $messages
+    *
+    * @param string $type
+    *
+    * @return array $messages
     */
     public function get_messages($type='ALL')
     {
         $messages = array();
-        
+
         switch ($type)
         {
             case 'ALL':
             {
                 $messages = $this->messages;
-                
+
                 break;
             }
             case 'SUCCESS':
             {
                 $messages = $this->messages['success'];
-                
+
                 break;
             }
             case 'ERROR':
             {
                 $messages = $this->messages['error'];
-                
+
                 break;
             }
             case 'FILE':
             {
                 $messages = $this->messages['file'];
-                
+
                 break;
             }
         }
-        
+
         return $messages;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Check if class execution has errors
-    * 
-    * @return Bool
+    *
+    * @return bool
     */
     protected function has_errors()
     {
         return ! empty($this->messages['error']);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
-    * Check if there are databases 
+    * Check if there are databases
     * set for dumping
-    * 
-    * @return Bool
+    *
+    * @return bool
     */
     protected function has_databases()
     {
         return ! empty($this->databases);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Creates folders in destination path
-    * 
-    * @param String $root
-    * 
-    * @return String $folder_name
+    *
+    * @param string $root
+    *
+    * @return string $folder_name
     */
     protected function create_folders($root='dump')
     {
         $folder_name_root  = $this->destination;
         $folder_name_root .= $root;
         $folder_name_root .= '/';
-        
+
         if ( ! is_dir($folder_name_root))
         {
             mkdir($folder_name_root);
         }
-        
+
         $folder_name_root .= date('ym');
         $folder_name_root .= '/';
-        
+
         if ( ! is_dir($folder_name_root))
         {
             mkdir($folder_name_root);
         }
-        
+
         $folder_name  = $folder_name_root;
         $folder_name .= date('d');
         $folder_name .= '/';
-        
+
         if ( ! is_dir($folder_name))
         {
             mkdir($folder_name);
         }
-        
+
         return $folder_name;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Check dumped file
-    * 
-    * @param String $filename
-    * @param String $database
-    * 
+    *
+    * @param string $filename
+    * @param string $database
+    *
     * @return void
     */
     protected function check_file($filename, $database)
     {
         $filename = str_replace('"', '', $filename);
-                    
+
         array_push($this->messages['file'], $filename);
-        
+
         if (empty(filesize($filename)))
         {
             array_push($this->messages['error'],
@@ -260,26 +260,26 @@ class Dump {
             );
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * MySQL dump
-    * 
-    * @param Bool $override
-    * 
-    * @return Bool
+    *
+    * @param bool $override
+    *
+    * @return bool
     */
     public function mysql($override=FALSE)
-    {   
+    {
         $this->override = $override;
-        
+
         function_exists('exec')
         ? NULL
         : array_push($this->messages['error'],
             'exec function disabled in PHP'
         );
-            
+
         if ($this->has_databases() && ! $this->has_errors())
         {
             if ($this->override)
@@ -290,22 +290,22 @@ class Dump {
             {
                 $folder_name = $this->create_folders('mysqldump');
             }
-            
+
             foreach ($this->databases as $database)
             {
                 $filename  = '"';
                 $filename .= $folder_name;
-                
+
                 if ( ! $this->override)
                 {
                     $filename .= date('ymdHis');
                     $filename .= '_-_';
                 }
-                
+
                 $filename .= $database;
                 $filename .= '.sql';
                 $filename .= '"';
-                
+
                 $command  = '"';
                 $command .= $this->command;
                 $command .= '" ';
@@ -318,20 +318,20 @@ class Dump {
                 $command .= $this->connection['host'];
                 $command .= ' > ';
                 $command .= $filename;
-                
+
                 exec($command);
-                    
+
                 $this->check_file($filename, $database);
             }
-            
+
             if ( ! $this->has_errors())
             {
                 return TRUE;
             }
         }
-        
+
         return FALSE;
     }
-    
+
     // -------------------------------------------------------------------------
 }

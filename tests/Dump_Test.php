@@ -16,55 +16,55 @@ use phplibrary\Dump as dump;
 * Testing Dump class
 */
 class Dump_Test extends Test_Case {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
-    * Command for dump execution    
-    * 
-    * @var String
+    * Command for dump execution
+    *
+    * @var string
     */
     private static $command = 'mysqldump';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Destination folder for dumped files
-    * 
-    * @var String
+    *
+    * @var string
     */
     private static $destination = '';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Dumped files to be deleted
     * after test is executed
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private static $files = array();
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Dump object data
     *
-    * @var Object
+    * @var object
     */
     private $dump_object;
 
     // -------------------------------------------------------------------------
-    
+
     /**
     * Dump constructor data
     *
-    * @var Array
+    * @var array
     */
     private $dump_data = array();
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Dump test setup before class method
     */
@@ -76,7 +76,7 @@ class Dump_Test extends Test_Case {
         {
             self::$command = $command;
         }
-        
+
         $destination  = realpath('outsource/');
         $destination .= DIRECTORY_SEPARATOR;
         $destination .= 'dump/';
@@ -93,9 +93,9 @@ class Dump_Test extends Test_Case {
             }
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Dump test setup method
     */
@@ -108,33 +108,33 @@ class Dump_Test extends Test_Case {
                 'phpmyadmin',
             ),
         );
-        
+
         $this->dump_object = new dump($this->dump_data);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing get_messages method for all messages
     */
     public function test_get_messages_method_for_all_messages()
     {
         $result = $this->dump_object->get_messages();
-        
+
         $this->assertInternalType('array', $result);
-        
+
         $this->assertArrayHasKey('success', $result);
         $this->assertEmpty($result['success']);
-        
+
         $this->assertArrayHasKey('error', $result);
         $this->assertEmpty($result['error']);
-        
+
         $this->assertArrayHasKey('file', $result);
         $this->assertEmpty($result['file']);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing get_messages method for other messages
     */
@@ -147,18 +147,18 @@ class Dump_Test extends Test_Case {
             '',
             NULL,
         );
-        
+
         foreach ($statuses as $status)
         {
             $result = $this->dump_object->get_messages($status);
-            
+
             $this->assertInternalType('array', $result);
             $this->assertEmpty($result);
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing mysql_dump method
     * with default parameters
@@ -166,15 +166,15 @@ class Dump_Test extends Test_Case {
     public function test_mysql_dump_method_default_params()
     {
         $result = $this->dump_object->mysql();
-        
+
         $this->assertInternalType('bool', $result);
         $this->assertTrue($result);
-        
+
         array_push(self::$files, $this->dump_object->get_messages('FILE'));
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing mysql_dump method
     * with override option enabled
@@ -182,15 +182,15 @@ class Dump_Test extends Test_Case {
     public function test_mysql_dump_method_override_enabled()
     {
         $result = $this->dump_object->mysql(TRUE);
-        
+
         $this->assertInternalType('bool', $result);
         $this->assertTrue($result);
-        
+
         array_push(self::$files, $this->dump_object->get_messages('FILE'));
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing mysql_dump method
     * with given connection string
@@ -204,17 +204,17 @@ class Dump_Test extends Test_Case {
                 'password' => '',
             ),
         ));
-        
+
         $result = $dump->mysql();
-        
+
         $this->assertInternalType('bool', $result);
         $this->assertFalse($result);
-        
+
         array_push(self::$files, $dump->get_messages('FILE'));
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing mysql_dump method
     * without database parameter
@@ -225,20 +225,20 @@ class Dump_Test extends Test_Case {
             'command'     => self::$command,
             'destination' => self::$destination,
         ));
-        
+
         $result = $dump->mysql();
-        
+
         $this->assertInternalType('bool', $result);
         $this->assertFalse($result);
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Dump test tear down after class method
     */
     public static function tearDownAfterClass()
-    {        
+    {
         if ( ! empty(self::$files))
         {
             foreach (self::$files as $file)
@@ -248,28 +248,28 @@ class Dump_Test extends Test_Case {
                     unlink($item);
                 }
             }
-            
+
             $day_directory  = self::$destination;
             $day_directory .= 'mysqldump/';
             $day_directory .= date('ym');
             $day_directory .= '/';
             $day_directory .= date('d');
             $day_directory .= '/';
-            
+
             $month_directory  = self::$destination;
             $month_directory .= 'mysqldump/';
             $month_directory .= date('ym');
             $month_directory .= '/';
-            
+
             $mysqldump_directory  = self::$destination;
             $mysqldump_directory .= 'mysqldump/';
-            
+
             rmdir($day_directory);
             rmdir($month_directory);
             rmdir($mysqldump_directory);
             rmdir(self::$destination);
         }
     }
-    
+
     // -------------------------------------------------------------------------
 }

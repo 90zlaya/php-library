@@ -16,30 +16,30 @@ use phplibrary\File_Version as file_version;
 * Testing File_Version class
 */
 class File_Version_Test extends Test_Case {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Locations for test setup
-    * 
-    * @var Array
+    *
+    * @var array
     */
     protected static $locations = array(
         'folder'    => 'outsource/',
         'subfolder' => 'file_version/',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Parameters for test
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private $params = array();
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * File_Version test setup before class method
     */
@@ -48,28 +48,28 @@ class File_Version_Test extends Test_Case {
         $path_to_testing_folder  = realpath(self::$locations['folder']);
         $path_to_testing_folder .= DIRECTORY_SEPARATOR;
         $path_to_testing_folder .= self::$locations['subfolder'];
-        
+
         if ( ! file_exists($path_to_testing_folder))
         {
             mkdir($path_to_testing_folder);
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Create file version files for testing purposes
-    * 
+    *
     * @return void
     */
     private function create_file_version_files()
     {
         file_version::dump(array(
             'file_names' => array(
-                'log_files'    => $this->params['folders']['file_version'] . 
+                'log_files'    => $this->params['folders']['file_version'] .
                     DIRECTORY_SEPARATOR .
                     $this->params['files']['files'],
-                'log_versions' => $this->params['folders']['file_version'] . 
+                'log_versions' => $this->params['folders']['file_version'] .
                     DIRECTORY_SEPARATOR .
                     $this->params['files']['versions'],
             ),
@@ -79,12 +79,12 @@ class File_Version_Test extends Test_Case {
             ),
         ));
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Unlink existent files for testing
-    * 
+    *
     * @return void
     */
     private function unlink_existent_files()
@@ -93,12 +93,12 @@ class File_Version_Test extends Test_Case {
             $this->params['folders']['file_version'] .
             DIRECTORY_SEPARATOR .
             $this->params['files']['files'],
-            
+
             $this->params['folders']['file_version'] .
             DIRECTORY_SEPARATOR .
             $this->params['files']['versions'],
         );
-        
+
         foreach ($locations as $location)
         {
             if (file_exists($location))
@@ -107,9 +107,9 @@ class File_Version_Test extends Test_Case {
             }
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * File_Version test setup method
     */
@@ -120,9 +120,9 @@ class File_Version_Test extends Test_Case {
         $this->params['files']['files']              = 'files';
         $this->params['files']['versions']           = 'versions';
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing dump method
     */
@@ -132,12 +132,12 @@ class File_Version_Test extends Test_Case {
         $this->assertDirectoryIsWritable($this->params['folders']['file_version']);
         $this->assertDirectoryExists($this->params['folders']['directory_lister']);
         $this->assertDirectoryIsReadable($this->params['folders']['directory_lister']);
-        
+
         $this->assertNull($this->create_file_version_files());
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Testing dump method file_names are not set
     */
@@ -153,20 +153,20 @@ class File_Version_Test extends Test_Case {
             ))
         );
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
-    * File_Version test tear down method 
+    * File_Version test tear down method
     */
     protected function tearDown()
     {
         $this->create_file_version_files();
         $this->unlink_existent_files();
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * File_Version test tear down after class method
     */
@@ -177,6 +177,6 @@ class File_Version_Test extends Test_Case {
             DIRECTORY_SEPARATOR
         );
     }
-    
+
     // -------------------------------------------------------------------------
 }

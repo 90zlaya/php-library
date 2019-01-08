@@ -156,7 +156,7 @@ When you update library version from older to newer, it's recommended to consult
 Acknowledgements
 ----------------
 
-Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
+Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 
 [Zlatan Stajic]: https://www.zlatanstajic.com/
 [GitHub]: https://github.com/90zlaya/php-library

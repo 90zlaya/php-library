@@ -21,22 +21,22 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType as DataType;
 * Export files using customisation class of PHPOffice/PhpSpreadsheet
 */
 class Export {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * File name
-    * 
-    * @var String
+    *
+    * @var string
     */
     protected static $file_name = 'file_export';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Document properties
-    * 
-    * @var Array
+    *
+    * @var array
     */
     protected static $document_properties = array(
         'creator'     => 'Maarten Balliauw',
@@ -45,13 +45,13 @@ class Export {
         'keywords'    => 'office 2007 openxml php',
         'category'    => 'Test result file',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Available cells
-    * 
-    * @var Array
+    *
+    * @var array
     */
     protected static $cells = array(
         '',
@@ -82,28 +82,28 @@ class Export {
         'Y',
         'Z',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Available types
-    * 
-    * @var Array
+    *
+    * @var array
     */
     protected static $allowed_types = array(
-        'xlsx', 
-        'xls', 
-        'csv', 
+        'xlsx',
+        'xls',
+        'csv',
         'osp',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Export file
-    * 
-    * @param Array $params
-    * 
+    *
+    * @param array $params
+    *
     * @return void
     */
     public static function export_file($params)
@@ -118,7 +118,7 @@ class Export {
         $description = isset($params['document_properties']['description']) ? $params['document_properties']['description'] : self::$document_properties['description'];
         $keywords    = isset($params['document_properties']['keywords']) ? $params['document_properties']['keywords'] : self::$document_properties['keywords'];
         $category    = isset($params['document_properties']['category']) ? $params['document_properties']['category'] : self::$document_properties['category'];
-        
+
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
 
@@ -130,7 +130,7 @@ class Export {
         $spreadsheet->getProperties()->setDescription($description);
         $spreadsheet->getProperties()->setKeywords($keywords);
         $spreadsheet->getProperties()->setCategory($category);
-        
+
         if ( ! headers_sent())
         {
             // Export type
@@ -168,15 +168,15 @@ class Export {
             }
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Export files to Text (osp)
-    * 
+    *
     * @param Spreadsheet $spreadsheet
-    * @param String $file_name
-    * 
+    * @param string $file_name
+    *
     * @return void
     */
     private static function to_osp($spreadsheet, $file_name)
@@ -187,23 +187,23 @@ class Export {
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
-        
+
         ob_end_flush();
-        
+
         $writer = IOFactory::createWriter($spreadsheet, 'Csv');
         $writer->save('php://output');
-        
+
         exit;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Export files to CSV (csv)
-    * 
-    * @param String $csv
-    * @param String $file_name
-    * 
+    *
+    * @param string $csv
+    * @param string $file_name
+    *
     * @return void
     */
     private static function to_csv($csv, $file_name)
@@ -214,22 +214,22 @@ class Export {
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
-        
+
         ob_end_flush();
-        
+
         print $csv;
-        
+
         exit;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Export files to Excel 5 (xls)
-    * 
+    *
     * @param Spreadsheet $spreadsheet
-    * @param String $file_name
-    * 
+    * @param string $file_name
+    *
     * @return void
     */
     private static function to_xls($spreadsheet, $file_name)
@@ -240,21 +240,21 @@ class Export {
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
-        
+
         $writer = IOFactory::createWriter($spreadsheet, 'Xls');
         $writer->save('php://output');
-        
+
         exit;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Export files to Excel 2007 (xlsx)
-    * 
+    *
     * @param Spreadsheet $spreadsheet
-    * @param String $file_name
-    * 
+    * @param string $file_name
+    *
     * @return void
     */
     private static function to_xlsx($spreadsheet, $file_name)
@@ -263,20 +263,21 @@ class Export {
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $file_name . '.xlsx"');
         header('Cache-Control: max-age=0');
+
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
-        
+
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
-        
+
         exit;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Serving filest for Internet Explorer over SSL
-    * 
+    *
     * @return void
     */
     private static function for_ie_ssl()
@@ -286,14 +287,14 @@ class Export {
         header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
         header('Pragma: public'); // HTTP/1.0
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Arrange data in line for export
-    * 
-    * @param Array $data
-    * 
+    *
+    * @param array $data
+    *
     * @return mixed
     */
     private static function line_arrangement($data)
@@ -301,35 +302,35 @@ class Export {
         if ( ! empty($data))
         {
             ob_start();
-            
+
             foreach ($data as $item)
             {
                 $item_indexed      = array_values($item);
                 $item_indexed_size = count($item_indexed);
                 $value             = '';
-                
+
                 for ($i=0; $i<$item_indexed_size; $i++)
                 {
                     $value .= $item_indexed[$i] . ';';
                 }
-                
+
                 echo $value . "\r\n";
             }
         }
-        
+
         return FALSE;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Arrange data in cells for export
-    * 
+    *
     * @param Spreadsheet $spreadsheet
-    * @param Array $head
-    * @param Array $data
-    * @param Array $data_types
-    * 
+    * @param array $head
+    * @param array $data
+    * @param array $data_types
+    *
     * @return mixed
     */
     private static function cell_arrangement($spreadsheet, $head, $data, $data_types=array())
@@ -338,7 +339,7 @@ class Export {
         {
             // Print head
             $iteration = 1;
-            
+
             foreach ($head as $item)
             {
                 $spreadsheet->getActiveSheet()->getColumnDimension(self::$cells[$iteration])->setAutoSize(TRUE);
@@ -347,26 +348,26 @@ class Export {
                     $item,
                     DataType::TYPE_STRING
                 );
-                
+
                 $iteration++;
             }
-            
+
             // Number of cells
             $number_of_cells = count($head);
-            
+
             // Print data
             $iteration = 2;
-            
+
             foreach ($data as $item)
             {
                 $item_indexed = array_values($item);
-                
+
                 for ($i=1; $i<=$number_of_cells; $i++)
                 {
                     $data_type = isset($data_types[$i-1]['index'])
                         ? $data_types[$i-1]['type']
                         : '';
-                    
+
                     switch ($data_type)
                     {
                         case 'TEXT':
@@ -376,7 +377,7 @@ class Export {
                                 $item_indexed[$i-1],
                                 DataType::TYPE_STRING
                             );
-                            
+
                             break;
                         }
                         default:
@@ -387,27 +388,27 @@ class Export {
                             );
                         }
                     }
-                    
+
                 }
-                
+
                 $iteration++;
             }
         }
-        
+
         return FALSE;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Allowed types for export
-    * 
-    * @return Array
+    *
+    * @return array
     */
     public static function allowed_types()
     {
         return self::$allowed_types;
     }
-    
+
     // -------------------------------------------------------------------------
 }

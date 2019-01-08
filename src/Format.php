@@ -21,7 +21,7 @@ class Format {
     /**
     * UTF-8 value
     *
-    * @var String
+    * @var string
     */
     protected static $utf_8 = 'utf-8';
 
@@ -30,7 +30,7 @@ class Format {
     /**
     * Windows-1250 value
     *
-    * @var String
+    * @var string
     */
     protected static $windows_1250 = 'windows-1250';
 
@@ -39,7 +39,7 @@ class Format {
     /**
     * IP related values
     *
-    * @var Array
+    * @var array
     */
     protected static $ip = array(
         'locator'   => 'http://www.geoplugin.net/php.gp?ip=',
@@ -57,7 +57,7 @@ class Format {
     /**
     * Website related values
     *
-    * @var Array
+    * @var array
     */
     protected static $website = array(
         'regex'    => '/^(http(s?):\/\/)?[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/',
@@ -73,7 +73,7 @@ class Format {
     /**
     * Computer digital information units
     *
-    * @var Array
+    * @var array
     */
     protected static $units = array(
         'B',
@@ -89,10 +89,10 @@ class Format {
     * Converts bytes
     *
     * @param int $bytes
-    * @param Bool $to_round
+    * @param bool $to_round
     * @param int $round_precision
     *
-    * @return Array
+    * @return array
     */
     public static function bytes($bytes, $to_round=TRUE, $round_precision=2)
     {
@@ -114,9 +114,9 @@ class Format {
     /**
     * Formating query
     *
-    * @param String $query
+    * @param string $query
     *
-    * @return String
+    * @return string
     */
     public static function query($query)
     {
@@ -131,8 +131,8 @@ class Format {
     /**
     * Formats telephone number
     *
-    * @param String $telephone
-    * @param String $telephone_backup
+    * @param string $telephone
+    * @param string $telephone_backup
     *
     * @return mixed
     */
@@ -172,8 +172,8 @@ class Format {
     /**
     * Formats website URL
     *
-    * @param String $location
-    * @param Bool $is_ssl
+    * @param string $location
+    * @param bool $is_ssl
     *
     * @return mixed
     */
@@ -219,7 +219,7 @@ class Format {
     /**
     * Formats IP addres and creates URL to more information
     *
-    * @param String $ip
+    * @param string $ip
     *
     * @return mixed
     */
@@ -250,9 +250,9 @@ class Format {
     /**
     * Reformats string to start with big first letter
     *
-    * @param String $title
+    * @param string $title
     *
-    * @return String
+    * @return string
     */
     public static function title_case($title)
     {
@@ -265,10 +265,10 @@ class Format {
     * Converting number to specific format
     *
     * @param float $number
-    * @param Bool $with_decimal
+    * @param bool $with_decimal
     * @param int $value
     *
-    * @return String $converted
+    * @return string $converted
     */
     public static function number($number, $with_decimal=TRUE, $value=1000000)
     {
@@ -301,7 +301,7 @@ class Format {
     * Convert given data to readable format
     *
     * @param mixed $data
-    * @param Bool $to_print
+    * @param bool $to_print
     *
     * @return void
     */
@@ -320,9 +320,9 @@ class Format {
     /**
     * Converting string from Windows-1250 to UTF-8
     *
-    * @param String $string
+    * @param string $string
     *
-    * @return String
+    * @return string
     */
     public static function windows1250_to_utf8($string)
     {
@@ -334,9 +334,9 @@ class Format {
     /**
     * Converting string from UTF-8 to Windows-1250
     *
-    * @param String $string
+    * @param string $string
     *
-    * @return String $converted
+    * @return string $converted
     */
     public static function utf8_to_windows1250($string)
     {
@@ -348,11 +348,11 @@ class Format {
     /**
     * Formating shortened string
     *
-    * @param String $string
+    * @param string $string
     * @param int $start
     * @param int $length
     *
-    * @return String $corrected
+    * @return string $corrected
     */
     public static function string($string, $start=0, $length=15)
     {
@@ -401,10 +401,10 @@ class Format {
     /**
     * Formats array to string
     *
-    * @param Array $array
-    * @param String $separator
+    * @param array $array
+    * @param string $separator
     *
-    * @return String
+    * @return string
     */
     public static function array_to_string($array, $separator='|')
     {
@@ -433,11 +433,11 @@ class Format {
     /**
     * Formats name and surname to one string
     *
-    * @param String $name
-    * @param String $surname
-    * @param String $delimiter
+    * @param string $name
+    * @param string $surname
+    * @param string $delimiter
     *
-    * @return String
+    * @return string
     */
     public static function fullname($name, $surname, $delimiter=' ')
     {
@@ -449,8 +449,8 @@ class Format {
     /**
     * Advanced database search
     *
-    * @param String $term
-    * @param Array $fields
+    * @param string $term
+    * @param array $fields
     *
     * @return mixed
     */
@@ -461,11 +461,11 @@ class Format {
             $term_counter = $field_counter = TRUE;
             $term_array   = explode(' ', $term);
 
-            $html = " AND( ";
+            $html = " AND ( ";
 
             foreach ($term_array as $term_item)
             {
-                if( $term_counter)
+                if ($term_counter)
                 {
                     $term_counter = FALSE;
 
@@ -473,7 +473,7 @@ class Format {
                 }
                 else
                 {
-                    $html .= " AND ( ";
+                    $html .= ' AND ( ';
                 }
 
                 $field_counter = TRUE;
@@ -484,15 +484,18 @@ class Format {
                     {
                         $field_counter = FALSE;
 
-                        $html .= "
-                            $field_item LIKE('%" . $term_item . "%')
-                        ";
+                        $html .= $field_item;
+                        $html .= " LIKE ('%";
+                        $html .= $term_item;
+                        $html .= "%')";
                     }
                     else
                     {
-                        $html .= "
-                            OR $field_item LIKE('%" . $term_item . "%')
-                        ";
+                        $html .= "OR ";
+                        $html .= $field_item;
+                        $html .= " LIKE ('%";
+                        $html .= $term_item;
+                        $html .= "%')";
                     }
                 }
 
@@ -512,11 +515,11 @@ class Format {
     /**
     * Value for given language
     *
-    * @param String $language
-    * @param String $primary
-    * @param String $secondary
+    * @param string $language
+    * @param string $primary
+    * @param string $secondary
     *
-    * @return String
+    * @return string
     */
     public static function language_value($language, $primary, $secondary='')
     {
@@ -534,8 +537,8 @@ class Format {
     /**
     * Prepares SQL statement
     *
-    * @param String $term
-    * @param Array $fields
+    * @param string $term
+    * @param array $fields
     *
     * @return mixed
     */
@@ -547,10 +550,15 @@ class Format {
             $counter     = 1;
             $fields_size = count($fields);
 
-            $sql = ' AND ' . $term . ' IN (';
+            $sql  = ' AND ';
+            $sql .= $term;
+            $sql .= ' IN (';
+
             foreach ($fields as $item)
             {
-                $sql .= '"' . $item . '"';
+                $sql .= '"';
+                $sql .= $item;
+                $sql .= '"';
 
                 if ($counter < $fields_size)
                 {
@@ -559,6 +567,7 @@ class Format {
 
                 $counter++;
             }
+
             $sql .= ')';
 
             return $sql;
@@ -572,11 +581,11 @@ class Format {
     /**
     * Sort multidimensional array by given item
     *
-    * @param Array $array
+    * @param array $array
     * @param int $sort_by_item
     * @param int $order
     *
-    * @return Array $array
+    * @return array $array
     */
     public static function multidimensional_array($array, $sort_by_item=0, $order=SORT_ASC)
     {

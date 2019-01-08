@@ -23,7 +23,7 @@ class Sorter_Test extends Test_Case {
     /**
     * Parameters for test
     *
-    * @var Array
+    * @var array
     */
     private $params = array();
 
@@ -32,7 +32,7 @@ class Sorter_Test extends Test_Case {
     /**
     * Locations for test setup
     *
-    * @var Array
+    * @var array
     */
     protected static $locations = array(
         'folder'      => 'outsource/',

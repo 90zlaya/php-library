@@ -17,137 +17,137 @@ use Exception as Exception;
 * Use this class when working with website related data
 */
 class Website {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Filled if something unpredicted occurs
-    * 
-    * @var Array
+    *
+    * @var array
     */
     public $errors = array();
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Server data holder
-    * 
-    * @var Array
+    *
+    * @var array
     */
     public $server = array();
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website name
-    * 
-    * @var String
+    *
+    * @var string
     */
     public $name;
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website host
-    * 
-    * @var String
+    *
+    * @var string
     */
     public $host;
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Year when website was made
-    * 
-    * @var String
+    *
+    * @var string
     */
     public $made;
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website language
-    * 
-    * @var String
+    *
+    * @var string
     */
     public $language = 'EN';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website charset
-    * 
-    * @var String
+    *
+    * @var string
     */
     public $charset = 'UTF-8';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website description
-    * 
-    * @var String
+    *
+    * @var string
     */
     public $description = 'Simple website';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website keywords
-    * 
-    * @var String
+    *
+    * @var string
     */
     public $keywords = 'simple, website';
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Head data
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private $head = array();
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Bottom data
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private $bottom = array();
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Available website images
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private $images = array(
         'icon' => 'https://php-library.zlatanstajic.com/assets/img/phplibrary-icon.png',
         'logo' => 'https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Website creator data
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private $creator = array(
         'name'    => 'Zlatan Stajić',
         'website' => 'https://www.zlatanstajic.com/',
         'email'   => 'contact@zlatanstajic.com',
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Head and bottom data calss
-    * 
-    * @var Array
+    *
+    * @var array
     */
     private $calls = array(
         'css'        => array(
@@ -159,14 +159,14 @@ class Website {
             'custom'   => 'script-custom',
         ),
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Class constructor method
     *
-    * @param Array $params
-    * 
+    * @param array $params
+    *
     * @return void
     */
     public function __construct($params)
@@ -174,97 +174,97 @@ class Website {
         $host = isset($_SERVER['HTTP_HOST'])
             ? $_SERVER['HTTP_HOST']
             : NULL;
-        
+
         $self = isset($_SERVER['PHP_SELF'])
             ? $_SERVER['PHP_SELF']
             : NULL;
-        
+
         $request_uri = isset($_SERVER['REQUEST_URI'])
             ? $_SERVER['REQUEST_URI']
             : NULL;
-        
+
         $referer = isset($_SERVER['HTTP_REFERER'])
             ? $_SERVER['HTTP_REFERER']
             : NULL;
-                
+
         $this->server['location'] = $host . $self;
         $this->server['referer']  = $referer;
         $this->server['host']     = $host;
         $this->server['uri']      = $request_uri;
         $this->server['path']     = dirname($self);
         $this->server['page']     = basename($self);
-        
+
         isset($params['name'])
             ? $this->name = $params['name']
             : array_push($this->errors, array(
                 'Please set "name" parameter when using class constructor',
             ));
-        
+
         isset($params['host'])
             ? $this->host = $params['host']
             : array_push($this->errors, array(
                 'Please set "host" parameter when using class constructor',
             ));
-        
+
         isset($params['made'])
             ? $this->made = $params['made']
             : array_push($this->errors, array(
                 'Please set "made" parameter when using class constructor',
             ));
-        
-        empty($params['language']) 
-            ? NULL 
+
+        empty($params['language'])
+            ? NULL
             : $this->language = $params['language'];
-        
-        empty($params['charset']) 
-            ? NULL 
+
+        empty($params['charset'])
+            ? NULL
             : $this->charset = $params['charset'];
-        
-        empty($params['description']) 
-            ? NULL 
+
+        empty($params['description'])
+            ? NULL
             : $this->description = $params['description'];
-        
-        empty($params['keywords']) 
-            ? NULL 
+
+        empty($params['keywords'])
+            ? NULL
             : $this->keywords = $params['keywords'];
-    }        
-    
+    }
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Adding css and javascript tags to head of html
-    * 
-    * @param Array $params
-    * 
+    *
+    * @param array $params
+    *
     * @return void
     */
     public function add_to_head($params)
     {
         $this->head = $params;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Adding css and javascript tags to bottom of html
-    * 
-    * @param Array $params
-    * 
+    *
+    * @param array $params
+    *
     * @return void
     */
     public function add_to_bottom($params)
     {
         $this->bottom = $params;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Adding images to website
-    * 
-    * @param Array $params
-    * @param Bool $to_merge
-    * 
+    *
+    * @param array $params
+    * @param bool $to_merge
+    *
     * @return void
     */
     public function add_to_images($params, $to_merge=FALSE)
@@ -278,15 +278,15 @@ class Website {
             $this->images = $params;
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Adding data about website creator
-    * 
-    * @param Array $params
-    * @param Bool $to_merge
-    * 
+    *
+    * @param array $params
+    * @param bool $to_merge
+    *
     * @return void
     */
     public function add_to_creator($params, $to_merge=FALSE)
@@ -300,34 +300,34 @@ class Website {
             $this->creator = $params;
         }
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Prints meta tags
-    * 
+    *
     * If no title was given, prints website name
-    * 
-    * @param Array $params
-    * 
-    * @return String $meta
+    *
+    * @param array $params
+    *
+    * @return string $meta
     */
     public function meta($params=array())
     {
         $meta = '';
-        
-        $title = isset($params['title']) 
-            ? $params['title'] 
+
+        $title = isset($params['title'])
+            ? $params['title']
             : '';
-        
-        $shortcut_icon = isset($params['shortcut_icon']) 
-            ? $params['shortcut_icon'] 
+
+        $shortcut_icon = isset($params['shortcut_icon'])
+            ? $params['shortcut_icon']
             : $this->images['icon'];
-        
-        $touch_icon = isset($params['touch_icon']) 
-            ? $params['touch_icon'] 
+
+        $touch_icon = isset($params['touch_icon'])
+            ? $params['touch_icon']
             : $this->images['icon'];
-        
+
         if (isset($params['google_site_verification']))
         {
             $meta .= '<meta name="google-site-verification" content="';
@@ -335,7 +335,7 @@ class Website {
             $meta .= '"/>';
             $meta .= PHP_EOL;
         }
-        
+
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=';
         $meta .= $this->charset;
         $meta .= '">';
@@ -371,23 +371,23 @@ class Website {
         $meta .= '<title>';
         $meta .= empty($title) ? $this->name : $title;
         $meta .= '</title>' . PHP_EOL;
-        
+
         return $meta;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Printing values in head of html
-    * 
-    * @return String $return
+    *
+    * @return string $return
     */
     public function head()
     {
         $return = '';
-        
+
         $return .= '<!-- HEAD -->' . PHP_EOL;
-        
+
         if (empty($this->head))
         {
             $return .= '<!-- NOT LOADED -->' . PHP_EOL;
@@ -427,28 +427,28 @@ class Website {
                         break;
                     }
                     default: NULL;
-                }    
+                }
             }
         }
-        
+
         $return .= '<!-- /HEAD -->' . PHP_EOL;
-        
+
         return $return;
-    }   
-    
+    }
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Printing values in bottom of html
-    * 
-    * @return String $return
+    *
+    * @return string $return
     */
     public function bottom()
     {
         $return = '';
-        
+
         $return .= '<!-- BOTTOM -->' . PHP_EOL;
-        
+
         if (empty($this->bottom))
         {
             $return .= '<!-- NOT LOADED -->' . PHP_EOL;
@@ -488,22 +488,22 @@ class Website {
                         break;
                     }
                     default: NULL;
-                }   
+                }
             }
         }
-        
+
         $return .= '<!-- /BOTTOM -->' . PHP_EOL;
-        
+
         return $return;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Printing creator data
-    * 
-    * @param String $creator
-    * 
+    *
+    * @param string $creator
+    *
     * @return mixed
     */
     public function creator($creator)
@@ -512,17 +512,17 @@ class Website {
         {
             return $this->creator[$creator];
         }
-        
+
         return FALSE;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Printing images
-    * 
-    * @param String $image
-    * 
+    *
+    * @param string $image
+    *
     * @return mixed
     */
     public function images($image)
@@ -531,17 +531,17 @@ class Website {
         {
             return $this->images[$image];
         }
-        
+
         return FALSE;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Printing image size value
-    * 
-    * @param String $image
-    * 
+    *
+    * @param string $image
+    *
     * @return mixed
     */
     public function image_size($image)
@@ -556,7 +556,7 @@ class Website {
                 $e->getMessage(),
             ));
         }
-        
+
         if ( ! empty($image_size))
         {
             return array(
@@ -569,29 +569,29 @@ class Website {
                 'mime'         => $image_size['mime'],
             );
         }
-        
+
         return FALSE;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Footer signature of creator and year when it was made
-    * 
-    * When you want year span (eg. 2007-2017) set 
+    *
+    * When you want year span (eg. 2007-2017) set
     * first method parameter as TRUE.
-    * 
-    * @param Bool $always_made_year
-    * @param Bool $show_licence
-    * 
-    * @return String
+    *
+    * @param bool $always_made_year
+    * @param bool $show_licence
+    *
+    * @return string
     */
     public function signature($always_made_year=FALSE, $show_licence=FALSE)
     {
         $licence = '';
-        
+
         $since = $current_year = date('Y');
-        
+
         if ($always_made_year)
         {
             $since = $this->made;
@@ -600,40 +600,40 @@ class Website {
         {
             $since = $this->made . '-' . $current_year;
         }
-        
+
         $show_licence ? $licence = ' | All Rights Reserved' : NULL;
-        
-        return 'Copyright &#169; ' . 
-            $since . 
-            ' | <a href="' . 
-            $this->creator['website'] . 
-            '" target="_blank">' .  
-            $this->creator['name'] . 
-            '</a>' . 
+
+        return 'Copyright &#169; ' .
+            $since .
+            ' | <a href="' .
+            $this->creator['website'] .
+            '" target="_blank">' .
+            $this->creator['name'] .
+            '</a>' .
             $licence;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Adds html comment to page view-source
-    * 
-    * If language parameter is not passed to method, 
+    *
+    * If language parameter is not passed to method,
     * default website language comment will be shown.
-    * 
-    * @param String $language
-    * 
-    * @return String $signature_hidden
+    *
+    * @param string $language
+    *
+    * @return string $signature_hidden
     */
     public function signature_hidden($language='')
     {
         $signature_hidden = '';
-        
+
         empty($language) ? $language = $this->language : NULL;
-        
+
         $signature_hidden .= PHP_EOL;
         $signature_hidden .= '<!-- ';
-        
+
         switch ($language)
         {
             case 'EN':
@@ -643,10 +643,10 @@ class Website {
                 $signature_hidden .= $this->creator['name'];
                 $signature_hidden .= '; Find me on ';
                 $signature_hidden .= $this->creator['website'];
-                
+
                 break;
             }
-            default: 
+            default:
             {
                 $signature_hidden .= 'Ponosno izradio: ';
                 $signature_hidden .= $this->creator['name'];
@@ -654,35 +654,35 @@ class Website {
                 $signature_hidden .= $this->creator['website'];
             }
         }
-        
+
         $signature_hidden .= ' -->';
         $signature_hidden .= PHP_EOL;
-        
+
         return $signature_hidden;
-    }   
-        
+    }
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Page redirection
-    * 
-    * @param String $page
-    * @param Bool $is_url
-    * @param Bool $to_exit
-    * 
+    *
+    * @param string $page
+    * @param bool $is_url
+    * @param bool $to_exit
+    *
     * @return void
     */
     public function redirect_to_page($page, $is_url=FALSE, $to_exit=TRUE)
     {
         $url = $is_url ? $page : $this->host . $page;
-        
+
         if ( ! headers_sent())
         {
             header('HTTP/1.1 301 Moved Permanently');
             header('Location: ' . $url);
             header('Connection: close');
         }
-        
+
         echo '<html>';
         echo '<head><title>Redirecting you...</title>';
         echo '<meta http-equiv="Refresh" content="0;url=';
@@ -700,9 +700,9 @@ class Website {
         echo 'If you are not, please click on the link above.<br />';
         echo '</body>';
         echo '</html>';
-        
+
         $to_exit ? exit : NULL;
     }
-    
+
     // -------------------------------------------------------------------------
 }

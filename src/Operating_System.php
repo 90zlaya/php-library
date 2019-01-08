@@ -15,13 +15,13 @@ namespace phplibrary;
 * Working with Operating System related data
 */
 class Operating_System {
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * List of operating systems
-    * 
-    * @var Array
+    *
+    * @var array
     */
     protected static $operating_systems = array(
         array(
@@ -40,18 +40,18 @@ class Operating_System {
             'name' => 'Linux',
         ),
     );
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
     * Gets operating systems list
     * 
-    * @return Array
+    * @return array
     */
     public static function get_list()
     {
         return self::$operating_systems;
     }
-    
+
     // -------------------------------------------------------------------------
 }

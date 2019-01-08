@@ -21,7 +21,7 @@ class Sorter {
     /**
     * Sorter class report
     *
-    * @var Array
+    * @var array
     */
     protected $report = array(
         'folders' => array(
@@ -56,7 +56,7 @@ class Sorter {
     /**
     * Deploy values
     *
-    * @var Array
+    * @var array
     */
     protected $deploy = array();
 
@@ -65,7 +65,7 @@ class Sorter {
     /**
     * Class constructor
     *
-    * @param Array $params
+    * @param array $params
     *
     * @return void
     */
@@ -110,7 +110,7 @@ class Sorter {
     /**
     * Deploy sorting process
     *
-    * @return Bool
+    * @return bool
     */
     public function deploy()
     {
@@ -132,7 +132,7 @@ class Sorter {
     /**
     * Crawl for files
     *
-    * @return Array
+    * @return array
     */
     protected function get_files()
     {
@@ -155,8 +155,7 @@ class Sorter {
                         $extension         = pathinfo($file, PATHINFO_EXTENSION);
                         $extension_lowered = strtolower($extension);
 
-                        if
-                        (
+                        if (
                             empty($this->deploy['types']) ||
                             in_array($extension_lowered, $this->deploy['types'])
                         )
@@ -252,9 +251,9 @@ class Sorter {
     /**
     * Transport files to created directories
     *
-    * @param Array $files
-    * @param String $operation
-    * @param Bool $overwrite
+    * @param array $files
+    * @param string $operation
+    * @param bool $overwrite
     *
     * @return void
     */
@@ -303,10 +302,10 @@ class Sorter {
     /**
     * Execute operation
     *
-    * @param String $operation
-    * @param String $location_from
-    * @param String $location_to
-    * @param String $item
+    * @param string $operation
+    * @param string $location_from
+    * @param string $location_to
+    * @param string $item
     *
     * @return void
     */
@@ -330,7 +329,7 @@ class Sorter {
     /**
     * Information about sorting process
     *
-    * @return Array
+    * @return array
     */
     public function report()
     {
@@ -371,7 +370,7 @@ class Sorter {
     *
     * @param int $i
     *
-    * @return String
+    * @return string
     */
     private function folder_name($i)
     {
@@ -405,9 +404,9 @@ class Sorter {
     /**
     * Copy files from one location to another
     *
-    * @param String $location_from
-    * @param String $location_to
-    * @param String $file
+    * @param string $location_from
+    * @param string $location_to
+    * @param string $file
     *
     * @return void
     */
@@ -430,9 +429,9 @@ class Sorter {
     /**
     * Move files from one location to another
     *
-    * @param String $location_from
-    * @param String $location_to
-    * @param String $file
+    * @param string $location_from
+    * @param string $location_to
+    * @param string $file
     *
     * @return void
     */
@@ -455,7 +454,7 @@ class Sorter {
     /**
     * Check if class execution has errors
     *
-    * @return Bool
+    * @return bool
     */
     protected function has_errors()
     {
@@ -467,7 +466,7 @@ class Sorter {
     /**
     * Check if class has nothing to sort
     *
-    * @return Bool
+    * @return bool
     */
     protected function has_nothing_to_sort()
     {
@@ -482,7 +481,7 @@ class Sorter {
     /**
     * Check if sorting operation is successful
     *
-    * @return Bool
+    * @return bool
     */
     protected function is_sorting_successful()
     {
@@ -501,7 +500,7 @@ class Sorter {
     /**
     * Deploy operation states
     *
-    * @return Array
+    * @return array
     */
     private function operation_states()
     {
