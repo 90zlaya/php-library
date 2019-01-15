@@ -19,20 +19,11 @@ class Password {
     // -------------------------------------------------------------------------
 
     /**
-    * Minimum password size
+    * Method for openssl_digest in digest method
     *
-    * @var int
+    * @var string
     */
-    protected static $size_minimum = 6;
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Optimum password size
-    *
-    * @var int
-    */
-    protected static $size_optimum = 9;
+    public static $method = 'sha512';
 
     // -------------------------------------------------------------------------
 
@@ -55,6 +46,30 @@ class Password {
     // -------------------------------------------------------------------------
 
     /**
+    * Password sizes
+    *
+    * @var array
+    */
+    private static $sizes = array(
+        'minimum' => 6,
+        'optimum' => 9,
+    );
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Encode/decode replaceable characters
+    *
+    * @var array
+    */
+    private static $replaceables = array(
+        'search'  => '+/=',
+        'replace' => '-_,',
+    );
+
+    // -------------------------------------------------------------------------
+
+    /**
     * Generates new unreadable password
     *
     * @param int $size_optimum
@@ -64,7 +79,7 @@ class Password {
     */
     public static function new_unreadable($size_optimum=0, $letters='')
     {
-        empty($size_optimum) ? $size_optimum = self::$size_optimum : NULL;
+        empty($size_optimum) ? $size_optimum = self::$sizes['optimum'] : NULL;
 
         empty($letters) ? $letters = self::$letters : NULL;
 
@@ -83,7 +98,7 @@ class Password {
     */
     public static function new_readable($size_optimum=0, $words='')
     {
-        empty($size_optimum) ? $size_optimum = self::$size_optimum : NULL;
+        empty($size_optimum) ? $size_optimum = self::$sizes['optimum'] : NULL;
 
         empty($words) ? $words = self::$words : NULL;
 
@@ -104,11 +119,19 @@ class Password {
 
         if ($size_optimum > 2)
         {
-            return substr($new_password, 0, $size_optimum-strlen($number)) . $number;
+            return substr(
+                $new_password,
+                0,
+                $size_optimum-strlen($number)
+            ) . $number;
         }
         else
         {
-            return substr($new_password, 0, $size_optimum);
+            return substr(
+                $new_password,
+                0,
+                $size_optimum
+            );
         }
     }
 
@@ -128,7 +151,7 @@ class Password {
         $h        = 0;
         $size     = strlen($string);
 
-        if ($size >= self::$size_minimum)
+        if ($size >= self::$sizes['minimum'])
         {
             foreach (count_chars($string, 1) as $v)
             {
@@ -152,13 +175,17 @@ class Password {
     /**
     * Base 64 encode
     *
-    * @param string $plainText
+    * @param string $plain_text
     *
     * @return string
     */
-    public static function encode($plainText)
+    public static function encode($plain_text)
     {
-        return strtr(base64_encode($plainText), '+/=', '-_,');
+        return strtr(
+            base64_encode($plain_text),
+            self::$replaceables['search'],
+            self::$replaceables['replace']
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -166,13 +193,42 @@ class Password {
     /**
     * Base 64 decode
     *
-    * @param string $plainText
+    * @param string $plain_text
     *
     * @return string
     */
-    public static function decode($plainText)
+    public static function decode($plain_text)
     {
-        return base64_decode(strtr($plainText, '-_,', '+/='));
+        return base64_decode(
+            strtr(
+                $plain_text,
+                self::$replaceables['replace'],
+                self::$replaceables['search']
+            )
+        );
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Computes a digest
+    *
+    * @param string $plain_text
+    *
+    * @return mixed
+    */
+    public static function digest($plain_text)
+    {
+        if (
+            ! empty($plain_text) &&
+            ! empty(self::$method) &&
+            in_array(self::$method, openssl_get_md_methods())
+        )
+        {
+            return openssl_digest($plain_text, self::$method);
+        }
+
+        return FALSE;
     }
 
     // -------------------------------------------------------------------------

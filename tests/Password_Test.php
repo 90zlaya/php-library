@@ -21,12 +21,18 @@ class Password_Test extends Test_Case {
 
     /**
     * Data for testing password methods
-    * 
+    *
     * @var array
     */
     protected $password_data = array(
-        'string'  => 'T3stPa$$w0r6',
-        'encoded' => 'VDNzdFBhJCR3MHI2',
+        'string'   => 'T3stPa$$w0r6',
+        'encoded'  => 'VDNzdFBhJCR3MHI2',
+        'digested' => array(
+            'sha512' => '9ee343313e04a742d9f1345d87a0b5aa3fe90aba8afee4339d3da988acce62b7349d5dce1d58c091a2ae7e379e6ac0d2fc24db66371a476678b00d941223cc84',
+            'sha256' => '4f2a67abe54576ac3690b78669c807053ddd82ce911f1ef39e2a093b33260ddf',
+            'sha1'   => 'a15e8bf186b2711ae305382eb97bcf53dd215498',
+            'md5'    => '4f809d0e0f25a98a0a6fa48b06bd5b36',
+        ),
     );
 
     // -------------------------------------------------------------------------
@@ -46,6 +52,103 @@ class Password_Test extends Test_Case {
         $this->assertInternalType('string', $decoded);
         $this->assertEquals($decoded, $this->password_data['string']);
         $this->assertEquals($encoded, $this->password_data['encoded']);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing digest method - default approach
+    */
+    public function test_digest_method_default_approach()
+    {
+        $result = password::digest($this->password_data['string']);
+
+        $this->assertInternalType('string', $result);
+        $this->assertEquals(
+            $this->password_data['digested']['sha512'],
+            $result
+        );
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing digest method - empty input
+    */
+    public function test_digest_method_empty_input()
+    {
+        $inputs = array(
+            '',
+            0,
+            NULL,
+            FALSE,
+        );
+
+        foreach ($inputs as $input)
+        {
+            $result = password::digest($input);
+
+            $this->assertFalse($result);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing digest method - different methods
+    */
+    public function test_digest_method_different_methods()
+    {
+        $methods = array(
+            'sha512',
+            'sha256',
+            'sha1',
+            'md5',
+        );
+
+        foreach ($methods as $method)
+        {
+            password::$method = $method;
+
+            $result = password::digest($this->password_data['string']);
+
+            $this->assertInternalType('string', $result);
+            $this->assertNotEmpty($result);
+            $this->assertNotFalse($result);
+
+            if (array_key_exists($method, $this->password_data['digested']))
+            {
+                $this->assertEquals(
+                    $this->password_data['digested'][$method],
+                    $result
+                );
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing digest method - false methods
+    */
+    public function test_digest_method_false_methods()
+    {
+        $methods = array(
+            'not-a-method',
+            '',
+            0,
+            NULL,
+            FALSE,
+        );
+
+        foreach ($methods as $method)
+        {
+            password::$method = $method;
+
+            $result = password::digest($this->password_data['string']);
+
+            $this->assertFalse($result);
+        }
     }
 
     // -------------------------------------------------------------------------

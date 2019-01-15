@@ -11,6 +11,7 @@ New
 ----------------
 
 * Dump: new class developed and tested
+* Password: digest method added
 * User_Agent: detect_operating_system method added
 
 Since php-library v1.5.0 (6-Apr-2018)
