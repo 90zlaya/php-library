@@ -69,21 +69,15 @@ class Sorter_Test extends Test_Case {
             self::$locations['movable'];
 
         $paths = array(
-            array(
-                'location' => self::$locations['paths']['destination'],
-                'mode'     => '0777',
-            ),
-            array(
-                'location' => self::$locations['paths']['movable'],
-                'mode'     => '0777',
-            ),
+            self::$locations['paths']['destination'],
+            self::$locations['paths']['movable'],
         );
 
         foreach ($paths as $path)
         {
-            if ( ! file_exists($path['location']))
+            if ( ! file_exists($path))
             {
-                mkdir($path['location'], $path['mode']);
+                mkdir($path);
             }
         }
 
