@@ -50,7 +50,7 @@ class File_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * File test setup before class method
+    * File test setup before File
     */
     public static function setUpBeforeClass()
     {
@@ -67,7 +67,7 @@ class File_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * File_Test setup method
+    * File test setup method
     */
     protected function setUp()
     {
@@ -80,7 +80,7 @@ class File_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * File_Test precondition method
+    * File test precondition method
     */
     protected function assertPreConditions()
     {
@@ -191,7 +191,7 @@ class File_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * File test tear down after class method
+    * File test tear down after File
     */
     public static function tearDownAfterClass()
     {

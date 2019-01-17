@@ -197,7 +197,7 @@ class Geo_Plugin {
 
     /**
     * Information from geoPlugin
-    * 
+    *
     * @param string $ip
     *
     * @return mixed
@@ -211,7 +211,7 @@ class Geo_Plugin {
         $host = str_replace('{IP}', $ip, $this->geo_plugin_service);
 
         $response = web_service::response($host, array(
-            'user_agent' => 'Geo_Plugin class from bit.ly/php-library',
+            'user_agent' => 'Geo_Plugin from bit.ly/php-library',
         ));
 
         $geo_information = unserialize($response);

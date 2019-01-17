@@ -2,7 +2,7 @@
 /**
 * Import
 *
-* Import data from file using customisation class of PHPOffice/PhpSpreadsheet
+* Import data from file using customisation of PHPOffice/PhpSpreadsheet
 * Location: https://github.com/PHPOffice/PhpSpreadsheet
 *
 * @package      PHP Library
@@ -15,7 +15,7 @@ namespace phplibrary;
 use PhpOffice\PhpSpreadsheet\IOFactory as IOFactory;
 
 /**
-* Import data from file using customisation class of PHPOffice/PhpSpreadsheet
+* Import data from file using customisation of PHPOffice/PhpSpreadsheet
 */
 class Import {
 
@@ -48,7 +48,7 @@ class Import {
 
     /**
     * Import data from file
-    * 
+    *
     * @param string $file_path
     *
     * @return mixed

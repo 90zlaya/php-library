@@ -119,7 +119,7 @@ class Web_Service_Test extends Test_Case {
             array(),
             array(
                 'header'          => 0,
-                'user_agent'      => 'PHP Library: Web_Service class test',
+                'user_agent'      => 'PHP Library: Web_Service test',
                 'binary_transfer' => 1,
             ),
         );

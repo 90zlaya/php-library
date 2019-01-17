@@ -121,7 +121,7 @@ class Dump {
     // -------------------------------------------------------------------------
 
     /**
-    * Get class execution messages
+    * Get execution messages
     *
     * @param string $type
     *
@@ -165,7 +165,7 @@ class Dump {
     // -------------------------------------------------------------------------
 
     /**
-    * Check if class execution has errors
+    * Check if execution has errors
     *
     * @return bool
     */

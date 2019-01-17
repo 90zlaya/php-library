@@ -2,7 +2,7 @@
 /**
 * Export
 *
-* Export files using customisation class of PHPOffice/PhpSpreadsheet
+* Export files using customisation of PHPOffice/PhpSpreadsheet
 * Location: https://github.com/PHPOffice/PhpSpreadsheet
 *
 * @package      PHP Library
@@ -18,7 +18,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet as Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Cell\DataType as DataType;
 
 /**
-* Export files using customisation class of PHPOffice/PhpSpreadsheet
+* Export files using customisation of PHPOffice/PhpSpreadsheet
 */
 class Export {
 

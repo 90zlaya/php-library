@@ -154,15 +154,10 @@ class Password_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Testing new_readable and new_unreadable methods
+    * Testing new_readable method
     */
-    public function test_new_readable_and_unreadable_method()
+    public function test_new_readable_method()
     {
-        $result = password::new_unreadable();
-
-        $this->assertNotEmpty($result);
-        $this->assertNotFalse($result);
-
         $result = password::new_readable();
 
         $this->assertNotEmpty($result);
@@ -172,6 +167,19 @@ class Password_Test extends Test_Case {
         $words .= 'Longing,Seventeen,Homecoming,Freight Car';
 
         $result = password::new_readable(1, $words);
+
+        $this->assertNotEmpty($result);
+        $this->assertNotFalse($result);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing new_unreadable method
+    */
+    public function test_new_unreadable_method()
+    {
+        $result = password::new_unreadable();
 
         $this->assertNotEmpty($result);
         $this->assertNotFalse($result);

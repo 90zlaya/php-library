@@ -66,7 +66,7 @@ class Dump_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Dump test setup before class method
+    * Dump test setup before Dump
     */
     public static function setUpBeforeClass()
     {
@@ -235,7 +235,7 @@ class Dump_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Dump test tear down after class method
+    * Dump test tear down after Dump
     */
     public static function tearDownAfterClass()
     {

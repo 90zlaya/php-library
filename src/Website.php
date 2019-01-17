@@ -2,7 +2,7 @@
 /**
 * Website
 *
-* Use this class when working with website related data.
+* Use when working with website related data.
 *
 * @package      PHP Library
 * @subpackage   phplibrary
@@ -14,7 +14,7 @@ namespace phplibrary;
 use Exception as Exception;
 
 /**
-* Use this class when working with website related data
+* Use when working with website related data
 */
 class Website {
 
@@ -197,19 +197,19 @@ class Website {
         isset($params['name'])
             ? $this->name = $params['name']
             : array_push($this->errors, array(
-                'Please set "name" parameter when using class constructor',
+                'Please set "name" parameter when using constructor',
             ));
 
         isset($params['host'])
             ? $this->host = $params['host']
             : array_push($this->errors, array(
-                'Please set "host" parameter when using class constructor',
+                'Please set "host" parameter when using constructor',
             ));
 
         isset($params['made'])
             ? $this->made = $params['made']
             : array_push($this->errors, array(
-                'Please set "made" parameter when using class constructor',
+                'Please set "made" parameter when using constructor',
             ));
 
         empty($params['language'])

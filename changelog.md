@@ -4,6 +4,7 @@ Since php-library v1.5.1 (07-Dec-2018)
 Important
 ----------------
 
+* File_Version: class removed from library
 * Sorter: multidimensional_array method moved to Format class
 * Sorter: entire class refactored
 

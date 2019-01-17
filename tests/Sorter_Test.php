@@ -46,7 +46,7 @@ class Sorter_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Sorter test setup before class method
+    * Sorter test setup before Setup
     */
     public static function setUpBeforeClass()
     {
@@ -69,15 +69,21 @@ class Sorter_Test extends Test_Case {
             self::$locations['movable'];
 
         $paths = array(
-            self::$locations['paths']['destination'],
-            self::$locations['paths']['movable'],
+            array(
+                'location' => self::$locations['paths']['destination'],
+                'mode'     => '0777',
+            ),
+            array(
+                'location' => self::$locations['paths']['movable'],
+                'mode'     => '0777',
+            ),
         );
 
         foreach ($paths as $path)
         {
-            if ( ! file_exists($path))
+            if ( ! file_exists($path['location']))
             {
-                mkdir($path);
+                mkdir($path['location'], $path['mode']);
             }
         }
 
@@ -217,9 +223,9 @@ class Sorter_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Test deploy method for nonexistent parameters
+    * Test deploy method for empty parameters
     */
-    public function test_deploy_method_for_nonexistent_parameters()
+    public function test_deploy_method_for_empty_parameters()
     {
         $sorter = new sorter(array());
 
@@ -290,9 +296,22 @@ class Sorter_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Sorter test tear down after class method
+    * Sorter test tear down after Sorter
     */
     public static function tearDownAfterClass()
+    {
+        self::delete_destination_folder_and_files();
+        self::delete_movable_folder_and_files();
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Delete destination folder and files
+    *
+    * @var void
+    */
+    private static function delete_destination_folder_and_files()
     {
         $listing = directory_lister::listing(array(
             'directory' => self::$locations['paths']['destination'],
@@ -309,13 +328,23 @@ class Sorter_Test extends Test_Case {
             'method'    => 'folders',
         ));
 
-        foreach ($listing['listing']['path'] as $path)
+        foreach ($listing['listing']['path'] as $item)
         {
-            rmdir($path);
+            rmdir($item);
         }
 
         rmdir(self::$locations['paths']['destination']);
+    }
 
+    // -------------------------------------------------------------------------
+
+    /**
+    * Delete movable folder and files
+    *
+    * @var void
+    */
+    private static function delete_movable_folder_and_files()
+    {
         $listing = directory_lister::listing(array(
             'directory' => self::$locations['paths']['movable'],
             'method'    => 'files',

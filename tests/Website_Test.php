@@ -2,7 +2,7 @@
 /**
 * Website_Test
 *
-* Use this class when working with website related data.
+* Works with website related data.
 *
 * @package      PHP Library
 * @subpackage   phplibrary
@@ -30,7 +30,7 @@ class Website_Test extends Test_Case {
 
     /**
     * Website constructor data
-    * 
+    *
     * @var array
     */
     private $website_data = array(
@@ -142,9 +142,13 @@ class Website_Test extends Test_Case {
     */
     public function test_image_size_method_with_existent_image()
     {
-        $result = $this->website_object->image_size(
-            'https://php-library.zlatanstajic.com/assets/img/phplibrary-icon.png'
-        );
+        $image  = 'https://camo.githubusercontent.com/b4c7dde9d26720006785acf';
+        $image .= '5423a7b5348d03a46/68747470733a2f2f7068702d6c6962726172792e';
+        $image .= '7a6c6174616e7374616a69632e636f6d2f6173736574732f696d672f70';
+        $image .= '68706c6962726172792d6c6f676f2d626c75652e706e673f636c656172';
+        $image .= '5f63616368653d31';
+
+        $result = $this->website_object->image_size($image);
 
         $this->assertNotFalse($result);
         $this->assertInternalType('array', $result);

@@ -19,7 +19,7 @@ class Sorter {
     // -------------------------------------------------------------------------
 
     /**
-    * Sorter class report
+    * Sorter report
     *
     * @var array
     */
@@ -452,7 +452,7 @@ class Sorter {
     // -------------------------------------------------------------------------
 
     /**
-    * Check if class execution has errors
+    * Check if execution has errors
     *
     * @return bool
     */
@@ -464,7 +464,7 @@ class Sorter {
     // -------------------------------------------------------------------------
 
     /**
-    * Check if class has nothing to sort
+    * Check if it has nothing to sort
     *
     * @return bool
     */
