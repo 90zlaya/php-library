@@ -20,6 +20,29 @@ class File_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
+    * Parameters for image method
+    *
+    * @var array
+    */
+    private $image_params = array(
+        'show'        => 'logo.png',
+        'do_not_show' => 'no-background.jpg',
+        'location'    => 'https://www.dis.rs/images/',
+        'default'     => 'download.png',
+    );
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * URL for force_download method
+    *
+    * @var string
+    */
+    private $url = 'https://www.dis.rs/images/logo.png';
+
+    // -------------------------------------------------------------------------
+
+    /**
     * Locations for test setup
     *
     * @var array
@@ -74,6 +97,11 @@ class File_Test extends Test_Case {
         $this->file = array(
             'location' => realpath('outsource/file/') . DIRECTORY_SEPARATOR,
             'name'     => 'file.txt',
+        );
+
+        file::$image = array(
+            'location' => $this->image_params['location'],
+            'default'  => $this->image_params['default'],
         );
     }
 
@@ -165,10 +193,8 @@ class File_Test extends Test_Case {
     */
     public function test_force_download_method()
     {
-        $this->assertNull(file::force_download(
-            'php-library.jpg',
-            'https://link.zlatanstajic.com/images/portfolio/'
-        ));
+        $this->assertNull(file::force_download($this->url));
+        $this->assertNull(file::force_download($this->url), FALSE);
     }
 
     // -------------------------------------------------------------------------
@@ -186,6 +212,40 @@ class File_Test extends Test_Case {
         ));
 
         $this->assertFalse(file::write_to_file(NULL, NULL));
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing image method - show image
+    */
+    public function test_image_method_show_image()
+    {
+        $result = file::image($this->image_params['show']);
+
+        $this->assertNotEmpty($result);
+        $this->assertInternalType('string', $result);
+        $this->assertEquals(
+            $result,
+            $this->image_params['location'] . $this->image_params['show']
+        );
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing image method - do not show image
+    */
+    public function test_image_method_do_not_show_image()
+    {
+        $result = file::image($this->image_params['do_not_show']);
+
+        $this->assertNotEmpty($result);
+        $this->assertInternalType('string', $result);
+        $this->assertEquals(
+            $result,
+            $this->image_params['location'] . $this->image_params['default']
+        );
     }
 
     // -------------------------------------------------------------------------

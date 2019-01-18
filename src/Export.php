@@ -25,25 +25,32 @@ class Export {
     // -------------------------------------------------------------------------
 
     /**
-    * File name
+    * Instance of Spreadsheet object
     *
-    * @var string
+    * @var Spreadsheet
     */
-    protected static $file_name = 'file_export';
+    private static $spreadsheet;
 
     // -------------------------------------------------------------------------
 
     /**
-    * Document properties
+    * Properties for file export
     *
     * @var array
     */
-    protected static $document_properties = array(
-        'creator'     => 'Maarten Balliauw',
-        'title'       => 'Office 2007 XLSX Test Document',
-        'description' => 'Test document for Office 2007 XLSX, generated using PHP classes.',
-        'keywords'    => 'office 2007 openxml php',
-        'category'    => 'Test result file',
+    private static $properties = array(
+        'file_name'           => 'file_export',
+        'type'                => 'xlsx',
+        'head'                => array(),
+        'data'                => array(),
+        'data_types'          => array(),
+        'document_properties' => array(
+            'creator'     => 'Maarten Balliauw',
+            'title'       => 'Office 2007 XLSX Test Document',
+            'description' => 'Test document for Office 2007 XLSX, generated using PHP classes.',
+            'keywords'    => 'office 2007 openxml php',
+            'category'    => 'Test result file',
+        ),
     );
 
     // -------------------------------------------------------------------------
@@ -53,7 +60,7 @@ class Export {
     *
     * @var array
     */
-    protected static $cells = array(
+    private static $cells = array(
         '',
         'A',
         'B',
@@ -90,7 +97,7 @@ class Export {
     *
     * @var array
     */
-    protected static $allowed_types = array(
+    private static $allowed_types = array(
         'xlsx',
         'xls',
         'csv',
@@ -108,63 +115,147 @@ class Export {
     */
     public static function export_file($params)
     {
-        $head        = isset($params['head']) ? $params['head'] : array();
-        $data        = isset($params['data']) ? $params['data'] : array();
-        $type        = isset($params['type']) ? $params['type'] : 'xlsx';
-        $data_types  = isset($params['data_types']) ? $params['data_types'] : array();
-        $file_name   = isset($params['file_name']) ? $params['file_name'] : self::$file_name;
-        $creator     = isset($params['document_properties']['creator']) ? $params['document_properties']['creator'] : self::$document_properties['creator'];
-        $title       = isset($params['document_properties']['title']) ? $params['document_properties']['title'] : self::$document_properties['title'];
-        $description = isset($params['document_properties']['description']) ? $params['document_properties']['description'] : self::$document_properties['description'];
-        $keywords    = isset($params['document_properties']['keywords']) ? $params['document_properties']['keywords'] : self::$document_properties['keywords'];
-        $category    = isset($params['document_properties']['category']) ? $params['document_properties']['category'] : self::$document_properties['category'];
+        self::set_properties($params);
+        self::create_spreadsheet_object();
+        self::deploy();
+    }
 
+    // -------------------------------------------------------------------------
+
+    /**
+    * Setting properties for file export
+    *
+    * @param array $params
+    *
+    * @var void
+    */
+    private static function set_properties($params)
+    {
+        isset($params['head'])
+            ? self::$properties['head'] = $params['head']
+            : NULL;
+
+        isset($params['data'])
+            ? self::$properties['data'] = $params['data']
+            : NULL;
+
+        isset($params['type'])
+            ? self::$properties['type'] = $params['type']
+            : NULL;
+
+        isset($params['data_types'])
+            ? self::$properties['data_types'] = $params['data_types']
+            : NULL;
+
+        isset($params['file_name'])
+            ? self::$properties['file_name'] = $params['file_name']
+            : NULL;
+
+        isset($params['document_properties'])
+            ? self::set_document_properties($params['document_properties'])
+            : NULL;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Create Spreadsheet object
+    *
+    * @return void
+    */
+    private static function create_spreadsheet_object()
+    {
         // Create new Spreadsheet object
-        $spreadsheet = new Spreadsheet();
+        self::$spreadsheet = new Spreadsheet();
 
         // Set document properties
-        $spreadsheet->getProperties()->setCreator($creator);
-        $spreadsheet->getProperties()->setLastModifiedBy($creator);
-        $spreadsheet->getProperties()->setTitle($title);
-        $spreadsheet->getProperties()->setSubject($title);
-        $spreadsheet->getProperties()->setDescription($description);
-        $spreadsheet->getProperties()->setKeywords($keywords);
-        $spreadsheet->getProperties()->setCategory($category);
+        self::$spreadsheet->getProperties()->setCreator(self::$properties['document_properties']['creator']);
+        self::$spreadsheet->getProperties()->setLastModifiedBy(self::$properties['document_properties']['creator']);
+        self::$spreadsheet->getProperties()->setTitle(self::$properties['document_properties']['title']);
+        self::$spreadsheet->getProperties()->setSubject(self::$properties['document_properties']['title']);
+        self::$spreadsheet->getProperties()->setDescription(self::$properties['document_properties']['description']);
+        self::$spreadsheet->getProperties()->setKeywords(self::$properties['document_properties']['keywords']);
+        self::$spreadsheet->getProperties()->setCategory(self::$properties['document_properties']['category']);
+    }
 
-        if ( ! headers_sent())
+    // -------------------------------------------------------------------------
+
+    /**
+    * Setting export document_properties
+    *
+    * @param array $params
+    *
+    * @return void
+    */
+    private static function set_document_properties($params)
+    {
+        $keys = array_keys(self::$properties['document_properties']);
+
+        foreach ($keys as $key)
         {
-            // Export type
-            switch ($type)
+            if (isset($params[$key]))
             {
-                case 'osp':
-                {
-                    self::line_arrangement($data);
-                    self::for_ie_ssl();
-                    self::to_osp($spreadsheet, $file_name);
-                    break;
-                }
-                case 'csv':
-                {
-                    $csv = self::line_arrangement($data);
-                    self::for_ie_ssl();
-                    self::to_csv($csv, $file_name);
-                    break;
-                }
-                case 'xls':
-                {
-                    self::cell_arrangement($spreadsheet, $head, $data, $data_types);
-                    self::for_ie_ssl();
-                    self::to_xls($spreadsheet, $file_name);
-                    break;
-                }
-                case 'xlsx':
-                {
-                    self::cell_arrangement($spreadsheet, $head, $data, $data_types);
-                    self::for_ie_ssl();
-                    self::to_xlsx($spreadsheet, $file_name);
-                    break;
-                }
-                default: NULL;
+                self::$properties['document_properties'][$key] = $params[$key];
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Deploy export after switching type
+    *
+    * @return void
+    */
+    private static function deploy()
+    {
+        switch (self::$properties['type'])
+        {
+            case 'osp':
+            {
+                self::line_arrangement(self::$properties['data']);
+                self::to_osp(self::$spreadsheet, self::$properties['file_name']);
+
+                break;
+            }
+            case 'csv':
+            {
+                $csv = self::line_arrangement(self::$properties['data']);
+                self::to_csv($csv, self::$properties['file_name']);
+
+                break;
+            }
+            case 'xls':
+            {
+                self::cell_arrangement(
+                    self::$spreadsheet,
+                    self::$properties['head'],
+                    self::$properties['data'],
+                    self::$properties['data_types']
+                );
+
+                self::to_xls(
+                    self::$spreadsheet,
+                    self::$properties['file_name']
+                );
+
+                break;
+            }
+            case 'xlsx':
+            {
+                self::cell_arrangement(
+                    self::$spreadsheet,
+                    self::$properties['head'],
+                    self::$properties['data'],
+                    self::$properties['data_types']
+                );
+
+                self::to_xlsx(
+                    self::$spreadsheet,
+                    self::$properties['file_name']
+                );
+
+                break;
             }
         }
     }
@@ -181,19 +272,23 @@ class Export {
     */
     private static function to_osp($spreadsheet, $file_name)
     {
-        // Redirect output to a client’s web browser (CSV)
-        header('Content-Type: text/txt');
-        header('Content-Disposition: attachment;filename="' . $file_name . '.osp"');
-        header('Cache-Control: max-age=0');
-        // If you're serving to IE 9, then the following may be needed
-        header('Cache-Control: max-age=1');
+        if ( ! headers_sent())
+        {
+            // Redirect output to a client’s web browser (CSV)
+            header('Content-Type: text/txt');
+            header('Content-Disposition: attachment;filename="' . $file_name . '.osp"');
+            header('Cache-Control: max-age=0');
 
-        ob_end_flush();
+            // If you're serving to IE 9, then the following may be needed
+            header('Cache-Control: max-age=1');
 
-        $writer = IOFactory::createWriter($spreadsheet, 'Csv');
-        $writer->save('php://output');
+            ob_end_flush();
 
-        exit;
+            $writer = IOFactory::createWriter($spreadsheet, 'Csv');
+            $writer->save('php://output');
+
+            exit;
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -208,18 +303,22 @@ class Export {
     */
     private static function to_csv($csv, $file_name)
     {
-        // Redirect output to a client’s web browser (CSV)
-        header('Content-Type: text/csv');
-        header('Content-Disposition: attachment;filename="' . $file_name . '.csv"');
-        header('Cache-Control: max-age=0');
-        // If you're serving to IE 9, then the following may be needed
-        header('Cache-Control: max-age=1');
+        if ( ! headers_sent())
+        {
+            // Redirect output to a client’s web browser (CSV)
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename="' . $file_name . '.csv"');
+            header('Cache-Control: max-age=0');
 
-        ob_end_flush();
+            // If you're serving to IE 9, then the following may be needed
+            header('Cache-Control: max-age=1');
 
-        print $csv;
+            ob_end_flush();
 
-        exit;
+            print $csv;
+
+            exit;
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -234,17 +333,21 @@ class Export {
     */
     private static function to_xls($spreadsheet, $file_name)
     {
-        // Redirect output to a client’s web browser (Excel5)
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $file_name . '.xls"');
-        header('Cache-Control: max-age=0');
-        // If you're serving to IE 9, then the following may be needed
-        header('Cache-Control: max-age=1');
+        if ( ! headers_sent())
+        {
+            // Redirect output to a client’s web browser (Excel5)
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment;filename="' . $file_name . '.xls"');
+            header('Cache-Control: max-age=0');
 
-        $writer = IOFactory::createWriter($spreadsheet, 'Xls');
-        $writer->save('php://output');
+            // If you're serving to IE 9, then the following may be needed
+            header('Cache-Control: max-age=1');
 
-        exit;
+            $writer = IOFactory::createWriter($spreadsheet, 'Xls');
+            $writer->save('php://output');
+
+            exit;
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -259,33 +362,21 @@ class Export {
     */
     private static function to_xlsx($spreadsheet, $file_name)
     {
-        // Redirect output to a client’s web browser (Excel2007)
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $file_name . '.xlsx"');
-        header('Cache-Control: max-age=0');
+        if ( ! headers_sent())
+        {
+            // Redirect output to a client’s web browser (Excel2007)
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="' . $file_name . '.xlsx"');
+            header('Cache-Control: max-age=0');
 
-        // If you're serving to IE 9, then the following may be needed
-        header('Cache-Control: max-age=1');
+            // If you're serving to IE 9, then the following may be needed
+            header('Cache-Control: max-age=1');
 
-        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $writer->save('php://output');
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save('php://output');
 
-        exit;
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Serving filest for Internet Explorer over SSL
-    *
-    * @return void
-    */
-    private static function for_ie_ssl()
-    {
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-        header('Pragma: public'); // HTTP/1.0
+            exit;
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -314,7 +405,15 @@ class Export {
                     $value .= $item_indexed[$i] . ';';
                 }
 
-                echo $value . "\r\n";
+                if ( ! headers_sent())
+                {
+                    echo $value . "\r\n";
+                }
+            }
+
+            if (headers_sent())
+            {
+                ob_end_flush();
             }
         }
 

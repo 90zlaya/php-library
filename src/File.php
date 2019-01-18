@@ -19,6 +19,41 @@ class File {
     // -------------------------------------------------------------------------
 
     /**
+    * Data for image method
+    *
+    * @var array
+    */
+    public static $image = array(
+        'location' => 'users/',
+        'default'  => 'default.png',
+    );
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get full image link
+    *
+    * @param string $name
+    *
+    * @return string $link
+    */
+    public static function image($name)
+    {
+        $link  = self::$image['location'];
+        $link .= $name;
+
+        if (empty($name) || ! getimagesize($link))
+        {
+            $link  = self::$image['location'];
+            $link .= self::$image['default'];
+        }
+
+        return $link;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
     * Writing data to file
     *
     * @param string $file_location
@@ -140,22 +175,27 @@ class File {
     /**
     * Force file download
     *
-    * @param string $file_name
-    * @param string $full_url
+    * @param string $url
+    * @param bool $to_download
     *
     * @return void
     */
-    public static function force_download($file_name, $full_url)
+    public static function force_download($url, $to_download=TRUE)
     {
-        if ( ! headers_sent())
+        if ($to_download)
         {
-            header('Content-Type: application/octet-stream');
-            header('Content-Transfer-Encoding: Binary');
-            header('Content-disposition: attachment; filename="' . $file_name . '"');
+            $file = pathinfo($url, PATHINFO_BASENAME);
 
-            readfile($full_url);
+            if ( ! headers_sent())
+            {
+                header('Content-Type: application/octet-stream');
+                header('Content-Transfer-Encoding: Binary');
+                header('Content-disposition: attachment; filename="' . $file . '"');
 
-            exit;
+                readfile($url);
+
+                exit;
+            }
         }
     }
 
