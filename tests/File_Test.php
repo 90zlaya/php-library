@@ -34,15 +34,6 @@ class File_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * URL for force_download method
-    *
-    * @var string
-    */
-    private $url = 'https://www.dis.rs/images/logo.png';
-
-    // -------------------------------------------------------------------------
-
-    /**
     * Locations for test setup
     *
     * @var array
@@ -193,8 +184,10 @@ class File_Test extends Test_Case {
     */
     public function test_force_download_method()
     {
-        $this->assertNull(file::force_download($this->url));
-        $this->assertNull(file::force_download($this->url), FALSE);
+        $this->assertNull(file::force_download(
+            $this->image_params['location'] .
+            $this->image_params['show']
+        ));
     }
 
     // -------------------------------------------------------------------------

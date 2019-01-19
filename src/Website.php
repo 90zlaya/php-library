@@ -662,47 +662,4 @@ class Website {
     }
 
     // -------------------------------------------------------------------------
-
-    /**
-    * Page redirection
-    *
-    * @param string $page
-    * @param bool $is_url
-    * @param bool $to_exit
-    *
-    * @return void
-    */
-    public function redirect_to_page($page, $is_url=FALSE, $to_exit=TRUE)
-    {
-        $url = $is_url ? $page : $this->host . $page;
-
-        if ( ! headers_sent())
-        {
-            header('HTTP/1.1 301 Moved Permanently');
-            header('Location: ' . $url);
-            header('Connection: close');
-        }
-
-        echo '<html>';
-        echo '<head><title>Redirecting you...</title>';
-        echo '<meta http-equiv="Refresh" content="0;url=';
-        echo $url;
-        echo '" />';
-        echo '</head>';
-        echo '<body onload="location.replace(\'';
-        echo $url;
-        echo '\')">';
-        echo 'You should be redirected to this URL:<br />';
-        echo '<a href="';
-        echo $url . '">';
-        echo $url;
-        echo '</a><br /><br />';
-        echo 'If you are not, please click on the link above.<br />';
-        echo '</body>';
-        echo '</html>';
-
-        $to_exit ? exit : NULL;
-    }
-
-    // -------------------------------------------------------------------------
 }

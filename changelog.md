@@ -8,6 +8,7 @@ Important
 * Sorter: multidimensional_array method moved to Format class
 * Sorter: entire class refactored
 * User: attributes and methods redefined and moved to File class
+* Website: redirect_to_page method removed
 
 New
 ----------------

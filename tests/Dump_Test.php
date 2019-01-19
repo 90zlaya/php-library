@@ -177,6 +177,22 @@ class Dump_Test extends Test_Case {
 
     /**
     * Testing mysql_dump method
+    * with override option enabled - testing is on
+    */
+    public function test_mysql_dump_method_default_params_testing_is_on()
+    {
+        $this->dump_object->testing = TRUE;
+
+        $result = $this->dump_object->mysql(TRUE);
+
+        $this->assertInternalType('bool', $result);
+        $this->assertFalse($result);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing mysql_dump method
     * with override option enabled
     */
     public function test_mysql_dump_method_override_enabled()

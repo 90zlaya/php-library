@@ -545,22 +545,4 @@ class Website_Test extends Test_Case {
     }
 
     // -------------------------------------------------------------------------
-
-    /**
-    * Test redirect_to_page method
-    */
-    public function test_redirect_to_page_method()
-    {
-        ob_start();
-
-        $this->assertNull($this->website_object->redirect_to_page(
-            'https://google.com/',
-            TRUE,
-            FALSE
-        ));
-
-        ob_end_clean();
-    }
-
-    // -------------------------------------------------------------------------
 }

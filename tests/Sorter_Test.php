@@ -35,12 +35,13 @@ class Sorter_Test extends Test_Case {
     * @var array
     */
     protected static $locations = array(
-        'folder'      => 'outsource/',
-        'subfolder'   => 'sorter/',
-        'destination' => 'destination/',
-        'source'      => 'source/',
-        'movable'     => 'movable/',
-        'paths'       => array(),
+        'folder'          => 'outsource/',
+        'subfolder'       => 'sorter/',
+        'destination'     => 'destination/',
+        'source'          => 'source/',
+        'movable'         => 'movable/',
+        'movable_testing' => 'movable_testing/',
+        'paths'           => array(),
     );
 
     // -------------------------------------------------------------------------
@@ -68,9 +69,16 @@ class Sorter_Test extends Test_Case {
             self::$locations['subfolder'] .
             self::$locations['movable'];
 
+        self::$locations['paths']['movable_testing'] =
+            realpath(self::$locations['folder']) .
+            DIRECTORY_SEPARATOR .
+            self::$locations['subfolder'] .
+            self::$locations['movable_testing'];
+
         $paths = array(
             self::$locations['paths']['destination'],
             self::$locations['paths']['movable'],
+            self::$locations['paths']['movable_testing'],
         );
 
         foreach ($paths as $path)
@@ -92,6 +100,11 @@ class Sorter_Test extends Test_Case {
                 $source['path'],
                 self::$locations['paths']['movable'] . $source['file']
             );
+
+            copy(
+                $source['path'],
+                self::$locations['paths']['movable_testing'] . $source['file']
+            );
         }
     }
 
@@ -110,6 +123,9 @@ class Sorter_Test extends Test_Case {
 
         $this->params['folders']['movable'] =
             realpath('outsource/sorter/movable/') . DIRECTORY_SEPARATOR;
+
+        $this->params['folders']['movable_testing'] =
+            realpath('outsource/sorter/movable_testing/') . DIRECTORY_SEPARATOR;
     }
 
     // -------------------------------------------------------------------------
@@ -173,6 +189,90 @@ class Sorter_Test extends Test_Case {
             $this->assertArrayHasKey('result', $report['array']);
             $this->assertEmpty($report['array']['result']['errors']);
         }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing deploy method - copy opteration - testing is on
+    */
+    public function test_deploy_method_copy_operation_testing_option()
+    {
+        $sorter = new sorter(array(
+            'where_to_read_files'         => $this->params['folders']['source'],
+            'where_to_create_directories' => $this->params['folders']['destination'],
+            'number_of_directories'       => 10,
+            'folder_sufix'                => 'xxx',
+            'operation'                   => 'c',
+            'overwrite'                   => TRUE,
+            'types'                       => array('jpg'),
+        ));
+
+        $sorter->testing = TRUE;
+
+        $deploy = $sorter->deploy();
+
+        $this->assertInternalType('bool', $deploy);
+        $this->assertFalse($deploy);
+
+        $report = $sorter->report();
+
+        $this->assertNotEmpty($report);
+        $this->assertInternalType('array', $report);
+        $this->assertArrayHasKey('bool', $report);
+        $this->assertInternalType('array', $report['bool']);
+        $this->assertTrue($report['bool']['no_errors']);
+        $this->assertFalse($report['bool']['successful_sorting']);
+        $this->assertFalse($report['bool']['something_to_sort']);
+        $this->assertArrayHasKey('string', $report);
+        $this->assertArrayHasKey('array', $report);
+        $this->assertInternalType('string', $report['string']);
+        $this->assertNotEmpty($report['string']);
+        $this->assertArrayHasKey('usage', $report['array']);
+        $this->assertArrayHasKey('result', $report['array']);
+        $this->assertEmpty($report['array']['result']['errors']);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing deploy method - move opteration - testing is on
+    */
+    public function test_deploy_method_move_operation_testing_option()
+    {
+        $sorter = new sorter(array(
+            'where_to_read_files'         => $this->params['folders']['movable_testing'],
+            'where_to_create_directories' => $this->params['folders']['destination'],
+            'number_of_directories'       => 10,
+            'folder_sufix'                => 'xxx',
+            'operation'                   => 'm',
+            'overwrite'                   => TRUE,
+            'types'                       => array('jpg'),
+        ));
+
+        $sorter->testing = TRUE;
+
+        $deploy = $sorter->deploy();
+
+        $this->assertInternalType('bool', $deploy);
+        $this->assertFalse($deploy);
+
+        $report = $sorter->report();
+
+        $this->assertNotEmpty($report);
+        $this->assertInternalType('array', $report);
+        $this->assertArrayHasKey('bool', $report);
+        $this->assertInternalType('array', $report['bool']);
+        $this->assertTrue($report['bool']['no_errors']);
+        $this->assertFalse($report['bool']['successful_sorting']);
+        $this->assertFalse($report['bool']['something_to_sort']);
+        $this->assertArrayHasKey('string', $report);
+        $this->assertArrayHasKey('array', $report);
+        $this->assertInternalType('string', $report['string']);
+        $this->assertNotEmpty($report['string']);
+        $this->assertArrayHasKey('usage', $report['array']);
+        $this->assertArrayHasKey('result', $report['array']);
+        $this->assertEmpty($report['array']['result']['errors']);
     }
 
     // -------------------------------------------------------------------------
@@ -296,6 +396,8 @@ class Sorter_Test extends Test_Case {
     {
         self::delete_destination_folder_and_files();
         self::delete_movable_folder_and_files();
+
+        rmdir(self::$locations['paths']['movable_testing']);
     }
 
     // -------------------------------------------------------------------------

@@ -19,6 +19,15 @@ class Sorter {
     // -------------------------------------------------------------------------
 
     /**
+    * Set to TRUE if being tested
+    *
+    * @var bool
+    */
+    public $testing = FALSE;
+
+    // -------------------------------------------------------------------------
+
+    /**
     * Sorter report
     *
     * @var array
@@ -216,7 +225,7 @@ class Sorter {
 
                     if ( ! file_exists($folder))
                     {
-                        if (mkdir($folder))
+                        if (mkdir($folder) && ! $this->testing)
                         {
                             $this->report['folders']['number']['created']++;
                             array_push(
@@ -412,7 +421,7 @@ class Sorter {
     */
     private function copy_files($location_from, $location_to, $file)
     {
-        if (copy($location_from, $location_to))
+        if (copy($location_from, $location_to) && ! $this->testing)
         {
             $this->report['files']['number']['copied']++;
             array_push($this->report['files']['report']['copied'], $file);
@@ -437,7 +446,7 @@ class Sorter {
     */
     private function move_files($location_from, $location_to, $file)
     {
-        if (rename($location_from, $location_to))
+        if (rename($location_from, $location_to) && ! $this->testing)
         {
             $this->report['files']['number']['moved']++;
             array_push($this->report['files']['report']['moved'], $file);

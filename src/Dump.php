@@ -21,6 +21,15 @@ class Dump {
     // -------------------------------------------------------------------------
 
     /**
+    * Set to TRUE if being tested
+    *
+    * @var bool
+    */
+    public $testing = FALSE;
+
+    // -------------------------------------------------------------------------
+
+    /**
     * Command for dump execution
     *
     * @var string
@@ -243,7 +252,7 @@ class Dump {
 
         array_push($this->messages['file'], $filename);
 
-        if (empty(filesize($filename)))
+        if (empty(filesize($filename)) || $this->testing)
         {
             array_push($this->messages['error'],
                 'Failed to dump ' .
@@ -274,11 +283,17 @@ class Dump {
     {
         $this->override = $override;
 
-        function_exists('exec')
-        ? NULL
-        : array_push($this->messages['error'],
-            'exec function disabled in PHP'
-        );
+        if ( ! function_exists('exec') || $this->testing)
+        {
+            array_push($this->messages['error'],
+                'exec function disabled in PHP'
+            );
+
+            if ($this->testing)
+            {
+                array_pop($this->messages['error']);
+            }
+        }
 
         if ($this->has_databases() && ! $this->has_errors())
         {

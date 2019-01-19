@@ -176,26 +176,22 @@ class File {
     * Force file download
     *
     * @param string $url
-    * @param bool $to_download
     *
     * @return void
     */
-    public static function force_download($url, $to_download=TRUE)
+    public static function force_download($url)
     {
-        if ($to_download)
+        if ( ! headers_sent())
         {
             $file = pathinfo($url, PATHINFO_BASENAME);
 
-            if ( ! headers_sent())
-            {
-                header('Content-Type: application/octet-stream');
-                header('Content-Transfer-Encoding: Binary');
-                header('Content-disposition: attachment; filename="' . $file . '"');
+            header('Content-Type: application/octet-stream');
+            header('Content-Transfer-Encoding: Binary');
+            header('Content-disposition: attachment; filename="' . $file . '"');
 
-                readfile($url);
+            readfile($url);
 
-                exit;
-            }
+            exit;
         }
     }
 
