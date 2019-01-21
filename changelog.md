@@ -5,6 +5,7 @@ Important
 ----------------
 
 * File_Version: class removed from library
+* Operating_System: class removed from library
 * Sorter: multidimensional_array method moved to Format class
 * Sorter: entire class refactored
 * User: attributes and methods redefined and moved to File class
