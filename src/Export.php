@@ -214,14 +214,27 @@ class Export {
             case 'osp':
             {
                 self::line_arrangement(self::$properties['data']);
-                self::to_osp(self::$spreadsheet, self::$properties['file_name']);
+
+                self::output(array(
+                    'content_type'     => 'text/txt',
+                    'file_extension'   => 'osp',
+                    'writer_extension' => 'Csv',
+                    'to_flush_ob'      => TRUE,
+                ));
 
                 break;
             }
             case 'csv':
             {
                 $csv = self::line_arrangement(self::$properties['data']);
-                self::to_csv($csv, self::$properties['file_name']);
+
+                self::output(array(
+                    'content_type'     => 'text/csv',
+                    'file_extension'   => 'csv',
+                    'writer_extension' => 'Csv',
+                    'to_flush_ob'      => TRUE,
+                    'print_data'       => $csv,
+                ));
 
                 break;
             }
@@ -234,10 +247,11 @@ class Export {
                     self::$properties['data_types']
                 );
 
-                self::to_xls(
-                    self::$spreadsheet,
-                    self::$properties['file_name']
-                );
+                self::output(array(
+                    'content_type'     => 'application/vnd.ms-excel',
+                    'file_extension'   => 'xls',
+                    'writer_extension' => 'Xls',
+                ));
 
                 break;
             }
@@ -250,10 +264,11 @@ class Export {
                     self::$properties['data_types']
                 );
 
-                self::to_xlsx(
-                    self::$spreadsheet,
-                    self::$properties['file_name']
-                );
+                self::output(array(
+                    'content_type'     => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    'file_extension'   => 'xlsx',
+                    'writer_extension' => 'Xlsx',
+                ));
 
                 break;
             }
@@ -263,117 +278,49 @@ class Export {
     // -------------------------------------------------------------------------
 
     /**
-    * Export files to Text (osp)
+    * Output for given parameters
     *
-    * @param Spreadsheet $spreadsheet
-    * @param string $file_name
-    *
-    * @return void
-    */
-    private static function to_osp($spreadsheet, $file_name)
-    {
-        if ( ! headers_sent())
-        {
-            // Redirect output to a client’s web browser (CSV)
-            header('Content-Type: text/txt');
-            header('Content-Disposition: attachment;filename="' . $file_name . '.osp"');
-            header('Cache-Control: max-age=0');
-
-            // If you're serving to IE 9, then the following may be needed
-            header('Cache-Control: max-age=1');
-
-            ob_end_flush();
-
-            $writer = IOFactory::createWriter($spreadsheet, 'Csv');
-            $writer->save('php://output');
-
-            exit;
-        }
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Export files to CSV (csv)
-    *
-    * @param string $csv
-    * @param string $file_name
+    * @param array $params
     *
     * @return void
     */
-    private static function to_csv($csv, $file_name)
+    private static function output($params)
     {
+        $file_name   = self::$properties['file_name'];
+        $spreadsheet = self::$spreadsheet;
+
+        $content_type     = $params['content_type'];
+        $file_extension   = $params['file_extension'];
+        $writer_extension = $params['writer_extension'];
+
+        $to_flush_ob = isset($params['to_flush_ob'])
+            ? $params['to_flush_ob']
+            : FALSE;
+
+        $print_data = isset($params['print_data'])
+            ? $params['print_data']
+            : FALSE;
+
         if ( ! headers_sent())
         {
-            // Redirect output to a client’s web browser (CSV)
-            header('Content-Type: text/csv');
-            header('Content-Disposition: attachment;filename="' . $file_name . '.csv"');
+            header('Content-Type: ' . $content_type);
+            header('Content-Disposition: attachment;filename="' . $file_name . '.' . $file_extension . '"');
             header('Cache-Control: max-age=0');
 
-            // If you're serving to IE 9, then the following may be needed
-            header('Cache-Control: max-age=1');
+            if ($to_flush_ob)
+            {
+                ob_end_flush();
+            }
 
-            ob_end_flush();
-
-            print $csv;
-
-            exit;
-        }
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Export files to Excel 5 (xls)
-    *
-    * @param Spreadsheet $spreadsheet
-    * @param string $file_name
-    *
-    * @return void
-    */
-    private static function to_xls($spreadsheet, $file_name)
-    {
-        if ( ! headers_sent())
-        {
-            // Redirect output to a client’s web browser (Excel5)
-            header('Content-Type: application/vnd.ms-excel');
-            header('Content-Disposition: attachment;filename="' . $file_name . '.xls"');
-            header('Cache-Control: max-age=0');
-
-            // If you're serving to IE 9, then the following may be needed
-            header('Cache-Control: max-age=1');
-
-            $writer = IOFactory::createWriter($spreadsheet, 'Xls');
-            $writer->save('php://output');
-
-            exit;
-        }
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Export files to Excel 2007 (xlsx)
-    *
-    * @param Spreadsheet $spreadsheet
-    * @param string $file_name
-    *
-    * @return void
-    */
-    private static function to_xlsx($spreadsheet, $file_name)
-    {
-        if ( ! headers_sent())
-        {
-            // Redirect output to a client’s web browser (Excel2007)
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="' . $file_name . '.xlsx"');
-            header('Cache-Control: max-age=0');
-
-            // If you're serving to IE 9, then the following may be needed
-            header('Cache-Control: max-age=1');
-
-            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-            $writer->save('php://output');
+            if (empty($print_data))
+            {
+                $writer = IOFactory::createWriter($spreadsheet, $writer_extension);
+                $writer->save('php://output');
+            }
+            else
+            {
+                print $print_data;
+            }
 
             exit;
         }

@@ -183,11 +183,9 @@ class File {
     {
         if ( ! headers_sent())
         {
-            $file = pathinfo($url, PATHINFO_BASENAME);
-
             header('Content-Type: application/octet-stream');
             header('Content-Transfer-Encoding: Binary');
-            header('Content-disposition: attachment; filename="' . $file . '"');
+            header('Content-disposition: attachment; filename="' . pathinfo($url, PATHINFO_BASENAME) . '"');
 
             readfile($url);
 
