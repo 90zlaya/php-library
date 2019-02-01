@@ -176,6 +176,25 @@ class User_Agent {
     // -------------------------------------------------------------------------
 
     /**
+    * List all operating systems
+    *
+    * @return array $operating_systems
+    */
+    public static function list_operating_systems()
+    {
+        $operating_systems = array();
+
+        foreach (self::$operating_systems as $key => $value)
+        {
+            $operating_systems[] = $value;
+        }
+
+        return $operating_systems;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
     * List all devices
     *
     * @return array

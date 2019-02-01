@@ -21,13 +21,31 @@ class User_Agent_Test extends Test_Case {
 
     /**
     * List of user agents
-    * 
+    *
     * @var array
     */
     private $user_agents = array(
         'non_mobile_crawler' => 'Googlebot-Image/1.0',
         'mobile_non_crawler' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0_3 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A432 Safari/604.1',
     );
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Test return value of list_operating_systems method
+    */
+    public function test_list_operating_systems_method()
+    {
+        $operating_systems = user_agent::list_operating_systems();
+
+        $this->assertNotEmpty($operating_systems);
+        $this->assertInternalType('array', $operating_systems);
+
+        foreach ($operating_systems as $system)
+        {
+            $this->assertNotEmpty($system);
+        }
+    }
 
     // -------------------------------------------------------------------------
 
