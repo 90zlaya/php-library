@@ -36,14 +36,26 @@ class User_Agent_Test extends Test_Case {
     */
     public function test_list_operating_systems_method()
     {
-        $operating_systems = user_agent::list_operating_systems();
+        $items = array(
+            NULL,
+            FALSE,
+            TRUE,
+            0,
+            '',
+            'TEST',
+        );
 
-        $this->assertNotEmpty($operating_systems);
-        $this->assertInternalType('array', $operating_systems);
-
-        foreach ($operating_systems as $system)
+        foreach ($items as $item)
         {
-            $this->assertNotEmpty($system);
+            $operating_systems = user_agent::list_operating_systems($item);
+
+            $this->assertNotEmpty($operating_systems);
+            $this->assertInternalType('array', $operating_systems);
+
+            foreach ($operating_systems as $system)
+            {
+                $this->assertNotEmpty($system);
+            }
         }
     }
 

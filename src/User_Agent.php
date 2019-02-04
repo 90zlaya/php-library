@@ -61,28 +61,111 @@ class User_Agent {
     * @var array
     */
     protected static $operating_systems = array(
-        '/windows nt 10.0/i'    => 'Windows 10',
-        '/windows nt 6.2/i'     => 'Windows 8',
-        '/windows nt 6.1/i'     => 'Windows 7',
-        '/windows nt 6.0/i'     => 'Windows Vista',
-        '/windows nt 5.2/i'     => 'Windows Server 2003/XP x64',
-        '/windows nt 5.1/i'     => 'Windows XP',
-        '/windows xp/i'         => 'Windows XP',
-        '/windows nt 5.0/i'     => 'Windows 2000',
-        '/windows me/i'         => 'Windows ME',
-        '/win98/i'              => 'Windows 98',
-        '/win95/i'              => 'Windows 95',
-        '/win16/i'              => 'Windows 3.11',
-        '/macintosh|mac os x/i' => 'Mac OS X',
-        '/mac_powerpc/i'        => 'Mac OS 9',
-        '/linux/i'              => 'Linux',
-        '/ubuntu/i'             => 'Ubuntu',
-        '/iphone/i'             => 'iPhone',
-        '/ipod/i'               => 'iPod',
-        '/ipad/i'               => 'iPad',
-        '/android/i'            => 'Android',
-        '/blackberry/i'         => 'BlackBerry',
-        '/webos/i'              => 'Mobile',
+        array(
+            'regex' => '/windows nt 10.0/i',
+            'name'  => 'Windows 10',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/windows nt 6.2/i',
+            'name'  => 'Windows 8',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/windows nt 6.1/i',
+            'name'  => 'Windows 7',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/windows nt 6.0/i',
+            'name'  => 'Windows Vista',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/windows nt 5.2/i',
+            'name'  => 'Windows Server 2003/XP x64',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/windows nt 5.1/i',
+            'name'  => 'Windows XP',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/windows xp/i',
+            'name'  => 'Windows XP',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/windows nt 5.0/i',
+            'name'  => 'Windows 2000',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/windows me/i',
+            'name'  => 'Windows ME',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/win98/i',
+            'name'  => 'Windows 98',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/win95/i',
+            'name'  => 'Windows 95',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/win16/i',
+            'name'  => 'Windows 3.11',
+            'group' => 'Windows',
+        ),
+        array(
+            'regex' => '/macintosh|mac os x/i',
+            'name'  => 'Mac OS X',
+            'group' => 'Macintosh',
+        ),
+        array(
+            'regex' => '/mac_powerpc/i',
+            'name'  => 'Mac OS 9',
+            'group' => 'Macintosh',
+        ),
+        array(
+            'regex' => '/iphone/i',
+            'name'  => 'iPhone',
+            'group' => 'iOS',
+        ),
+        array(
+            'regex' => '/ipod/i',
+            'name'  => 'iPod',
+            'group' => 'iOS',
+        ),
+        array(
+            'regex' => '/ipad/i',
+            'name'  => 'iPad',
+            'group' => 'iOS',
+        ),
+        array(
+            'regex' => '/linux/i',
+            'name'  => 'Linux',
+            'group' => 'Linux',
+        ),
+        array(
+            'regex' => '/ubuntu/i',
+            'name'  => 'Ubuntu',
+            'group' => 'Linux',
+        ),
+        array(
+            'regex' => '/android/i',
+            'name'  => 'Android',
+            'group' => 'Android',
+        ),
+        array(
+            'regex' => '/blackberry/i',
+            'name'  => 'BlackBerry',
+            'group' => 'BlackBerry',
+        ),
     );
 
     // -------------------------------------------------------------------------
@@ -178,16 +261,28 @@ class User_Agent {
     /**
     * List all operating systems
     *
+    * @param bool $only_group
+    *
     * @return array $operating_systems
     */
-    public static function list_operating_systems()
+    public static function list_operating_systems($only_group=FALSE)
     {
         $operating_systems = array();
 
-        foreach (self::$operating_systems as $key => $value)
+        $key = $only_group
+            ? 'group'
+            : 'name';
+
+        foreach (self::$operating_systems as $item)
         {
-            $operating_systems[] = $value;
+            if ( ! in_array($item[$key], $operating_systems))
+            {
+                $operating_systems[] = $item[$key];
+            }
         }
+
+
+        asort($operating_systems);
 
         return $operating_systems;
     }
@@ -254,11 +349,11 @@ class User_Agent {
     */
     public static function detect_operating_system($user_agent, $name_when_no_match='')
     {
-        foreach (self::$operating_systems as $regex => $value)
+        foreach (self::$operating_systems as $item)
         {
-            if (preg_match($regex, $user_agent))
+            if (preg_match($item['regex'], $user_agent))
             {
-                return $value;
+                return $item['name'];
             }
         }
 
