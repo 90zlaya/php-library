@@ -195,9 +195,13 @@ class User_Agent_Test extends Test_Case {
             $this->user_agents['mobile_non_crawler']
         );
 
-        $this->assertInternalType('string', $result);
-        $this->assertNotEquals('', $result);
-        $this->assertEquals('Mac OS X', $result);
+        $this->assertInternalType('array', $result);
+        $this->assertNotEmpty($result);
+        $this->assertArrayHasKey('regex', $result);
+        $this->assertArrayHasKey('name', $result);
+        $this->assertArrayHasKey('group', $result);
+        $this->assertEquals('Mac OS X', $result['name']);
+        $this->assertEquals('Macintosh', $result['group']);
 
         $name_when_no_match = 'Unknown';
         $result             = user_agent::detect_operating_system(
@@ -205,8 +209,14 @@ class User_Agent_Test extends Test_Case {
             $name_when_no_match
         );
 
-        $this->assertInternalType('string', $result);
-        $this->assertEquals($name_when_no_match, $result);
+        $this->assertInternalType('array', $result);
+        $this->assertNotEmpty($result);
+        $this->assertArrayHasKey('regex', $result);
+        $this->assertArrayHasKey('name', $result);
+        $this->assertArrayHasKey('group', $result);
+        $this->assertEquals('', $result['regex']);
+        $this->assertEquals($name_when_no_match, $result['name']);
+        $this->assertEquals('', $result['group']);
     }
 
     // -------------------------------------------------------------------------

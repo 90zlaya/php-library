@@ -345,7 +345,7 @@ class User_Agent {
     * @param string $user_agent
     * @param string $name_when_no_match
     *
-    * @return string
+    * @return mixed
     */
     public static function detect_operating_system($user_agent, $name_when_no_match='')
     {
@@ -353,11 +353,15 @@ class User_Agent {
         {
             if (preg_match($item['regex'], $user_agent))
             {
-                return $item['name'];
+                return $item;
             }
         }
 
-        return $name_when_no_match;
+        return array(
+            'regex' => '',
+            'name'  => $name_when_no_match,
+            'group' => '',
+        );
     }
 
     // -------------------------------------------------------------------------

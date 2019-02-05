@@ -25,6 +25,7 @@ Modified
 * User_Agent: list_operating_systems method sort names alphabetically
 * User_Agent: list_operating_systems method duplicate operating systems removed
 * User_Agent: list_operating_systems method option to group operating systems
+* User_Agent: detect_operating_system method returns array instead of string
 
 Since php-library v1.5.0 (6-Apr-2018)
 =======
