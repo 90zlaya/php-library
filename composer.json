@@ -1,10 +1,12 @@
 {
     "name": "90zlaya/php-library",
     "type": "library",
-    "description": "PHP Library is set of custom made PHP classes containing most useful methods and variables for Web Development.",
+    "description": "PHP Library is a set of classes that contain the most useful attributes and methods that faciliate the development of Web applications",
     "keywords": [
-        "php7",
-        "oop-library"
+        "php",
+        "library",
+        "oop",
+        "php-library"
     ],
     "homepage": "https://github.com/90zlaya/php-library",
     "license": "MIT",
@@ -18,7 +20,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "phplibrary\\": "src"
+            "PHP_Library\\League\\Data\\": "src\\data",
+            "PHP_Library\\League\\Files\\": "src\\files",
+            "PHP_Library\\League\\Format\\": "src\\format",
+            "PHP_Library\\League\\Math\\": "src\\math",
+            "PHP_Library\\League\\SQL\\": "src\\sql",
+            "PHP_Library\\League\\Services\\": "src\\services"
         }
     },
     "minimum-stability": "stable",

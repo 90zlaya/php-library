@@ -6,16 +6,16 @@
 ![Official logo of php-library](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1)
 =======
 
-PHP Library is set of custom made PHP classes containing most useful methods and variables for Web Development.
+PHP Library is a set of classes that contain the most useful attributes and methods that faciliate the development of Web applications.
 Project is open-sourced under MIT licence on [GitHub]. Available over Composer and [Packagist].
 
 Organisation
 =======
 
-Every native class call should have phplibrary namespace call in front.
+Every native class call should have following type of namespace call in front.
 
 ``` php
-phplibrary\Class_Name
+PHP_Library\League\Class_Namespace\Class_Name
 ```
 
 * All classes are inside src folder.
