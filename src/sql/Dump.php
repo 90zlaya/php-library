@@ -237,6 +237,36 @@ class Dump {
     }
 
     // -------------------------------------------------------------------------
+    
+    /**
+    * Create filename for dumped file
+    * 
+    * @param string $folder_name
+    * @param string $database
+    * 
+    * @return string $filename
+    */
+    private function create_filename($folder_name, $database)
+    {
+        $filename = '';
+        
+        $filename .= '"';
+        $filename .= $folder_name;
+
+        if ( ! $this->override)
+        {
+            $filename .= date('ymdHis');
+            $filename .= '_-_';
+        }
+
+        $filename .= $database;
+        $filename .= '.sql';
+        $filename .= '"';
+        
+        return $filename;
+    }
+    
+    // -------------------------------------------------------------------------
 
     /**
     * Check dumped file
@@ -271,6 +301,61 @@ class Dump {
     }
 
     // -------------------------------------------------------------------------
+    
+    /**
+    * Execute dump command
+    * 
+    * @param string $filename
+    * @param string $database
+    * 
+    * @return void
+    */
+    private function execute_command($filename, $database)
+    {
+        $command = '';
+        
+        $command .= '"';
+        $command .= $this->command;
+        $command .= '" ';
+        $command .= $database;
+        $command .= ' --user=';
+        $command .= $this->connection['username'];
+        $command .= ' --password=';
+        $command .= $this->connection['password'];
+        $command .= ' --host=';
+        $command .= $this->connection['host'];
+        $command .= ' > ';
+        $command .= $filename;
+
+        exec($command);
+    }
+    
+    // -------------------------------------------------------------------------
+    
+    /**
+    * Option for PHPUnit testing
+    * 
+    * @return void
+    */
+    private function testing()
+    {
+        $function_name = 'exec';
+        
+        if ( ! function_exists($function_name) || $this->testing)
+        {
+            array_push($this->messages['error'],
+                $function_name .
+                ' function disabled in PHP'
+            );
+
+            if ($this->testing)
+            {
+                array_pop($this->messages['error']);
+            }
+        }
+    }
+    
+    // -------------------------------------------------------------------------
 
     /**
     * MySQL dump
@@ -281,61 +366,21 @@ class Dump {
     */
     public function mysql($override=FALSE)
     {
-        $this->override = $override;
-
-        if ( ! function_exists('exec') || $this->testing)
-        {
-            array_push($this->messages['error'],
-                'exec function disabled in PHP'
-            );
-
-            if ($this->testing)
-            {
-                array_pop($this->messages['error']);
-            }
-        }
+        $this->testing();
 
         if ($this->has_databases() && ! $this->has_errors())
         {
-            if ($this->override)
-            {
-                $folder_name = $this->destination;
-            }
-            else
-            {
-                $folder_name = $this->create_folders('mysqldump');
-            }
+            $this->override = $override;
+            
+            $folder_name = $this->override
+                ? $this->destination
+                : $this->create_folders('mysqldump');
 
             foreach ($this->databases as $database)
             {
-                $filename  = '"';
-                $filename .= $folder_name;
-
-                if ( ! $this->override)
-                {
-                    $filename .= date('ymdHis');
-                    $filename .= '_-_';
-                }
-
-                $filename .= $database;
-                $filename .= '.sql';
-                $filename .= '"';
-
-                $command  = '"';
-                $command .= $this->command;
-                $command .= '" ';
-                $command .= $database;
-                $command .= ' --user=';
-                $command .= $this->connection['username'];
-                $command .= ' --password=';
-                $command .= $this->connection['password'];
-                $command .= ' --host=';
-                $command .= $this->connection['host'];
-                $command .= ' > ';
-                $command .= $filename;
-
-                exec($command);
-
+                $filename = $this->create_filename($folder_name, $database);
+                
+                $this->execute_command($filename, $database);
                 $this->check_file($filename, $database);
             }
 
