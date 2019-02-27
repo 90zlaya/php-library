@@ -15,7 +15,7 @@ Organisation
 Every native class call should have following type of namespace call in front.
 
 ``` php
-PHP_Library\League\Class_Namespace\Class_Name
+PHP_Library\Class_Subpackage\Class_Namespace\Class_Name
 ```
 
 * All classes are inside src folder.

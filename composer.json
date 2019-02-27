@@ -20,12 +20,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "PHP_Library\\League\\Data\\": "src\\data",
-            "PHP_Library\\League\\Files\\": "src\\files",
-            "PHP_Library\\League\\Format\\": "src\\format",
-            "PHP_Library\\League\\Math\\": "src\\math",
-            "PHP_Library\\League\\SQL\\": "src\\sql",
-            "PHP_Library\\League\\Services\\": "src\\services"
+            "PHP_Library\\Core\\Data\\": "src\\core\\data",
+            "PHP_Library\\Core\\Files\\": "src\\core\\files",
+            "PHP_Library\\Core\\Format\\": "src\\core\\format",
+            "PHP_Library\\Core\\Math\\": "src\\core\\math",
+            "PHP_Library\\Core\\SQL\\": "src\\core\\sql",
+            "PHP_Library\\Core\\Services\\": "src\\core\\services"
         }
     },
     "minimum-stability": "stable",
