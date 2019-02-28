@@ -19,41 +19,97 @@ class Web_Service {
     // -------------------------------------------------------------------------
 
     /**
-    * Response from webservice
+    * Holds information about cURL availability
     *
-    * @param string $web_service_url
+    * @var bool
+    */
+    private $curl_enabled = FALSE;
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Holds cURL session
+    *
+    * @var resource
+    */
+    private $ch;
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Web service URL
+    *
+    * @var string
+    */
+    private $url = '';
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Class constructor method
+    *
+    * @param string $url
+    *
+    * @return void
+    */
+    public function __construct($url='')
+    {
+        if (function_exists('curl_init'))
+        {
+            $this->curl_enabled = TRUE;
+        }
+
+        $this->set_url($url);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set URL attribute
+    *
+    * @param string $url
+    *
+    * @return void
+    */
+    public function set_url($url)
+    {
+        $this->url = $url;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Gets response from web service
+    *
     * @param array $params
     *
     * @return mixed
     */
-    public static function response($web_service_url, $params=array())
+    public function response($params=array())
     {
-        if
-        (
-            function_exists('curl_init') &&
-            self::check_file($web_service_url)['status']
-        )
+        if ($this->is_ready_for_initialisation())
         {
-            $ch = curl_init($web_service_url);
+            $this->session_initialize();
 
-            isset($params['header'])
-                ? curl_setopt($ch, CURLOPT_HEADER, $params['header'])
-                : NULL;
+            $request = $this->optional_request($params);
 
-            isset($params['user_agent'])
-                ? curl_setopt($ch, CURLOPT_USERAGENT, $params['user_agent'])
-                : NULL;
+            $this->transfer_options($request['parameters']);
 
-            isset($params['binary_transfer'])
-                ? curl_setopt($ch, CURLOPT_BINARYTRANSFER, $params['binary_transfer'])
-                : NULL;
+            $response = $this->session_perform();
+            $code     = $this->transfer_information();
 
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $this->session_close();
 
-            $response = curl_exec($ch);
-            curl_close($ch);
+            if ($request['is_custom'])
+            {
+                $response = json_decode($response, TRUE);
+            }
 
-            return $response;
+            return array(
+                'status'   => $this->convert_code($code),
+                'code'     => $code,
+                'response' => $response,
+            );
         }
 
         return FALSE;
@@ -62,89 +118,167 @@ class Web_Service {
     // -------------------------------------------------------------------------
 
     /**
-    * Convert response code to service status
+    * Checks if everything is ready for cURL initalisation
     *
-    * @param int $code
-    *
-    * @return array
+    * @var bool
     */
-    public static function response_code($code)
+    private function is_ready_for_initialisation()
     {
-        $status = FALSE;
-
-        switch ($code)
-        {
-            case 200:
-            {
-                $status = TRUE;
-                break;
-            }
-        }
-
-        return array(
-            'status' => $status,
-        );
+        return $this->curl_enabled && ! empty($this->url);
     }
 
     // -------------------------------------------------------------------------
 
     /**
-    * Reading response body
+    * Initialize a cURL session and set attribute
     *
-    * Pass data values if your web service requires them
-    *
-    * @param string $web_service_url
-    * @param string $data
+    * @return void
+    */
+    private function session_initialize()
+    {
+        $this->ch = curl_init($this->url);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Perform a cURL session
     *
     * @return mixed
     */
-    public static function response_body($web_service_url, $data=array())
+    private function session_perform()
     {
-        if
-        (
-            function_exists('curl_init') &&
-            self::check_file($web_service_url)['status']
-        )
-        {
-            $data_string = json_encode($data);
-
-            $ch = curl_init($web_service_url);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string),
-            ));
-            $result = curl_exec($ch);
-            curl_close($ch);
-
-            return json_decode($result, TRUE);
-        }
-
-        return FALSE;
+        return curl_exec($this->ch);
     }
 
     // -------------------------------------------------------------------------
 
     /**
-    * Check if remote file exists
+    * Close a cURL session
     *
-    * @param string $url
+    * @return void
+    */
+    private function session_close()
+    {
+        curl_close($this->ch);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get information regarding a specific transfer
+    *
+    * @return mixed
+    */
+    private function transfer_information()
+    {
+        return curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set an option for a cURL transfer
+    *
+    * @param array $params
+    *
+    * @return void
+    */
+    private function transfer_options($params)
+    {
+        isset($params['header'])
+            ? curl_setopt($this->ch, CURLOPT_HEADER, $params['header'])
+            : NULL;
+
+        isset($params['user_agent'])
+            ? curl_setopt($this->ch, CURLOPT_USERAGENT, $params['user_agent'])
+            : NULL;
+
+        isset($params['binary_transfer'])
+            ? curl_setopt($this->ch, CURLOPT_BINARYTRANSFER, $params['binary_transfer'])
+            : NULL;
+
+        isset($params['custom_request'])
+            ? curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, $params['custom_request'])
+            : NULL;
+
+        isset($params['post_fields'])
+            ? curl_setopt($this->ch, CURLOPT_POSTFIELDS, $params['post_fields'])
+            : NULL;
+
+        isset($params['http_header'])
+            ? curl_setopt($this->ch, CURLOPT_HTTPHEADER, $params['http_header'])
+            : NULL;
+
+        $return_transfer = isset($params['return_transfer'])
+            ? $params['return_transfer']
+            : TRUE;
+
+        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, $return_transfer);
+
+        $no_body = isset($params['no_body'])
+            ? $params['no_body']
+            : FALSE;
+
+        curl_setopt($this->ch, CURLOPT_NOBODY, $no_body);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Convert response code to service availability status
+    *
+    * @param int $code
+    *
+    * @return bool
+    */
+    private function convert_code($code)
+    {
+        switch ($code)
+        {
+            case 200: return TRUE;
+            default: return FALSE;
+        }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Sending optional request
+    *
+    * @param array $params
     *
     * @return array
     */
-    public static function check_file($url)
+    private function optional_request($params)
     {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-        curl_exec($ch);
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+        $is_custom  = FALSE;
+        $exit_array = array();
+
+        if (isset($params['data']))
+        {
+            $is_custom = TRUE;
+
+            $data_string   = json_encode($params['data']);
+            $string_length = strlen($data_string);
+
+            $exit_array = array_merge($params, array(
+                'custom_request' => 'POST',
+                'post_fields'    => $data_string,
+                'http_header'    => array(
+                    'Content-Type: application/json',
+                    'Content-Length: ' . $string_length,
+                ),
+            ));
+        }
+        else
+        {
+            $exit_array = $params;
+        }
 
         return array(
-            'status' => self::response_code($code)['status'],
-            'code'   => $code,
+            'is_custom'  => $is_custom,
+            'parameters' => $exit_array,
         );
     }
 

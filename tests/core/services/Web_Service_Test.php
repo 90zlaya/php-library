@@ -20,128 +20,150 @@ class Web_Service_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Existent URL/Webservice
+    * URLs
     *
-    * @var string
+    * @var array
     */
-    private $existent_url = 'http://www.geoplugin.net/php.gp?ip=109.93.204.177';
+    private $urls = array(
+        'existent'    => array(
+            'image' => 'http://php.net/images/logos/elephpant-running-78x48.gif',
+            'get'   => 'http://www.geoplugin.net/php.gp?ip=109.93.204.177',
+        ),
+        'nonexistent' => array(
+            'image' => 'http://php.net/images/null.png',
+            'post'  => 'https://www.example.com/null/',
+        ),
+    );
 
     // -------------------------------------------------------------------------
 
     /**
-    * Nonexistent URL/Webservice
+    * Web_Service object data
     *
-    * @var string
+    * @var object
     */
-    private $nonexistent_url = 'https://www.example.com/null/';
+    private $web_service_object;
 
     // -------------------------------------------------------------------------
 
     /**
-    * What is expected after 200 code is passed
-    * to the responce_code method
+    * Web_Service test setup method
     */
-    public function test_responce_code_usage_for_200()
+    public function setUp()
     {
-        $result = web_service::response_code(200);
-
-        $this->assertInternalType('array', $result);
-        $this->assertArrayHasKey('status', $result);
-        $this->assertTrue($result['status']);
+        $this->web_service_object = new web_service();
     }
 
     // -------------------------------------------------------------------------
 
     /**
-    * What is expected after 400 code is passed
-    * to the responce_code method
+    * Testing response method - existent URL with GET
     */
-    public function test_responce_code_usage_for_400()
+    public function test_response_method_existent_url_with_get()
     {
-        $result = web_service::response_code(400);
+        $this->web_service_object->set_url($this->urls['existent']['get']);
 
-        $this->assertInternalType('array', $result);
-        $this->assertArrayHasKey('status', $result);
-        $this->assertFalse($result['status']);
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * What happens in response_body method for existent webservice
-    */
-    public function test_response_body_for_existent_webservice()
-    {
-        $result = web_service::response_body($this->existent_url);
-
-        $this->assertNotFalse($result);
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * What happens in response_body method for nonexistent webservice
-    */
-    public function test_response_body_for_nonexistent_webservice()
-    {
-        $result = web_service::response_body($this->nonexistent_url);
-
-        $this->assertFalse($result);
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * What is expected from check_file method for nonexistent file
-    */
-    public function test_check_file_method_for_nonexistent_file()
-    {
-        $result = web_service::check_file($this->nonexistent_url);
-
-        $this->assertInternalType('array', $result);
-        $this->assertArrayHasKey('status', $result);
-        $this->assertArrayHasKey('code', $result);
-        $this->assertFalse($result['status']);
-        $this->assertContains($result['code'], array(
-            404,
-            0,
-        ));
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Testing response method for existent webservice
-    */
-    public function test_response_method_for_existent_webservice()
-    {
         $items = array(
             array(),
             array(
-                'header'          => 0,
+                'header'          => FALSE,
+                'binary_transfer' => TRUE,
                 'user_agent'      => 'PHP Library: Web_Service test',
-                'binary_transfer' => 1,
+            ),
+            array(
+                'return_transfer' => TRUE,
+            ),
+            array(
+                'no_body'         => TRUE,
             ),
         );
 
         foreach ($items as $item)
         {
-            $result = web_service::response($this->existent_url, $item);
+            $result = $this->web_service_object->response($item);
 
-            $this->assertNotFalse($result);
-            $this->assertInternalType('string', $result);
+            $this->assertInternalType('array', $result);
+
+            $this->assertArrayHasKey('status', $result);
+            $this->assertInternalType('bool', $result['status']);
+            $this->assertTrue($result['status']);
+
+            $this->assertArrayHasKey('code', $result);
+            $this->assertInternalType('int', $result['code']);
+            $this->assertEquals(200, $result['code']);
+
+            $this->assertArrayHasKey('response', $result);
+            $this->assertInternalType('string', $result['response']);
+
+            if (isset($item['no_body']) && $item['no_body'] === TRUE)
+            {
+                $this->assertEmpty($result['response']);
+            }
+            else
+            {
+                $this->assertNotEmpty($result['response']);
+            }
         }
     }
 
     // -------------------------------------------------------------------------
 
     /**
-    * Testing response method for nonexistent webservice
+    * Testing response method - nonexistent URL with POST
     */
-    public function test_response_method_for_nonexistent_webservice()
+    public function test_response_method_nonexistent_url_with_post()
     {
-        $result = web_service::response($this->nonexistent_url);
+        $this->web_service_object->set_url($this->urls['nonexistent']['post']);
 
+        $result = $this->web_service_object->response(array(
+            'data' => array(
+                'username' => 'nonexistent@example.com',
+                'password' => 'thereISn0n3',
+            ),
+        ));
+
+        $this->assertInternalType('array', $result);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing response method - nonexistent URLs
+    */
+    public function test_response_method_nonexistent_urls()
+    {
+        foreach ($this->urls['nonexistent'] as $url)
+        {
+            $this->web_service_object->set_url($url);
+
+            $result = $this->web_service_object->response();
+
+            $this->assertInternalType('array', $result);
+
+            $this->assertArrayHasKey('status', $result);
+            $this->assertInternalType('bool', $result['status']);
+            $this->assertFalse($result['status']);
+
+            $this->assertArrayHasKey('code', $result);
+            $this->assertInternalType('int', $result['code']);
+            $this->assertEquals(404, $result['code']);
+
+            $this->assertArrayHasKey('response', $result);
+            $this->assertInternalType('string', $result['response']);
+            $this->assertNotEmpty($result['response']);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing response method - URL not set
+    */
+    public function test_response_method_url_not_set()
+    {
+        $result = $this->web_service_object->response();
+
+        $this->assertInternalType('bool', $result);
         $this->assertFalse($result);
     }
 

@@ -210,11 +210,12 @@ class Geo_Plugin {
 
         $host = str_replace('{IP}', $ip, $this->geo_plugin_service);
 
-        $response = web_service::response($host, array(
+        $web_service = new web_service($host);
+        $response    = $web_service->response(array(
             'user_agent' => 'Geo_Plugin from bit.ly/php-library',
         ));
 
-        $geo_information = unserialize($response);
+        $geo_information = unserialize($response['response']);
         $this->code      = $geo_information['geoplugin_status'];
 
         return $geo_information;
