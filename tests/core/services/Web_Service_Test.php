@@ -109,9 +109,9 @@ class Web_Service_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Testing response method - nonexistent URL with POST
+    * Testing response method - nonexistent URL with data
     */
-    public function test_response_method_nonexistent_url_with_post()
+    public function test_response_method_nonexistent_url_with_data()
     {
         $this->web_service_object->set_url($this->urls['nonexistent']['post']);
 
@@ -123,6 +123,19 @@ class Web_Service_Test extends Test_Case {
         ));
 
         $this->assertInternalType('array', $result);
+
+        $this->assertArrayHasKey('status', $result);
+        $this->assertInternalType('bool', $result['status']);
+        $this->assertFalse($result['status']);
+
+        $this->assertArrayHasKey('code', $result);
+        $this->assertInternalType('int', $result['code']);
+        $this->assertEquals(404, $result['code']);
+
+        $this->assertArrayHasKey('response', $result);
+        $this->assertInternalType('null', $result['response']);
+        $this->assertNull($result['response']);
+
     }
 
     // -------------------------------------------------------------------------

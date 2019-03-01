@@ -100,7 +100,7 @@ class Web_Service {
 
             $this->session_close();
 
-            if ($request['is_custom'])
+            if ($request['is_optional'])
             {
                 $response = json_decode($response, TRUE);
             }
@@ -252,12 +252,12 @@ class Web_Service {
     */
     private function optional_request($params)
     {
-        $is_custom  = FALSE;
-        $exit_array = array();
+        $is_optional = FALSE;
+        $exit_array  = array();
 
         if (isset($params['data']))
         {
-            $is_custom = TRUE;
+            $is_optional = TRUE;
 
             $data_string   = json_encode($params['data']);
             $string_length = strlen($data_string);
@@ -277,8 +277,8 @@ class Web_Service {
         }
 
         return array(
-            'is_custom'  => $is_custom,
-            'parameters' => $exit_array,
+            'is_optional' => $is_optional,
+            'parameters'  => $exit_array,
         );
     }
 

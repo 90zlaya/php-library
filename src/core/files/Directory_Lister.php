@@ -11,6 +11,8 @@
 */
 namespace PHP_Library\Core\Files;
 
+use PHP_Library\Core\Format\Format as format;
+
 /**
 * Directory content retrieval
 */
@@ -230,27 +232,26 @@ class Directory_Lister {
     // -------------------------------------------------------------------------
 
     /**
-    * Displaying images
+    * Create anchor tag with path to the file
+    * to be opened inside browser
     *
-    * @param array $list
+    * @param string $path
+    * @param string $file
     *
-    * @return string $display
+    * @return string $tag
     */
-    private static function display($list)
+    private static function create_tag($path, $file)
     {
-        $display = '';
+        $tag = '';
 
-        if ( ! empty($list))
-        {
-            foreach ($list as $item)
-            {
-                $display .= '<script>window.open("';
-                $display .= $item['location'];
-                $display .= '");</script>';
-            }
-        }
+        $tag .= '<a href="';
+        $tag .= self::$open_inside_browser;
+        $tag .= $path;
+        $tag .= '" target="_blank">';
+        $tag .= $file;
+        $tag .= '</a>';
 
-        return $display;
+        return $tag;
     }
 
     // -------------------------------------------------------------------------
@@ -369,31 +370,30 @@ class Directory_Lister {
 
                         if (empty($types) || in_array($extension_lowered, $types))
                         {
-                            $path      = $directory . $file;
-                            $location  = self::$open_inside_browser . $path;
-                            $directory = self::$directory;
-                            $date      = date(self::$date_format, filemtime($location));
-                            $time      = date(self::$time_format, filemtime($location));
-                            $open      = '<a href="' . $location . '" target="_blank">' . $file . '</a>';
-                            $title     = basename($file, '.' . $extension);
-                            $size      = filesize($location);
+                            $title = basename($file, '.' . $extension);
+
+                            $path  = $directory;
+                            $path .= $file;
+
+                            $path         = str_replace('\\', '/', $path);
+                            $directory    = str_replace('\\', '/', $directory);
+                            $path_to_open = str_replace('/', '\\', $path);
 
                             $data = array(
-                                'open'      => $open,
-                                'location'  => $location,
+                                'title'     => $title,
+                                'open'      => self::create_tag($path, $file),
                                 'path'      => $path,
                                 'directory' => $directory,
                                 'file'      => $file,
-                                'title'     => $title,
                                 'extension' => $extension,
-                                'size'      => $size,
-                                'date'      => $date,
-                                'time'      => $time,
+                                'size'      => filesize($path),
+                                'date'      => date(self::$date_format, filemtime($path)),
+                                'time'      => date(self::$time_format, filemtime($path)),
                             );
 
                             array_push($arr_files, $data);
 
-                            self::$number_of_files += 1;
+                            self::$number_of_files++;
                         }
                     }
                 }
@@ -490,9 +490,8 @@ class Directory_Lister {
         $directory = $params['directory'];
         $method    = $params['method'];
 
-        $print   = isset($params['print']) ? $params['print'] : FALSE;
-        $display = isset($params['display']) ? $params['display'] : FALSE;
-        $types   = isset($params['types']) ? $params['types'] : array();
+        $print = isset($params['print']) ? $params['print'] : FALSE;
+        $types = isset($params['types']) ? $params['types'] : array();
 
         $searched = array();
 
@@ -514,7 +513,7 @@ class Directory_Lister {
             $searched = $list;
         }
 
-        self::form_of_view($searched, $print, $display);
+        self::form_of_view($searched, $print);
 
         if (array_key_exists('folder', $searched))
         {
@@ -526,6 +525,8 @@ class Directory_Lister {
             $count = count($searched);
             $max   = self::$number_of_files;
         }
+
+        array_multisort($searched);
 
         $data = array(
             'listing' => $searched,
@@ -584,25 +585,14 @@ class Directory_Lister {
     *
     * @param array $searched
     * @param bool $print
-    * @param bool $display
     *
     * @return void
     */
-    private static function form_of_view($searched, $print, $display)
+    private static function form_of_view($searched, $print)
     {
-        if ($print || $display)
+        if ($print)
         {
-            if ($print)
-            {
-                print_r('<pre>');
-                print_r($searched);
-                print_r('</pre>');
-            }
-
-            if ($display)
-            {
-                print_r(self::display($searched));
-            }
+            format::pre($searched);
         }
     }
 
