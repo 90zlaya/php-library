@@ -115,9 +115,9 @@ class Dump_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Testing get_messages method for all messages
+    * Testing get_messages method
     */
-    public function test_get_messages_method_for_all_messages()
+    public function test_get_messages_method()
     {
         $result = $this->dump_object->get_messages();
 
@@ -136,22 +136,18 @@ class Dump_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Testing get_messages method for other messages
+    * Testing get_* methods
     */
-    public function test_get_messages_method_for_other_messages()
+    public function test_get_asterix_methods()
     {
-        $statuses = array(
-            'SUCCESS',
-            'ERROR',
-            'FILE',
-            '',
-            NULL,
-        );
+        $results = array();
 
-        foreach ($statuses as $status)
+        $results[] = $this->dump_object->get_success();
+        $results[] = $this->dump_object->get_error();
+        $results[] = $this->dump_object->get_file();
+
+        foreach ($results as $result)
         {
-            $result = $this->dump_object->get_messages($status);
-
             $this->assertInternalType('array', $result);
             $this->assertEmpty($result);
         }
@@ -170,7 +166,7 @@ class Dump_Test extends Test_Case {
         $this->assertInternalType('bool', $result);
         $this->assertTrue($result);
 
-        array_push(self::$files, $this->dump_object->get_messages('FILE'));
+        array_push(self::$files, $this->dump_object->get_file());
     }
 
     // -------------------------------------------------------------------------
@@ -181,7 +177,7 @@ class Dump_Test extends Test_Case {
     */
     public function test_mysql_dump_method_default_params_testing_is_on()
     {
-        $this->dump_object->testing = TRUE;
+        $this->dump_object->turn_on();
 
         $result = $this->dump_object->mysql(TRUE);
 
@@ -202,7 +198,7 @@ class Dump_Test extends Test_Case {
         $this->assertInternalType('bool', $result);
         $this->assertTrue($result);
 
-        array_push(self::$files, $this->dump_object->get_messages('FILE'));
+        array_push(self::$files, $this->dump_object->get_file());
     }
 
     // -------------------------------------------------------------------------
@@ -226,7 +222,7 @@ class Dump_Test extends Test_Case {
         $this->assertInternalType('bool', $result);
         $this->assertFalse($result);
 
-        array_push(self::$files, $dump->get_messages('FILE'));
+        array_push(self::$files, $dump->get_file());
     }
 
     // -------------------------------------------------------------------------

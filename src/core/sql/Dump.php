@@ -11,21 +11,13 @@
 */
 namespace PHP_Library\Core\SQL;
 
+use PHP_Library\System\Testing\Testing as Testing;
 use Exception as Exception;
 
 /**
 * Dump database from SQL server
 */
-class Dump {
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Set to TRUE if being tested
-    *
-    * @var bool
-    */
-    public $testing = FALSE;
+class Dump extends Testing {
 
     // -------------------------------------------------------------------------
 
@@ -79,19 +71,6 @@ class Dump {
     // -------------------------------------------------------------------------
 
     /**
-    * Dump messages
-    *
-    * @var array
-    */
-    private $messages = array(
-        'success' => array(),
-        'error'   => array(),
-        'file'    => array(),
-    );
-
-    // -------------------------------------------------------------------------
-
-    /**
     * Class constructor method
     *
     * @param array $params
@@ -122,65 +101,7 @@ class Dump {
 
         isset($params['databases'])
             ? $this->databases = $params['databases']
-            : array_push($this->messages['error'],
-                'Set databases for dumping'
-            );
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Get execution messages
-    *
-    * @param string $type
-    *
-    * @return array $messages
-    */
-    public function get_messages($type='ALL')
-    {
-        $messages = array();
-
-        switch ($type)
-        {
-            case 'ALL':
-            {
-                $messages = $this->messages;
-
-                break;
-            }
-            case 'SUCCESS':
-            {
-                $messages = $this->messages['success'];
-
-                break;
-            }
-            case 'ERROR':
-            {
-                $messages = $this->messages['error'];
-
-                break;
-            }
-            case 'FILE':
-            {
-                $messages = $this->messages['file'];
-
-                break;
-            }
-        }
-
-        return $messages;
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Check if execution has errors
-    *
-    * @return bool
-    */
-    private function has_errors()
-    {
-        return ! empty($this->messages['error']);
+            : $this->set_error('Set databases for dumping');
     }
 
     // -------------------------------------------------------------------------
@@ -237,19 +158,19 @@ class Dump {
     }
 
     // -------------------------------------------------------------------------
-    
+
     /**
     * Create filename for dumped file
-    * 
+    *
     * @param string $folder_name
     * @param string $database
-    * 
+    *
     * @return string $filename
     */
     private function create_filename($folder_name, $database)
     {
         $filename = '';
-        
+
         $filename .= '"';
         $filename .= $folder_name;
 
@@ -262,10 +183,10 @@ class Dump {
         $filename .= $database;
         $filename .= '.sql';
         $filename .= '"';
-        
+
         return $filename;
     }
-    
+
     // -------------------------------------------------------------------------
 
     /**
@@ -280,11 +201,11 @@ class Dump {
     {
         $filename = str_replace('"', '', $filename);
 
-        array_push($this->messages['file'], $filename);
+        $this->set_file($filename);
 
-        if (empty(filesize($filename)) || $this->testing)
+        if (empty(filesize($filename)) || $this->is_being_tested())
         {
-            array_push($this->messages['error'],
+            $this->set_error(
                 'Failed to dump ' .
                 $database .
                 ' database'
@@ -292,7 +213,7 @@ class Dump {
         }
         else
         {
-            array_push($this->messages['success'],
+            $this->set_success(
                 'Database ' .
                 $database .
                 ' is dumped'
@@ -301,19 +222,19 @@ class Dump {
     }
 
     // -------------------------------------------------------------------------
-    
+
     /**
     * Execute dump command
-    * 
+    *
     * @param string $filename
     * @param string $database
-    * 
+    *
     * @return void
     */
     private function execute_command($filename, $database)
     {
         $command = '';
-        
+
         $command .= '"';
         $command .= $this->command;
         $command .= '" ';
@@ -329,32 +250,7 @@ class Dump {
 
         exec($command);
     }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-    * Option for PHPUnit testing
-    * 
-    * @return void
-    */
-    private function testing()
-    {
-        $function_name = 'exec';
-        
-        if ( ! function_exists($function_name) || $this->testing)
-        {
-            array_push($this->messages['error'],
-                $function_name .
-                ' function disabled in PHP'
-            );
 
-            if ($this->testing)
-            {
-                array_pop($this->messages['error']);
-            }
-        }
-    }
-    
     // -------------------------------------------------------------------------
 
     /**
@@ -366,12 +262,12 @@ class Dump {
     */
     public function mysql($override=FALSE)
     {
-        $this->testing();
+        $this->is_function_available('exec');
 
         if ($this->has_databases() && ! $this->has_errors())
         {
             $this->override = $override;
-            
+
             $folder_name = $this->override
                 ? $this->destination
                 : $this->create_folders('mysqldump');
@@ -379,7 +275,7 @@ class Dump {
             foreach ($this->databases as $database)
             {
                 $filename = $this->create_filename($folder_name, $database);
-                
+
                 $this->execute_command($filename, $database);
                 $this->check_file($filename, $database);
             }

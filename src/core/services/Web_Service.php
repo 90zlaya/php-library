@@ -11,10 +11,12 @@
 */
 namespace PHP_Library\Core\Services;
 
+use PHP_Library\System\Testing\Testing as Testing;
+
 /**
 * Web service related data
 */
-class Web_Service {
+class Web_Service extends Testing {
 
     // -------------------------------------------------------------------------
 
@@ -59,7 +61,10 @@ class Web_Service {
             $this->curl_enabled = TRUE;
         }
 
-        $this->set_url($url);
+        if ( ! empty($url))
+        {
+            $this->url = $url;
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -73,7 +78,14 @@ class Web_Service {
     */
     public function set_url($url)
     {
-        $this->url = $url;
+        if (empty($url))
+        {
+            $this->set_error('Please set URL');
+        }
+        else
+        {
+            $this->url = $url;
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -87,6 +99,8 @@ class Web_Service {
     */
     public function response($params=array())
     {
+        $this->is_function_available('curl_init');
+
         if ($this->is_ready_for_initialisation())
         {
             $this->session_initialize();
@@ -137,6 +151,16 @@ class Web_Service {
     private function session_initialize()
     {
         $this->ch = curl_init($this->url);
+
+        if (empty($this->ch) || $this->is_being_tested())
+        {
+            $this->set_error('Unable to initialize cURL handler');
+        }
+
+        if ($this->is_being_tested())
+        {
+            $this->pop_error();
+        }
     }
 
     // -------------------------------------------------------------------------

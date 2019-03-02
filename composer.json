@@ -25,7 +25,9 @@
             "PHP_Library\\Core\\Format\\": "src\\core\\format",
             "PHP_Library\\Core\\Math\\": "src\\core\\math",
             "PHP_Library\\Core\\SQL\\": "src\\core\\sql",
-            "PHP_Library\\Core\\Services\\": "src\\core\\services"
+            "PHP_Library\\Core\\Services\\": "src\\core\\services",
+            "PHP_Library\\System\\Data\\": "src\\system\\data",
+            "PHP_Library\\System\\Testing\\": "src\\system\\testing"
         }
     },
     "minimum-stability": "stable",

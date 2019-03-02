@@ -11,6 +11,7 @@
 */
 use PHPUnit\Framework\TestCase as Test_Case;
 use PHP_Library\Core\Services\Web_Service as web_service;
+use PHP_Library\System\Testing\Testing as testing;
 
 /**
 * Testing Web_Service class
@@ -103,6 +104,11 @@ class Web_Service_Test extends Test_Case {
             {
                 $this->assertNotEmpty($result['response']);
             }
+
+            $errors = $this->web_service_object->get_error();
+
+            $this->assertInternalType('array', $errors);
+            $this->assertEmpty($errors);
         }
     }
 
@@ -136,6 +142,11 @@ class Web_Service_Test extends Test_Case {
         $this->assertInternalType('null', $result['response']);
         $this->assertNull($result['response']);
 
+        $errors = $this->web_service_object->get_error();
+
+        $this->assertInternalType('array', $errors);
+        $this->assertEmpty($errors);
+
     }
 
     // -------------------------------------------------------------------------
@@ -164,6 +175,11 @@ class Web_Service_Test extends Test_Case {
             $this->assertArrayHasKey('response', $result);
             $this->assertInternalType('string', $result['response']);
             $this->assertNotEmpty($result['response']);
+
+            $errors = $this->web_service_object->get_error();
+
+            $this->assertInternalType('array', $errors);
+            $this->assertEmpty($errors);
         }
     }
 
@@ -178,6 +194,90 @@ class Web_Service_Test extends Test_Case {
 
         $this->assertInternalType('bool', $result);
         $this->assertFalse($result);
+
+        $errors = $this->web_service_object->get_error();
+
+        $this->assertInternalType('array', $errors);
+        $this->assertEmpty($errors);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing response method - URL passed in constructor
+    */
+    public function test_response_method_url_passed_in_constructor()
+    {
+        $web_service = new web_service($this->urls['existent']['get']);
+
+        $result = $web_service->response();
+
+        $this->assertInternalType('array', $result);
+
+        $this->assertArrayHasKey('status', $result);
+        $this->assertInternalType('bool', $result['status']);
+        $this->assertTrue($result['status']);
+
+        $this->assertArrayHasKey('code', $result);
+        $this->assertInternalType('int', $result['code']);
+        $this->assertEquals(200, $result['code']);
+
+        $this->assertArrayHasKey('response', $result);
+        $this->assertInternalType('string', $result['response']);
+        $this->assertNotEmpty($result['response']);
+
+        $errors = $this->web_service_object->get_error();
+
+        $this->assertInternalType('array', $errors);
+        $this->assertEmpty($errors);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing reponse method - testing is on
+    */
+    public function test_response_method_testing_is_on()
+    {
+        $this->web_service_object->turn_on();
+
+        $this->web_service_object->set_url($this->urls['existent']['get']);
+
+        $result = $this->web_service_object->response();
+
+        $this->assertInternalType('array', $result);
+
+        $this->assertArrayHasKey('status', $result);
+        $this->assertInternalType('bool', $result['status']);
+        $this->assertTrue($result['status']);
+
+        $this->assertArrayHasKey('code', $result);
+        $this->assertInternalType('int', $result['code']);
+        $this->assertEquals(200, $result['code']);
+
+        $this->assertArrayHasKey('response', $result);
+        $this->assertInternalType('string', $result['response']);
+        $this->assertNotEmpty($result['response']);
+
+        $errors = $this->web_service_object->get_error();
+
+        $this->assertInternalType('array', $errors);
+        $this->assertEmpty($errors);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Testing set_url method - no passed parameter
+    */
+    public function test_set_url_method_no_passed_parameter()
+    {
+        $this->web_service_object->set_url('');
+
+        $errors = $this->web_service_object->get_error();
+
+        $this->assertInternalType('array', $errors);
+        $this->assertNotEmpty($errors);
     }
 
     // -------------------------------------------------------------------------
