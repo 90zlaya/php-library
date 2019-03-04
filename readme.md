@@ -146,7 +146,12 @@ This library is powering following Websites/Web Applications:
 API documentation
 ----------------
 
-Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied [online].
+Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied online on [API].
+
+Coverage
+----------------
+
+Official PHP Library code coverage report has been composed by [xDebug] and could be studied online on [coverage].
 
 Migration
 ----------------
@@ -163,7 +168,8 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
 [MIT License]: http://www.opensource.org/licenses/mit-license.php
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
-[online]: https://php-library.zlatanstajic.com/api/
+[API]: https://php-library.zlatanstajic.com/api/
+[coverage]: https://php-library.zlatanstajic.com/coverage/
 [zlatanstajic.com]: https://www.zlatanstajic.com/
 [cms.dis.rs]: https://cms.dis.rs/
 [kupci.dis.rs]: https://kupci.dis.rs/
@@ -172,6 +178,7 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 [phpDocumentor]: https://www.phpdoc.org/
 [PHP_CodeSniffer]: https://github.com/squizlabs/PHP_CodeSniffer
 [designseed.co]: https://designseedco.com/en/
+[xDebug]: https://xdebug.org/
 
 [ruleset.xml]: https://github.com/90zlaya/php-library/blob/master/ruleset.xml
 [phpunit.xml]: https://github.com/90zlaya/php-library/blob/master/phpunit.xml

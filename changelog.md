@@ -6,8 +6,6 @@ Important
 
 * Changed namespaces for every class in library
 * Changed folder structure
-* Testing: new class created to be extended by core classes
-* Messages: new class created to be extended by Testing class
 
 * Directory_Lister: modified structure of files array and sorted by title
 * Directory_Lister: removed file display option
@@ -22,8 +20,11 @@ Important
 New
 ----------------
 
+* System classes created to be extended by core classes
+
 * Dump: new class developed and tested
 * Password: digest method added
+* PDO: new class developed and tested
 * User_Agent: detect_operating_system method added
 * User_Agent: list_operating_systems method added
 
