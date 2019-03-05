@@ -70,14 +70,21 @@ class PDO extends Connection {
     */
     private function open_connection()
     {
-        $this->connection = new PHP_PDO(
-            $this->connection_string(),
-            $this->parameters['user'],
-            $this->parameters['pass'],
-            array(
-                PHP_PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
-            )
-        );
+        try
+        {
+            $this->connection = new PHP_PDO(
+                $this->connection_string(),
+                $this->parameters['user'],
+                $this->parameters['pass'],
+                array(
+                    PHP_PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
+                )
+            );
+        }
+        catch (PHP_PDO_Exception $e)
+        {
+            $this->set_error($e->getMessage());
+        }
     }
 
     // -------------------------------------------------------------------------

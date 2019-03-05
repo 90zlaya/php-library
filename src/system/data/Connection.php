@@ -80,6 +80,11 @@ class Connection extends Messages {
     */
     public function get_connection()
     {
+        if (empty($this->connection))
+        {
+            $this->set_error('Connection is not opened!');
+        }
+
         return $this->connection;
     }
 

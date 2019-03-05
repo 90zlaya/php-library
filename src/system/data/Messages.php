@@ -138,7 +138,7 @@ class Messages {
     *
     * @return bool
     */
-    protected function has_errors()
+    public function has_errors()
     {
         return ! empty($this->messages['error']);
     }

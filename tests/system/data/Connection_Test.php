@@ -33,7 +33,7 @@ class Connection_Test extends Test_Case {
     */
     public function setUp()
     {
-        $this->messages_object = new connection();
+        $this->connection_object = new connection();
     }
 
     // -------------------------------------------------------------------------
@@ -43,9 +43,19 @@ class Connection_Test extends Test_Case {
     */
     public function test_get_connection_method()
     {
-        $result = $this->messages_object->get_connection();
+        $result = $this->connection_object->get_connection();
 
         $this->assertEmpty($result);
+
+        $errors = $this->connection_object->get_error();
+
+        $this->assertInternalType('array', $errors);
+        $this->assertNotEmpty($errors);
+
+        $has_errors = $this->connection_object->has_errors();
+
+        $this->assertInternalType('bool', $has_errors);
+        $this->assertTrue($has_errors);
     }
 
     // -------------------------------------------------------------------------

@@ -57,6 +57,19 @@ class Messages_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
+    * Testing has_errors method
+    */
+    public function test_has_errors_method()
+    {
+        $result = $this->messages_object->has_errors();
+
+        $this->assertInternalType('bool', $result);
+        $this->assertFalse($result);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
     * Testing rest of getters
     */
     public function test_rest_of_getters()
@@ -66,7 +79,7 @@ class Messages_Test extends Test_Case {
         $results[] = $this->messages_object->get_success();
         $results[] = $this->messages_object->get_error();
         $results[] = $this->messages_object->get_file();
-        
+
         foreach ($results as $result)
         {
             $this->assertInternalType('array', $result);
