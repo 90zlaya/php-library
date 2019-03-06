@@ -26,7 +26,7 @@ class Website extends Testing {
     *
     * @var array
     */
-    public $server = array();
+    private $server = array();
 
     // -------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ class Website extends Testing {
     *
     * @var string
     */
-    public $name;
+    private $name;
 
     // -------------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ class Website extends Testing {
     *
     * @var string
     */
-    public $host;
+    private $host;
 
     // -------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ class Website extends Testing {
     *
     * @var string
     */
-    public $made;
+    private $made;
 
     // -------------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ class Website extends Testing {
     *
     * @var string
     */
-    public $language = 'EN';
+    private $language = 'EN';
 
     // -------------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ class Website extends Testing {
     *
     * @var string
     */
-    public $charset = 'UTF-8';
+    private $charset = 'UTF-8';
 
     // -------------------------------------------------------------------------
 
@@ -80,7 +80,7 @@ class Website extends Testing {
     *
     * @var string
     */
-    public $description = 'Simple website';
+    private $description = 'Simple website';
 
     // -------------------------------------------------------------------------
 
@@ -89,7 +89,7 @@ class Website extends Testing {
     *
     * @var string
     */
-    public $keywords = 'simple, website';
+    private $keywords = 'simple, website';
 
     // -------------------------------------------------------------------------
 
@@ -179,40 +179,42 @@ class Website extends Testing {
             ? $_SERVER['HTTP_REFERER']
             : NULL;
 
-        $this->server['location'] = $host . $self;
-        $this->server['referer']  = $referer;
-        $this->server['host']     = $host;
-        $this->server['uri']      = $request_uri;
-        $this->server['path']     = dirname($self);
-        $this->server['page']     = basename($self);
+        $this->set_server(array(
+            'location' => $host . $self,
+            'referer'  => $referer,
+            'host'     => $host,
+            'uri'      => $request_uri,
+            'path'     => dirname($self),
+            'page'     => basename($self),
+        ));
 
         isset($params['name'])
-            ? $this->name = $params['name']
+            ? $this->set_name($params['name'])
             : $this->set_error('Please set "name" parameter when using constructor');
 
         isset($params['host'])
-            ? $this->host = $params['host']
+            ? $this->set_host($params['host'])
             : $this->set_error('Please set "host" parameter when using constructor');
 
         isset($params['made'])
-            ? $this->made = $params['made']
+            ? $this->set_made($params['made'])
             : $this->set_error('Please set "made" parameter when using constructor');
 
         empty($params['language'])
             ? NULL
-            : $this->language = $params['language'];
+            : $this->set_language($params['language']);
 
         empty($params['charset'])
             ? NULL
-            : $this->charset = $params['charset'];
+            : $this->set_charset($params['charset']);
 
         empty($params['description'])
             ? NULL
-            : $this->description = $params['description'];
+            : $this->set_description($params['description']);
 
         empty($params['keywords'])
             ? NULL
-            : $this->keywords = $params['keywords'];
+            : $this->set_keywords($params['keywords']);
     }
 
     // -------------------------------------------------------------------------
@@ -323,7 +325,7 @@ class Website extends Testing {
         }
 
         $meta .= '<meta http-equiv="Content-Type" content="text/html; charset=';
-        $meta .= $this->charset;
+        $meta .= $this->get_charset();
         $meta .= '">';
         $meta .= PHP_EOL;
         $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
@@ -331,11 +333,11 @@ class Website extends Testing {
         $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">';
         $meta .= PHP_EOL;
         $meta .= '<meta name="description" content="';
-        $meta .= $this->description;
+        $meta .= $this->get_description();
         $meta .= '">';
         $meta .= PHP_EOL;
         $meta .= '<meta name="keywords" content="';
-        $meta .= $this->keywords;
+        $meta .= $this->get_keywords();
         $meta .= '">';
         $meta .= PHP_EOL;
         $meta .= '<meta name="author" content="';
@@ -355,7 +357,7 @@ class Website extends Testing {
         $meta .= '" type="image/png">';
         $meta .= PHP_EOL;
         $meta .= '<title>';
-        $meta .= empty($title) ? $this->name : $title;
+        $meta .= empty($title) ? $this->get_name() : $title;
         $meta .= '</title>' . PHP_EOL;
 
         return $meta;
@@ -578,11 +580,11 @@ class Website extends Testing {
 
         if ($always_made_year)
         {
-            $since = $this->made;
+            $since = $this->get_made();
         }
-        elseif ($current_year != $this->made)
+        elseif ($current_year != $this->get_made())
         {
-            $since = $this->made . '-' . $current_year;
+            $since = $this->get_made() . '-' . $current_year;
         }
 
         $show_licence ? $licence = ' | All Rights Reserved' : NULL;
@@ -613,7 +615,7 @@ class Website extends Testing {
     {
         $signature_hidden = '';
 
-        empty($language) ? $language = $this->language : NULL;
+        empty($language) ? $language = $this->get_language() : NULL;
 
         $signature_hidden .= PHP_EOL;
         $signature_hidden .= '<!-- ';
@@ -643,6 +645,214 @@ class Website extends Testing {
         $signature_hidden .= PHP_EOL;
 
         return $signature_hidden;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get server attribute
+    *
+    * @return array $this->server
+    */
+    public function get_server()
+    {
+        return $this->server;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set server attribute
+    *
+    * @param array $params
+    *
+    * @return void
+    */
+    private function set_server($params)
+    {
+        $this->server = $params;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get name attribute
+    *
+    * @return string $this->name
+    */
+    public function get_name()
+    {
+        return $this->name;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set name attribute
+    *
+    * @param string $value
+    *
+    * @return void
+    */
+    private function set_name($value)
+    {
+        $this->name = $value;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get host attribute
+    *
+    * @return string $this->host
+    */
+    public function get_host()
+    {
+        return $this->host;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set host attribute
+    *
+    * @param string $value
+    *
+    * @return void
+    */
+    private function set_host($value)
+    {
+        $this->host = $value;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get made attribute
+    *
+    * @return string $this->made
+    */
+    public function get_made()
+    {
+        return $this->made;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set made attribute
+    *
+    * @param string $value
+    *
+    * @return void
+    */
+    private function set_made($value)
+    {
+        $this->made = $value;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get language attribute
+    *
+    * @return string $this->language
+    */
+    public function get_language()
+    {
+        return $this->language;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set language attribute
+    *
+    * @param string $value
+    *
+    * @return void
+    */
+    private function set_language($value)
+    {
+        $this->language = $value;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get charset attribute
+    *
+    * @return string $this->charset
+    */
+    public function get_charset()
+    {
+        return $this->charset;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set charset attribute
+    *
+    * @param string $value
+    *
+    * @return void
+    */
+    private function set_charset($value)
+    {
+        $this->charset = $value;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get description attribute
+    *
+    * @return string $this->description
+    */
+    public function get_description()
+    {
+        return $this->description;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set description attribute
+    *
+    * @param string $value
+    *
+    * @return void
+    */
+    private function set_description($value)
+    {
+        $this->description = $value;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get keywords attribute
+    *
+    * @return string $this->keywords
+    */
+    public function get_keywords()
+    {
+        return $this->keywords;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set keywords attribute
+    *
+    * @param string $value
+    *
+    * @return void
+    */
+    private function set_keywords($value)
+    {
+        $this->keywords = $value;
     }
 
     // -------------------------------------------------------------------------

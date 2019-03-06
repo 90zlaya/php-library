@@ -83,29 +83,29 @@ class Website_Test extends Test_Case {
     */
     public function test_retrieving_website_properties()
     {
-        $this->assertArrayHasKey('location', $this->website_object->server);
-        $this->assertArrayHasKey('referer', $this->website_object->server);
-        $this->assertArrayHasKey('host', $this->website_object->server);
-        $this->assertArrayHasKey('uri', $this->website_object->server);
-        $this->assertArrayHasKey('path', $this->website_object->server);
-        $this->assertArrayHasKey('page', $this->website_object->server);
+        $this->assertArrayHasKey('location', $this->website_object->get_server());
+        $this->assertArrayHasKey('referer', $this->website_object->get_server());
+        $this->assertArrayHasKey('host', $this->website_object->get_server());
+        $this->assertArrayHasKey('uri', $this->website_object->get_server());
+        $this->assertArrayHasKey('path', $this->website_object->get_server());
+        $this->assertArrayHasKey('page', $this->website_object->get_server());
 
-        $this->assertEquals($this->website_object->name, $this->website_data['name']);
-        $this->assertEquals($this->website_object->host, $this->website_data['host']);
-        $this->assertEquals($this->website_object->made, $this->website_data['made']);
-        $this->assertEquals($this->website_object->language, $this->website_data['language']);
-        $this->assertEquals($this->website_object->charset, $this->website_data['charset']);
-        $this->assertEquals($this->website_object->description, $this->website_data['description']);
-        $this->assertEquals($this->website_object->keywords, $this->website_data['keywords']);
+        $this->assertEquals($this->website_object->get_name(), $this->website_data['name']);
+        $this->assertEquals($this->website_object->get_host(), $this->website_data['host']);
+        $this->assertEquals($this->website_object->get_made(), $this->website_data['made']);
+        $this->assertEquals($this->website_object->get_language(), $this->website_data['language']);
+        $this->assertEquals($this->website_object->get_charset(), $this->website_data['charset']);
+        $this->assertEquals($this->website_object->get_description(), $this->website_data['description']);
+        $this->assertEquals($this->website_object->get_keywords(), $this->website_data['keywords']);
 
-        $this->assertInternalType('string', $this->website_object->name);
-        $this->assertInternalType('string', $this->website_object->host);
-        $this->assertInternalType('string', $this->website_object->made);
-        $this->assertInternalType('string', $this->website_object->language);
-        $this->assertInternalType('string', $this->website_object->charset);
-        $this->assertInternalType('string', $this->website_object->description);
-        $this->assertInternalType('string', $this->website_object->keywords);
-        $this->assertInternalType('array', $this->website_object->server);
+        $this->assertInternalType('string', $this->website_object->get_name());
+        $this->assertInternalType('string', $this->website_object->get_host());
+        $this->assertInternalType('string', $this->website_object->get_made());
+        $this->assertInternalType('string', $this->website_object->get_language());
+        $this->assertInternalType('string', $this->website_object->get_charset());
+        $this->assertInternalType('string', $this->website_object->get_description());
+        $this->assertInternalType('string', $this->website_object->get_keywords());
+        $this->assertInternalType('array', $this->website_object->get_server());
 
         $errors = $this->website_object->get_error();
 
@@ -126,18 +126,18 @@ class Website_Test extends Test_Case {
 
         $this->assertInternalType('array', $errors);
 
-        $this->assertInternalType('array', $website->server);
+        $this->assertInternalType('array', $website->get_server());
 
         $this->assertNotEmpty($errors);
-        $this->assertNotEmpty($website->server);
+        $this->assertNotEmpty($website->get_server());
 
-        $this->assertEmpty($website->name);
-        $this->assertEmpty($website->host);
-        $this->assertEmpty($website->made);
-        $this->assertEquals($website->language, 'EN');
-        $this->assertEquals($website->charset, 'UTF-8');
-        $this->assertEquals($website->description, 'Simple website');
-        $this->assertEquals($website->keywords, 'simple, website');
+        $this->assertEmpty($website->get_name());
+        $this->assertEmpty($website->get_host());
+        $this->assertEmpty($website->get_made());
+        $this->assertEquals($website->get_language(), 'EN');
+        $this->assertEquals($website->get_charset(), 'UTF-8');
+        $this->assertEquals($website->get_description(), 'Simple website');
+        $this->assertEquals($website->get_keywords(), 'simple, website');
     }
 
     // -------------------------------------------------------------------------
