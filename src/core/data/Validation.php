@@ -189,16 +189,8 @@ class Validation {
         $extension = pathinfo($file, PATHINFO_EXTENSION);
         $extension = strtolower($extension);
 
-        if
-        (
-            in_array($extension, $allowed_extensions) &&
-            in_array($type, $allowed_types)
-        )
-        {
-            return TRUE;
-        }
-
-        return FALSE;
+        return in_array($extension, $allowed_extensions) &&
+            in_array($type, $allowed_types);
     }
 
     // -------------------------------------------------------------------------

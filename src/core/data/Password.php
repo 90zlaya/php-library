@@ -23,7 +23,7 @@ class Password {
     *
     * @var string
     */
-    public static $method = 'sha512';
+    private static $method = 'sha512';
 
     // -------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ class Password {
     *
     * @var string
     */
-    protected static $letters = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    private static $letters = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 
     // -------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ class Password {
     *
     * @var string
     */
-    protected static $words = 'dog,cat,sheep,sun,sky,red,ball,happy,ice,green,blue,music,movies,radio,green,turbo,mouse,computer,paper,water,fire,storm,chicken,boot,freedom,white,nice,player,small,eyes,path,kid,box,black,flower,ping,pong,smile,coffee,colors,rainbow,plus,king,tv,ring';
+    private static $words = 'dog,cat,sheep,sun,sky,red,ball,happy,ice,green,blue,music,movies,radio,green,turbo,mouse,computer,paper,water,fire,storm,chicken,boot,freedom,white,nice,player,small,eyes,path,kid,box,black,flower,ping,pong,smile,coffee,colors,rainbow,plus,king,tv,ring';
 
     // -------------------------------------------------------------------------
 
@@ -221,14 +221,40 @@ class Password {
     {
         if (
             ! empty($plain_text) &&
-            ! empty(self::$method) &&
-            in_array(self::$method, openssl_get_md_methods())
+            ! empty(self::get_method()) &&
+            in_array(self::get_method(), openssl_get_md_methods())
         )
         {
-            return openssl_digest($plain_text, self::$method);
+            return openssl_digest($plain_text, self::get_method());
         }
 
         return FALSE;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Get method attribute
+    *
+    * @return string self::$method
+    */
+    private static function get_method()
+    {
+        return self::$method;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Set method attribute
+    *
+    * @param string $value
+    *
+    * @return void
+    */
+    public static function set_method($value)
+    {
+        self::$method = $value;
     }
 
     // -------------------------------------------------------------------------

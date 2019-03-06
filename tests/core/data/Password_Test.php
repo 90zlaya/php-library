@@ -108,7 +108,7 @@ class Password_Test extends Test_Case {
 
         foreach ($methods as $method)
         {
-            password::$method = $method;
+            password::set_method($method);
 
             $result = password::digest($this->password_data['string']);
 
@@ -143,7 +143,7 @@ class Password_Test extends Test_Case {
 
         foreach ($methods as $method)
         {
-            password::$method = $method;
+            password::set_method($method);
 
             $result = password::digest($this->password_data['string']);
 

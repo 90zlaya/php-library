@@ -23,7 +23,7 @@ class Random {
     *
     * @var string
     */
-    protected static $numbers = '0123456789';
+    private static $numbers = '0123456789';
 
     // -------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ class Random {
     *
     * @var string
     */
-    protected static $alphanumeric = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    private static $alphanumeric = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     // -------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ class Random {
     *
     * @var array
     */
-    protected static $consonant = array(
+    private static $consonant = array(
         'b',
         'c',
         'd',
@@ -71,7 +71,7 @@ class Random {
     *
     * @var array
     */
-    protected static $vocal = array(
+    private static $vocal = array(
         'a',
         'e',
         'i',
@@ -172,11 +172,13 @@ class Random {
             case 'DAY':
             {
                 $index = date('N') - 1;
+
                 break;
             }
             case 'MONTH':
             {
                 $index = date('j') - 1;
+
                 break;
             }
             default: $index = rand(0, $list_size - 1);
