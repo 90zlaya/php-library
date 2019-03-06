@@ -11,7 +11,7 @@
 */
 namespace PHP_Library\Core\Files;
 
-use PHP_Library\Core\Format\Format as format;
+use PHP_Library\Core\Arrangements\Format as format;
 
 /**
 * Directory content retrieval
@@ -61,7 +61,7 @@ class Directory_Lister {
     *
     * @var string
     */
-    protected static $directory = '';
+    private static $directory = '';
 
     // -------------------------------------------------------------------------
 
@@ -70,7 +70,7 @@ class Directory_Lister {
     *
     * @var string
     */
-    protected static $date_format = 'Y-m-d';
+    private static $date_format = 'Y-m-d';
 
     // -------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ class Directory_Lister {
     *
     * @var string
     */
-    protected static $time_format = 'H:m:i';
+    private static $time_format = 'H:m:i';
 
     // -------------------------------------------------------------------------
 
@@ -88,7 +88,7 @@ class Directory_Lister {
     *
     * @var array
     */
-    protected static $method_calls = array(
+    private static $method_calls = array(
         'files'   => 'files',
         'folders' => 'folders',
         'crawl'   => 'crawl',
@@ -101,7 +101,7 @@ class Directory_Lister {
     *
     * @var array
     */
-    protected static $forbidden_characters = array(
+    private static $forbidden_characters = array(
         '-',
         '+',
         '!',
@@ -301,7 +301,7 @@ class Directory_Lister {
     *
     * @return array $data
     */
-    protected static function folders($directory='')
+    private static function folders($directory='')
     {
         empty($directory) ? $directory = self::$directory : self::$directory = $directory;
 
@@ -348,7 +348,7 @@ class Directory_Lister {
     *
     * @return array $arr_files
     */
-    protected static function files($directory='', $types=array())
+    private static function files($directory='', $types=array())
     {
         $arr_files = array();
 
@@ -414,7 +414,7 @@ class Directory_Lister {
     *
     * @return mixed
     */
-    protected static function crawl($params)
+    private static function crawl($params)
     {
         $directory = isset($params['directory']) ? $params['directory'] : '';
         $types     = isset($params['types']) ? $params['types'] : array();

@@ -11,7 +11,7 @@
 */
 namespace PHP_Library\Core\Services;
 
-use PHP_Library\System\Testing\Testing as Testing;
+use PHP_Library\System\Examinations\Testing as Testing;
 
 /**
 * Web service related data

@@ -11,7 +11,7 @@
 */
 use PHPUnit\Framework\TestCase as Test_Case;
 use PHP_Library\Core\Services\Web_Service as web_service;
-use PHP_Library\System\Testing\Testing as testing;
+use PHP_Library\System\Examinations\Testing as testing;
 
 /**
 * Testing Web_Service class

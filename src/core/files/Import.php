@@ -26,7 +26,7 @@ class Import {
     *
     * @var array
     */
-    protected static $allowed_types = array(
+    private static $allowed_types = array(
         'xlsx',
         'xls',
         'csv',
@@ -57,12 +57,17 @@ class Import {
     {
         if (file_exists($file_path))
         {
-            $file_extension = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
+            $file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
 
-            if (in_array($file_extension, self::$allowed_types))
+            if (in_array(strtolower($file_extension), self::$allowed_types))
             {
                 $spreadsheet = IOFactory::load($file_path);
-                $sheetData   = $spreadsheet->getActiveSheet()->toArray(NULL, TRUE, TRUE, TRUE);
+                $sheetData   = $spreadsheet->getActiveSheet()->toArray(
+                    NULL,
+                    TRUE,
+                    TRUE,
+                    TRUE
+                );
 
                 return $sheetData;
             }

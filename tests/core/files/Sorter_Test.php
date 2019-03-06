@@ -187,7 +187,10 @@ class Sorter_Test extends Test_Case {
             $this->assertNotEmpty($report['string']);
             $this->assertArrayHasKey('usage', $report['array']);
             $this->assertArrayHasKey('result', $report['array']);
-            $this->assertEmpty($report['array']['result']['errors']);
+
+            $errors = $sorter->get_error();
+
+            $this->assertEmpty($errors);
         }
     }
 
@@ -208,7 +211,7 @@ class Sorter_Test extends Test_Case {
             'types'                       => array('jpg'),
         ));
 
-        $sorter->testing = TRUE;
+        $sorter->turn_on();
 
         $deploy = $sorter->deploy();
 
@@ -230,7 +233,10 @@ class Sorter_Test extends Test_Case {
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
-        $this->assertEmpty($report['array']['result']['errors']);
+
+        $errors = $sorter->get_error();
+
+        $this->assertEmpty($errors);
     }
 
     // -------------------------------------------------------------------------
@@ -250,7 +256,7 @@ class Sorter_Test extends Test_Case {
             'types'                       => array('jpg'),
         ));
 
-        $sorter->testing = TRUE;
+        $sorter->turn_on();
 
         $deploy = $sorter->deploy();
 
@@ -272,7 +278,10 @@ class Sorter_Test extends Test_Case {
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
-        $this->assertEmpty($report['array']['result']['errors']);
+
+        $errors = $sorter->get_error();
+
+        $this->assertEmpty($errors);
     }
 
     // -------------------------------------------------------------------------
@@ -311,7 +320,10 @@ class Sorter_Test extends Test_Case {
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
-        $this->assertEmpty($report['array']['result']['errors']);
+
+        $errors = $sorter->get_error();
+
+        $this->assertEmpty($errors);
     }
 
     // -------------------------------------------------------------------------
@@ -343,7 +355,10 @@ class Sorter_Test extends Test_Case {
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
-        $this->assertNotEmpty($report['array']['result']['errors']);
+
+        $errors = $sorter->get_error();
+
+        $this->assertNotEmpty($errors);
     }
 
     // -------------------------------------------------------------------------
@@ -384,7 +399,10 @@ class Sorter_Test extends Test_Case {
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
-        $this->assertNotEmpty($report['array']['result']['errors']);
+
+        $errors = $sorter->get_error();
+
+        $this->assertNotEmpty($errors);
     }
 
     // -------------------------------------------------------------------------

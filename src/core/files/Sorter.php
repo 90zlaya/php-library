@@ -11,19 +11,12 @@
 */
 namespace PHP_Library\Core\Files;
 
+use PHP_Library\System\Examinations\Testing as Testing;
+
 /**
 * Sortes files to multiple folders
 */
-class Sorter {
-
-    // -------------------------------------------------------------------------
-
-    /**
-    * Set to TRUE if being tested
-    *
-    * @var bool
-    */
-    public $testing = FALSE;
+class Sorter extends Testing {
 
     // -------------------------------------------------------------------------
 
@@ -32,7 +25,7 @@ class Sorter {
     *
     * @var array
     */
-    protected $report = array(
+    private $report = array(
         'folders' => array(
             'number' => array(
                 'created'     => 0,
@@ -57,7 +50,6 @@ class Sorter {
                 'not_moved'  => array(),
             ),
         ),
-        'errors'  => array(),
     );
 
     // -------------------------------------------------------------------------
@@ -67,7 +59,7 @@ class Sorter {
     *
     * @var array
     */
-    protected $deploy = array();
+    private $deploy = array();
 
     // -------------------------------------------------------------------------
 
@@ -143,7 +135,7 @@ class Sorter {
     *
     * @return array
     */
-    protected function get_files()
+    private function get_files()
     {
         $arr_files = array();
 
@@ -186,10 +178,7 @@ class Sorter {
         }
         else
         {
-            $this->report['errors'] = array_merge(
-                $this->report['errors'],
-                array('Improperly set ' . $files_param . ' parameter.')
-            );
+            $this->set_error('Improperly set ' . $files_param . ' parameter');
         }
 
         return $arr_files;
@@ -202,7 +191,7 @@ class Sorter {
     *
     * @return void
     */
-    protected function create_directories()
+    private function create_directories()
     {
         $directories_param = 'where_to_create_directories';
 
@@ -212,10 +201,7 @@ class Sorter {
 
             if (empty($this->deploy[$number_of_directories]))
             {
-                $this->report['errors'] = array_merge(
-                    $this->report['errors'],
-                    array('Please set ' . $number_of_directories . ' parameter.')
-                );
+                $this->set_error('Please set ' . $number_of_directories . ' parameter');
             }
             else
             {
@@ -225,7 +211,7 @@ class Sorter {
 
                     if ( ! file_exists($folder))
                     {
-                        if (mkdir($folder) && ! $this->testing)
+                        if (mkdir($folder) && ! $this->is_being_tested())
                         {
                             $this->report['folders']['number']['created']++;
                             array_push(
@@ -248,10 +234,7 @@ class Sorter {
         }
         else
         {
-            $this->report['errors'] = array_merge(
-                $this->report['errors'],
-                array('Improperly set ' . $directories_param . ' parameter.')
-            );
+            $this->set_error('Improperly set ' . $directories_param . ' parameter');
         }
     }
 
@@ -266,7 +249,7 @@ class Sorter {
     *
     * @return void
     */
-    protected function transport_files($files, $operation, $overwrite)
+    private function transport_files($files, $operation, $overwrite)
     {
         if ( ! empty($files))
         {
@@ -421,7 +404,7 @@ class Sorter {
     */
     private function copy_files($location_from, $location_to, $file)
     {
-        if (copy($location_from, $location_to) && ! $this->testing)
+        if (copy($location_from, $location_to) && ! $this->is_being_tested())
         {
             $this->report['files']['number']['copied']++;
             array_push($this->report['files']['report']['copied'], $file);
@@ -446,7 +429,7 @@ class Sorter {
     */
     private function move_files($location_from, $location_to, $file)
     {
-        if (rename($location_from, $location_to) && ! $this->testing)
+        if (rename($location_from, $location_to) && ! $this->is_being_tested())
         {
             $this->report['files']['number']['moved']++;
             array_push($this->report['files']['report']['moved'], $file);
@@ -461,23 +444,11 @@ class Sorter {
     // -------------------------------------------------------------------------
 
     /**
-    * Check if execution has errors
-    *
-    * @return bool
-    */
-    protected function has_errors()
-    {
-        return ! empty($this->report['errors']);
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
     * Check if it has nothing to sort
     *
     * @return bool
     */
-    protected function has_nothing_to_sort()
+    private function has_nothing_to_sort()
     {
         $state = $this->operation_states();
 
@@ -492,7 +463,7 @@ class Sorter {
     *
     * @return bool
     */
-    protected function is_sorting_successful()
+    private function is_sorting_successful()
     {
         $state = $this->operation_states();
 

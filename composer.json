@@ -20,14 +20,16 @@
     ],
     "autoload": {
         "psr-4": {
+            "PHP_Library\\Core\\Arrangements\\": "src\\core\\arrangements",
             "PHP_Library\\Core\\Data\\": "src\\core\\data",
             "PHP_Library\\Core\\Files\\": "src\\core\\files",
-            "PHP_Library\\Core\\Format\\": "src\\core\\format",
-            "PHP_Library\\Core\\Math\\": "src\\core\\math",
-            "PHP_Library\\Core\\SQL\\": "src\\core\\sql",
+            "PHP_Library\\Core\\Numericals\\": "src\\core\\numericals",
             "PHP_Library\\Core\\Services\\": "src\\core\\services",
-            "PHP_Library\\System\\Data\\": "src\\system\\data",
-            "PHP_Library\\System\\Testing\\": "src\\system\\testing"
+            "PHP_Library\\Core\\Sites\\": "src\\core\\sites",
+            "PHP_Library\\Core\\SQL\\": "src\\core\\sql",
+            "PHP_Library\\System\\Associations\\": "src\\system\\associations",
+            "PHP_Library\\System\\Examinations\\": "src\\system\\examinations",
+            "PHP_Library\\System\\Informations\\": "src\\system\\informations"
         }
     },
     "minimum-stability": "stable",

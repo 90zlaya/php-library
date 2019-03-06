@@ -115,11 +115,11 @@ class Dump_Test extends Test_Case {
     // -------------------------------------------------------------------------
 
     /**
-    * Testing get_messages method
+    * Testing get_message method
     */
-    public function test_get_messages_method()
+    public function test_get_message_method()
     {
-        $result = $this->dump_object->get_messages();
+        $result = $this->dump_object->get_message();
 
         $this->assertInternalType('array', $result);
 
