@@ -122,7 +122,7 @@ class Password {
             return substr(
                 $new_password,
                 0,
-                $size_optimum-strlen($number)
+                $size_optimum - strlen( (string) $number)
             ) . $number;
         }
         else
@@ -195,7 +195,7 @@ class Password {
     *
     * @param string $plain_text
     *
-    * @return string
+    * @return mixed
     */
     public static function decode($plain_text)
     {

@@ -329,7 +329,7 @@ class Format {
     *
     * @param string $string
     *
-    * @return string
+    * @return mixed
     */
     public static function windows1250_to_utf8($string)
     {
@@ -343,7 +343,7 @@ class Format {
     *
     * @param string $string
     *
-    * @return string $converted
+    * @return mixed
     */
     public static function utf8_to_windows1250($string)
     {
@@ -390,7 +390,7 @@ class Format {
     */
     public static function price_format($price, $decimal=2)
     {
-        if (stripos($price, ',') === FALSE)
+        if (stripos( (string) $price, ',') === FALSE)
         {
             $price_format = number_format($price, $decimal);
             $price_format = str_replace('.', '?', $price_format);

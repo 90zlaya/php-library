@@ -143,7 +143,7 @@ class Sorter extends Testing {
 
         if (file_exists($this->deploy[$files_param]))
         {
-            $files           = scandir($this->deploy[$files_param]);
+            $files           = (array) scandir($this->deploy[$files_param]);
             $number_of_files = 0;
             $counter         = 1;
 
@@ -151,6 +151,8 @@ class Sorter extends Testing {
             {
                 if ($counter > 2)
                 {
+                    $file = (string) $file;
+
                     if (stripos($file, '.'))
                     {
                         $extension         = pathinfo($file, PATHINFO_EXTENSION);
@@ -366,7 +368,7 @@ class Sorter extends Testing {
     */
     private function folder_name($i)
     {
-        switch (strlen($i))
+        switch (strlen( (string) $i))
         {
             case 1:
             {

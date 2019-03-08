@@ -171,13 +171,13 @@ class Random {
         {
             case 'DAY':
             {
-                $index = date('N') - 1;
+                $index = (int) date('N') - 1;
 
                 break;
             }
             case 'MONTH':
             {
-                $index = date('j') - 1;
+                $index = (int) date('j') - 1;
 
                 break;
             }

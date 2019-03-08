@@ -1,6 +1,6 @@
 <?php
 /**
-* Website_Test
+* Website
 *
 * Works with website related data
 *

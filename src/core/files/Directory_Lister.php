@@ -305,13 +305,13 @@ class Directory_Lister {
     {
         empty($directory) ? $directory = self::$directory : self::$directory = $directory;
 
-        $files      = is_dir($directory) ? scandir($directory) : array();
+        $files      = is_dir($directory) ? (array) scandir($directory) : array();
         $arr_folder = $arr_path = array();
         $counter    = 1;
 
         foreach ($files as $folder)
         {
-            $folder_first_character = substr($folder, 0, 1);
+            $folder_first_character = substr( (string) $folder, 0, 1);
 
             if ( ! in_array($folder_first_character, self::$forbidden_characters))
             {
@@ -356,13 +356,15 @@ class Directory_Lister {
 
         if (file_exists($directory))
         {
-            $files   = scandir($directory);
+            $files   = (array) scandir($directory);
             $counter = 1;
 
             foreach ($files as $file)
             {
                 if ($counter > 2)
                 {
+                    $file = (string) $file;
+
                     if (stripos($file, '.'))
                     {
                         $extension         = pathinfo($file, PATHINFO_EXTENSION);
@@ -387,8 +389,8 @@ class Directory_Lister {
                                 'file'      => $file,
                                 'extension' => $extension,
                                 'size'      => filesize($path),
-                                'date'      => date(self::$date_format, filemtime($path)),
-                                'time'      => date(self::$time_format, filemtime($path)),
+                                'date'      => date(self::$date_format, (int) filemtime($path)),
+                                'time'      => date(self::$time_format, (int) filemtime($path)),
                             );
 
                             array_push($arr_files, $data);

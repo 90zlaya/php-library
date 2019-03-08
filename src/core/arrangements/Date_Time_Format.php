@@ -153,7 +153,7 @@ class Date_Time_Format {
     public static function compare($date)
     {
         return self::current(self::$types['database']['format']) >
-            date(self::$types['database']['format'], strtotime($date));
+            date(self::$types['database']['format'], (int) strtotime($date));
     }
 
     // -------------------------------------------------------------------------
@@ -172,7 +172,7 @@ class Date_Time_Format {
             ? self::$types['friendly']['date']
             : self::$types['friendly']['datetime'];
 
-        return date($type, strtotime($date));
+        return date($type, (int) strtotime($date));
     }
 
     // -------------------------------------------------------------------------
@@ -190,7 +190,7 @@ class Date_Time_Format {
         {
             $format_to_database = date(
                 self::$types['database']['format'],
-                strtotime($date)
+                (int) strtotime($date)
             );
 
             return $format_to_database;
@@ -214,7 +214,7 @@ class Date_Time_Format {
         {
             $format_to_user = date(
                 self::$types['user']['format'],
-                strtotime($date)
+                (int) strtotime($date)
             );
 
             return $format_to_user;
@@ -279,11 +279,11 @@ class Date_Time_Format {
     *
     * @param string $time
     *
-    * @return string $minutes
+    * @return int $minutes
     */
     public static function hours_to_minutes($time)
     {
-        $minutes = '';
+        $minutes = 0;
 
         if (strpos($time, ':') !== FALSE)
         {
@@ -309,7 +309,8 @@ class Date_Time_Format {
                 }
             }
 
-            $minutes += $hours * 60;
+            $hours_to_minutes = (int) $hours * 60;
+            $minutes          = $hours_to_minutes + (int) $minutes;
         }
 
         return $minutes;
@@ -439,7 +440,7 @@ class Date_Time_Format {
         {
             empty($year) ? $year = date('Y') : NULL;
 
-            return date($format, strtotime('01.01.' . $year));
+            return date($format, (int) strtotime('01.01.' . $year));
         }
 
         return FALSE;
@@ -463,7 +464,7 @@ class Date_Time_Format {
                 ? $format = self::$types['database']['format']
                 : NULL;
 
-            return date($format, strtotime(' -' . $number_of_days . ' day'));
+            return date($format, (int) strtotime(' -' . $number_of_days . ' day'));
         }
 
         return FALSE;
@@ -487,7 +488,7 @@ class Date_Time_Format {
                 ? $format = self::$types['database']['format']
                 : NULL;
 
-            return date($format, strtotime(' +' . $number_of_days . ' day'));
+            return date($format, (int) strtotime(' +' . $number_of_days . ' day'));
         }
 
         return FALSE;

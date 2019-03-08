@@ -284,7 +284,7 @@ class Web_Service extends Testing {
             $is_optional = TRUE;
 
             $data_string   = json_encode($params['data']);
-            $string_length = strlen($data_string);
+            $string_length = strlen( (string) $data_string);
 
             $exit_array = array_merge($params, array(
                 'custom_request' => 'POST',

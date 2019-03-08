@@ -178,7 +178,7 @@ class Email {
     * @param bool $to_lower
     * @param int $parts
     *
-    * @return array
+    * @return mixed
     */
     private static function split($data, $to_lower=TRUE, $parts=5)
     {

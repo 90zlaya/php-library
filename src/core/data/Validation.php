@@ -27,7 +27,7 @@ class Validation {
     */
     public static function year($year)
     {
-        return is_numeric($year) && strlen($year) === strlen(date('Y'));
+        return is_numeric($year) && strlen( (string) $year) === strlen(date('Y'));
     }
 
     // -------------------------------------------------------------------------
