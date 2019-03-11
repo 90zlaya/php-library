@@ -215,10 +215,12 @@ class File {
     * @param string $data
     * @param string $operation
     *
-    * @return mixed
+    * @return int $value
     */
     private static function resource_operation($file_location, $data, $operation='w')
     {
+        $value = 0;
+
         $resource = fopen($file_location, $operation);
 
         if ( ! empty($resource))
@@ -227,12 +229,12 @@ class File {
             {
                 case 'w':
                 {
-                    return fwrite($resource, $data);
+                    $value = fwrite($resource, $data);
                 }
             }
         }
 
-        return FALSE;
+        return (int) $value;
     }
 
     // -------------------------------------------------------------------------
