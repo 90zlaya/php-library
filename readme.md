@@ -156,7 +156,7 @@ Official PHP Library code coverage report has been composed by [xDebug] and coul
 Migration
 ----------------
 
-When you update library version from older to newer, it's recommended to consult changelog file, which is located under the name [changelog.md] in root directory.
+All versions equal to PHP Library v2.0 or higher follow strict semantic versioning rules. All tests are guaranteed to pass for minor and patch versions, but major version change will make application crash.
 
 Acknowledgements
 ----------------
@@ -182,4 +182,3 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 
 [ruleset.xml]: https://github.com/90zlaya/php-library/blob/master/ruleset.xml
 [phpunit.xml]: https://github.com/90zlaya/php-library/blob/master/phpunit.xml
-[changelog.md]: https://github.com/90zlaya/php-library/blob/master/changelog.md

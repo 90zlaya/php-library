@@ -116,7 +116,7 @@ class Email {
     * @param string $email
     * @param array $invalid_email_clients
     *
-    * @return bool
+    * @return mixed
     */
     public static function validate($email, $invalid_email_clients=array())
     {

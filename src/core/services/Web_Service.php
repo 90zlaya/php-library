@@ -150,7 +150,12 @@ class Web_Service extends Testing {
     */
     private function session_initialize()
     {
-        $this->ch = curl_init($this->url);
+        $ch = curl_init($this->url);
+
+        if ( ! empty($ch))
+        {
+            $this->ch = $ch;
+        }
 
         if (empty($this->ch) || $this->is_being_tested())
         {

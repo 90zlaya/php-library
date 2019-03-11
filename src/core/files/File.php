@@ -64,33 +64,37 @@ class File {
     */
     public static function write_to_file($file_location, $write_data, $last_in=TRUE)
     {
-        if (empty($file_location) || empty($write_data))
-        {
-            return FALSE;
-        }
-        else
+        if ( ! empty($file_location) || ! empty($write_data))
         {
             $new_data = $write_data . PHP_EOL;
 
             if (file_exists($file_location))
             {
-                $file     = fopen($file_location, 'r');
-                $old_data = fread($file, filesize($file_location));
+                $file = fopen($file_location, 'r');
 
-                $data = $last_in
-                    ? $old_data . $new_data
-                    : $new_data . $old_data;
+                if ( ! empty($file))
+                {
+                    $file_location = (string) $file_location;
+                    $file_size     = (int) filesize($file_location);
 
-                fclose($file);
-                $file = fopen($file_location, 'w');
-                fwrite($file, $data);
+                    $old_data = fread($file, $file_size);
+
+                    $data = $last_in
+                        ? $old_data . $new_data
+                        : $new_data . $old_data;
+
+                    fclose($file);
+
+                    return self::resource_operation($file_location, $data, 'w');
+                }
             }
             else
             {
-                $file = fopen($file_location, 'w');
-                fwrite($file, $new_data);
+                return self::resource_operation($file_location, $new_data, 'w');
             }
         }
+
+        return FALSE;
     }
 
     // -------------------------------------------------------------------------
@@ -108,31 +112,37 @@ class File {
         {
             $f = fopen($file_location, 'r');
 
-            $cursor = -1;
-
-            fseek($f, $cursor, SEEK_END);
-            $char = fgetc($f);
-
-            while ($char === "\n" || $char === "\r")
+            if ($f)
             {
-                fseek($f, $cursor--, SEEK_END);
-                $char = fgetc($f);
-            }
+                $cursor = -1;
 
-            $line = '';
-            while ($char !== FALSE && $char !== "\n" && $char !== "\r")
-            {
-                $line = $char . $line;
-                fseek($f, $cursor--, SEEK_END);
-                $char = fgetc($f);
-            }
+                fseek($f, $cursor, SEEK_END);
 
-            return $line;
+                $char = fgetc($f);
+
+                while ($char === "\n" || $char === "\r")
+                {
+                    fseek($f, $cursor--, SEEK_END);
+
+                    $char = fgetc($f);
+                }
+
+                $line = '';
+
+                while ($char !== FALSE && $char !== "\n" && $char !== "\r")
+                {
+                    $line = $char . $line;
+
+                    fseek($f, $cursor--, SEEK_END);
+
+                    $char = fgetc($f);
+                }
+
+                return $line;
+            }
         }
-        else
-        {
-            return FALSE;
-        }
+
+        return FALSE;
     }
 
     // -------------------------------------------------------------------------
@@ -158,9 +168,12 @@ class File {
 
             $to_unlink ? unlink($file_location) : NULL;
 
-            foreach ($file_contents as $line)
+            if ( ! empty($file_contents))
             {
-                $items[] = explode(';', $line);
+                foreach ($file_contents as $line)
+                {
+                    $items[] = explode(';', $line);
+                }
             }
         }
 
@@ -191,6 +204,35 @@ class File {
 
             exit;
         }
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+    * Use fopen to ensure that resource is available for operations
+    *
+    * @param string $file_location
+    * @param string $data
+    * @param string $operation
+    *
+    * @return mixed
+    */
+    private static function resource_operation($file_location, $data, $operation='w')
+    {
+        $resource = fopen($file_location, $operation);
+
+        if ( ! empty($resource))
+        {
+            switch ($operation)
+            {
+                case 'w':
+                {
+                    return fwrite($resource, $data);
+                }
+            }
+        }
+
+        return FALSE;
     }
 
     // -------------------------------------------------------------------------

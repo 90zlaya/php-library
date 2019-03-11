@@ -199,10 +199,13 @@ class File_Test extends Test_Case {
     {
         unlink(realpath($this->file['location'] . $this->file['name']));
 
-        $this->assertNull(file::write_to_file(
+        $result = file::write_to_file(
             $this->file['location'] . $this->file['name'],
             $this->line
-        ));
+        );
+
+        $this->assertNotNull($result);
+        $this->assertInternalType('int', $result);
 
         $this->assertFalse(file::write_to_file(NULL, NULL));
     }

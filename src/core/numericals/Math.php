@@ -102,13 +102,13 @@ class Math {
     /**
     * Set iterator attribute
     *
-    * @param string $value
+    * @param int $value
     *
     * @return void
     */
     public static function set_iterator($value=0)
     {
-        self::$iterator = (int) $value;
+        self::$iterator = $value;
     }
 
     // -------------------------------------------------------------------------
