@@ -170,7 +170,15 @@ class Web_Service_Test extends Test_Case {
 
             $this->assertArrayHasKey('code', $result);
             $this->assertInternalType('int', $result['code']);
-            $this->assertEquals(404, $result['code']);
+
+            if ($url === $this->urls['nonexistent']['image'])
+            {
+                $this->assertEquals(301, $result['code']);
+            }
+            else
+            {
+                $this->assertEquals(404, $result['code']);
+            }
 
             $this->assertArrayHasKey('response', $result);
             $this->assertInternalType('string', $result['response']);

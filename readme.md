@@ -6,7 +6,7 @@
 ![Official logo of php-library](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1)
 =======
 
-PHP Library is a set of classes that contain the most useful attributes and methods that faciliate the development of Web applications.
+PHP Library is a set of classes that contain the most useful attributes and methods that facilitate the development of Web applications.
 Project is open-sourced under MIT licence on [GitHub]. Available over Composer and [Packagist].
 
 Organisation
