@@ -174,7 +174,11 @@ class Geo_Plugin_Test extends Test_Case {
         $this->assertArrayHasKey('geoplugin_status', $result);
         $this->assertNotEmpty($result['geoplugin_status']);
         $this->assertNotEmpty($geo_plugin->get_code());
-        $this->assertEquals($geo_plugin->get_code(), 404);
+        $this->assertContains($geo_plugin->get_code(), array(
+            200,
+            206,
+            404,
+        ));
     }
 
     // -------------------------------------------------------------------------
