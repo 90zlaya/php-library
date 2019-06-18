@@ -25,10 +25,10 @@ class File_Test extends Test_Case {
     * @var array
     */
     private $image_params = array(
-        'show'        => 'logo.png',
+        'show'        => 'icon-person.png',
         'do_not_show' => 'no-background.jpg',
-        'location'    => 'https://www.dis.rs/images/',
-        'default'     => 'download.png',
+        'location'    => 'https://link.zlatanstajic.com/images/email/',
+        'default'     => 'photo.png',
     );
 
     // -------------------------------------------------------------------------
