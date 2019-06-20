@@ -9,6 +9,7 @@ install:
   - chmod +x coveralls.phar
   - php coveralls.phar --version    
 before_script:
+    - rm -R outsource
     - mkdir -p build/logs
     - ls -al
 script:
