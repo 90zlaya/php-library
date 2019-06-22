@@ -13,8 +13,7 @@ install:
   - php coveralls.phar --version    
 before_script:
     - sudo mkdir -p /var/run/mysqld
-    - sudo ln -s /run/mysql-5.6/mysqld.sock /var/run/mysqld/mysqld.sock
-    - mkdir -p build/logs
+    - sudo mkdir -p build/logs
     - ls -al
 script:
     - wget https://link.zlatanstajic.com/software/php-library/outsource.zip
