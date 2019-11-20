@@ -1,9 +1,11 @@
-![Latest Stable Version]
-![Total Downloads]
-![Travis]
-![Coverage Status]
+[![Latest Stable Version]][latest release]
+[![Total Downloads]][Packagist]
+[![Travis Build Status]][Travis-CI]
+[![Coverage Status]][Coverals]
 
-# ![Official logo of php-library]
+![Official logo of php-library]
+
+# Description
 
 PHP Library is a set of classes that contain the most useful attributes and methods that facilitate the development of Web applications.
 Project is open-sourced under MIT licence on [GitHub]. Available over Composer and [Packagist].
@@ -122,17 +124,13 @@ Official PHP Library logo is designed by [designseed.co] - an unlimited custom g
 
 This library is powering following Websites/Web Applications:
 
-### [zlatanstajic.com]
+### [Zlatan Stajic]
 
 ![Homepage of zlatanstajic.com]
 
-### [space-prospection.zlatanstajic.com]
+### [Space Prospection]
 
 ![Homepage of Space Prospection]
-
-### [kupci.dis.rs]
-
-![Login page of kupci.dis.rs]
 
 ## API documentation
 
@@ -153,13 +151,14 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 [Zlatan Stajic]: https://www.zlatanstajic.com/
 [GitHub]: https://github.com/90zlaya/php-library
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
+[Travis-CI]: https://travis-ci.org/90zlaya/php-library
+[Coverals]:https://coveralls.io/github/90zlaya/php-library
 [MIT License]: http://www.opensource.org/licenses/mit-license.php
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
 [API]: https://php-library.zlatanstajic.com/api/
 [coverage]: https://php-library.zlatanstajic.com/coverage/
-[zlatanstajic.com]: https://www.zlatanstajic.com/
-[space-prospection.zlatanstajic.com]: https://space-prospection.zlatanstajic.com
-[kupci.dis.rs]: https://kupci.dis.rs/
+[Zlatan Stajic]: https://www.zlatanstajic.com/
+[Space Prospection]: https://space-prospection.zlatanstajic.com
 [PHP Stan]: https://github.com/phpstan/phpstan
 [phpDocumentor]: https://www.phpdoc.org/
 [PHP_CodeSniffer]: https://github.com/squizlabs/PHP_CodeSniffer
@@ -171,9 +170,8 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 
 [Latest Stable Version]: https://poser.pugx.org/90zlaya/php-library/v/stable?clear_cache=1
 [Total Downloads]: https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=1
-[Travis]: https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=1
+[Travis Build Status]: https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=1
 [Coverage Status]: https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=1
 [Official logo of php-library]: https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1
 [Homepage of zlatanstajic.com]: https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg?clear_cache=1
 [Homepage of Space Prospection]: https://link.zlatanstajic.com/images/portfolio/small/space-prospection.jpg?clear_cache=1
-[Login page of kupci.dis.rs]: https://link.zlatanstajic.com/images/portfolio/small/kupci.dis.jpg?clear_cache=1
