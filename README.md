@@ -1,14 +1,22 @@
-[![Latest Stable Version]][latest release]
-[![Total Downloads]][Packagist]
-[![Travis Build Status]][Travis-CI]
-[![Coverage Status]][Coverals]
+<div align="center">
+    <a href="https://php-library.zlatanstajic.com">
+        <img
+            alt="PHP Library"
+            src="https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1"
+        >
+    </a>
+</div>
 
-![Official logo of php-library]
 
 # Description
 
 PHP Library is a set of classes that contain the most useful attributes and methods that facilitate the development of Web applications.
 Project is open-sourced under MIT licence on [GitHub]. Available over Composer and [Packagist].
+
+[![Latest Stable Version]][latest release]
+[![Total Downloads]][Packagist]
+[![Travis Build Status]][Travis-CI]
+[![Coverage Status]][Coverals]
 
 # Organisation
 Every native class call should have following type of namespace call in front.
@@ -80,7 +88,7 @@ composer run bug-analysis
 
 All tests are covered with PHPUnit framework and stored inside tests folder. They need outsource folder to perform specific tests, which you have to download and unzip in PHP Library's root directory.
 
-```
+```bash
 # Download outsource.zip file
 wget https://link.zlatanstajic.com/software/php-library/outsource.zip
 
@@ -172,6 +180,5 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 [Total Downloads]: https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=1
 [Travis Build Status]: https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=1
 [Coverage Status]: https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=1
-[Official logo of php-library]: https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1
 [Homepage of zlatanstajic.com]: https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg?clear_cache=1
 [Homepage of Space Prospection]: https://link.zlatanstajic.com/images/portfolio/small/space-prospection.jpg?clear_cache=1
