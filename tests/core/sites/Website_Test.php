@@ -48,7 +48,7 @@ class Website_Test extends Test_Case {
     /**
     * Website test setup method
     */
-    public function setUp()
+    public function setUp(): void
     {
         $localhost = 'http://localhost/_develop/php-library';
 
@@ -98,14 +98,14 @@ class Website_Test extends Test_Case {
         $this->assertEquals($this->website_object->get_description(), $this->website_data['description']);
         $this->assertEquals($this->website_object->get_keywords(), $this->website_data['keywords']);
 
-        $this->assertInternalType('string', $this->website_object->get_name());
-        $this->assertInternalType('string', $this->website_object->get_host());
-        $this->assertInternalType('string', $this->website_object->get_made());
-        $this->assertInternalType('string', $this->website_object->get_language());
-        $this->assertInternalType('string', $this->website_object->get_charset());
-        $this->assertInternalType('string', $this->website_object->get_description());
-        $this->assertInternalType('string', $this->website_object->get_keywords());
-        $this->assertInternalType('array', $this->website_object->get_server());
+        $this->assertIsString($this->website_object->get_name());
+        $this->assertIsString($this->website_object->get_host());
+        $this->assertIsString($this->website_object->get_made());
+        $this->assertIsString($this->website_object->get_language());
+        $this->assertIsString($this->website_object->get_charset());
+        $this->assertIsString($this->website_object->get_description());
+        $this->assertIsString($this->website_object->get_keywords());
+        $this->assertIsArray($this->website_object->get_server());
 
         $errors = $this->website_object->get_error();
 
@@ -124,9 +124,9 @@ class Website_Test extends Test_Case {
 
         $errors = $website->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
 
-        $this->assertInternalType('array', $website->get_server());
+        $this->assertIsArray($website->get_server());
 
         $this->assertNotEmpty($errors);
         $this->assertNotEmpty($website->get_server());
@@ -156,7 +156,7 @@ class Website_Test extends Test_Case {
         $result = $this->website_object->image_size($image);
 
         $this->assertNotFalse($result);
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         $values = array(
             'width',
@@ -186,7 +186,7 @@ class Website_Test extends Test_Case {
         );
 
         $this->assertFalse($result);
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -212,7 +212,7 @@ class Website_Test extends Test_Case {
             $result = $this->website_object->meta($item);
 
             $this->assertNotEmpty($result);
-            $this->assertInternalType('string', $result);
+            $this->assertIsString($result);
         }
     }
 
@@ -250,7 +250,7 @@ class Website_Test extends Test_Case {
             );
 
             $this->assertNotEmpty($result);
-            $this->assertInternalType('string', $result);
+            $this->assertIsString($result);
         }
     }
 
@@ -314,7 +314,7 @@ class Website_Test extends Test_Case {
             $result = $this->website_object->signature_hidden($item);
 
             $this->assertNotEmpty($result);
-            $this->assertInternalType('string', $result);
+            $this->assertIsString($result);
         }
     }
 
@@ -353,18 +353,9 @@ class Website_Test extends Test_Case {
             $image_nothing,
             $this->website_object->images($name_nothing)
         );
-        $this->assertInternalType(
-            'string',
-            $this->website_object->images($name_php_logo)
-        );
-        $this->assertInternalType(
-            'string',
-            $this->website_object->images($name_background)
-        );
-        $this->assertInternalType(
-            'bool',
-            $this->website_object->images($name_nothing)
-        );
+        $this->assertIsString($this->website_object->images($name_php_logo));
+        $this->assertIsString($this->website_object->images($name_background));
+        $this->assertIsBool($this->website_object->images($name_nothing));
 
         $name_random  = 'random';
         $image_random = 'http://www.example.com/random.png';
@@ -381,10 +372,7 @@ class Website_Test extends Test_Case {
             $image_random,
             $this->website_object->images($name_random)
         );
-        $this->assertInternalType(
-            'string',
-            $this->website_object->images($name_random)
-        );
+        $this->assertIsString($this->website_object->images($name_random));
     }
 
     /* ---------------------------------------------------------------------- */
@@ -430,22 +418,10 @@ class Website_Test extends Test_Case {
             $value_nothing,
             $this->website_object->creator($name_nothing)
         );
-        $this->assertInternalType(
-            'string',
-            $this->website_object->creator($name_name)
-        );
-        $this->assertInternalType(
-            'string',
-            $this->website_object->creator($name_website)
-        );
-        $this->assertInternalType(
-            'string',
-            $this->website_object->creator($name_email)
-        );
-        $this->assertInternalType(
-            'bool',
-            $this->website_object->creator($name_nothing)
-        );
+        $this->assertIsString($this->website_object->creator($name_name));
+        $this->assertIsString($this->website_object->creator($name_website));
+        $this->assertIsString($this->website_object->creator($name_email));
+        $this->assertIsBool($this->website_object->creator($name_nothing));
 
         $name_random  = 'random';
         $value_random = 'http://www.example.com/random.png';
@@ -463,10 +439,7 @@ class Website_Test extends Test_Case {
             $value_random,
             $this->website_object->creator($name_random)
         );
-        $this->assertInternalType(
-            'string',
-            $this->website_object->creator($name_random)
-        );
+        $this->assertIsString($this->website_object->creator($name_random));
     }
 
     /* ---------------------------------------------------------------------- */
@@ -505,7 +478,7 @@ class Website_Test extends Test_Case {
             $head = $this->website_object->head();
 
             $this->assertNotEmpty($head);
-            $this->assertInternalType('string', $head);
+            $this->assertIsString($head);
         }
     }
 
@@ -545,7 +518,7 @@ class Website_Test extends Test_Case {
             $bottom = $this->website_object->bottom();
 
             $this->assertNotEmpty($bottom);
-            $this->assertInternalType('string', $bottom);
+            $this->assertIsString($bottom);
         }
     }
 

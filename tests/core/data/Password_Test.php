@@ -47,9 +47,9 @@ class Password_Test extends Test_Case {
         $decoded = password::decode($encoded);
 
         $this->assertNotEmpty($encoded);
-        $this->assertInternalType('string', $encoded);
+        $this->assertIsString($encoded);
         $this->assertNotEmpty($decoded);
-        $this->assertInternalType('string', $decoded);
+        $this->assertIsString($decoded);
         $this->assertEquals($decoded, $this->password_data['string']);
         $this->assertEquals($encoded, $this->password_data['encoded']);
     }
@@ -63,7 +63,7 @@ class Password_Test extends Test_Case {
     {
         $result = password::digest($this->password_data['string']);
 
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertEquals(
             $this->password_data['digested']['sha512'],
             $result
@@ -112,7 +112,7 @@ class Password_Test extends Test_Case {
 
             $result = password::digest($this->password_data['string']);
 
-            $this->assertInternalType('string', $result);
+            $this->assertIsString($result);
             $this->assertNotEmpty($result);
             $this->assertNotFalse($result);
 
@@ -195,13 +195,13 @@ class Password_Test extends Test_Case {
         $result = password::strength($this->password_data['string'], 80);
 
         $this->assertNotEmpty($result);
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         $this->assertArrayHasKey('status', $result);
         $this->assertArrayHasKey('strength', $result);
 
-        $this->assertInternalType('bool', $result['status']);
-        $this->assertInternalType('float', $result['strength']);
+        $this->assertIsBool($result['status']);
+        $this->assertIsFloat($result['strength']);
 
         $this->assertTrue($result['status']);
         $this->assertEquals($result['strength'], 85.457395851362);

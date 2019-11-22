@@ -31,7 +31,7 @@ class Connection_Test extends Test_Case {
     /**
     * Connection test setup method
     */
-    public function setUp()
+    public function setUp(): void
     {
         $this->connection_object = new connection();
     }
@@ -49,12 +49,12 @@ class Connection_Test extends Test_Case {
 
         $errors = $this->connection_object->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
         $this->assertNotEmpty($errors);
 
         $has_errors = $this->connection_object->has_errors();
 
-        $this->assertInternalType('bool', $has_errors);
+        $this->assertIsBool($has_errors);
         $this->assertTrue($has_errors);
     }
 

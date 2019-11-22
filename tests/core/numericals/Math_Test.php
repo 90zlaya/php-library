@@ -33,7 +33,7 @@ class Math_Test extends Test_Case {
 
         $number = math::iterate(TRUE);
 
-        $this->assertInternalType('int', $number);
+        $this->assertIsInt($number);
         $this->assertEquals(1, $number);
     }
 
@@ -48,7 +48,7 @@ class Math_Test extends Test_Case {
 
         $iterator = math::get_iterator();
 
-        $this->assertInternalType('int', $iterator);
+        $this->assertIsInt($iterator);
         $this->assertEmpty($iterator);
 
         $new_value = 15;
@@ -57,7 +57,7 @@ class Math_Test extends Test_Case {
 
         $iterator = math::get_iterator();
 
-        $this->assertInternalType('int', $iterator);
+        $this->assertIsInt($iterator);
         $this->assertEquals($new_value, $iterator);
 
 
@@ -77,7 +77,7 @@ class Math_Test extends Test_Case {
         {
             $string = math::even_or_odd($parameter_one, $parameter_two);
 
-            $this->assertInternalType('string', $string);
+            $this->assertIsString($string);
             $this->assertNotEmpty($string);
 
             if ($i % 2 == 0)
@@ -104,12 +104,12 @@ class Math_Test extends Test_Case {
 
         $percentage = math::percentage(30, 50);
 
-        $this->assertInternalType('array', $percentage);
+        $this->assertIsArray($percentage);
         $this->assertArrayHasKey('value', $percentage);
         $this->assertArrayHasKey('sign', $percentage);
 
-        $this->assertInternalType('int', $percentage['value']);
-        $this->assertInternalType('string', $percentage['sign']);
+        $this->assertIsInt($percentage['value']);
+        $this->assertIsString($percentage['sign']);
 
         $this->assertEquals($expected_value, $percentage['value']);
         $this->assertEquals($expected_value . '%', $percentage['sign']);

@@ -31,7 +31,7 @@ class Message_Test extends Test_Case {
     /**
     * Message test setup method
     */
-    public function setUp()
+    public function setUp(): void
     {
         $this->message_object = new message();
     }
@@ -45,7 +45,7 @@ class Message_Test extends Test_Case {
     {
         $result = $this->message_object->get_message();
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('success', $result);
         $this->assertEmpty($result['success']);
         $this->assertArrayHasKey('error', $result);
@@ -63,7 +63,7 @@ class Message_Test extends Test_Case {
     {
         $result = $this->message_object->has_errors();
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertFalse($result);
     }
 
@@ -82,7 +82,7 @@ class Message_Test extends Test_Case {
 
         foreach ($results as $result)
         {
-            $this->assertInternalType('array', $result);
+            $this->assertIsArray($result);
             $this->assertEmpty($result);
         }
     }

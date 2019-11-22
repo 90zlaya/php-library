@@ -49,7 +49,7 @@ class Sorter_Test extends Test_Case {
     /**
     * Sorter test setup before Setup
     */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$locations['paths']['source'] =
             realpath(self::$locations['folder']) .
@@ -113,7 +113,7 @@ class Sorter_Test extends Test_Case {
     /**
     * Sorter test setup method
     */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->params['folders']['source'] =
             realpath('outsource/sorter/source/') . DIRECTORY_SEPARATOR;
@@ -133,7 +133,7 @@ class Sorter_Test extends Test_Case {
     /**
     * Sorter precondition method
     */
-    protected function assertPreConditions()
+    protected function assertPreConditions(): void
     {
         $this->assertDirectoryExists($this->params['folders']['source']);
         $this->assertDirectoryExists($this->params['folders']['destination']);
@@ -169,21 +169,21 @@ class Sorter_Test extends Test_Case {
 
             $deploy = $sorter->deploy();
 
-            $this->assertInternalType('bool', $deploy);
+            $this->assertIsBool($deploy);
             $this->assertTrue($deploy);
 
             $report = $sorter->report();
 
             $this->assertNotEmpty($report);
-            $this->assertInternalType('array', $report);
+            $this->assertIsArray($report);
             $this->assertArrayHasKey('bool', $report);
-            $this->assertInternalType('array', $report['bool']);
+            $this->assertIsArray($report['bool']);
             $this->assertTrue($report['bool']['no_errors']);
             $this->assertTrue($report['bool']['successful_sorting']);
             $this->assertTrue($report['bool']['something_to_sort']);
             $this->assertArrayHasKey('string', $report);
             $this->assertArrayHasKey('array', $report);
-            $this->assertInternalType('string', $report['string']);
+            $this->assertIsString($report['string']);
             $this->assertNotEmpty($report['string']);
             $this->assertArrayHasKey('usage', $report['array']);
             $this->assertArrayHasKey('result', $report['array']);
@@ -215,21 +215,21 @@ class Sorter_Test extends Test_Case {
 
         $deploy = $sorter->deploy();
 
-        $this->assertInternalType('bool', $deploy);
+        $this->assertIsBool($deploy);
         $this->assertFalse($deploy);
 
         $report = $sorter->report();
 
         $this->assertNotEmpty($report);
-        $this->assertInternalType('array', $report);
+        $this->assertIsArray($report);
         $this->assertArrayHasKey('bool', $report);
-        $this->assertInternalType('array', $report['bool']);
+        $this->assertIsArray($report['bool']);
         $this->assertTrue($report['bool']['no_errors']);
         $this->assertFalse($report['bool']['successful_sorting']);
         $this->assertFalse($report['bool']['something_to_sort']);
         $this->assertArrayHasKey('string', $report);
         $this->assertArrayHasKey('array', $report);
-        $this->assertInternalType('string', $report['string']);
+        $this->assertIsString($report['string']);
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
@@ -260,21 +260,21 @@ class Sorter_Test extends Test_Case {
 
         $deploy = $sorter->deploy();
 
-        $this->assertInternalType('bool', $deploy);
+        $this->assertIsBool($deploy);
         $this->assertFalse($deploy);
 
         $report = $sorter->report();
 
         $this->assertNotEmpty($report);
-        $this->assertInternalType('array', $report);
+        $this->assertIsArray($report);
         $this->assertArrayHasKey('bool', $report);
-        $this->assertInternalType('array', $report['bool']);
+        $this->assertIsArray($report['bool']);
         $this->assertTrue($report['bool']['no_errors']);
         $this->assertFalse($report['bool']['successful_sorting']);
         $this->assertFalse($report['bool']['something_to_sort']);
         $this->assertArrayHasKey('string', $report);
         $this->assertArrayHasKey('array', $report);
-        $this->assertInternalType('string', $report['string']);
+        $this->assertIsString($report['string']);
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
@@ -302,21 +302,21 @@ class Sorter_Test extends Test_Case {
 
         $deploy = $sorter->deploy();
 
-        $this->assertInternalType('bool', $deploy);
+        $this->assertIsBool($deploy);
         $this->assertTrue($deploy);
 
         $report = $sorter->report();
 
         $this->assertNotEmpty($report);
-        $this->assertInternalType('array', $report);
+        $this->assertIsArray($report);
         $this->assertArrayHasKey('bool', $report);
-        $this->assertInternalType('array', $report['bool']);
+        $this->assertIsArray($report['bool']);
         $this->assertTrue($report['bool']['no_errors']);
         $this->assertTrue($report['bool']['successful_sorting']);
         $this->assertTrue($report['bool']['something_to_sort']);
         $this->assertArrayHasKey('string', $report);
         $this->assertArrayHasKey('array', $report);
-        $this->assertInternalType('string', $report['string']);
+        $this->assertIsString($report['string']);
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
@@ -337,21 +337,21 @@ class Sorter_Test extends Test_Case {
 
         $deploy = $sorter->deploy();
 
-        $this->assertInternalType('bool', $deploy);
+        $this->assertIsBool($deploy);
         $this->assertFalse($deploy);
 
         $report = $sorter->report();
 
         $this->assertNotEmpty($report);
-        $this->assertInternalType('array', $report);
+        $this->assertIsArray($report);
         $this->assertArrayHasKey('bool', $report);
-        $this->assertInternalType('array', $report['bool']);
+        $this->assertIsArray($report['bool']);
         $this->assertFalse($report['bool']['no_errors']);
         $this->assertFalse($report['bool']['successful_sorting']);
         $this->assertFalse($report['bool']['something_to_sort']);
         $this->assertArrayHasKey('string', $report);
         $this->assertArrayHasKey('array', $report);
-        $this->assertInternalType('string', $report['string']);
+        $this->assertIsString($report['string']);
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
@@ -381,21 +381,21 @@ class Sorter_Test extends Test_Case {
 
         $deploy = $sorter->deploy();
 
-        $this->assertInternalType('bool', $deploy);
+        $this->assertIsBool($deploy);
         $this->assertFalse($deploy);
 
         $report = $sorter->report();
 
         $this->assertNotEmpty($report);
-        $this->assertInternalType('array', $report);
+        $this->assertIsArray($report);
         $this->assertArrayHasKey('bool', $report);
-        $this->assertInternalType('array', $report['bool']);
+        $this->assertIsArray($report['bool']);
         $this->assertFalse($report['bool']['no_errors']);
         $this->assertFalse($report['bool']['successful_sorting']);
         $this->assertFalse($report['bool']['something_to_sort']);
         $this->assertArrayHasKey('string', $report);
         $this->assertArrayHasKey('array', $report);
-        $this->assertInternalType('string', $report['string']);
+        $this->assertIsString($report['string']);
         $this->assertNotEmpty($report['string']);
         $this->assertArrayHasKey('usage', $report['array']);
         $this->assertArrayHasKey('result', $report['array']);
@@ -410,7 +410,7 @@ class Sorter_Test extends Test_Case {
     /**
     * Sorter test tear down after Sorter
     */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::delete_destination_folder_and_files();
         self::delete_movable_folder_and_files();
@@ -464,7 +464,7 @@ class Sorter_Test extends Test_Case {
             'method'    => 'files',
         ));
 
-        if ($listing['count'] > 0)
+        if ( ! is_bool($listing) && $listing['count'] > 0)
         {
             foreach ($listing['listing'] as $item)
             {

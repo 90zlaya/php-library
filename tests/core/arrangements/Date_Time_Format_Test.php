@@ -33,7 +33,7 @@ class Date_Time_Format_Test extends Test_Case {
 
         $this->assertClassHasAttribute('types', date_time_format::class);
         $this->assertNotEmpty(date_time_format::$types);
-        $this->assertInternalType('array', date_time_format::$types);
+        $this->assertIsArray(date_time_format::$types);
 
         foreach ($names as $name)
         {
@@ -352,7 +352,7 @@ class Date_Time_Format_Test extends Test_Case {
     {
         $days = date_time_format::get_days();
 
-        $this->assertInternalType('array', $days);
+        $this->assertIsArray($days);
         $this->assertArrayHasKey('php', $days);
         $this->assertArrayHasKey('json', $days);
         $this->assertNotEmpty($days['php']);
@@ -377,7 +377,7 @@ class Date_Time_Format_Test extends Test_Case {
     {
         $months = date_time_format::get_months();
 
-        $this->assertInternalType('array', $months);
+        $this->assertIsArray($months);
         $this->assertArrayHasKey('php', $months);
         $this->assertArrayHasKey('json', $months);
         $this->assertNotEmpty($months['php']);

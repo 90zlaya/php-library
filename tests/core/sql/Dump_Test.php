@@ -68,7 +68,7 @@ class Dump_Test extends Test_Case {
     /**
     * Dump test setup before Dump
     */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $command = 'C:/xampp/mysql/bin/mysqldump.exe';
 
@@ -99,7 +99,7 @@ class Dump_Test extends Test_Case {
     /**
     * Dump test setup method
     */
-    public function setUp()
+    public function setUp(): void
     {
         $this->dump_data = array(
             'command'     => self::$command,
@@ -121,7 +121,7 @@ class Dump_Test extends Test_Case {
     {
         $result = $this->dump_object->get_message();
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         $this->assertArrayHasKey('success', $result);
         $this->assertEmpty($result['success']);
@@ -148,7 +148,7 @@ class Dump_Test extends Test_Case {
 
         foreach ($results as $result)
         {
-            $this->assertInternalType('array', $result);
+            $this->assertIsArray($result);
             $this->assertEmpty($result);
         }
     }
@@ -163,7 +163,7 @@ class Dump_Test extends Test_Case {
     {
         $result = $this->dump_object->mysql();
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertTrue($result);
 
         array_push(self::$files, $this->dump_object->get_file());
@@ -181,7 +181,7 @@ class Dump_Test extends Test_Case {
 
         $result = $this->dump_object->mysql(TRUE);
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertFalse($result);
     }
 
@@ -195,7 +195,7 @@ class Dump_Test extends Test_Case {
     {
         $result = $this->dump_object->mysql(TRUE);
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertTrue($result);
 
         array_push(self::$files, $this->dump_object->get_file());
@@ -219,7 +219,7 @@ class Dump_Test extends Test_Case {
 
         $result = $dump->mysql();
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertFalse($result);
 
         array_push(self::$files, $dump->get_file());
@@ -240,7 +240,7 @@ class Dump_Test extends Test_Case {
 
         $result = $dump->mysql();
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertFalse($result);
     }
 
@@ -249,7 +249,7 @@ class Dump_Test extends Test_Case {
     /**
     * Dump test tear down after Dump
     */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         if ( ! empty(self::$files))
         {

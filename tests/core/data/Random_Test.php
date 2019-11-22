@@ -80,7 +80,7 @@ class Random_Test extends Test_Case {
             $result = random::element($list, $type);
 
             $this->assertNotEmpty($result);
-            $this->assertInternalType('array', $result);
+            $this->assertIsArray($result);
 
             foreach ($list as $item)
             {
@@ -114,7 +114,7 @@ class Random_Test extends Test_Case {
             $result = random::element($list, $type);
 
             $this->assertNotEmpty($result);
-            $this->assertInternalType('string', $result);
+            $this->assertIsString($result);
         }
     }
 
@@ -180,7 +180,7 @@ class Random_Test extends Test_Case {
 
         $this->assertNotFalse($result);
         $this->assertNotEmpty($result);
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
     }
 
     /* ---------------------------------------------------------------------- */

@@ -31,7 +31,7 @@ class Testing_Test extends Test_Case {
     /**
     * Testing test setup method
     */
-    public function setUp()
+    public function setUp(): void
     {
         $this->testing_object = new testing();
     }

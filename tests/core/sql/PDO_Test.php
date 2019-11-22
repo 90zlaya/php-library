@@ -31,7 +31,7 @@ class PDO_Test extends Test_Case {
     /**
     * PDO test setup method
     */
-    public function setUp()
+    public function setUp(): void
     {
         $this->pdo_object = new pdo();
     }
@@ -49,12 +49,12 @@ class PDO_Test extends Test_Case {
 
         $errors = $this->pdo_object->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
         $this->assertEmpty($errors);
 
         $has_errors = $this->pdo_object->has_errors();
 
-        $this->assertInternalType('bool', $has_errors);
+        $this->assertIsBool($has_errors);
         $this->assertFalse($has_errors);
     }
 
@@ -73,12 +73,12 @@ class PDO_Test extends Test_Case {
 
         $errors = $connection->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
         $this->assertEmpty($errors);
 
         $has_errors = $this->pdo_object->has_errors();
 
-        $this->assertInternalType('bool', $has_errors);
+        $this->assertIsBool($has_errors);
         $this->assertFalse($has_errors);
     }
 
@@ -97,12 +97,12 @@ class PDO_Test extends Test_Case {
 
         $errors = $connection->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
         $this->assertNotEmpty($errors);
 
         $has_errors = $connection->has_errors();
 
-        $this->assertInternalType('bool', $has_errors);
+        $this->assertIsBool($has_errors);
         $this->assertTrue($has_errors);
     }
 

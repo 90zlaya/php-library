@@ -62,12 +62,12 @@ class Export_Test extends Test_Case {
         $types = export::allowed_types();
 
         $this->assertNotEmpty($types);
-        $this->assertInternalType('array', $types);
+        $this->assertIsArray($types);
         $this->assertCount(4, $types);
 
         foreach ($types as $type)
         {
-            $this->assertInternalType('string', $type);
+            $this->assertIsString($type);
             $this->assertNotEmpty($type);
         }
     }

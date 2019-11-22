@@ -50,7 +50,7 @@ class User_Agent_Test extends Test_Case {
             $operating_systems = user_agent::list_operating_systems($item);
 
             $this->assertNotEmpty($operating_systems);
-            $this->assertInternalType('array', $operating_systems);
+            $this->assertIsArray($operating_systems);
 
             foreach ($operating_systems as $system)
             {
@@ -69,7 +69,7 @@ class User_Agent_Test extends Test_Case {
         $browsers = user_agent::list_browsers();
 
         $this->assertNotEmpty($browsers);
-        $this->assertInternalType('array', $browsers);
+        $this->assertIsArray($browsers);
 
         foreach ($browsers as $browser)
         {
@@ -88,7 +88,7 @@ class User_Agent_Test extends Test_Case {
         $devices = user_agent::list_devices();
 
         $this->assertNotEmpty($devices);
-        $this->assertInternalType('array', $devices);
+        $this->assertIsArray($devices);
 
         foreach ($devices as $device)
         {
@@ -107,7 +107,7 @@ class User_Agent_Test extends Test_Case {
         $crawlers = user_agent::list_crawlers();
 
         $this->assertNotEmpty($crawlers);
-        $this->assertInternalType('array', $crawlers);
+        $this->assertIsArray($crawlers);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -124,14 +124,14 @@ class User_Agent_Test extends Test_Case {
         );
 
         $this->assertTrue($is_crawler);
-        $this->assertInternalType('bool', $is_crawler);
+        $this->assertIsBool($is_crawler);
 
         $is_crawler = user_agent::is_crawler(
             $this->user_agents['mobile_non_crawler']
         );
 
         $this->assertFalse($is_crawler);
-        $this->assertInternalType('bool', $is_crawler);
+        $this->assertIsBool($is_crawler);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -148,14 +148,14 @@ class User_Agent_Test extends Test_Case {
         );
 
         $this->assertTrue($is_mobile);
-        $this->assertInternalType('bool', $is_mobile);
+        $this->assertIsBool($is_mobile);
 
         $is_mobile = user_agent::is_mobile(
             $this->user_agents['non_mobile_crawler']
         );
 
         $this->assertFalse($is_mobile);
-        $this->assertInternalType('bool', $is_mobile);
+        $this->assertIsBool($is_mobile);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -169,7 +169,7 @@ class User_Agent_Test extends Test_Case {
             $this->user_agents['mobile_non_crawler']
         );
 
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertNotEquals('', $result);
         $this->assertEquals('Safari', $result);
 
@@ -179,7 +179,7 @@ class User_Agent_Test extends Test_Case {
             $name_when_no_match
         );
 
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertEquals($name_when_no_match, $result);
     }
 
@@ -195,7 +195,7 @@ class User_Agent_Test extends Test_Case {
             $this->user_agents['mobile_non_crawler']
         );
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertNotEmpty($result);
         $this->assertArrayHasKey('regex', $result);
         $this->assertArrayHasKey('name', $result);
@@ -209,7 +209,7 @@ class User_Agent_Test extends Test_Case {
             $name_when_no_match
         );
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertNotEmpty($result);
         $this->assertArrayHasKey('regex', $result);
         $this->assertArrayHasKey('name', $result);
@@ -230,7 +230,7 @@ class User_Agent_Test extends Test_Case {
             $this->user_agents['mobile_non_crawler']
         );
 
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertNotEquals('', $result);
         $this->assertEquals('iPhone', $result);
 
@@ -240,7 +240,7 @@ class User_Agent_Test extends Test_Case {
             $name_when_no_match
         );
 
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertEquals($name_when_no_match, $result);
     }
 

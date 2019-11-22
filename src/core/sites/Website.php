@@ -346,12 +346,20 @@ class Website extends Testing {
         $meta .= PHP_EOL;
         $meta .= '<meta name="apple-mobile-web-app-capable" content="yes"/>';
         $meta .= PHP_EOL;
-        $meta .= '<link rel="apple-touch-icon" sizes="';
-        $meta .= $this->image_size($touch_icon)['width_height'];
-        $meta .= '" href="';
-        $meta .= $touch_icon;
-        $meta .= '"/>';
-        $meta .= PHP_EOL;
+
+        // Touch icon image size
+        $touch_icon_image_size = $this->image_size($touch_icon);
+
+        if ( ! is_bool($touch_icon_image_size))
+        {
+            $meta .= '<link rel="apple-touch-icon" sizes="';
+            $meta .= $touch_icon_image_size['width_height'];
+            $meta .= '" href="';
+            $meta .= $touch_icon;
+            $meta .= '"/>';
+            $meta .= PHP_EOL;
+        }
+
         $meta .= '<link rel="shortcut icon" href="';
         $meta .= $shortcut_icon;
         $meta .= '" type="image/png">';

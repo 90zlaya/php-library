@@ -41,13 +41,13 @@ class Temperature_Test extends Test_Case {
         $celsius = temperature::k_to_c($kelvin_value);
 
         $this->assertNotFalse($celsius);
-        $this->assertInternalType('array', $celsius);
+        $this->assertIsArray($celsius);
         $this->assertArrayHasKey('value', $celsius);
         $this->assertArrayHasKey('signed', $celsius);
         $this->assertArrayHasKey('rounded', $celsius);
-        $this->assertInternalType('float', $celsius['value']);
-        $this->assertInternalType('int', $celsius['rounded']);
-        $this->assertInternalType('string', $celsius['signed']);
+        $this->assertIsFloat($celsius['value']);
+        $this->assertIsInt($celsius['rounded']);
+        $this->assertIsString($celsius['signed']);
         $this->assertEquals($celsius['value'], $celsius_expected);
 
         $celsius = temperature::k_to_c($this->non_numeric_value);
@@ -57,13 +57,13 @@ class Temperature_Test extends Test_Case {
         $fahrenheit = temperature::k_to_f($kelvin_value);
 
         $this->assertNotFalse($fahrenheit);
-        $this->assertInternalType('array', $fahrenheit);
+        $this->assertIsArray($fahrenheit);
         $this->assertArrayHasKey('value', $fahrenheit);
         $this->assertArrayHasKey('rounded', $fahrenheit);
         $this->assertArrayHasKey('signed', $fahrenheit);
-        $this->assertInternalType('float', $fahrenheit['value']);
-        $this->assertInternalType('int', $fahrenheit['rounded']);
-        $this->assertInternalType('string', $fahrenheit['signed']);
+        $this->assertIsFloat($fahrenheit['value']);
+        $this->assertIsInt($fahrenheit['rounded']);
+        $this->assertIsString($fahrenheit['signed']);
         $this->assertEquals($fahrenheit['value'], $fahrenheit_expected);
 
         $fahrenheit = temperature::k_to_f($this->non_numeric_value);
@@ -86,13 +86,13 @@ class Temperature_Test extends Test_Case {
         $celsius = temperature::f_to_c($fahrenheit_value);
 
         $this->assertNotFalse($celsius);
-        $this->assertInternalType('array', $celsius);
+        $this->assertIsArray($celsius);
         $this->assertArrayHasKey('value', $celsius);
         $this->assertArrayHasKey('rounded', $celsius);
         $this->assertArrayHasKey('signed', $celsius);
-        $this->assertInternalType('float', $celsius['value']);
-        $this->assertInternalType('int', $celsius['rounded']);
-        $this->assertInternalType('string', $celsius['signed']);
+        $this->assertIsFloat($celsius['value']);
+        $this->assertIsInt($celsius['rounded']);
+        $this->assertIsString($celsius['signed']);
         $this->assertEquals($celsius['value'], $celsius_expected);
 
         $celsius = temperature::f_to_c($this->non_numeric_value);
@@ -102,13 +102,13 @@ class Temperature_Test extends Test_Case {
         $kelvin = temperature::f_to_k($fahrenheit_value);
 
         $this->assertNotFalse($kelvin);
-        $this->assertInternalType('array', $kelvin);
+        $this->assertIsArray($kelvin);
         $this->assertArrayHasKey('value', $kelvin);
         $this->assertArrayHasKey('rounded', $kelvin);
         $this->assertArrayHasKey('signed', $kelvin);
-        $this->assertInternalType('float', $kelvin['value']);
-        $this->assertInternalType('int', $kelvin['rounded']);
-        $this->assertInternalType('string', $kelvin['signed']);
+        $this->assertIsFloat($kelvin['value']);
+        $this->assertIsInt($kelvin['rounded']);
+        $this->assertIsString($kelvin['signed']);
         $this->assertEquals($kelvin['value'], $kelvin_expected);
 
         $kelvin = temperature::f_to_k($this->non_numeric_value);
@@ -131,13 +131,13 @@ class Temperature_Test extends Test_Case {
         $fahrenheit = temperature::c_to_f($celsius_value);
 
         $this->assertNotFalse($fahrenheit);
-        $this->assertInternalType('array', $fahrenheit);
+        $this->assertIsArray($fahrenheit);
         $this->assertArrayHasKey('value', $fahrenheit);
         $this->assertArrayHasKey('rounded', $fahrenheit);
         $this->assertArrayHasKey('signed', $fahrenheit);
-        $this->assertInternalType('float', $fahrenheit['value']);
-        $this->assertInternalType('int', $fahrenheit['rounded']);
-        $this->assertInternalType('string', $fahrenheit['signed']);
+        $this->assertIsFloat($fahrenheit['value']);
+        $this->assertIsInt($fahrenheit['rounded']);
+        $this->assertIsString($fahrenheit['signed']);
         $this->assertEquals($fahrenheit['value'], $fahrenheit_expected);
 
         $fahrenheit = temperature::c_to_f($this->non_numeric_value);
@@ -147,13 +147,13 @@ class Temperature_Test extends Test_Case {
         $kelvin = temperature::c_to_k($celsius_value);
 
         $this->assertNotFalse($kelvin);
-        $this->assertInternalType('array', $kelvin);
+        $this->assertIsArray($kelvin);
         $this->assertArrayHasKey('value', $kelvin);
         $this->assertArrayHasKey('rounded', $kelvin);
         $this->assertArrayHasKey('signed', $kelvin);
-        $this->assertInternalType('float', $kelvin['value']);
-        $this->assertInternalType('int', $kelvin['rounded']);
-        $this->assertInternalType('string', $kelvin['signed']);
+        $this->assertIsFloat($kelvin['value']);
+        $this->assertIsInt($kelvin['rounded']);
+        $this->assertIsString($kelvin['signed']);
         $this->assertEquals($kelvin['value'], $kelvin_expected);
 
         $kelvin = temperature::c_to_k($this->non_numeric_value);

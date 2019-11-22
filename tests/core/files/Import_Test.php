@@ -28,12 +28,12 @@ class Import_Test extends Test_Case {
         $types = import::allowed_types();
 
         $this->assertNotEmpty($types);
-        $this->assertInternalType('array', $types);
+        $this->assertIsArray($types);
         $this->assertCount(3, $types);
 
         foreach ($types as $type)
         {
-            $this->assertInternalType('string', $type);
+            $this->assertIsString($type);
         }
     }
 
@@ -47,7 +47,7 @@ class Import_Test extends Test_Case {
         $return = import::import_data(realpath('outsource/import/example1.xls'));
 
         $this->assertNotFalse($return);
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertNotEmpty($return);
 
         $keys = array(

@@ -40,7 +40,7 @@ class Directory_Lister_Test extends Test_Case {
 
         $this->assertDirectoryExists($this->directory);
         $this->assertDirectoryIsReadable($this->directory);
-        $this->assertInternalType('array', $listing);
+        $this->assertIsArray($listing);
         $this->assertArrayHasKey('listing', $listing);
         $this->assertArrayHasKey('count', $listing);
         $this->assertArrayHasKey('max', $listing);
@@ -275,8 +275,8 @@ class Directory_Lister_Test extends Test_Case {
             'method'    => 'php-library',
         ));
 
-        $this->assertEquals(0, $listing['count']);
-        $this->assertEquals(0, $listing['max']);
+        $this->assertIsBool($listing);
+        $this->assertFalse($listing);
     }
 
     /* ---------------------------------------------------------------------- */

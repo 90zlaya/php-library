@@ -27,7 +27,7 @@ class Format_Test extends Test_Case {
         $bytes = format::bytes(715000, TRUE, 3);
 
         $this->assertNotEmpty($bytes);
-        $this->assertInternalType('array', $bytes);
+        $this->assertIsArray($bytes);
         $this->assertArrayHasKey('value', $bytes);
         $this->assertArrayHasKey('sign', $bytes);
         $this->assertEquals(698.242, $bytes['value']);
@@ -85,7 +85,7 @@ class Format_Test extends Test_Case {
 
         $result = format::website('zlatanstajic.com');
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('anchor', $result);
         $this->assertEquals('http://www.zlatanstajic.com', $result['name']);
@@ -96,7 +96,7 @@ class Format_Test extends Test_Case {
 
         $result = format::website('zlatanstajic.com', TRUE);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('anchor', $result);
         $this->assertEquals('https://www.zlatanstajic.com', $result['name']);

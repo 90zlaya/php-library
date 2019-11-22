@@ -58,7 +58,7 @@ class Geo_Plugin_Test extends Test_Case {
         $data = $geo_plugin->data();
 
         $this->assertNotEmpty($data);
-        $this->assertInternalType('array', $data);
+        $this->assertIsArray($data);
         $this->assertArrayHasKey('base', $data);
         $this->assertArrayHasKey('server', $data);
         $this->assertArrayHasKey('geo', $data);

@@ -50,7 +50,7 @@ class Web_Service_Test extends Test_Case {
     /**
     * Web_Service test setup method
     */
-    public function setUp()
+    public function setUp(): void
     {
         $this->web_service_object = new web_service();
     }
@@ -83,18 +83,18 @@ class Web_Service_Test extends Test_Case {
         {
             $result = $this->web_service_object->response($item);
 
-            $this->assertInternalType('array', $result);
+            $this->assertIsArray($result);
 
             $this->assertArrayHasKey('status', $result);
-            $this->assertInternalType('bool', $result['status']);
+            $this->assertIsBool($result['status']);
             $this->assertTrue($result['status']);
 
             $this->assertArrayHasKey('code', $result);
-            $this->assertInternalType('int', $result['code']);
+            $this->assertIsInt($result['code']);
             $this->assertEquals(200, $result['code']);
 
             $this->assertArrayHasKey('response', $result);
-            $this->assertInternalType('string', $result['response']);
+            $this->assertIsString($result['response']);
 
             if (isset($item['no_body']) && $item['no_body'] === TRUE)
             {
@@ -107,7 +107,7 @@ class Web_Service_Test extends Test_Case {
 
             $errors = $this->web_service_object->get_error();
 
-            $this->assertInternalType('array', $errors);
+            $this->assertIsArray($errors);
             $this->assertEmpty($errors);
         }
     }
@@ -128,23 +128,22 @@ class Web_Service_Test extends Test_Case {
             ),
         ));
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         $this->assertArrayHasKey('status', $result);
-        $this->assertInternalType('bool', $result['status']);
+        $this->assertIsBool($result['status']);
         $this->assertFalse($result['status']);
 
         $this->assertArrayHasKey('code', $result);
-        $this->assertInternalType('int', $result['code']);
+        $this->assertIsInt($result['code']);
         $this->assertEquals(404, $result['code']);
 
         $this->assertArrayHasKey('response', $result);
-        $this->assertInternalType('null', $result['response']);
         $this->assertNull($result['response']);
 
         $errors = $this->web_service_object->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
         $this->assertEmpty($errors);
 
     }
@@ -162,14 +161,14 @@ class Web_Service_Test extends Test_Case {
 
             $result = $this->web_service_object->response();
 
-            $this->assertInternalType('array', $result);
+            $this->assertIsArray($result);
 
             $this->assertArrayHasKey('status', $result);
-            $this->assertInternalType('bool', $result['status']);
+            $this->assertIsBool($result['status']);
             $this->assertFalse($result['status']);
 
             $this->assertArrayHasKey('code', $result);
-            $this->assertInternalType('int', $result['code']);
+            $this->assertIsInt($result['code']);
 
             if ($url === $this->urls['nonexistent']['image'])
             {
@@ -181,12 +180,12 @@ class Web_Service_Test extends Test_Case {
             }
 
             $this->assertArrayHasKey('response', $result);
-            $this->assertInternalType('string', $result['response']);
+            $this->assertIsString($result['response']);
             $this->assertNotEmpty($result['response']);
 
             $errors = $this->web_service_object->get_error();
 
-            $this->assertInternalType('array', $errors);
+            $this->assertIsArray($errors);
             $this->assertEmpty($errors);
         }
     }
@@ -200,12 +199,12 @@ class Web_Service_Test extends Test_Case {
     {
         $result = $this->web_service_object->response();
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertFalse($result);
 
         $errors = $this->web_service_object->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
         $this->assertEmpty($errors);
     }
 
@@ -220,23 +219,23 @@ class Web_Service_Test extends Test_Case {
 
         $result = $web_service->response();
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         $this->assertArrayHasKey('status', $result);
-        $this->assertInternalType('bool', $result['status']);
+        $this->assertIsBool($result['status']);
         $this->assertTrue($result['status']);
 
         $this->assertArrayHasKey('code', $result);
-        $this->assertInternalType('int', $result['code']);
+        $this->assertIsInt($result['code']);
         $this->assertEquals(200, $result['code']);
 
         $this->assertArrayHasKey('response', $result);
-        $this->assertInternalType('string', $result['response']);
+        $this->assertIsString($result['response']);
         $this->assertNotEmpty($result['response']);
 
         $errors = $this->web_service_object->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
         $this->assertEmpty($errors);
     }
 
@@ -253,23 +252,23 @@ class Web_Service_Test extends Test_Case {
 
         $result = $this->web_service_object->response();
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
 
         $this->assertArrayHasKey('status', $result);
-        $this->assertInternalType('bool', $result['status']);
+        $this->assertIsBool($result['status']);
         $this->assertTrue($result['status']);
 
         $this->assertArrayHasKey('code', $result);
-        $this->assertInternalType('int', $result['code']);
+        $this->assertIsInt($result['code']);
         $this->assertEquals(200, $result['code']);
 
         $this->assertArrayHasKey('response', $result);
-        $this->assertInternalType('string', $result['response']);
+        $this->assertIsString($result['response']);
         $this->assertNotEmpty($result['response']);
 
         $errors = $this->web_service_object->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
         $this->assertEmpty($errors);
     }
 
@@ -284,7 +283,7 @@ class Web_Service_Test extends Test_Case {
 
         $errors = $this->web_service_object->get_error();
 
-        $this->assertInternalType('array', $errors);
+        $this->assertIsArray($errors);
         $this->assertNotEmpty($errors);
     }
 

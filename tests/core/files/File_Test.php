@@ -66,7 +66,7 @@ class File_Test extends Test_Case {
     /**
     * File test setup before File
     */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $path_to_testing_folder  = realpath(self::$locations['folder']);
         $path_to_testing_folder .= DIRECTORY_SEPARATOR;
@@ -83,7 +83,7 @@ class File_Test extends Test_Case {
     /**
     * File test setup method
     */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->file = array(
             'location' => realpath('outsource/file/') . DIRECTORY_SEPARATOR,
@@ -101,7 +101,7 @@ class File_Test extends Test_Case {
     /**
     * File test precondition method
     */
-    protected function assertPreConditions()
+    protected function assertPreConditions(): void
     {
         $this->assertDirectoryIsReadable($this->file['location']);
         $this->assertDirectoryIsWritable($this->file['location']);
@@ -163,7 +163,7 @@ class File_Test extends Test_Case {
             $this->file['location'] . $this->file['name']
         );
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertArrayHasKey('status', $result);
         $this->assertArrayHasKey('items', $result);
         $this->assertTrue($result['status']);
@@ -205,7 +205,7 @@ class File_Test extends Test_Case {
         );
 
         $this->assertNotNull($result);
-        $this->assertInternalType('int', $result);
+        $this->assertIsInt($result);
 
         $this->assertFalse(file::write_to_file(NULL, NULL));
     }
@@ -220,7 +220,7 @@ class File_Test extends Test_Case {
         $result = file::image($this->image_params['show']);
 
         $this->assertNotEmpty($result);
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertEquals(
             $result,
             $this->image_params['location'] . $this->image_params['show']
@@ -237,7 +237,7 @@ class File_Test extends Test_Case {
         $result = file::image($this->image_params['do_not_show']);
 
         $this->assertNotEmpty($result);
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertEquals(
             $result,
             $this->image_params['location'] . $this->image_params['default']
@@ -249,7 +249,7 @@ class File_Test extends Test_Case {
     /**
     * File test tear down after File
     */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         $file_directory  = realpath(self::$locations['folder']);
         $file_directory .= DIRECTORY_SEPARATOR;

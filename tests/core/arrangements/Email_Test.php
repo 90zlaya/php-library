@@ -41,12 +41,12 @@ class Email_Test extends Test_Case {
         $result = email::show($this->emails['valid']);
 
         $this->assertNotFalse($result);
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
 
         $result = email::show($this->emails['valid_uppercase']);
 
         $this->assertNotFalse($result);
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -59,12 +59,12 @@ class Email_Test extends Test_Case {
         $result = email::show($this->emails['invalid']);
 
         $this->assertFalse($result);
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
 
         $result = email::show($this->emails['forbidden_client']);
 
         $this->assertFalse($result);
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -77,7 +77,7 @@ class Email_Test extends Test_Case {
         $result = email::validate($this->emails['valid']);
 
         $this->assertNotFalse($result);
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertEquals($result, $this->emails['valid']);
     }
 
@@ -91,7 +91,7 @@ class Email_Test extends Test_Case {
         $result = email::show($this->emails['forbidden_client']);
 
         $this->assertFalse($result);
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -104,7 +104,7 @@ class Email_Test extends Test_Case {
         $result = email::mailto($this->emails['valid']);
 
         $this->assertNotEmpty($result);
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -117,7 +117,7 @@ class Email_Test extends Test_Case {
         $result = email::mailto($this->emails['forbidden_client']);
 
         $this->assertFalse($result);
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
     }
 
     /* ---------------------------------------------------------------------- */

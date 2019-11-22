@@ -40,12 +40,12 @@ class Validation_Test extends Test_Case {
     {
         $result = validation::comma('159,99');
 
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertEquals('159.99', $result);
 
         $result = validation::comma('159.99');
 
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertEquals('159.99', $result);
     }
 
@@ -58,17 +58,17 @@ class Validation_Test extends Test_Case {
     {
         $result = validation::clear_number(108);
 
-        $this->assertInternalType('int', $result);
+        $this->assertIsInt($result);
         $this->assertEquals(108, $result);
 
         $result = validation::clear_number('108');
 
-        $this->assertInternalType('int', $result);
+        $this->assertIsInt($result);
         $this->assertEquals(108, $result);
 
         $result = validation::clear_number('nothing');
 
-        $this->assertInternalType('int', $result);
+        $this->assertIsInt($result);
         $this->assertEquals(0, $result);
     }
 
@@ -81,12 +81,12 @@ class Validation_Test extends Test_Case {
     {
         $result = validation::clear_string('This is <strong>cool</strong>!');
 
-        $this->assertInternalType('string', $result);
+        $this->assertIsString($result);
         $this->assertEquals('This is strongcoolstrong!', $result);
 
         $result = validation::clear_string('');
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertFalse($result);
     }
 
@@ -104,7 +104,7 @@ class Validation_Test extends Test_Case {
             array('image/jpeg')
         );
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertTrue($result);
 
         $result = validation::extension(
@@ -115,7 +115,7 @@ class Validation_Test extends Test_Case {
             )
         );
 
-        $this->assertInternalType('bool', $result);
+        $this->assertIsBool($result);
         $this->assertFalse($result);
     }
 
@@ -131,7 +131,7 @@ class Validation_Test extends Test_Case {
 
         $ordinary = validation::rewrite($string);
 
-        $this->assertInternalType('string', $ordinary);
+        $this->assertIsString($ordinary);
         $this->assertEquals(
             'ovo_je_test_naziv_12_razmak_34_ima_i_.png',
             $ordinary
@@ -139,7 +139,7 @@ class Validation_Test extends Test_Case {
 
         $special = validation::rewrite_special($string);
 
-        $this->assertInternalType('string', $special);
+        $this->assertIsString($special);
         $this->assertEquals(
             'ovo_je_test_naziv_12_razmak_34_ima_i_djdjccs.png',
             $special
