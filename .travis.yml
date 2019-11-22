@@ -3,30 +3,29 @@ sudo: required
 dist: trusty
 group: edge
 php:
-    - 7.1
-    - 7.2
-    - 7.3
+  - 7.2
+  - 7.3
 install:
   - travis_retry composer install --no-interaction --no-suggest
   - wget -c -nc --retry-connrefused --tries=0 https://github.com/php-coveralls/php-coveralls/releases/download/v2.0.0/php-coveralls.phar -O coveralls.phar
   - chmod +x coveralls.phar
   - php coveralls.phar --version
 before_script:
-    - sudo mkdir -p /var/run/mysqld
-    - sudo mkdir -p build/logs
-    - ls -al
+  - sudo mkdir -p /var/run/mysqld
+  - sudo mkdir -p build/logs
+  - ls -al
 script:
-    - wget https://link.zlatanstajic.com/software/php-library/outsource.zip
-    - unzip outsource.zip
-    - composer update
-    - vendor/bin/phpcs index.php --standard='ruleset.xml'
-    - vendor/bin/phpcs src --standard='ruleset.xml'
-    - vendor/bin/phpcs tests --standard='ruleset.xml'
-    - vendor/bin/phpstan analyse src --level max
-    - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - wget https://link.zlatanstajic.com/software/php-library/outsource.zip
+  - unzip outsource.zip
+  - composer update
+  - vendor/bin/phpcs index.php --standard='ruleset.xml'
+  - vendor/bin/phpcs src --standard='ruleset.xml'
+  - vendor/bin/phpcs tests --standard='ruleset.xml'
+  - vendor/bin/phpstan analyse src --level max
+  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 after_success:
-    - travis_retry php coveralls.phar -v
-    - bash <(curl -s https://codecov.io/bash)
+  - travis_retry php coveralls.phar -v
+  - bash <(curl -s https://codecov.io/bash)
 branches:
   only: master
 cache:

@@ -18,7 +18,7 @@ use PHP_Library\Core\Services\Geo_Plugin as geo_plugin;
 */
 class Geo_Plugin_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * What is expected from data method
@@ -137,7 +137,7 @@ class Geo_Plugin_Test extends Test_Case {
         $this->assertEquals($geo_plugin->get_code(), $data['geo']['geoplugin_status']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Valid IP is sent to geo_information method
@@ -157,7 +157,7 @@ class Geo_Plugin_Test extends Test_Case {
         $this->assertEquals($result['geoplugin_request'], $valid_ip_address);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * No IP sent to geo_information method, which is not
@@ -181,5 +181,5 @@ class Geo_Plugin_Test extends Test_Case {
         ));
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 }

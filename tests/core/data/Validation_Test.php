@@ -17,7 +17,7 @@ use PHP_Library\Core\Data\Validation as validation;
 */
 class Validation_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test year method for different input
@@ -31,7 +31,7 @@ class Validation_Test extends Test_Case {
         $this->assertFalse(validation::year('nothing'));
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test comma method for different input
@@ -49,7 +49,7 @@ class Validation_Test extends Test_Case {
         $this->assertEquals('159.99', $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test clear_number method for different input
@@ -72,7 +72,7 @@ class Validation_Test extends Test_Case {
         $this->assertEquals(0, $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test clear_string method for different input
@@ -90,7 +90,7 @@ class Validation_Test extends Test_Case {
         $this->assertFalse($result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test extension method for different input
@@ -119,7 +119,7 @@ class Validation_Test extends Test_Case {
         $this->assertFalse($result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing rewrite and rewrite_special methods
@@ -152,5 +152,5 @@ class Validation_Test extends Test_Case {
         $this->assertFalse($special);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 }

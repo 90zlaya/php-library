@@ -17,7 +17,7 @@ use PHP_Library\Core\Numericals\Temperature as temperature;
 */
 class Temperature_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Random data to pass to conversion methods
@@ -26,7 +26,7 @@ class Temperature_Test extends Test_Case {
     */
     private $non_numeric_value = 'This is definitely not numeric value!';
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test conversion from kelvin to celsius and
@@ -71,7 +71,7 @@ class Temperature_Test extends Test_Case {
         $this->assertFalse($fahrenheit);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test conversion from fahrenheit to celsius and
@@ -116,7 +116,7 @@ class Temperature_Test extends Test_Case {
         $this->assertFalse($kelvin);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test conversion from celsius to fahrenheit and
@@ -161,5 +161,5 @@ class Temperature_Test extends Test_Case {
         $this->assertFalse($kelvin);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 }

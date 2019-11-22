@@ -17,7 +17,7 @@ use PHP_Library\Core\Data\User_Agent as user_agent;
 */
 class User_Agent_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * List of user agents
@@ -29,7 +29,7 @@ class User_Agent_Test extends Test_Case {
         'mobile_non_crawler' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0_3 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A432 Safari/604.1',
     );
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test return value of list_operating_systems method
@@ -59,7 +59,7 @@ class User_Agent_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test return value of list_browsers method
@@ -78,7 +78,7 @@ class User_Agent_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test return value of list_devices method
@@ -97,7 +97,7 @@ class User_Agent_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test return value of list_crawlers method
@@ -110,7 +110,7 @@ class User_Agent_Test extends Test_Case {
         $this->assertInternalType('array', $crawlers);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing is_crawler method for two user agents
@@ -134,7 +134,7 @@ class User_Agent_Test extends Test_Case {
         $this->assertInternalType('bool', $is_crawler);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing is_mobile method for two user agents
@@ -158,7 +158,7 @@ class User_Agent_Test extends Test_Case {
         $this->assertInternalType('bool', $is_mobile);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing detect_browser method for valid and invalid input
@@ -183,7 +183,7 @@ class User_Agent_Test extends Test_Case {
         $this->assertEquals($name_when_no_match, $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing detect_operating_system method
@@ -219,7 +219,7 @@ class User_Agent_Test extends Test_Case {
         $this->assertEquals('', $result['group']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing detect_device method for valid and invalid input
@@ -244,5 +244,5 @@ class User_Agent_Test extends Test_Case {
         $this->assertEquals($name_when_no_match, $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 }

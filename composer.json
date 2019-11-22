@@ -34,8 +34,8 @@
   },
   "scripts": {
     "auto-test": "bash auto-test.sh",
-    "coding-standard": "vendor/bin/phpcs index.php src tests --standard='ruleset.xml'",
-    "bug-analysis": "vendor/bin/phpstan analyse src --level max",
+    "phpcs": "vendor/bin/phpcs index.php src tests --standard='ruleset.xml'",
+    "phpstan": "vendor/bin/phpstan analyse src --level max",
     "phpunit": "vendor/bin/phpunit"
   },
   "minimum-stability": "stable",

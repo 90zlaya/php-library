@@ -1,12 +1,4 @@
-<div align="center">
-    <a href="https://php-library.zlatanstajic.com">
-        <img
-            alt="PHP Library"
-            src="https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1"
-        >
-    </a>
-</div>
-
+[![PHP Library Logo]][PHP Library Official Website]
 
 # Description
 
@@ -70,7 +62,7 @@ PHP Library has it's own coding standard which deviates from PSR-2 standard with
 
 ```bash
 # Run coding standard for all PHP files in library
-composer run coding-standard
+composer run phpcs
 ```
 
 If you want to find out more about specific rules, open [ruleset.xml] file which is located in root directory.
@@ -81,7 +73,7 @@ This library has been tested with [PHP Stan] and approved as bug-free for all cl
 
 ```bash
 # Run bug analysis
-composer run bug-analysis
+composer run phpstan
 ```
 
 ## Unit testing
@@ -163,6 +155,7 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 [Coverals]:https://coveralls.io/github/90zlaya/php-library
 [MIT License]: http://www.opensource.org/licenses/mit-license.php
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
+[PHP Library Official Website]: https://php-library.zlatanstajic.com
 [API]: https://php-library.zlatanstajic.com/api/
 [coverage]: https://php-library.zlatanstajic.com/coverage/
 [Zlatan Stajic]: https://www.zlatanstajic.com/
@@ -176,6 +169,7 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 [ruleset.xml]: ruleset.xml
 [phpunit.xml]: phpunit.xml
 
+[PHP Library Logo]: https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1
 [Latest Stable Version]: https://poser.pugx.org/90zlaya/php-library/v/stable?clear_cache=1
 [Total Downloads]: https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=1
 [Travis Build Status]: https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=1

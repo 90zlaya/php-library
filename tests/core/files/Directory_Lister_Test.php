@@ -17,7 +17,7 @@ use PHP_Library\Core\Files\Directory_Lister as directory_lister;
 */
 class Directory_Lister_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Directory for testing Directory_Lister class
@@ -26,7 +26,7 @@ class Directory_Lister_Test extends Test_Case {
     */
     private $directory = 'outsource/directory_lister/';
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Minimalistic input to listing method
@@ -47,7 +47,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals($listing['count'], $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Included years parameter to listing method
@@ -68,7 +68,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(25, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Included types parameter to listing method
@@ -92,7 +92,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(25, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Included date_start parameter to listing method
@@ -117,7 +117,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(25, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Included date_end parameter to listing method
@@ -143,7 +143,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(25, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Included delimiter parameter to listing method
@@ -170,7 +170,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(25, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Included reverse parameter to listing method
@@ -198,7 +198,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(25, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Included print parameter to listing method
@@ -231,7 +231,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(25, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Only files within given folder
@@ -247,7 +247,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(1, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Only folders within given folder
@@ -263,7 +263,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(3, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Nonexistent method parameter passed
@@ -279,7 +279,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertEquals(0, $listing['max']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Crawling nonexistent files inside folder
@@ -297,7 +297,7 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertFalse($listing);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Crawling nonexistent files inside folder
@@ -312,5 +312,5 @@ class Directory_Lister_Test extends Test_Case {
         $this->assertFalse($listing);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 }

@@ -18,7 +18,7 @@ use PHP_Library\Core\Files\Directory_Lister as directory_lister;
 */
 class Sorter_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Parameters for test
@@ -27,7 +27,7 @@ class Sorter_Test extends Test_Case {
     */
     private $params = array();
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Locations for test setup
@@ -44,7 +44,7 @@ class Sorter_Test extends Test_Case {
         'paths'           => array(),
     );
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Sorter test setup before Setup
@@ -108,7 +108,7 @@ class Sorter_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Sorter test setup method
@@ -128,7 +128,7 @@ class Sorter_Test extends Test_Case {
             realpath('outsource/sorter/movable_testing/') . DIRECTORY_SEPARATOR;
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Sorter precondition method
@@ -141,7 +141,7 @@ class Sorter_Test extends Test_Case {
         $this->assertDirectoryIsWritable($this->params['folders']['destination']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test deploy method for existent parameters
@@ -194,7 +194,7 @@ class Sorter_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing deploy method - copy opteration - testing is on
@@ -239,7 +239,7 @@ class Sorter_Test extends Test_Case {
         $this->assertEmpty($errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing deploy method - move opteration - testing is on
@@ -284,7 +284,7 @@ class Sorter_Test extends Test_Case {
         $this->assertEmpty($errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing deploy method for movable option
@@ -326,7 +326,7 @@ class Sorter_Test extends Test_Case {
         $this->assertEmpty($errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test deploy method for empty parameters
@@ -361,7 +361,7 @@ class Sorter_Test extends Test_Case {
         $this->assertNotEmpty($errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Test deploy method only without setting number_of_directories parameter
@@ -405,7 +405,7 @@ class Sorter_Test extends Test_Case {
         $this->assertNotEmpty($errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Sorter test tear down after Sorter
@@ -418,7 +418,7 @@ class Sorter_Test extends Test_Case {
         rmdir(self::$locations['paths']['movable_testing']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Delete destination folder and files
@@ -450,7 +450,7 @@ class Sorter_Test extends Test_Case {
         rmdir(self::$locations['paths']['destination']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Delete movable folder and files
@@ -475,5 +475,5 @@ class Sorter_Test extends Test_Case {
         rmdir(self::$locations['paths']['movable']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 }

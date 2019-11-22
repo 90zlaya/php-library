@@ -17,7 +17,7 @@ use PHP_Library\Core\Arrangements\Email as email;
 */
 class Email_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * List of emails for testing
@@ -31,7 +31,7 @@ class Email_Test extends Test_Case {
         'forbidden_client' => 'zlatanstajic@fakeinbox.com',
     );
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Valid email passed to show_method
@@ -49,7 +49,7 @@ class Email_Test extends Test_Case {
         $this->assertInternalType('string', $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Invalid email passed to show_method
@@ -67,7 +67,7 @@ class Email_Test extends Test_Case {
         $this->assertInternalType('bool', $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Valid input sent to validate method
@@ -81,7 +81,7 @@ class Email_Test extends Test_Case {
         $this->assertEquals($result, $this->emails['valid']);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Invalid input sent to validate method
@@ -94,7 +94,7 @@ class Email_Test extends Test_Case {
         $this->assertInternalType('bool', $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Valid input sent to mailto method
@@ -107,7 +107,7 @@ class Email_Test extends Test_Case {
         $this->assertInternalType('string', $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Invalid input sent to mailto method
@@ -120,5 +120,5 @@ class Email_Test extends Test_Case {
         $this->assertInternalType('bool', $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 }

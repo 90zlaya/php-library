@@ -17,7 +17,7 @@ use PHP_Library\Core\Arrangements\Date_Time_Format as date_time_format;
 */
 class Date_Time_Format_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing types public property
@@ -41,7 +41,7 @@ class Date_Time_Format_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Comparing current method return values
@@ -62,7 +62,7 @@ class Date_Time_Format_Test extends Test_Case {
         );
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing compare method return values
@@ -74,7 +74,7 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertFalse(date_time_format::compare('31.12.2037'));
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing return values of format, format_to_database,
@@ -103,7 +103,7 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertFalse($result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing minutes_to_hours method
@@ -123,7 +123,7 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertFalse($hours);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing hours_to_minutes method
@@ -139,7 +139,7 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertEmpty($minutes);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing number_to_day method for various input
@@ -173,7 +173,7 @@ class Date_Time_Format_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing number_to_month method for various input
@@ -207,7 +207,7 @@ class Date_Time_Format_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing prefix method
@@ -225,7 +225,7 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertFalse($result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing date_from_jmbg method for various input
@@ -255,7 +255,7 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertEquals('9. 10. 1990.', $date);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing first_day_of_year method for various input
@@ -281,7 +281,7 @@ class Date_Time_Format_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing days_before method for various input
@@ -312,7 +312,7 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertNotFalse($result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing days_after method for various input
@@ -343,7 +343,7 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertEquals($formula, $result);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing get_days method for various input
@@ -368,7 +368,7 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertNotEmpty($days);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing get_months method for various input
@@ -393,5 +393,5 @@ class Date_Time_Format_Test extends Test_Case {
         $this->assertNotEmpty($months);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 }

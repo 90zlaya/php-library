@@ -18,7 +18,7 @@ use PHP_Library\System\Examinations\Testing as testing;
 */
 class Web_Service_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * URLs
@@ -36,7 +36,7 @@ class Web_Service_Test extends Test_Case {
         ),
     );
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Web_Service object data
@@ -45,7 +45,7 @@ class Web_Service_Test extends Test_Case {
     */
     private $web_service_object;
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Web_Service test setup method
@@ -55,7 +55,7 @@ class Web_Service_Test extends Test_Case {
         $this->web_service_object = new web_service();
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing response method - existent URL with GET
@@ -112,7 +112,7 @@ class Web_Service_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing response method - nonexistent URL with data
@@ -149,7 +149,7 @@ class Web_Service_Test extends Test_Case {
 
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing response method - nonexistent URLs
@@ -191,7 +191,7 @@ class Web_Service_Test extends Test_Case {
         }
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing response method - URL not set
@@ -209,7 +209,7 @@ class Web_Service_Test extends Test_Case {
         $this->assertEmpty($errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing response method - URL passed in constructor
@@ -240,7 +240,7 @@ class Web_Service_Test extends Test_Case {
         $this->assertEmpty($errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing reponse method - testing is on
@@ -273,7 +273,7 @@ class Web_Service_Test extends Test_Case {
         $this->assertEmpty($errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing set_url method - no passed parameter
@@ -288,5 +288,5 @@ class Web_Service_Test extends Test_Case {
         $this->assertNotEmpty($errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 }

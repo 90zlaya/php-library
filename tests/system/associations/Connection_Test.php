@@ -17,7 +17,7 @@ use PHP_Library\System\Associations\Connection as connection;
 */
 class Connection_Test extends Test_Case {
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Connection object data
@@ -26,7 +26,7 @@ class Connection_Test extends Test_Case {
     */
     private $connection_object;
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Connection test setup method
@@ -36,7 +36,7 @@ class Connection_Test extends Test_Case {
         $this->connection_object = new connection();
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
     /**
     * Testing get_connection method
@@ -58,6 +58,6 @@ class Connection_Test extends Test_Case {
         $this->assertTrue($has_errors);
     }
 
-    // -------------------------------------------------------------------------
+    /* ---------------------------------------------------------------------- */
 
 }
