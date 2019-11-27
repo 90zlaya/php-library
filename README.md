@@ -78,14 +78,20 @@ composer run phpstan
 
 ## Unit testing
 
-All tests are covered with PHPUnit framework and stored inside tests folder. They need outsource folder to perform specific tests, which you have to download and unzip in PHP Library's root directory.
+All tests are covered with PHPUnit framework and stored inside tests folder. They need [outsource folder] to perform specific tests, which you have to download and unzip in PHP Library's root directory.
 
 ```bash
-# Download outsource.zip file
-wget https://link.zlatanstajic.com/software/php-library/outsource.zip
+# Download outsource repository
+wget https://github.com/php-library-league/outsource/archive/1.1.0.zip
 
-# Unzip downloaded file
-unzip outsource.zip
+# Unzip and remove downloaded file
+unzip 1.1.0.zip && rm -rf 1.1.0.zip
+
+# Rename folder
+mv outsource-1.1.0/ outsource/
+
+# Unzip archive
+unzip outsource/archive.zip -d outsource/
 ```
 
 Command for running unit tests will target [phpunit.xml] file which is located inside root directory.
@@ -108,7 +114,7 @@ composer run auto-test
 * Bug analysis with PHPStan
 * Running unit tests with PHPUnit
 
-Precondition for running all tests above is having Composer vendors updated and outsource directory downloaded.
+Precondition for running all tests above is having Composer vendors updated and [outsource folder] downloaded.
 
 # References
 
@@ -165,6 +171,7 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 [PHP_CodeSniffer]: https://github.com/squizlabs/PHP_CodeSniffer
 [designseed.co]: https://designseedco.com/en/
 [xDebug]: https://xdebug.org/
+[outsource folder]: https://github.com/php-library-league/outsource
 
 [ruleset.xml]: ruleset.xml
 [phpunit.xml]: phpunit.xml
