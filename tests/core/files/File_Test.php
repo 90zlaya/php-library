@@ -25,10 +25,10 @@ class File_Test extends Test_Case {
     * @var array
     */
     private $image_params = array(
-        'show'        => 'icon-person.png',
+        'show'        => 'phplibrary-icon.png',
         'do_not_show' => 'no-background.jpg',
-        'location'    => 'https://link.zlatanstajic.com/images/email/',
-        'default'     => 'photo.png',
+        'location'    => 'https://raw.githubusercontent.com/php-library-league/assets/1.0.0/img/',
+        'default'     => 'phplibrary-logo-blue.png',
     );
 
     /* ---------------------------------------------------------------------- */

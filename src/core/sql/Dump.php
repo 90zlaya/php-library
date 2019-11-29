@@ -12,7 +12,6 @@
 namespace PHP_Library\Core\SQL;
 
 use PHP_Library\System\Examinations\Testing as Testing;
-use Exception as Exception;
 
 /**
 * Dump database from SQL server

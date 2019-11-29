@@ -11,6 +11,8 @@
 */
 namespace PHP_Library\Core\Files;
 
+use Exception as Exception;
+
 /**
 * File-related operations
 */
@@ -31,6 +33,15 @@ class File {
     /* ---------------------------------------------------------------------- */
 
     /**
+    * Errors occured during execution
+    *
+    * @var array
+    */
+    public static $errors = array();
+
+    /* ---------------------------------------------------------------------- */
+
+    /**
     * Get full image link
     *
     * @param string $name
@@ -42,7 +53,18 @@ class File {
         $link  = self::$image['location'];
         $link .= $name;
 
-        if (empty($name) || ! getimagesize($link))
+        $image_size = FALSE;
+
+        try
+        {
+            $image_size = getimagesize($link);
+        }
+        catch (Exception $e)
+        {
+            array_push(self::$errors, $e->getMessage());
+        }
+
+        if (empty($name) || ! $image_size)
         {
             $link  = self::$image['location'];
             $link .= self::$image['default'];
