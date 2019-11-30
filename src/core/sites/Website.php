@@ -422,7 +422,6 @@ class Website extends Testing {
                         $return .= '</script>' . PHP_EOL;
                         break;
                     }
-                    default: NULL;
                 }
             }
         }
@@ -483,7 +482,6 @@ class Website extends Testing {
                         $return .= '</script>' . PHP_EOL;
                         break;
                     }
-                    default: NULL;
                 }
             }
         }
