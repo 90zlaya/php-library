@@ -18,8 +18,8 @@ Every native class call should have following type of namespace call in front.
 use PHP_Library\Class_Subpackage\Class_Namespace\Class_Name;
 ```
 
-* All classes are inside src folder.
-* All unit tests are inside tests folder.
+* All classes are inside [src folder].
+* All unit tests are inside [tests folder].
 
 Autoload file is created by Composer and it's located inside vendor folder.
 
@@ -30,7 +30,17 @@ include_once 'vendor/autoload.php';
 
 # Installation
 
-There are two ways of using PHP Library. First one is to install it inside another project, let's say framework like CodeIgniter. Second one is to install it for development. Either way, you need PHP 7 and Composer to do it.
+There are two ways of using PHP Library. First one is to install it inside another project, let's say framework like CodeIgniter or Laravel. Second one is to install it for development. Either way, you need PHP 7 and Composer to do it. Here's detailed list of PHP versions supported.
+
+PHP  | Production | Development
+---- | ---------- | -----------
+7.0  | Yes        | No
+7.1  | Yes        | No
+7.2  | Yes        | Yes
+7.3  | Yes        | Yes
+7.4  | Yes        | Yes
+
+**Production** column shows on which versions PHP Library will work. **Development** column shows on which versions PHP Library is guaranteed to work and could be developed.
 
 ## Manual
 
@@ -101,21 +111,6 @@ Command for running unit tests will target [phpunit.xml] file which is located i
 composer run phpunit
 ```
 
-## Automatic tests
-
-You can run all possible automatic tests at once with one simple command.
-
-```bash
-# Run all tests
-composer run auto-test
-```
-
-* Coding standard with PHP_CodeSniffer
-* Bug analysis with PHPStan
-* Running unit tests with PHPUnit
-
-Precondition for running all tests above is having Composer vendors updated and [outsource folder] downloaded.
-
 # References
 
 ## Inspiration
@@ -172,6 +167,8 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 [designseed.co]: https://designseedco.com/en/
 [xDebug]: https://xdebug.org/
 [outsource folder]: https://github.com/php-library-league/outsource
+[src folder]: src/
+[tests folder]: tests/
 
 [ruleset.xml]: ruleset.xml
 [phpunit.xml]: phpunit.xml
