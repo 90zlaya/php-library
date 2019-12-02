@@ -9,13 +9,13 @@
 * @category     Associations
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\System\Associations\Connection as connection;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\System\Associations\Connection;
 
 /**
 * Testing Connection class
 */
-class Connection_Test extends Test_Case {
+class Connection_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -33,7 +33,7 @@ class Connection_Test extends Test_Case {
     */
     public function setUp(): void
     {
-        $this->connection_object = new connection();
+        $this->connection_object = new Connection();
     }
 
     /* ---------------------------------------------------------------------- */

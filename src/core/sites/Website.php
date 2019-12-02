@@ -11,8 +11,8 @@
 */
 namespace PHP_Library\Core\Sites;
 
-use PHP_Library\System\Examinations\Testing as Testing;
-use Exception as Exception;
+use PHP_Library\System\Examinations\Testing;
+use Exception;
 
 /**
 * Use when working with website related data

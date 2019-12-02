@@ -9,13 +9,13 @@
 * @category     Sites
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Sites\Website as website;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Sites\Website;
 
 /**
 * Testing Website class
 */
-class Website_Test extends Test_Case {
+class Website_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -64,7 +64,7 @@ class Website_Test extends Test_Case {
             ? $_SERVER['HTTP_REFERER']
             : $localhost . '/tests/Website_Test.php';
 
-        $this->website_object = new website(array(
+        $this->website_object = new Website(array(
             'name'        => $this->website_data['name'],
             'host'        => $this->website_data['host'],
             'made'        => $this->website_data['made'],
@@ -120,7 +120,7 @@ class Website_Test extends Test_Case {
     */
     public function test_empty_website_object_public_properties()
     {
-        $website = new website(array());
+        $website = new Website(array());
 
         $errors = $website->get_error();
 

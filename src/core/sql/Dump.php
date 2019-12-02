@@ -11,7 +11,7 @@
 */
 namespace PHP_Library\Core\SQL;
 
-use PHP_Library\System\Examinations\Testing as Testing;
+use PHP_Library\System\Examinations\Testing;
 
 /**
 * Dump database from SQL server

@@ -9,13 +9,13 @@
 * @category     Informations
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\System\Informations\Message as message;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\System\Informations\Message;
 
 /**
 * Testing Message class
 */
-class Message_Test extends Test_Case {
+class Message_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -33,7 +33,7 @@ class Message_Test extends Test_Case {
     */
     public function setUp(): void
     {
-        $this->message_object = new message();
+        $this->message_object = new Message();
     }
 
     /* ---------------------------------------------------------------------- */

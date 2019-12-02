@@ -10,13 +10,13 @@
 * @category     Services
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Services\Geo_Plugin as geo_plugin;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Services\Geo_Plugin;
 
 /**
 * Testing Geo_Plugin class
 */
-class Geo_Plugin_Test extends Test_Case {
+class Geo_Plugin_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -25,7 +25,7 @@ class Geo_Plugin_Test extends Test_Case {
     */
     public function test_data_method_return_values()
     {
-        $geo_plugin = new geo_plugin();
+        $geo_plugin = new Geo_Plugin();
 
         $localhost = 'http://localhost/_develop/php-library';
 
@@ -146,7 +146,7 @@ class Geo_Plugin_Test extends Test_Case {
     {
         $valid_ip_address = '109.93.204.177';
 
-        $geo_plugin = new geo_plugin();
+        $geo_plugin = new Geo_Plugin();
 
         $this->assertEmpty($geo_plugin->get_code());
 
@@ -165,7 +165,7 @@ class Geo_Plugin_Test extends Test_Case {
     */
     public function test_geo_information_method_without_ip_address()
     {
-        $geo_plugin = new geo_plugin();
+        $geo_plugin = new Geo_Plugin();
 
         $this->assertEmpty($geo_plugin->get_code());
 

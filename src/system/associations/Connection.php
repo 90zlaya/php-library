@@ -11,7 +11,7 @@
 */
 namespace PHP_Library\System\Associations;
 
-use PHP_Library\System\Informations\Message as Message;
+use PHP_Library\System\Informations\Message;
 
 /**
 * Make connection to a database

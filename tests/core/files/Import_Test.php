@@ -10,13 +10,13 @@
 * @category     Files
 * @author       Ivan Skokić <iskokic@gmail.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Files\Import as import;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Files\Import;
 
 /**
 * Testing Import class
 */
-class Import_Test extends Test_Case {
+class Import_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -25,7 +25,7 @@ class Import_Test extends Test_Case {
     */
     public function test_allowed_types_method()
     {
-        $types = import::allowed_types();
+        $types = Import::allowed_types();
 
         $this->assertNotEmpty($types);
         $this->assertIsArray($types);
@@ -44,7 +44,7 @@ class Import_Test extends Test_Case {
     */
     public function test_import_data_method()
     {
-        $return = import::import_data(realpath('outsource/import/example1.xls'));
+        $return = Import::import_data(realpath('outsource/import/example1.xls'));
 
         $this->assertNotFalse($return);
         $this->assertIsArray($return);
@@ -67,11 +67,11 @@ class Import_Test extends Test_Case {
             }
         }
 
-        $return = import::import_data(NULL);
+        $return = Import::import_data(NULL);
 
         $this->assertFalse($return);
 
-        $return = import::import_data('test/test.csv');
+        $return = Import::import_data('test/test.csv');
 
         $this->assertFalse($return);
     }

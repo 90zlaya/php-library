@@ -9,13 +9,13 @@
 * @category     Arrangements
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Arrangements\Format as format;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Arrangements\Format;
 
 /**
 * Testing Format class
 */
-class Format_Test extends Test_Case {
+class Format_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -24,7 +24,7 @@ class Format_Test extends Test_Case {
     */
     public function test_bytes_method()
     {
-        $bytes = format::bytes(715000, TRUE, 3);
+        $bytes = Format::bytes(715000, TRUE, 3);
 
         $this->assertNotEmpty($bytes);
         $this->assertIsArray($bytes);
@@ -41,7 +41,7 @@ class Format_Test extends Test_Case {
     */
     public function test_query_method()
     {
-        $result = format::query('SELECT name FROM table WHERE id < 10');
+        $result = Format::query('SELECT name FROM table WHERE id < 10');
 
         $this->assertEquals(
             '<pre><code>SELECT name FROM table WHERE id &lt; 10</code></pre>',
@@ -56,19 +56,19 @@ class Format_Test extends Test_Case {
     */
     public function test_telephone_method()
     {
-        $telephone = format::telephone('012345678');
+        $telephone = Format::telephone('012345678');
 
         $this->assertEquals('012/34-56-78', $telephone);
 
-        $telephone = format::telephone('012/34567890');
+        $telephone = Format::telephone('012/34567890');
 
         $this->assertEquals('012/34-56-7890', $telephone);
 
-        $telephone = format::telephone('', '01234/567-890');
+        $telephone = Format::telephone('', '01234/567-890');
 
         $this->assertEquals('012/34-56-7890', $telephone);
 
-        $telephone = format::telephone(NULL);
+        $telephone = Format::telephone(NULL);
 
         $this->assertFalse($telephone);
     }
@@ -83,7 +83,7 @@ class Format_Test extends Test_Case {
         $expected  = '<a href="http://www.zlatanstajic.com"';
         $expected .= ' target="_blank">zlatanstajic.com</a>';
 
-        $result = format::website('zlatanstajic.com');
+        $result = Format::website('zlatanstajic.com');
 
         $this->assertIsArray($result);
         $this->assertArrayHasKey('name', $result);
@@ -94,7 +94,7 @@ class Format_Test extends Test_Case {
         $expected  = '<a href="https://www.zlatanstajic.com"';
         $expected .= ' target="_blank">zlatanstajic.com</a>';
 
-        $result = format::website('zlatanstajic.com', TRUE);
+        $result = Format::website('zlatanstajic.com', TRUE);
 
         $this->assertIsArray($result);
         $this->assertArrayHasKey('name', $result);
@@ -102,19 +102,19 @@ class Format_Test extends Test_Case {
         $this->assertEquals('https://www.zlatanstajic.com', $result['name']);
         $this->assertEquals($expected, $result['anchor']);
 
-        $result = format::website(NULL);
+        $result = Format::website(NULL);
 
         $this->assertFalse($result);
 
         $address = 'http://www.zlatanstajic.com';
 
-        $result = format::website($address);
+        $result = Format::website($address);
 
         $this->assertEquals($address, $result['name']);
 
         $url = 'www.zlatanstajic.com';
 
-        $result = format::website($url);
+        $result = Format::website($url);
 
         $this->assertEquals($address, $result['name']);
     }
@@ -130,7 +130,7 @@ class Format_Test extends Test_Case {
         $expected .= 'php.gp?ip=172.168.150.15" target="_blank">';
         $expected .= '172.168.150.15</a>';
 
-        $result = format::ip('172.168.150.15');
+        $result = Format::ip('172.168.150.15');
 
         $this->assertEquals($expected, $result);
 
@@ -141,12 +141,12 @@ class Format_Test extends Test_Case {
 
         foreach ($localhosts as $localhost)
         {
-            $result = format::ip($localhost);
+            $result = Format::ip($localhost);
 
             $this->assertEquals('Localhost', $result);
         }
 
-        $result = format::ip(NULL);
+        $result = Format::ip(NULL);
 
         $this->assertFalse($result);
     }
@@ -175,7 +175,7 @@ class Format_Test extends Test_Case {
 
         foreach ($list_of_parameters as $item)
         {
-            $result = format::title_case($item['before']);
+            $result = Format::title_case($item['before']);
 
             $this->assertEquals($item['after'], $result);
         }
@@ -188,19 +188,19 @@ class Format_Test extends Test_Case {
     */
     public function test_number_method()
     {
-        $result = format::number(1234567.89);
+        $result = Format::number(1234567.89);
 
         $this->assertEquals(1.2, $result);
 
-        $result = format::number(1234567.89, FALSE, 1000);
+        $result = Format::number(1234567.89, FALSE, 1000);
 
         $this->assertEquals(1235, $result);
 
-        $result = format::number(1234567.89, FALSE);
+        $result = Format::number(1234567.89, FALSE);
 
         $this->assertEquals(1, $result);
 
-        $result = format::number(NULL);
+        $result = Format::number(NULL);
 
         $this->assertEmpty($result);
     }
@@ -214,7 +214,7 @@ class Format_Test extends Test_Case {
     {
         ob_start();
 
-        $this->assertNull(format::pre('Test'));
+        $this->assertNull(Format::pre('Test'));
 
         ob_end_clean();
     }
@@ -229,11 +229,11 @@ class Format_Test extends Test_Case {
     */
     public function test_conversions_windows_1250_and_utf8()
     {
-        $result = format::windows1250_to_utf8('Test');
+        $result = Format::windows1250_to_utf8('Test');
 
         $this->assertTrue(mb_detect_encoding($result, 'UTF-8') === 'UTF-8');
 
-        $result = format::utf8_to_windows1250('Test');
+        $result = Format::utf8_to_windows1250('Test');
 
         $this->assertTrue(mb_detect_encoding($result, 'ISO-8859-2') === 'ISO-8859-2');
     }
@@ -248,15 +248,15 @@ class Format_Test extends Test_Case {
         $string  = 'Lorem Ipsum is simply dummy text of the printing';
         $string .= ' and typesetting industry.';
 
-        $result = format::string($string);
+        $result = Format::string($string);
 
         $this->assertEquals('Lorem Ipsum is ...', $result);
 
-        $result = format::string($string, 6, 9);
+        $result = Format::string($string, 6, 9);
 
         $this->assertEquals('Ipsum is ...', $result);
 
-        $result = format::string($string, 6, 90);
+        $result = Format::string($string, 6, 90);
 
         $this->assertEquals($string, $result);
     }
@@ -268,15 +268,15 @@ class Format_Test extends Test_Case {
     */
     public function test_price_format_method()
     {
-        $result = format::price_format(108.985);
+        $result = Format::price_format(108.985);
 
         $this->assertEquals('108,99', $result);
 
-        $result = format::price_format('108.985', 3);
+        $result = Format::price_format('108.985', 3);
 
         $this->assertEquals('108,985', $result);
 
-        $result = format::price_format('108,985', 3);
+        $result = Format::price_format('108,985', 3);
 
         $this->assertFalse($result);
     }
@@ -288,21 +288,21 @@ class Format_Test extends Test_Case {
     */
     public function test_array_to_string_method()
     {
-        $result = format::array_to_string(array(
+        $result = Format::array_to_string(array(
             2017,
             2018,
         ));
 
         $this->assertEquals('2017|2018', $result);
 
-        $result = format::array_to_string(array(
+        $result = Format::array_to_string(array(
             2017,
             2018,
         ), ', ');
 
         $this->assertEquals('2017, 2018', $result);
 
-        $result = format::array_to_string('2017|2018');
+        $result = Format::array_to_string('2017|2018');
 
         $this->assertEquals('', $result);
     }
@@ -314,11 +314,11 @@ class Format_Test extends Test_Case {
     */
     public function test_fullname_method()
     {
-        $result = format::fullname('John', 'Doe');
+        $result = Format::fullname('John', 'Doe');
 
         $this->assertEquals('John Doe', $result);
 
-        $result = format::fullname('John', 'Doe', ' - ');
+        $result = Format::fullname('John', 'Doe', ' - ');
 
         $this->assertEquals('John - Doe', $result);
     }
@@ -330,7 +330,7 @@ class Format_Test extends Test_Case {
     */
     public function test_search_wizard_method()
     {
-        $result = format::search_wizard(
+        $result = Format::search_wizard(
             'php-library',
             array(
                 'name',
@@ -341,7 +341,7 @@ class Format_Test extends Test_Case {
 
         $this->assertNotFalse($result);
 
-        $result = format::search_wizard(
+        $result = Format::search_wizard(
             'PHP Library',
             array(
                 'name',
@@ -352,7 +352,7 @@ class Format_Test extends Test_Case {
 
         $this->assertNotFalse($result);
 
-        $result = format::search_wizard('', array());
+        $result = Format::search_wizard('', array());
 
         $this->assertFalse($result);
     }
@@ -364,11 +364,11 @@ class Format_Test extends Test_Case {
     */
     public function test_language_value_method()
     {
-        $result = format::language_value('english', 'Elephant');
+        $result = Format::language_value('english', 'Elephant');
 
         $this->assertEquals('Elephant', $result);
 
-        $result = format::language_value('serbian', 'Elephant', 'Slon');
+        $result = Format::language_value('serbian', 'Elephant', 'Slon');
 
         $this->assertEquals('Slon', $result);
     }
@@ -380,7 +380,7 @@ class Format_Test extends Test_Case {
     */
     public function test_in_wizard_method()
     {
-        $result = format::in_wizard(
+        $result = Format::in_wizard(
             'field',
             array(
                 'first',
@@ -394,7 +394,7 @@ class Format_Test extends Test_Case {
             $result
         );
 
-        $result = format::in_wizard('', array());
+        $result = Format::in_wizard('', array());
 
         $this->assertFalse($result);
     }

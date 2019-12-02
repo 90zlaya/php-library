@@ -9,13 +9,13 @@
 * @category     Data
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Data\Random as random;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Data\Random;
 
 /**
 * Testing Random class
 */
-class Random_Test extends Test_Case {
+class Random_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -77,7 +77,7 @@ class Random_Test extends Test_Case {
 
         foreach ($types as $type)
         {
-            $result = random::element($list, $type);
+            $result = Random::element($list, $type);
 
             $this->assertNotEmpty($result);
             $this->assertIsArray($result);
@@ -111,7 +111,7 @@ class Random_Test extends Test_Case {
 
         foreach ($types as $type)
         {
-            $result = random::element($list, $type);
+            $result = Random::element($list, $type);
 
             $this->assertNotEmpty($result);
             $this->assertIsString($result);
@@ -133,7 +133,7 @@ class Random_Test extends Test_Case {
 
         foreach ($types as $type)
         {
-            $result = random::generate(5, $type);
+            $result = Random::generate(5, $type);
 
             $this->assertNotEmpty($result);
         }
@@ -163,7 +163,7 @@ class Random_Test extends Test_Case {
 
         foreach ($calls as $call)
         {
-            $result = random::generate($call['length'], $call['type']);
+            $result = Random::generate($call['length'], $call['type']);
 
             $this->assertFalse($result);
         }
@@ -176,7 +176,7 @@ class Random_Test extends Test_Case {
     */
     public function test_break_caching_method()
     {
-        $result = random::break_caching();
+        $result = Random::break_caching();
 
         $this->assertNotFalse($result);
         $this->assertNotEmpty($result);

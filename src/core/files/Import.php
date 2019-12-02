@@ -12,7 +12,7 @@
 */
 namespace PHP_Library\Core\Files;
 
-use PhpOffice\PhpSpreadsheet\IOFactory as IOFactory;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 /**
 * Import data from file using customisation of PHPOffice/PhpSpreadsheet

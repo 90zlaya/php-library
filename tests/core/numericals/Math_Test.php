@@ -9,13 +9,13 @@
 * @category     Numericals
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Numericals\Math as math;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Numericals\Math;
 
 /**
 * Testing Math class
 */
-class Math_Test extends Test_Case {
+class Math_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -26,12 +26,12 @@ class Math_Test extends Test_Case {
     {
         for ($i=0; $i<10; $i++)
         {
-            $number = math::iterate();
+            $number = Math::iterate();
 
             $this->assertEquals($i+1, $number);
         }
 
-        $number = math::iterate(TRUE);
+        $number = Math::iterate(TRUE);
 
         $this->assertIsInt($number);
         $this->assertEquals(1, $number);
@@ -44,18 +44,18 @@ class Math_Test extends Test_Case {
     */
     public function test_iterate_method_getters_and_setters()
     {
-        math::set_iterator();
+        Math::set_iterator();
 
-        $iterator = math::get_iterator();
+        $iterator = Math::get_iterator();
 
         $this->assertIsInt($iterator);
         $this->assertEmpty($iterator);
 
         $new_value = 15;
 
-        math::set_iterator($new_value);
+        Math::set_iterator($new_value);
 
-        $iterator = math::get_iterator();
+        $iterator = Math::get_iterator();
 
         $this->assertIsInt($iterator);
         $this->assertEquals($new_value, $iterator);
@@ -75,7 +75,7 @@ class Math_Test extends Test_Case {
 
         for ($i=0; $i<10; $i++)
         {
-            $string = math::even_or_odd($parameter_one, $parameter_two);
+            $string = Math::even_or_odd($parameter_one, $parameter_two);
 
             $this->assertIsString($string);
             $this->assertNotEmpty($string);
@@ -102,7 +102,7 @@ class Math_Test extends Test_Case {
     {
         $expected_value = 60;
 
-        $percentage = math::percentage(30, 50);
+        $percentage = Math::percentage(30, 50);
 
         $this->assertIsArray($percentage);
         $this->assertArrayHasKey('value', $percentage);
@@ -114,7 +114,7 @@ class Math_Test extends Test_Case {
         $this->assertEquals($expected_value, $percentage['value']);
         $this->assertEquals($expected_value . '%', $percentage['sign']);
 
-        $percentage = math::percentage(NULL, NULL);
+        $percentage = Math::percentage(NULL, NULL);
 
         $this->assertEquals(NULL, $percentage['value']);
     }

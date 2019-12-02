@@ -9,14 +9,14 @@
 * @category     Files
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Files\Sorter as sorter;
-use PHP_Library\Core\Files\Directory_Lister as directory_lister;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Files\Sorter;
+use PHP_Library\Core\Files\Directory_Lister;
 
 /**
 * Testing Sorter class
 */
-class Sorter_Test extends Test_Case {
+class Sorter_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -89,7 +89,7 @@ class Sorter_Test extends Test_Case {
             }
         }
 
-        $listing = directory_lister::listing(array(
+        $listing = Directory_Lister::listing(array(
             'directory' => self::$locations['paths']['source'],
             'method'    => 'files',
         ));
@@ -157,7 +157,7 @@ class Sorter_Test extends Test_Case {
 
         foreach ($numbers as $number)
         {
-            $sorter = new sorter(array(
+            $sorter = new Sorter(array(
                 'where_to_read_files'         => $this->params['folders']['source'],
                 'where_to_create_directories' => $this->params['folders']['destination'],
                 'number_of_directories'       => $number,
@@ -201,7 +201,7 @@ class Sorter_Test extends Test_Case {
     */
     public function test_deploy_method_copy_operation_testing_option()
     {
-        $sorter = new sorter(array(
+        $sorter = new Sorter(array(
             'where_to_read_files'         => $this->params['folders']['source'],
             'where_to_create_directories' => $this->params['folders']['destination'],
             'number_of_directories'       => 10,
@@ -246,7 +246,7 @@ class Sorter_Test extends Test_Case {
     */
     public function test_deploy_method_move_operation_testing_option()
     {
-        $sorter = new sorter(array(
+        $sorter = new Sorter(array(
             'where_to_read_files'         => $this->params['folders']['movable_testing'],
             'where_to_create_directories' => $this->params['folders']['destination'],
             'number_of_directories'       => 10,
@@ -291,7 +291,7 @@ class Sorter_Test extends Test_Case {
     */
     public function test_deploy_method_for_movable_option()
     {
-        $sorter = new sorter(array(
+        $sorter = new Sorter(array(
             'where_to_read_files'         => $this->params['folders']['movable'],
             'where_to_create_directories' => $this->params['folders']['destination'],
             'number_of_directories'       => 10,
@@ -333,7 +333,7 @@ class Sorter_Test extends Test_Case {
     */
     public function test_deploy_method_for_empty_parameters()
     {
-        $sorter = new sorter(array());
+        $sorter = new Sorter(array());
 
         $deploy = $sorter->deploy();
 
@@ -368,7 +368,7 @@ class Sorter_Test extends Test_Case {
     */
     public function test_deploy_method_without_number_of_directories()
     {
-        $sorter = new sorter(array(
+        $sorter = new Sorter(array(
             'where_to_read_files'         => $this->params['folders']['movable'],
             'where_to_create_directories' => $this->params['folders']['destination'],
             'folder_sufix'                => '000',
@@ -427,7 +427,7 @@ class Sorter_Test extends Test_Case {
     */
     private static function delete_destination_folder_and_files()
     {
-        $listing = directory_lister::listing(array(
+        $listing = Directory_Lister::listing(array(
             'directory' => self::$locations['paths']['destination'],
             'method'    => 'crawl',
         ));
@@ -437,7 +437,7 @@ class Sorter_Test extends Test_Case {
             unlink($item['path']);
         }
 
-        $listing = directory_lister::listing(array(
+        $listing = Directory_Lister::listing(array(
             'directory' => self::$locations['paths']['destination'],
             'method'    => 'folders',
         ));
@@ -459,7 +459,7 @@ class Sorter_Test extends Test_Case {
     */
     private static function delete_movable_folder_and_files()
     {
-        $listing = directory_lister::listing(array(
+        $listing = Directory_Lister::listing(array(
             'directory' => self::$locations['paths']['movable'],
             'method'    => 'files',
         ));

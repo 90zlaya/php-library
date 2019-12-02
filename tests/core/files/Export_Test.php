@@ -10,13 +10,13 @@
 * @category     Files
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Files\Export as export;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Files\Export;
 
 /**
 * Testing Email class
 */
-class Export_Test extends Test_Case {
+class Export_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -59,7 +59,7 @@ class Export_Test extends Test_Case {
     */
     public function test_allowed_types_method()
     {
-        $types = export::allowed_types();
+        $types = Export::allowed_types();
 
         $this->assertNotEmpty($types);
         $this->assertIsArray($types);
@@ -79,7 +79,7 @@ class Export_Test extends Test_Case {
     */
     public function test_export_file_method()
     {
-        $this->assertNull(export::export_file($this->export_parameters));
+        $this->assertNull(Export::export_file($this->export_parameters));
     }
 
     /* ---------------------------------------------------------------------- */
@@ -89,7 +89,7 @@ class Export_Test extends Test_Case {
     */
     public function test_export_file_method_no_parameters()
     {
-        $this->assertNull(export::export_file(array()));
+        $this->assertNull(Export::export_file(array()));
     }
 
     /* ---------------------------------------------------------------------- */
@@ -100,7 +100,7 @@ class Export_Test extends Test_Case {
     public function test_export_file_method_file_name_property_given()
     {
         $this->assertNull(
-            export::export_file(array_merge(
+            Export::export_file(array_merge(
                 $this->export_parameters,
                 array(
                     'file_name' => 'genius_playboy_billionare_philantrophist',
@@ -117,7 +117,7 @@ class Export_Test extends Test_Case {
     public function test_export_file_method_document_properties_given()
     {
         $this->assertNull(
-            export::export_file(array_merge(
+            Export::export_file(array_merge(
                 $this->export_parameters,
                 array(
                     'document_properties' => array(
@@ -157,7 +157,7 @@ class Export_Test extends Test_Case {
         foreach ($types as $type)
         {
             $this->assertNull(
-                export::export_file(array_merge(
+                Export::export_file(array_merge(
                     $this->export_parameters,
                     $type
                 ))

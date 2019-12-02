@@ -199,13 +199,13 @@ class Password {
     */
     public static function decode($plain_text)
     {
-        return base64_decode(
-            strtr(
-                $plain_text,
-                self::$replaceables['replace'],
-                self::$replaceables['search']
-            )
+        $replaced_substring = strtr(
+            $plain_text,
+            self::$replaceables['replace'],
+            self::$replaceables['search']
         );
+
+        return base64_decode($replaced_substring);
     }
 
     /* ---------------------------------------------------------------------- */

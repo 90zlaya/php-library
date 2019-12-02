@@ -9,13 +9,13 @@
 * @category     Data
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Data\User_Agent as user_agent;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Data\User_Agent;
 
 /**
 * Testing User_Agent class
 */
-class User_Agent_Test extends Test_Case {
+class User_Agent_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -47,7 +47,7 @@ class User_Agent_Test extends Test_Case {
 
         foreach ($items as $item)
         {
-            $operating_systems = user_agent::list_operating_systems($item);
+            $operating_systems = User_Agent::list_operating_systems($item);
 
             $this->assertNotEmpty($operating_systems);
             $this->assertIsArray($operating_systems);
@@ -66,7 +66,7 @@ class User_Agent_Test extends Test_Case {
     */
     public function test_list_browsers_method()
     {
-        $browsers = user_agent::list_browsers();
+        $browsers = User_Agent::list_browsers();
 
         $this->assertNotEmpty($browsers);
         $this->assertIsArray($browsers);
@@ -85,7 +85,7 @@ class User_Agent_Test extends Test_Case {
     */
     public function test_list_devices_method()
     {
-        $devices = user_agent::list_devices();
+        $devices = User_Agent::list_devices();
 
         $this->assertNotEmpty($devices);
         $this->assertIsArray($devices);
@@ -104,7 +104,7 @@ class User_Agent_Test extends Test_Case {
     */
     public function test_list_crawlers_method()
     {
-        $crawlers = user_agent::list_crawlers();
+        $crawlers = User_Agent::list_crawlers();
 
         $this->assertNotEmpty($crawlers);
         $this->assertIsArray($crawlers);
@@ -119,14 +119,14 @@ class User_Agent_Test extends Test_Case {
     */
     public function test_is_crawler_method()
     {
-        $is_crawler = user_agent::is_crawler(
+        $is_crawler = User_Agent::is_crawler(
             $this->user_agents['non_mobile_crawler']
         );
 
         $this->assertTrue($is_crawler);
         $this->assertIsBool($is_crawler);
 
-        $is_crawler = user_agent::is_crawler(
+        $is_crawler = User_Agent::is_crawler(
             $this->user_agents['mobile_non_crawler']
         );
 
@@ -143,14 +143,14 @@ class User_Agent_Test extends Test_Case {
     */
     public function test_is_mobile_method()
     {
-        $is_mobile = user_agent::is_mobile(
+        $is_mobile = User_Agent::is_mobile(
             $this->user_agents['mobile_non_crawler']
         );
 
         $this->assertTrue($is_mobile);
         $this->assertIsBool($is_mobile);
 
-        $is_mobile = user_agent::is_mobile(
+        $is_mobile = User_Agent::is_mobile(
             $this->user_agents['non_mobile_crawler']
         );
 
@@ -165,7 +165,7 @@ class User_Agent_Test extends Test_Case {
     */
     public function test_detect_browser_method()
     {
-        $result = user_agent::detect_browser(
+        $result = User_Agent::detect_browser(
             $this->user_agents['mobile_non_crawler']
         );
 
@@ -174,7 +174,7 @@ class User_Agent_Test extends Test_Case {
         $this->assertEquals('Safari', $result);
 
         $name_when_no_match = 'Unknown';
-        $result             = user_agent::detect_browser(
+        $result             = User_Agent::detect_browser(
             $this->user_agents['non_mobile_crawler'],
             $name_when_no_match
         );
@@ -191,7 +191,7 @@ class User_Agent_Test extends Test_Case {
     */
     public function test_detect_operating_system_method()
     {
-        $result = user_agent::detect_operating_system(
+        $result = User_Agent::detect_operating_system(
             $this->user_agents['mobile_non_crawler']
         );
 
@@ -204,7 +204,7 @@ class User_Agent_Test extends Test_Case {
         $this->assertEquals('Macintosh', $result['group']);
 
         $name_when_no_match = 'Unknown';
-        $result             = user_agent::detect_operating_system(
+        $result             = User_Agent::detect_operating_system(
             $this->user_agents['non_mobile_crawler'],
             $name_when_no_match
         );
@@ -226,7 +226,7 @@ class User_Agent_Test extends Test_Case {
     */
     public function test_detect_device_method()
     {
-        $result = user_agent::detect_device(
+        $result = User_Agent::detect_device(
             $this->user_agents['mobile_non_crawler']
         );
 
@@ -235,7 +235,7 @@ class User_Agent_Test extends Test_Case {
         $this->assertEquals('iPhone', $result);
 
         $name_when_no_match = 'Unknown';
-        $result             = user_agent::detect_device(
+        $result             = User_Agent::detect_device(
             $this->user_agents['non_mobile_crawler'],
             $name_when_no_match
         );

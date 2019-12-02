@@ -9,13 +9,13 @@
 * @category     Data
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Data\Password as password;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Data\Password;
 
 /**
 * Testing Password class
 */
-class Password_Test extends Test_Case {
+class Password_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -43,8 +43,8 @@ class Password_Test extends Test_Case {
     */
     public function test_encode_and_decode_methods()
     {
-        $encoded = password::encode($this->password_data['string']);
-        $decoded = password::decode($encoded);
+        $encoded = Password::encode($this->password_data['string']);
+        $decoded = Password::decode($encoded);
 
         $this->assertNotEmpty($encoded);
         $this->assertIsString($encoded);
@@ -61,7 +61,7 @@ class Password_Test extends Test_Case {
     */
     public function test_digest_method_default_approach()
     {
-        $result = password::digest($this->password_data['string']);
+        $result = Password::digest($this->password_data['string']);
 
         $this->assertIsString($result);
         $this->assertEquals(
@@ -86,7 +86,7 @@ class Password_Test extends Test_Case {
 
         foreach ($inputs as $input)
         {
-            $result = password::digest($input);
+            $result = Password::digest($input);
 
             $this->assertFalse($result);
         }
@@ -108,9 +108,9 @@ class Password_Test extends Test_Case {
 
         foreach ($methods as $method)
         {
-            password::set_method($method);
+            Password::set_method($method);
 
-            $result = password::digest($this->password_data['string']);
+            $result = Password::digest($this->password_data['string']);
 
             $this->assertIsString($result);
             $this->assertNotEmpty($result);
@@ -143,9 +143,9 @@ class Password_Test extends Test_Case {
 
         foreach ($methods as $method)
         {
-            password::set_method($method);
+            Password::set_method($method);
 
-            $result = password::digest($this->password_data['string']);
+            $result = Password::digest($this->password_data['string']);
 
             $this->assertFalse($result);
         }
@@ -158,7 +158,7 @@ class Password_Test extends Test_Case {
     */
     public function test_new_readable_method()
     {
-        $result = password::new_readable();
+        $result = Password::new_readable();
 
         $this->assertNotEmpty($result);
         $this->assertNotFalse($result);
@@ -166,7 +166,7 @@ class Password_Test extends Test_Case {
         $words  = 'Furnace,Benign,Rusted,One,Daybreak,Nine,';
         $words .= 'Longing,Seventeen,Homecoming,Freight Car';
 
-        $result = password::new_readable(1, $words);
+        $result = Password::new_readable(1, $words);
 
         $this->assertNotEmpty($result);
         $this->assertNotFalse($result);
@@ -179,7 +179,7 @@ class Password_Test extends Test_Case {
     */
     public function test_new_unreadable_method()
     {
-        $result = password::new_unreadable();
+        $result = Password::new_unreadable();
 
         $this->assertNotEmpty($result);
         $this->assertNotFalse($result);
@@ -192,7 +192,7 @@ class Password_Test extends Test_Case {
     */
     public function test_strength_method_for_various_input()
     {
-        $result = password::strength($this->password_data['string'], 80);
+        $result = Password::strength($this->password_data['string'], 80);
 
         $this->assertNotEmpty($result);
         $this->assertIsArray($result);

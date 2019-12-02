@@ -9,13 +9,13 @@
 * @category     Examinations
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\System\Examinations\Testing as testing;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\System\Examinations\Testing;
 
 /**
 * Testing Testing class
 */
-class Testing_Test extends Test_Case {
+class Testing_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -33,7 +33,7 @@ class Testing_Test extends Test_Case {
     */
     public function setUp(): void
     {
-        $this->testing_object = new testing();
+        $this->testing_object = new Testing();
     }
 
     /* ---------------------------------------------------------------------- */

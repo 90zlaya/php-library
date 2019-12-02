@@ -12,7 +12,7 @@
 */
 namespace PHP_Library\Core\Services;
 
-use PHP_Library\Core\Services\Web_Service as web_service;
+use PHP_Library\Core\Services\Web_Service;
 
 /**
 * Geography location and other server and browser
@@ -210,7 +210,7 @@ class Geo_Plugin {
 
         $host = str_replace('{IP}', $ip, $this->geo_plugin_service);
 
-        $web_service = new web_service($host);
+        $web_service = new Web_Service($host);
         $response    = $web_service->response(array(
             'user_agent' => 'Geo_Plugin from bit.ly/php-library',
         ));

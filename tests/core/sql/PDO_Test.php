@@ -9,13 +9,13 @@
 * @category     SQL
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\SQL\PDO as pdo;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\SQL\PDO;
 
 /**
 * Testing PDO class
 */
-class PDO_Test extends Test_Case {
+class PDO_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -33,7 +33,7 @@ class PDO_Test extends Test_Case {
     */
     public function setUp(): void
     {
-        $this->pdo_object = new pdo();
+        $this->pdo_object = new PDO();
     }
 
     /* ---------------------------------------------------------------------- */
@@ -65,7 +65,7 @@ class PDO_Test extends Test_Case {
     */
     public function test_get_connection_method_set_parameters()
     {
-        $connection = new pdo('localhost', 'root');
+        $connection = new PDO('localhost', 'root');
 
         $result = $connection->get_connection();
 
@@ -89,7 +89,7 @@ class PDO_Test extends Test_Case {
     */
     public function test_get_connection_method_set_invalid_parameters()
     {
-        $connection = new pdo('localhost', 'nonexistent', 'invalid_password');
+        $connection = new PDO('localhost', 'nonexistent', 'invalid_password');
 
         $result = $connection->get_connection();
 

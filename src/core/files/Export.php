@@ -12,10 +12,9 @@
 */
 namespace PHP_Library\Core\Files;
 
-use PhpOffice\PhpSpreadsheet\Helper\Sample as Sample;
-use PhpOffice\PhpSpreadsheet\IOFactory as IOFactory;
-use PhpOffice\PhpSpreadsheet\Spreadsheet as Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Cell\DataType as DataType;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 
 /**
 * Export files using customisation of PHPOffice/PhpSpreadsheet

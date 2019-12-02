@@ -9,13 +9,13 @@
 * @category     Files
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Files\File as file;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Files\File;
 
 /**
 * Testing File class
 */
-class File_Test extends Test_Case {
+class File_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -90,7 +90,7 @@ class File_Test extends Test_Case {
             'name'     => 'file.txt',
         );
 
-        file::$image = array(
+        File::$image = array(
             'location' => $this->image_params['location'],
             'default'  => $this->image_params['default'],
         );
@@ -116,7 +116,7 @@ class File_Test extends Test_Case {
     */
     protected function write_to_file()
     {
-        file::write_to_file(
+        File::write_to_file(
             $this->file['location'] . $this->file['name'],
             $this->line
         );
@@ -130,7 +130,7 @@ class File_Test extends Test_Case {
     public function test_write_to_file_method()
     {
         $this->assertNull($this->write_to_file());
-        $this->assertFalse(file::write_to_file(NULL, NULL));
+        $this->assertFalse(File::write_to_file(NULL, NULL));
         $this->assertNull($this->write_to_file());
     }
 
@@ -141,13 +141,13 @@ class File_Test extends Test_Case {
     */
     public function test_read_from_file_method()
     {
-        $result = file::read_from_file(
+        $result = File::read_from_file(
             $this->file['location'] . $this->file['name']
         );
 
         $this->assertEquals($this->line, $result);
 
-        $result = file::read_from_file(NULL);
+        $result = File::read_from_file(NULL);
 
         $this->assertFalse($result);
     }
@@ -159,7 +159,7 @@ class File_Test extends Test_Case {
     */
     public function test_read_file_contents_method()
     {
-        $result = file::read_file_contents(
+        $result = File::read_file_contents(
             $this->file['location'] . $this->file['name']
         );
 
@@ -184,7 +184,7 @@ class File_Test extends Test_Case {
     */
     public function test_force_download_method()
     {
-        $this->assertNull(file::force_download(
+        $this->assertNull(File::force_download(
             $this->image_params['location'] .
             $this->image_params['show']
         ));
@@ -199,7 +199,7 @@ class File_Test extends Test_Case {
     {
         unlink(realpath($this->file['location'] . $this->file['name']));
 
-        $result = file::write_to_file(
+        $result = File::write_to_file(
             $this->file['location'] . $this->file['name'],
             $this->line
         );
@@ -207,7 +207,7 @@ class File_Test extends Test_Case {
         $this->assertNotNull($result);
         $this->assertIsInt($result);
 
-        $this->assertFalse(file::write_to_file(NULL, NULL));
+        $this->assertFalse(File::write_to_file(NULL, NULL));
     }
 
     /* ---------------------------------------------------------------------- */
@@ -217,7 +217,7 @@ class File_Test extends Test_Case {
     */
     public function test_image_method_show_image()
     {
-        $result = file::image($this->image_params['show']);
+        $result = File::image($this->image_params['show']);
 
         $this->assertNotEmpty($result);
         $this->assertIsString($result);
@@ -234,7 +234,7 @@ class File_Test extends Test_Case {
     */
     public function test_image_method_do_not_show_image()
     {
-        $result = file::image($this->image_params['do_not_show']);
+        $result = File::image($this->image_params['do_not_show']);
 
         $this->assertNotEmpty($result);
         $this->assertIsString($result);

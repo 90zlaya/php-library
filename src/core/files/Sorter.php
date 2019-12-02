@@ -11,7 +11,7 @@
 */
 namespace PHP_Library\Core\Files;
 
-use PHP_Library\System\Examinations\Testing as Testing;
+use PHP_Library\System\Examinations\Testing;
 
 /**
 * Sortes files to multiple folders

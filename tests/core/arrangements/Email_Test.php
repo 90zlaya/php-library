@@ -9,13 +9,13 @@
 * @category     Arrangements
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Arrangements\Email as email;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Arrangements\Email;
 
 /**
 * Testing Email class
 */
-class Email_Test extends Test_Case {
+class Email_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -38,12 +38,12 @@ class Email_Test extends Test_Case {
     */
     public function test_show_method_for_valid_email()
     {
-        $result = email::show($this->emails['valid']);
+        $result = Email::show($this->emails['valid']);
 
         $this->assertNotFalse($result);
         $this->assertIsString($result);
 
-        $result = email::show($this->emails['valid_uppercase']);
+        $result = Email::show($this->emails['valid_uppercase']);
 
         $this->assertNotFalse($result);
         $this->assertIsString($result);
@@ -56,12 +56,12 @@ class Email_Test extends Test_Case {
     */
     public function test_show_method_for_invalid_email()
     {
-        $result = email::show($this->emails['invalid']);
+        $result = Email::show($this->emails['invalid']);
 
         $this->assertFalse($result);
         $this->assertIsBool($result);
 
-        $result = email::show($this->emails['forbidden_client']);
+        $result = Email::show($this->emails['forbidden_client']);
 
         $this->assertFalse($result);
         $this->assertIsBool($result);
@@ -74,7 +74,7 @@ class Email_Test extends Test_Case {
     */
     public function test_validate_method_for_valid_input()
     {
-        $result = email::validate($this->emails['valid']);
+        $result = Email::validate($this->emails['valid']);
 
         $this->assertNotFalse($result);
         $this->assertIsString($result);
@@ -88,7 +88,7 @@ class Email_Test extends Test_Case {
     */
     public function test_validate_method_for_invalid_input()
     {
-        $result = email::show($this->emails['forbidden_client']);
+        $result = Email::show($this->emails['forbidden_client']);
 
         $this->assertFalse($result);
         $this->assertIsBool($result);
@@ -101,7 +101,7 @@ class Email_Test extends Test_Case {
     */
     public function test_mailto_method_for_valid_input()
     {
-        $result = email::mailto($this->emails['valid']);
+        $result = Email::mailto($this->emails['valid']);
 
         $this->assertNotEmpty($result);
         $this->assertIsString($result);
@@ -114,7 +114,7 @@ class Email_Test extends Test_Case {
     */
     public function test_mailto_method_for_invalid_input()
     {
-        $result = email::mailto($this->emails['forbidden_client']);
+        $result = Email::mailto($this->emails['forbidden_client']);
 
         $this->assertFalse($result);
         $this->assertIsBool($result);

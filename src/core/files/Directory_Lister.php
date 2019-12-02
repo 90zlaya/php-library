@@ -11,7 +11,7 @@
 */
 namespace PHP_Library\Core\Files;
 
-use PHP_Library\Core\Arrangements\Format as format;
+use PHP_Library\Core\Arrangements\Format;
 
 /**
 * Directory content retrieval
@@ -594,7 +594,7 @@ class Directory_Lister {
     {
         if ($print)
         {
-            format::pre($searched);
+            Format::pre($searched);
         }
     }
 

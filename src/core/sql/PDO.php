@@ -11,8 +11,7 @@
 */
 namespace PHP_Library\Core\SQL;
 
-use PHP_Library\System\Associations\Connection as Connection;
-
+use PHP_Library\System\Associations\Connection;
 use PDO as PHP_PDO;
 use PDOException as PHP_PDO_Exception;
 

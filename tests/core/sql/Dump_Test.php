@@ -9,13 +9,13 @@
 * @category     SQL
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\SQL\Dump as dump;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\SQL\Dump;
 
 /**
 * Testing Dump class
 */
-class Dump_Test extends Test_Case {
+class Dump_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -109,7 +109,7 @@ class Dump_Test extends Test_Case {
             ),
         );
 
-        $this->dump_object = new dump($this->dump_data);
+        $this->dump_object = new Dump($this->dump_data);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -209,7 +209,7 @@ class Dump_Test extends Test_Case {
     */
     public function test_mysql_dump_method_given_connection_string()
     {
-        $dump = new dump(array(
+        $dump = new Dump(array(
             'connection' => array(
                 'host'     => 'localhost',
                 'username' => 'root',
@@ -233,7 +233,7 @@ class Dump_Test extends Test_Case {
     */
     public function test_mysql_dump_method_no_database()
     {
-        $dump = new dump(array(
+        $dump = new Dump(array(
             'command'     => self::$command,
             'destination' => self::$destination,
         ));

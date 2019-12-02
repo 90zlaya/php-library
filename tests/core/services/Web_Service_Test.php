@@ -9,14 +9,13 @@
 * @category     Services
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Services\Web_Service as web_service;
-use PHP_Library\System\Examinations\Testing as testing;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Services\Web_Service;
 
 /**
 * Testing Web_Service class
 */
-class Web_Service_Test extends Test_Case {
+class Web_Service_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -52,7 +51,7 @@ class Web_Service_Test extends Test_Case {
     */
     public function setUp(): void
     {
-        $this->web_service_object = new web_service();
+        $this->web_service_object = new Web_Service();
     }
 
     /* ---------------------------------------------------------------------- */
@@ -215,7 +214,7 @@ class Web_Service_Test extends Test_Case {
     */
     public function test_response_method_url_passed_in_constructor()
     {
-        $web_service = new web_service($this->urls['existent']['get']);
+        $web_service = new Web_Service($this->urls['existent']['get']);
 
         $result = $web_service->response();
 

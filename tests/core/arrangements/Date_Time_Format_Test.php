@@ -9,13 +9,13 @@
 * @category     Arrangements
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Arrangements\Date_Time_Format as date_time_format;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Arrangements\Date_Time_Format;
 
 /**
 * Testing Date_Time_Format class
 */
-class Date_Time_Format_Test extends Test_Case {
+class Date_Time_Format_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -31,13 +31,13 @@ class Date_Time_Format_Test extends Test_Case {
             'unfriendly',
         );
 
-        $this->assertClassHasAttribute('types', date_time_format::class);
-        $this->assertNotEmpty(date_time_format::$types);
-        $this->assertIsArray(date_time_format::$types);
+        $this->assertClassHasAttribute('types', Date_Time_Format::class);
+        $this->assertNotEmpty(Date_Time_Format::$types);
+        $this->assertIsArray(Date_Time_Format::$types);
 
         foreach ($names as $name)
         {
-            $this->assertArrayHasKey($name, date_time_format::$types);
+            $this->assertArrayHasKey($name, Date_Time_Format::$types);
         }
     }
 
@@ -50,15 +50,15 @@ class Date_Time_Format_Test extends Test_Case {
     public function test_current_method()
     {
         $this->assertEquals(
-            date(date_time_format::$types['unfriendly']['datetime']),
-            date_time_format::current()
+            date(Date_Time_Format::$types['unfriendly']['datetime']),
+            Date_Time_Format::current()
         );
 
-        $parameter = date_time_format::$types['friendly']['datetime'];
+        $parameter = Date_Time_Format::$types['friendly']['datetime'];
 
         $this->assertEquals(
             date($parameter),
-            date_time_format::current($parameter)
+            Date_Time_Format::current($parameter)
         );
     }
 
@@ -70,8 +70,8 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_compare_method()
     {
-        $this->assertTrue(date_time_format::compare('31.12.2017'));
-        $this->assertFalse(date_time_format::compare('31.12.2037'));
+        $this->assertTrue(Date_Time_Format::compare('31.12.2017'));
+        $this->assertFalse(Date_Time_Format::compare('31.12.2037'));
     }
 
     /* ---------------------------------------------------------------------- */
@@ -82,23 +82,23 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_format_methods()
     {
-        $result = date_time_format::format('01.01.2018', TRUE);
+        $result = Date_Time_Format::format('01.01.2018', TRUE);
 
         $this->assertEquals('01-Jan-2018', $result);
 
-        $result = date_time_format::format_to_database('01.01.2018');
+        $result = Date_Time_Format::format_to_database('01.01.2018');
 
         $this->assertEquals('2018-01-01', $result);
 
-        $result = date_time_format::format_to_user('2018-01-01');
+        $result = Date_Time_Format::format_to_user('2018-01-01');
 
         $this->assertEquals('01.01.2018', $result);
 
-        $result = date_time_format::format_to_database('01.01.1970');
+        $result = Date_Time_Format::format_to_database('01.01.1970');
 
         $this->assertFalse($result);
 
-        $result = date_time_format::format_to_user('1970-01-01');
+        $result = Date_Time_Format::format_to_user('1970-01-01');
 
         $this->assertFalse($result);
     }
@@ -110,15 +110,15 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_minutes_to_hours_method()
     {
-        $hours = date_time_format::minutes_to_hours(555);
+        $hours = Date_Time_Format::minutes_to_hours(555);
 
         $this->assertEquals('09:15', $hours);
 
-        $hours = date_time_format::minutes_to_hours(-555);
+        $hours = Date_Time_Format::minutes_to_hours(-555);
 
         $this->assertEquals('00:00', $hours);
 
-        $hours = date_time_format::minutes_to_hours('nothing');
+        $hours = Date_Time_Format::minutes_to_hours('nothing');
 
         $this->assertFalse($hours);
     }
@@ -130,11 +130,11 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_hours_to_minutes_method()
     {
-        $minutes = date_time_format::hours_to_minutes('09:15');
+        $minutes = Date_Time_Format::hours_to_minutes('09:15');
 
         $this->assertEquals(555, $minutes);
 
-        $minutes = date_time_format::hours_to_minutes('09-15');
+        $minutes = Date_Time_Format::hours_to_minutes('09-15');
 
         $this->assertEmpty($minutes);
     }
@@ -146,15 +146,15 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_number_to_day_method()
     {
-        $day = date_time_format::number_to_day(5);
+        $day = Date_Time_Format::number_to_day(5);
 
         $this->assertEquals('petak', $day);
 
-        $day = date_time_format::number_to_day(1, 'english');
+        $day = Date_Time_Format::number_to_day(1, 'english');
 
         $this->assertEquals('monday', $day);
 
-        $day = date_time_format::number_to_day(6, 'serbian', FALSE);
+        $day = Date_Time_Format::number_to_day(6, 'serbian', FALSE);
 
         $this->assertEquals('Subota', $day);
 
@@ -167,7 +167,7 @@ class Date_Time_Format_Test extends Test_Case {
 
         foreach ($false_values as $value)
         {
-            $day = date_time_format::number_to_day($value);
+            $day = Date_Time_Format::number_to_day($value);
 
             $this->assertFalse($day);
         }
@@ -180,15 +180,15 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_number_to_month_method()
     {
-        $month = date_time_format::number_to_month(5);
+        $month = Date_Time_Format::number_to_month(5);
 
         $this->assertEquals('maj', $month);
 
-        $month = date_time_format::number_to_month(1, 'english');
+        $month = Date_Time_Format::number_to_month(1, 'english');
 
         $this->assertEquals('january', $month);
 
-        $month = date_time_format::number_to_month(9, 'serbian', FALSE);
+        $month = Date_Time_Format::number_to_month(9, 'serbian', FALSE);
 
         $this->assertEquals('Septembar', $month);
 
@@ -201,7 +201,7 @@ class Date_Time_Format_Test extends Test_Case {
 
         foreach ($false_values as $value)
         {
-            $month = date_time_format::number_to_month($value);
+            $month = Date_Time_Format::number_to_month($value);
 
             $this->assertFalse($month);
         }
@@ -216,11 +216,11 @@ class Date_Time_Format_Test extends Test_Case {
     {
         $string = 'phpunit';
 
-        $result = date_time_format::prefix($string);
+        $result = Date_Time_Format::prefix($string);
 
         $this->assertEquals(date('YmdHis') . '_' . $string, $result);
 
-        $result = date_time_format::prefix('');
+        $result = Date_Time_Format::prefix('');
 
         $this->assertFalse($result);
     }
@@ -232,7 +232,7 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_date_from_jmbg_method()
     {
-        $date = date_time_format::date_from_jmbg('2609970123456');
+        $date = Date_Time_Format::date_from_jmbg('2609970123456');
 
         $this->assertEquals('26. 9. 1970.', $date);
 
@@ -245,12 +245,12 @@ class Date_Time_Format_Test extends Test_Case {
 
         foreach ($false_values as $value)
         {
-            $date = date_time_format::date_from_jmbg($value);
+            $date = Date_Time_Format::date_from_jmbg($value);
 
             $this->assertFalse($date);
         }
 
-        $date = date_time_format::date_from_jmbg('0910990123456');
+        $date = Date_Time_Format::date_from_jmbg('0910990123456');
 
         $this->assertEquals('9. 10. 1990.', $date);
     }
@@ -262,7 +262,7 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_first_day_of_year_method()
     {
-        $day = date_time_format::first_day_of_year('l', 2018);
+        $day = Date_Time_Format::first_day_of_year('l', 2018);
 
         $this->assertEquals('Monday', $day);
 
@@ -275,7 +275,7 @@ class Date_Time_Format_Test extends Test_Case {
 
         foreach ($false_values as $value)
         {
-            $day = date_time_format::first_day_of_year($value);
+            $day = Date_Time_Format::first_day_of_year($value);
 
             $this->assertFalse($day);
         }
@@ -290,7 +290,7 @@ class Date_Time_Format_Test extends Test_Case {
     {
         $number_of_days = 10;
 
-        $result = date_time_format::days_before($number_of_days);
+        $result = Date_Time_Format::days_before($number_of_days);
 
         $formula = date('Y-m-d', strtotime(' -' . $number_of_days . ' day'));
 
@@ -302,12 +302,12 @@ class Date_Time_Format_Test extends Test_Case {
 
         foreach ($false_values as $value)
         {
-            $day = date_time_format::days_before($value);
+            $day = Date_Time_Format::days_before($value);
 
             $this->assertFalse($day);
         }
 
-        $result = date_time_format::days_before($number_of_days, 'd-m-Y');
+        $result = Date_Time_Format::days_before($number_of_days, 'd-m-Y');
 
         $this->assertNotFalse($result);
     }
@@ -321,7 +321,7 @@ class Date_Time_Format_Test extends Test_Case {
     {
         $number_of_days = 10;
 
-        $result = date_time_format::days_after($number_of_days);
+        $result = Date_Time_Format::days_after($number_of_days);
 
         $formula = date('Y-m-d', strtotime(' +' . $number_of_days . ' day'));
 
@@ -333,12 +333,12 @@ class Date_Time_Format_Test extends Test_Case {
 
         foreach ($false_values as $value)
         {
-            $day = date_time_format::days_after($value);
+            $day = Date_Time_Format::days_after($value);
 
             $this->assertFalse($day);
         }
 
-        $result = date_time_format::days_after($number_of_days, 'Y-m-d');
+        $result = Date_Time_Format::days_after($number_of_days, 'Y-m-d');
 
         $this->assertEquals($formula, $result);
     }
@@ -350,7 +350,7 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_get_days_method()
     {
-        $days = date_time_format::get_days();
+        $days = Date_Time_Format::get_days();
 
         $this->assertIsArray($days);
         $this->assertArrayHasKey('php', $days);
@@ -363,7 +363,7 @@ class Date_Time_Format_Test extends Test_Case {
             json_encode($days['php'])
         );
 
-        $days = date_time_format::get_days(NULL, 3);
+        $days = Date_Time_Format::get_days(NULL, 3);
 
         $this->assertNotEmpty($days);
     }
@@ -375,7 +375,7 @@ class Date_Time_Format_Test extends Test_Case {
     */
     public function test_get_months_method()
     {
-        $months = date_time_format::get_months();
+        $months = Date_Time_Format::get_months();
 
         $this->assertIsArray($months);
         $this->assertArrayHasKey('php', $months);
@@ -388,7 +388,7 @@ class Date_Time_Format_Test extends Test_Case {
             json_encode($months['php'])
         );
 
-        $months = date_time_format::get_months(NULL, 3);
+        $months = Date_Time_Format::get_months(NULL, 3);
 
         $this->assertNotEmpty($months);
     }

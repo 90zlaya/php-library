@@ -11,7 +11,7 @@
 */
 namespace PHP_Library\Core\Files;
 
-use Exception as Exception;
+use Exception;
 
 /**
 * File-related operations

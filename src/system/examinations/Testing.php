@@ -11,7 +11,7 @@
 */
 namespace PHP_Library\System\Examinations;
 
-use PHP_Library\System\Informations\Message as Message;
+use PHP_Library\System\Informations\Message;
 
 /**
 * Use when testing unreachable code

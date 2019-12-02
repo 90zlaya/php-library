@@ -97,12 +97,9 @@ class Email {
             $split_me .= $link_text;
             $split_me .= '</a>';
 
-            return self::script(
-                self::split(
-                    $split_me,
-                    FALSE
-                )
-            );
+            $from_split = self::split($split_me, FALSE);
+
+            return self::script($from_split);
         }
 
         return FALSE;

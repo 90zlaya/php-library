@@ -9,13 +9,13 @@
 * @category     Data
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
-use PHPUnit\Framework\TestCase as Test_Case;
-use PHP_Library\Core\Data\Validation as validation;
+use PHPUnit\Framework\TestCase;
+use PHP_Library\Core\Data\Validation;
 
 /**
 * Testing Validation class
 */
-class Validation_Test extends Test_Case {
+class Validation_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -24,11 +24,11 @@ class Validation_Test extends Test_Case {
     */
     public function test_year_method()
     {
-        $this->assertTrue(validation::year(2017));
-        $this->assertTrue(validation::year(1917));
-        $this->assertFalse(validation::year(0));
-        $this->assertFalse(validation::year(20018));
-        $this->assertFalse(validation::year('nothing'));
+        $this->assertTrue(Validation::year(2017));
+        $this->assertTrue(Validation::year(1917));
+        $this->assertFalse(Validation::year(0));
+        $this->assertFalse(Validation::year(20018));
+        $this->assertFalse(Validation::year('nothing'));
     }
 
     /* ---------------------------------------------------------------------- */
@@ -38,12 +38,12 @@ class Validation_Test extends Test_Case {
     */
     public function test_comma_method()
     {
-        $result = validation::comma('159,99');
+        $result = Validation::comma('159,99');
 
         $this->assertIsString($result);
         $this->assertEquals('159.99', $result);
 
-        $result = validation::comma('159.99');
+        $result = Validation::comma('159.99');
 
         $this->assertIsString($result);
         $this->assertEquals('159.99', $result);
@@ -56,17 +56,17 @@ class Validation_Test extends Test_Case {
     */
     public function test_clear_number_method()
     {
-        $result = validation::clear_number(108);
+        $result = Validation::clear_number(108);
 
         $this->assertIsInt($result);
         $this->assertEquals(108, $result);
 
-        $result = validation::clear_number('108');
+        $result = Validation::clear_number('108');
 
         $this->assertIsInt($result);
         $this->assertEquals(108, $result);
 
-        $result = validation::clear_number('nothing');
+        $result = Validation::clear_number('nothing');
 
         $this->assertIsInt($result);
         $this->assertEquals(0, $result);
@@ -79,12 +79,12 @@ class Validation_Test extends Test_Case {
     */
     public function test_clear_string_method()
     {
-        $result = validation::clear_string('This is <strong>cool</strong>!');
+        $result = Validation::clear_string('This is <strong>cool</strong>!');
 
         $this->assertIsString($result);
         $this->assertEquals('This is strongcoolstrong!', $result);
 
-        $result = validation::clear_string('');
+        $result = Validation::clear_string('');
 
         $this->assertIsBool($result);
         $this->assertFalse($result);
@@ -97,7 +97,7 @@ class Validation_Test extends Test_Case {
     */
     public function test_extension_method()
     {
-        $result = validation::extension(
+        $result = Validation::extension(
             '90zlaya.jpeg',
             array('jpeg'),
             'image/jpeg',
@@ -107,7 +107,7 @@ class Validation_Test extends Test_Case {
         $this->assertIsBool($result);
         $this->assertTrue($result);
 
-        $result = validation::extension(
+        $result = Validation::extension(
             '90zlaya.xml',
             array(
                 'jpeg',
@@ -129,7 +129,7 @@ class Validation_Test extends Test_Case {
     {
         $string = 'Ovo je test NAZIV 12  razmak 34 ima i đĐčćŠ.png';
 
-        $ordinary = validation::rewrite($string);
+        $ordinary = Validation::rewrite($string);
 
         $this->assertIsString($ordinary);
         $this->assertEquals(
@@ -137,7 +137,7 @@ class Validation_Test extends Test_Case {
             $ordinary
         );
 
-        $special = validation::rewrite_special($string);
+        $special = Validation::rewrite_special($string);
 
         $this->assertIsString($special);
         $this->assertEquals(
@@ -145,8 +145,8 @@ class Validation_Test extends Test_Case {
             $special
         );
 
-        $ordinary = validation::rewrite('');
-        $special  = validation::rewrite_special('');
+        $ordinary = Validation::rewrite('');
+        $special  = Validation::rewrite_special('');
 
         $this->assertFalse($ordinary);
         $this->assertFalse($special);
