@@ -20,7 +20,6 @@ script:
   - unzip 1.1.0.zip && sudo rm -rf 1.1.0.zip
   - sudo mv outsource-1.1.0/ outsource/
   - unzip outsource/archive.zip -d outsource/
-  - vendor/bin/phpcs index.php --standard='ruleset.xml'
   - vendor/bin/phpcs src --standard='ruleset.xml'
   - vendor/bin/phpcs tests --standard='ruleset.xml'
   - vendor/bin/phpstan analyse src --level max

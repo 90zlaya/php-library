@@ -33,7 +33,7 @@
     }
   },
   "scripts": {
-    "phpcs": "vendor/bin/phpcs index.php src tests --standard='ruleset.xml'",
+    "phpcs": "vendor/bin/phpcs src tests --standard='ruleset.xml'",
     "phpstan": "vendor/bin/phpstan analyse src --level max",
     "phpunit": "vendor/bin/phpunit"
   },

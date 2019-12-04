@@ -1,6 +1,6 @@
 <?php
 /**
-* PDO
+* PDO_Connection
 *
 * Make PDO connection to a database
 *
@@ -10,12 +10,12 @@
 * @author       Zlatan Stajić <contact@zlatanstajic.com>
 */
 use PHPUnit\Framework\TestCase;
-use PHP_Library\Core\SQL\PDO;
+use PHP_Library\Core\SQL\PDO_Connection;
 
 /**
 * Testing PDO class
 */
-class PDO_Test extends TestCase {
+class PDO_Connection_Test extends TestCase {
 
     /* ---------------------------------------------------------------------- */
 
@@ -33,7 +33,7 @@ class PDO_Test extends TestCase {
     */
     public function setUp(): void
     {
-        $this->pdo_object = new PDO();
+        $this->pdo_object = new PDO_Connection();
     }
 
     /* ---------------------------------------------------------------------- */
@@ -65,7 +65,7 @@ class PDO_Test extends TestCase {
     */
     public function test_get_connection_method_set_parameters()
     {
-        $connection = new PDO('localhost', 'root');
+        $connection = new PDO_Connection('localhost', 'root');
 
         $result = $connection->get_connection();
 
@@ -89,7 +89,11 @@ class PDO_Test extends TestCase {
     */
     public function test_get_connection_method_set_invalid_parameters()
     {
-        $connection = new PDO('localhost', 'nonexistent', 'invalid_password');
+        $connection = new PDO_Connection(
+          'localhost',
+          'nonexistent',
+          'invalid_password'
+        );
 
         $result = $connection->get_connection();
 

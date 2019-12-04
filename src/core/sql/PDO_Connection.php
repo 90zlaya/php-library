@@ -1,6 +1,6 @@
 <?php
 /**
-* PDO
+* PDO_Connection
 *
 * Make PDO connection to a database
 *
@@ -12,13 +12,13 @@
 namespace PHP_Library\Core\SQL;
 
 use PHP_Library\System\Associations\Connection;
-use PDO as PHP_PDO;
-use PDOException as PHP_PDO_Exception;
+use PDO;
+use PDOException;
 
 /**
 * Make PDO connection to a database
 */
-class PDO extends Connection {
+class PDO_Connection extends Connection {
 
     /* ---------------------------------------------------------------------- */
 
@@ -71,16 +71,16 @@ class PDO extends Connection {
     {
         try
         {
-            $this->connection = new PHP_PDO(
+            $this->connection = new PDO(
                 $this->connection_string(),
                 $this->parameters['user'],
                 $this->parameters['pass'],
                 array(
-                    PHP_PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
                 )
             );
         }
-        catch (PHP_PDO_Exception $e)
+        catch (PDOException $e)
         {
             $this->set_error($e->getMessage());
         }
