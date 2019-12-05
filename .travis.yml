@@ -13,13 +13,14 @@ install:
 before_script:
   - sudo mkdir -p /var/run/mysqld
   - sudo mkdir -p build/logs
-  - sudo chmod -R 0777 build/logs
+  - sudo chmod -R 777 build/logs
   - ls -al
 script:
   - wget https://github.com/php-library-league/outsource/archive/1.1.0.zip
   - unzip 1.1.0.zip && sudo rm -rf 1.1.0.zip
   - sudo mv outsource-1.1.0/ outsource/
   - unzip outsource/archive.zip -d outsource/
+  - sudo chmod -R 777 outsource/
   - vendor/bin/phpcs src --standard='ruleset.xml'
   - vendor/bin/phpcs tests --standard='ruleset.xml'
   - vendor/bin/phpstan analyse src --level max

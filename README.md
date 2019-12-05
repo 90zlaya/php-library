@@ -102,6 +102,9 @@ mv outsource-1.1.0/ outsource/
 
 # Unzip archive
 unzip outsource/archive.zip -d outsource/
+
+# Give full permissions to all files and folders
+chmod -R 777 outsource/
 ```
 
 Command for running unit tests will target [phpunit.xml] file which is located inside root directory.
