@@ -44,7 +44,7 @@ class Import_Test extends TestCase {
     */
     public function test_import_data_method()
     {
-        $return = Import::import_data(realpath('outsource/import/example1.xls'));
+        $return = Import::import_data(__DIR__ . '/../../../outsource/import/example1.xls');
 
         $this->assertNotFalse($return);
         $this->assertIsArray($return);

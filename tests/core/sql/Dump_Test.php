@@ -77,9 +77,7 @@ class Dump_Test extends TestCase {
             self::$command = $command;
         }
 
-        $destination  = realpath('outsource/');
-        $destination .= DIRECTORY_SEPARATOR;
-        $destination .= 'dump/';
+        $destination = __DIR__ . '/../../../outsource/dump/';
 
         if (file_exists($destination))
         {

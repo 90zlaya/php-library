@@ -24,7 +24,7 @@ class Directory_Lister_Test extends TestCase {
     *
     * @var string
     */
-    private $directory = 'outsource/directory_lister/';
+    private $directory = __DIR__ .'/../../../outsource/directory_lister/';
 
     /* ---------------------------------------------------------------------- */
 
@@ -34,7 +34,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_on_minimalistic_input()
     {
         $listing = Directory_Lister::listing(array(
-            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory' => $this->directory,
             'method'    => 'crawl',
         ));
 
@@ -55,7 +55,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_on_years_input()
     {
         $listing = Directory_Lister::listing(array(
-            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory' => $this->directory,
             'method'    => 'crawl',
             'years'     => array(
                 2013,
@@ -76,7 +76,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_on_types_input()
     {
         $listing = Directory_Lister::listing(array(
-            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory' => $this->directory,
             'method'    => 'crawl',
             'years'     => array(
                 2013,
@@ -100,7 +100,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_on_date_start_input()
     {
         $listing = Directory_Lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory'  => $this->directory,
             'method'     => 'crawl',
             'years'      => array(
                 2013,
@@ -125,7 +125,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_on_date_end_input()
     {
         $listing = Directory_Lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory'  => $this->directory,
             'method'     => 'crawl',
             'years'      => array(
                 2013,
@@ -151,7 +151,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_on_delimiter_input()
     {
         $listing = Directory_Lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory'  => $this->directory,
             'method'     => 'crawl',
             'years'      => array(
                 2013,
@@ -178,7 +178,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_on_reverse_input()
     {
         $listing = Directory_Lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory'  => $this->directory,
             'method'     => 'crawl',
             'years'      => array(
                 2013,
@@ -208,7 +208,7 @@ class Directory_Lister_Test extends TestCase {
         ob_start();
 
         $listing = Directory_Lister::listing(array(
-            'directory'  => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory'  => $this->directory,
             'method'     => 'crawl',
             'years'      => array(
                 2013,
@@ -239,7 +239,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_on_files_call()
     {
         $listing = Directory_Lister::listing(array(
-            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory' => $this->directory,
             'method'    => 'files',
         ));
 
@@ -255,7 +255,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_on_folders_call()
     {
         $listing = Directory_Lister::listing(array(
-            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory' => $this->directory,
             'method'    => 'folders',
         ));
 
@@ -271,7 +271,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_when_nonexistent_method_parameter_passed()
     {
         $listing = Directory_Lister::listing(array(
-            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory' => $this->directory,
             'method'    => 'php-library',
         ));
 
@@ -287,7 +287,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_to_nonexistent_files_inside_folder()
     {
         $listing = Directory_Lister::listing(array(
-            'directory' => realpath($this->directory) . DIRECTORY_SEPARATOR,
+            'directory' => $this->directory,
             'method'    => 'crawl',
             'types'     => array(
                 'php',
@@ -305,7 +305,7 @@ class Directory_Lister_Test extends TestCase {
     public function test_lister_for_folder_without_depth()
     {
         $listing = Directory_Lister::listing(array(
-            'directory' => realpath($this->directory. 'SQL/') . DIRECTORY_SEPARATOR,
+            'directory' => $this->directory. 'SQL/',
             'method'    => 'crawl',
         ));
 
