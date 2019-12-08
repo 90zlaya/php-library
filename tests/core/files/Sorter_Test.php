@@ -35,7 +35,7 @@ class Sorter_Test extends TestCase {
     * @var array
     */
     protected static $locations = array(
-        'folder'          => 'outsource/',
+        'folder'          => __DIR__ . '/../../../outsource/',
         'subfolder'       => 'sorter/',
         'destination'     => 'destination/',
         'source'          => 'source/',
@@ -52,26 +52,22 @@ class Sorter_Test extends TestCase {
     public static function setUpBeforeClass(): void
     {
         self::$locations['paths']['source'] =
-            realpath(self::$locations['folder']) .
-            DIRECTORY_SEPARATOR .
+            self::$locations['folder'] .
             self::$locations['subfolder'] .
             self::$locations['source'];
 
         self::$locations['paths']['destination'] =
-            realpath(self::$locations['folder']) .
-            DIRECTORY_SEPARATOR .
+            self::$locations['folder'] .
             self::$locations['subfolder'] .
             self::$locations['destination'];
 
         self::$locations['paths']['movable'] =
-            realpath(self::$locations['folder']) .
-            DIRECTORY_SEPARATOR .
+            self::$locations['folder'] .
             self::$locations['subfolder'] .
             self::$locations['movable'];
 
         self::$locations['paths']['movable_testing'] =
-            realpath(self::$locations['folder']) .
-            DIRECTORY_SEPARATOR .
+            self::$locations['folder'] .
             self::$locations['subfolder'] .
             self::$locations['movable_testing'];
 
@@ -115,17 +111,12 @@ class Sorter_Test extends TestCase {
     */
     protected function setUp(): void
     {
-        $this->params['folders']['source'] =
-            realpath('outsource/sorter/source/') . DIRECTORY_SEPARATOR;
+        $sorter_folder = __DIR__ . '/../../../outsource/sorter/';
 
-        $this->params['folders']['destination'] =
-            realpath('outsource/sorter/destination/') . DIRECTORY_SEPARATOR;
-
-        $this->params['folders']['movable'] =
-            realpath('outsource/sorter/movable/') . DIRECTORY_SEPARATOR;
-
-        $this->params['folders']['movable_testing'] =
-            realpath('outsource/sorter/movable_testing/') . DIRECTORY_SEPARATOR;
+        $this->params['folders']['source']          = $sorter_folder . 'source/';
+        $this->params['folders']['destination']     = $sorter_folder . 'destination/';
+        $this->params['folders']['movable']         = $sorter_folder . 'movable/';
+        $this->params['folders']['movable_testing'] = $sorter_folder . 'movable_testing/';
     }
 
     /* ---------------------------------------------------------------------- */

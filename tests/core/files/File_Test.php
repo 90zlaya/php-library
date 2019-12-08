@@ -39,7 +39,7 @@ class File_Test extends TestCase {
     * @var array
     */
     protected static $locations = array(
-        'folder'    => 'outsource/',
+        'folder'    => __DIR__ . '/../../../outsource/',
         'subfolder' => 'file/',
     );
 
@@ -68,8 +68,7 @@ class File_Test extends TestCase {
     */
     public static function setUpBeforeClass(): void
     {
-        $path_to_testing_folder  = realpath(self::$locations['folder']);
-        $path_to_testing_folder .= DIRECTORY_SEPARATOR;
+        $path_to_testing_folder  = self::$locations['folder'];
         $path_to_testing_folder .= self::$locations['subfolder'];
 
         if ( ! file_exists($path_to_testing_folder))
@@ -86,7 +85,7 @@ class File_Test extends TestCase {
     protected function setUp(): void
     {
         $this->file = array(
-            'location' => realpath('outsource/file/') . DIRECTORY_SEPARATOR,
+            'location' => self::$locations['folder'] . self::$locations['subfolder'],
             'name'     => 'file.txt',
         );
 
@@ -197,7 +196,7 @@ class File_Test extends TestCase {
     */
     public function test_write_to_file_method_when_no_file_is_present()
     {
-        unlink(realpath($this->file['location'] . $this->file['name']));
+        unlink($this->file['location'] . $this->file['name']);
 
         $result = File::write_to_file(
             $this->file['location'] . $this->file['name'],
@@ -251,8 +250,7 @@ class File_Test extends TestCase {
     */
     public static function tearDownAfterClass(): void
     {
-        $file_directory  = realpath(self::$locations['folder']);
-        $file_directory .= DIRECTORY_SEPARATOR;
+        $file_directory  = self::$locations['folder'];
         $file_directory .= self::$locations['subfolder'];
         $file_document   = 'file.txt';
 
