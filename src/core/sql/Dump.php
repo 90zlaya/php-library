@@ -240,8 +240,13 @@ class Dump extends Testing {
         $command .= $database;
         $command .= ' --user=';
         $command .= $this->connection['username'];
-        $command .= ' --password=';
-        $command .= $this->connection['password'];
+
+        if ( ! empty($this->connection['password']))
+        {
+            $command .= ' --password=';
+            $command .= $this->connection['password'];
+        }
+
         $command .= ' --host=';
         $command .= $this->connection['host'];
         $command .= ' > ';
