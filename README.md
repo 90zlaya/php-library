@@ -114,6 +114,17 @@ Command for running unit tests will target [phpunit.xml] file which is located i
 composer run phpunit
 ```
 
+# PHP Library League
+
+PHP Library League represents group of developers making everything about PHP Library to be even richer. Since main goal for this library is to stay as lightweight as possible, some of the functionalities for development and testing are created as separate projects in domain of [PHP Library League] and they are:
+
+* Demo: PHP Library demonstrations scripts
+* Shell: PHP Library shell scripts
+* Outsource: PHP Library outsource folder for demonstrations and PHP unit tests
+* Assets: PHP Library official website assets
+
+Every single one of these projects has detailed instructions on how to integrate them inside PHP Library. Pay close attention to match release version of PHP Library with release version of desired project. 
+
 # References
 
 ## Inspiration
@@ -169,6 +180,7 @@ Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
 [PHP_CodeSniffer]: https://github.com/squizlabs/PHP_CodeSniffer
 [designseed.co]: https://designseedco.com/en/
 [xDebug]: https://xdebug.org/
+[PHP Library League]: https://github.com/php-library-league
 [outsource folder]: https://github.com/php-library-league/outsource
 [src folder]: src/
 [tests folder]: tests/
