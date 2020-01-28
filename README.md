@@ -161,7 +161,7 @@ All versions equal to PHP Library v2.0 or higher follow strict semantic versioni
 
 ## Acknowledgements
 
-Copyright © 2017-2019 | [Zlatan Stajic] | Released under the [MIT License]
+Copyright © 2017-2020 | [Zlatan Stajic] | Released under the [MIT License]
 
 [Zlatan Stajic]: https://www.zlatanstajic.com/
 [GitHub]: https://github.com/90zlaya/php-library
