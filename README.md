@@ -122,8 +122,9 @@ PHP Library League represents group of developers making everything about PHP Li
 * Shell: PHP Library shell scripts
 * Outsource: PHP Library outsource folder for demonstrations and PHP unit tests
 * Assets: PHP Library official website assets
+* Logos: Logos for PHP Library and PHP Library League
 
-Every single one of these projects has detailed instructions on how to integrate them inside PHP Library. Pay close attention to match release version of PHP Library with release version of desired project. 
+Every single one of these projects has detailed instructions on how to integrate them inside PHP Library. Pay close attention to match release version of PHP Library with release version of desired project.
 
 # References
 
