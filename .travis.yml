@@ -5,10 +5,7 @@ group: edge
 php:
   - 7.2
   - 7.3
-  - 7.4
 install:
-  - git clone https://github.com/php-library-league/shell.git
-  - bash shell/php-extensions.sh 7.4
   - travis_retry composer install --no-interaction --no-suggest
   - wget -c -nc --retry-connrefused --tries=0 https://github.com/php-coveralls/php-coveralls/releases/download/v2.2.0/php-coveralls.phar -O coveralls.phar
   - chmod +x coveralls.phar
