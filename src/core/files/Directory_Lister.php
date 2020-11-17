@@ -389,8 +389,8 @@ class Directory_Lister {
                                 'file'      => $file,
                                 'extension' => $extension,
                                 'size'      => filesize($path),
-                                'date'      => date(self::$date_format, (int) filemtime($path)),
-                                'time'      => date(self::$time_format, (int) filemtime($path)),
+                                'date'      => date(self::$date_format, intval(filemtime($path))),
+                                'time'      => date(self::$time_format, intval(filemtime($path))),
                             );
 
                             array_push($arr_files, $data);

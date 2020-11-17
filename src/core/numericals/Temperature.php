@@ -50,15 +50,13 @@ class Temperature {
     */
     private static function create_return_values($value, $type)
     {
-        $sign = '';
-
-        $sign .= $value;
+        $sign  = $value;
         $sign .= ' ';
         $sign .= self::$signs[$type];
 
         return array(
             'value'   => $value,
-            'rounded' => (int) round($value),
+            'rounded' => intval(round($value)),
             'signed'  => $sign,
         );
     }

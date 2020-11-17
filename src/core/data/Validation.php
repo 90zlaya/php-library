@@ -95,7 +95,7 @@ class Validation {
     */
     public static function clear_number($variable)
     {
-        return is_numeric($variable) ? (int) $variable : 0;
+        return is_numeric($variable) ? intval($variable) : 0;
     }
 
     /* ---------------------------------------------------------------------- */
