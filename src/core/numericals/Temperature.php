@@ -74,14 +74,8 @@ class Temperature {
     */
     public static function k_to_c($temp)
     {
-        if (is_numeric($temp))
-        {
-            $value = ($temp - self::$absolute_zero);
-
-            return self::create_return_values($value, 'celsius');
-        }
-
-        return FALSE;
+        $value = (floatval($temp) - self::$absolute_zero);
+        return self::create_return_values($value, 'celsius');
     }
 
     /* ---------------------------------------------------------------------- */
@@ -95,14 +89,8 @@ class Temperature {
     */
     public static function k_to_f($temp)
     {
-        if (is_numeric($temp))
-        {
-            $value = (($temp - self::$absolute_zero) * (9 / 5)) + 32;
-
-            return self::create_return_values($value, 'fahrenheit');
-        }
-
-        return FALSE;
+        $value = ((floatval($temp) - self::$absolute_zero) * (9 / 5)) + 32;
+        return self::create_return_values($value, 'fahrenheit');
     }
 
     /* ---------------------------------------------------------------------- */
@@ -116,14 +104,8 @@ class Temperature {
     */
     public static function f_to_c($temp)
     {
-        if (is_numeric($temp))
-        {
-            $value = ($temp - 32) * (5 / 9);
-
-            return self::create_return_values($value, 'celsius');
-        }
-
-        return FALSE;
+        $value = (floatval($temp) - 32) * (5 / 9);
+        return self::create_return_values($value, 'celsius');
     }
 
     /* ---------------------------------------------------------------------- */
@@ -137,14 +119,8 @@ class Temperature {
     */
     public static function f_to_k($temp)
     {
-        if (is_numeric($temp))
-        {
-            $value = ($temp + 459.67) * (5 / 9);
-
-            return self::create_return_values($value, 'kelvin');
-        }
-
-        return FALSE;
+        $value = (floatval($temp) + 459.67) * (5 / 9);
+        return self::create_return_values($value, 'kelvin');
     }
 
     /* ---------------------------------------------------------------------- */
@@ -158,14 +134,8 @@ class Temperature {
     */
     public static function c_to_f($temp)
     {
-        if (is_numeric($temp))
-        {
-            $value = ($temp * (9 / 5)) + 32;
-
-            return self::create_return_values($value, 'fahrenheit');
-        }
-
-        return FALSE;
+        $value = (floatval($temp) * (9 / 5)) + 32;
+        return self::create_return_values($value, 'fahrenheit');
     }
 
     /* ---------------------------------------------------------------------- */
@@ -179,14 +149,8 @@ class Temperature {
     */
     public static function c_to_k($temp)
     {
-        if (is_numeric($temp))
-        {
-            $value = $temp + self::$absolute_zero;
-
-            return self::create_return_values($value, 'kelvin');
-        }
-
-        return FALSE;
+        $value = floatval($temp) + self::$absolute_zero;
+        return self::create_return_values($value, 'kelvin');
     }
 
     /* ---------------------------------------------------------------------- */

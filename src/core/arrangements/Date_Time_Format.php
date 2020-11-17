@@ -21,7 +21,7 @@ class Date_Time_Format {
     /**
     * Date and time types
     *
-    * @var array
+    * @var array Types
     */
     public static $types = array(
         'user'       => array(
@@ -254,22 +254,17 @@ class Date_Time_Format {
     */
     public static function minutes_to_hours($time=0, $format='%02d:%02d')
     {
-        if (is_int($time))
+        if ( intval($time) > 0)
         {
-            if ($time > 0)
-            {
-                $hours   = floor($time / 60);
-                $minutes = ($time % 60);
+            $hours   = floor($time / 60);
+            $minutes = ($time % 60);
 
-                return sprintf($format, $hours, $minutes);
-            }
-            else
-            {
-                return '00:00';
-            }
+            return sprintf($format, $hours, $minutes);
         }
-
-        return FALSE;
+        else
+        {
+            return '00:00';
+        }
     }
 
     /* ---------------------------------------------------------------------- */

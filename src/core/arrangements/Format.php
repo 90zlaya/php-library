@@ -207,7 +207,7 @@ class Format {
 
             $anchor  = '<a href="';
             $anchor .= $location_final;
-            $anchor .= '" target="_blank">';
+            $anchor .= '" target="_blank" rel="noopener">';
             $anchor .= $location;
             $anchor .= '</a>';
 
@@ -242,7 +242,7 @@ class Format {
                 return '<a href="' .
                     self::$ip['locator'] .
                     $ip .
-                    '" target="_blank">' .
+                    '" target="_blank" rel="noopener">' .
                     $ip .
                     '</a>';
             }

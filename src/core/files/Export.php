@@ -126,7 +126,7 @@ class Export {
     *
     * @param array $params
     *
-    * @var void
+    * @return void
     */
     private static function set_properties($params)
     {

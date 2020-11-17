@@ -266,7 +266,7 @@ class Website_Test extends TestCase {
         $string .= $this->website_data['made'];
         $string .= ' | ';
         $string .= '<a href="https://www.zlatanstajic.com/" ';
-        $string .= 'target="_blank">Zlatan Stajić</a>';
+        $string .= 'target="_blank" rel="noopener">Zlatan Stajić</a>';
 
         $result = $this->website_object->signature(TRUE);
 
@@ -286,7 +286,7 @@ class Website_Test extends TestCase {
         $string .= date('Y');
         $string .= ' | ';
         $string .= '<a href="https://www.zlatanstajic.com/" ';
-        $string .= 'target="_blank">Zlatan Stajić</a>';
+        $string .= 'target="_blank" rel="noopener">Zlatan Stajić</a>';
 
         $result = $this->website_object->signature();
 

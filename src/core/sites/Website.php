@@ -599,7 +599,7 @@ class Website extends Testing {
             $since .
             ' | <a href="' .
             $this->creator['website'] .
-            '" target="_blank">' .
+            '" target="_blank" rel="noopener">' .
             $this->creator['name'] .
             '</a>' .
             $licence;

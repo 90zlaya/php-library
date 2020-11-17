@@ -120,7 +120,7 @@ class Date_Time_Format_Test extends TestCase {
 
         $hours = Date_Time_Format::minutes_to_hours('nothing');
 
-        $this->assertFalse($hours);
+        $this->assertEquals('00:00', $hours);
     }
 
     /* ---------------------------------------------------------------------- */

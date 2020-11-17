@@ -52,7 +52,7 @@ class Temperature_Test extends TestCase {
 
         $celsius = Temperature::k_to_c($this->non_numeric_value);
 
-        $this->assertFalse($celsius);
+        $this->assertIsArray($celsius);
 
         $fahrenheit = Temperature::k_to_f($kelvin_value);
 
@@ -68,7 +68,7 @@ class Temperature_Test extends TestCase {
 
         $fahrenheit = Temperature::k_to_f($this->non_numeric_value);
 
-        $this->assertFalse($fahrenheit);
+        $this->assertIsArray($fahrenheit);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -97,7 +97,7 @@ class Temperature_Test extends TestCase {
 
         $celsius = Temperature::f_to_c($this->non_numeric_value);
 
-        $this->assertFalse($celsius);
+        $this->assertIsArray($celsius);
 
         $kelvin = Temperature::f_to_k($fahrenheit_value);
 
@@ -113,7 +113,7 @@ class Temperature_Test extends TestCase {
 
         $kelvin = Temperature::f_to_k($this->non_numeric_value);
 
-        $this->assertFalse($kelvin);
+        $this->assertIsArray($kelvin);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -142,7 +142,7 @@ class Temperature_Test extends TestCase {
 
         $fahrenheit = Temperature::c_to_f($this->non_numeric_value);
 
-        $this->assertFalse($fahrenheit);
+        $this->assertIsArray($fahrenheit);
 
         $kelvin = Temperature::c_to_k($celsius_value);
 
@@ -158,7 +158,7 @@ class Temperature_Test extends TestCase {
 
         $kelvin = Temperature::c_to_k($this->non_numeric_value);
 
-        $this->assertFalse($kelvin);
+        $this->assertIsArray($kelvin);
     }
 
     /* ---------------------------------------------------------------------- */

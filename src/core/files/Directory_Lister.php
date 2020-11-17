@@ -247,7 +247,7 @@ class Directory_Lister {
         $tag .= '<a href="';
         $tag .= self::$open_inside_browser;
         $tag .= $path;
-        $tag .= '" target="_blank">';
+        $tag .= '" target="_blank" rel="noopener">';
         $tag .= $file;
         $tag .= '</a>';
 

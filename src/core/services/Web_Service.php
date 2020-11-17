@@ -134,7 +134,7 @@ class Web_Service extends Testing {
     /**
     * Checks if everything is ready for cURL initalisation
     *
-    * @var bool
+    * @return bool
     */
     private function is_ready_for_initialisation()
     {

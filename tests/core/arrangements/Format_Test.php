@@ -81,7 +81,7 @@ class Format_Test extends TestCase {
     public function test_website_method()
     {
         $expected  = '<a href="http://www.zlatanstajic.com"';
-        $expected .= ' target="_blank">zlatanstajic.com</a>';
+        $expected .= ' target="_blank" rel="noopener">zlatanstajic.com</a>';
 
         $result = Format::website('zlatanstajic.com');
 
@@ -92,7 +92,7 @@ class Format_Test extends TestCase {
         $this->assertEquals($expected, $result['anchor']);
 
         $expected  = '<a href="https://www.zlatanstajic.com"';
-        $expected .= ' target="_blank">zlatanstajic.com</a>';
+        $expected .= ' target="_blank" rel="noopener">zlatanstajic.com</a>';
 
         $result = Format::website('zlatanstajic.com', TRUE);
 
@@ -127,7 +127,7 @@ class Format_Test extends TestCase {
     public function test_ip_method()
     {
         $expected  = '<a href="http://www.geoplugin.net/';
-        $expected .= 'php.gp?ip=172.168.150.15" target="_blank">';
+        $expected .= 'php.gp?ip=172.168.150.15" target="_blank" rel="noopener">';
         $expected .= '172.168.150.15</a>';
 
         $result = Format::ip('172.168.150.15');
