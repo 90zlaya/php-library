@@ -96,7 +96,7 @@ class File {
 
                 if ( ! empty($file))
                 {
-                    $file_location = (string) $file_location;
+                    $file_location = strval($file_location);
                     $file_size     = intval(filesize($file_location));
 
                     $old_data = fread($file, $file_size);

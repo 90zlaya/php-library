@@ -390,7 +390,7 @@ class Format {
     */
     public static function price_format($price, $decimal=2)
     {
-        if (stripos( (string) $price, ',') === FALSE)
+        if (stripos(strval($price), ',') === FALSE)
         {
             $price_format = number_format($price, $decimal);
             $price_format = str_replace('.', '?', $price_format);

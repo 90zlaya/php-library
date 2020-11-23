@@ -122,7 +122,7 @@ class Password {
             return substr(
                 $new_password,
                 0,
-                $size_optimum - strlen( (string) $number)
+                $size_optimum - strlen(strval($number))
             ) . $number;
         }
         else

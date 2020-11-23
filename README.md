@@ -10,7 +10,7 @@ Project is open-sourced under MIT licence on [GitHub](https://github.com/90zlaya
 [![Travis Build Status](https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=1)](https://travis-ci.com/90zlaya/php-library)
 [![Coverage Status](https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=1)](https://coveralls.io/github/90zlaya/php-library)
 
-# Organisation
+# Organization
 Every native class call should have following type of namespace call in front.
 
 ```php
@@ -118,11 +118,11 @@ composer run phpunit
 
 PHP Library League represents group of developers making everything about PHP Library to be even richer. Since main goal for this library is to stay as lightweight as possible, some of the functionalities for development and testing are created as separate projects in domain of [PHP Library League](https://github.com/php-library-league) and they are:
 
-* Demo: PHP Library demonstrations scripts
-* Shell: PHP Library shell scripts
-* Outsource: PHP Library outsource folder for demonstrations and PHP unit tests
-* Assets: PHP Library official website assets
-* Logos: Logos for PHP Library and PHP Library League
+* [Demo](https://github.com/php-library-league/demo): PHP Library demonstrations scripts
+* [Shell](https://github.com/php-library-league/shell): PHP Library shell scripts
+* [Outsource](https://github.com/php-library-league/outsource): PHP Library outsource folder for demonstrations and PHP unit tests
+* [Assets](https://github.com/php-library-league/assets): PHP Library official website assets
+* [Logos](https://github.com/php-library-league/logos): Logos for PHP Library and PHP Library League
 
 Every single one of these projects has detailed instructions on how to integrate them inside PHP Library. Pay close attention to match release version of PHP Library with release version of desired project.
 
@@ -142,11 +142,11 @@ This library is powering following Websites/Web Applications:
 
 ### [Zlatan Stajić]
 
-[![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg?clear_cache=1)][Zlatan Stajić]
+[![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=1)][Zlatan Stajić]
 
 ### [Space Prospection]
 
-[![Homepage of Space Prospection](https://link.zlatanstajic.com/images/portfolio/small/space-prospection.jpg?clear_cache=1)][Space Prospection]
+[![Homepage of Space Prospection](https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=1)][Space Prospection]
 
 ## API documentation
 

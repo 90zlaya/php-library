@@ -311,7 +311,7 @@ class Directory_Lister {
 
         foreach ($files as $folder)
         {
-            $folder_first_character = substr( (string) $folder, 0, 1);
+            $folder_first_character = substr(strval($folder), 0, 1);
 
             if ( ! in_array($folder_first_character, self::$forbidden_characters))
             {
@@ -363,7 +363,7 @@ class Directory_Lister {
             {
                 if ($counter > 2)
                 {
-                    $file = (string) $file;
+                    $file = strval($file);
 
                     if (stripos($file, '.'))
                     {

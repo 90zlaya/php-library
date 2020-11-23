@@ -27,7 +27,7 @@ class Validation {
     */
     public static function year($year)
     {
-        return is_numeric($year) && strlen( (string) $year) === strlen(date('Y'));
+        return is_numeric($year) && strlen(strval($year)) === strlen(date('Y'));
     }
 
     /* ---------------------------------------------------------------------- */
@@ -152,7 +152,7 @@ class Validation {
             $string_lowered = str_ireplace('Đ', 'dj', $string_lowered);
 
             $string_replaced = preg_replace('/_[a-zA-Z0-9]+(\.)/', '.', $string_lowered, 1);
-            $string_trimmed  = trim( (string) $string_replaced);
+            $string_trimmed  = trim(strval($string_replaced));
 
             $string_trimmed = str_ireplace(" ", "_", $string_trimmed);
             $string_trimmed = str_ireplace("__", "_", $string_trimmed);

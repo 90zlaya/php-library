@@ -151,7 +151,7 @@ class Sorter extends Testing {
             {
                 if ($counter > 2)
                 {
-                    $file = (string) $file;
+                    $file = strval($file);
 
                     if (stripos($file, '.'))
                     {
@@ -368,7 +368,7 @@ class Sorter extends Testing {
     */
     private function folder_name($i)
     {
-        switch (strlen( (string) $i))
+        switch (strlen(strval($i)))
         {
             case 1:
             {
