@@ -1,4 +1,4 @@
-[![PHP Library Logo](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=2)](https://php-library.zlatanstajic.com)
+[![PHP Library Logo](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=3)](https://php-library.zlatanstajic.com)
 
 # Description
 
@@ -171,9 +171,9 @@ Copyright © 2017-2020 | [Zlatan Stajić] | Released under the [MIT License](htt
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
 [Coverals]:https://coveralls.io/github/90zlaya/php-library
 
-[Latest Stable Version]: https://poser.pugx.org/90zlaya/php-library/v/stable?clear_cache=2
-[Total Downloads]: https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=2
-[Travis Build Status]: https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=2
-[Coverage Status]: https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=2
-[Homepage of Space Prospection]: https://link.zlatanstajic.com/images/portfolio/small/space-prospection.jpg?clear_cache=2
-[Homepage of Space Prospection]: https://link.zlatanstajic.com/images/portfolio/small/space-prospection.jpg?clear_cache=2
+[Latest Stable Version]: https://poser.pugx.org/90zlaya/php-library/v/stable?clear_cache=3
+[Total Downloads]: https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=3
+[Travis Build Status]: https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=3
+[Coverage Status]: https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=3
+[Homepage of zlatanstajic.com]: https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=3
+[Homepage of Space Prospection]: https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=3
