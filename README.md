@@ -142,11 +142,11 @@ This library is powering following Websites/Web Applications:
 
 ### [Zlatan Stajić]
 
-![Homepage of zlatanstajic.com]
+<img src="https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=3" alt="Homepage of zlatanstajic.com" width="450"/>
 
 ### [Space Prospection]
 
-![Homepage of Space Prospection]
+<img src="https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=3" alt="Space Prospection" width="450"/>
 
 ## API documentation
 
@@ -175,5 +175,3 @@ Copyright © 2017-2020 | [Zlatan Stajić] | Released under the [MIT License](htt
 [Total Downloads]: https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=3
 [Travis Build Status]: https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=3
 [Coverage Status]: https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=3
-[Homepage of zlatanstajic.com]: https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=3
-[Homepage of Space Prospection]: https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=3
