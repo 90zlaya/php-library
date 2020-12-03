@@ -5,10 +5,10 @@
 PHP Library is a set of classes that contain the most useful attributes and methods that facilitate the development of Web applications.
 Project is open-sourced under MIT licence on [GitHub](https://github.com/90zlaya/php-library). Available over Composer and [Packagist].
 
-[![Latest Stable Version](https://poser.pugx.org/90zlaya/php-library/v/stable?clear_cache=2)][latest release]
-[![Total Downloads](https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=2)][Packagist]
-[![Travis Build Status](https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=2)](https://travis-ci.com/90zlaya/php-library)
-[![Coverage Status](https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=2)](https://coveralls.io/github/90zlaya/php-library)
+[![Latest Stable Version]][latest release]
+[![Total Downloads]][Packagist]
+[![Travis Build Status]][Travis-CI]
+[![Coverage Status]][Coverals]
 
 # Organization
 Every native class call should have following type of namespace call in front.
@@ -142,11 +142,11 @@ This library is powering following Websites/Web Applications:
 
 ### [Zlatan Stajić]
 
-[![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=2)][Zlatan Stajić]
+![Homepage of zlatanstajic.com]
 
 ### [Space Prospection]
 
-[![Homepage of Space Prospection](https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=2)][Space Prospection]
+![Homepage of Space Prospection]
 
 ## API documentation
 
@@ -167,4 +167,13 @@ Copyright © 2017-2020 | [Zlatan Stajić] | Released under the [MIT License](htt
 [Zlatan Stajić]: https://www.zlatanstajic.com/
 [Space Prospection]: https://space-prospection.zlatanstajic.com
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
+[Travis-CI]: https://travis-ci.org/90zlaya/php-library
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
+[Coverals]:https://coveralls.io/github/90zlaya/php-library
+
+[Latest Stable Version]: https://poser.pugx.org/90zlaya/php-library/v/stable?clear_cache=2
+[Total Downloads]: https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=2
+[Travis Build Status]: https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=2
+[Coverage Status]: https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=2
+[Homepage of Space Prospection]: https://link.zlatanstajic.com/images/portfolio/small/space-prospection.jpg?clear_cache=2
+[Homepage of Space Prospection]: https://link.zlatanstajic.com/images/portfolio/small/space-prospection.jpg?clear_cache=2
