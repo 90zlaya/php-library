@@ -15,7 +15,7 @@
       "name": "Zlatan Stajic",
       "email": "contact@zlatanstajic.com",
       "homepage": "https://www.zlatanstajic.com",
-      "role": "Developer"
+      "role": "Author & Main Developer"
     }
   ],
   "autoload": {
@@ -36,6 +36,11 @@
     "phpcs": "vendor/bin/phpcs src tests --standard='ruleset.xml'",
     "phpstan": "vendor/bin/phpstan analyse src --level max",
     "phpunit": "vendor/bin/phpunit"
+  },
+  "config": {
+      "sort-packages": true,
+      "optimize-autoloader": true,
+      "vendor-dir": "vendor"
   },
   "minimum-stability": "stable",
   "require": {

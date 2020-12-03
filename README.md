@@ -1,14 +1,14 @@
-[![PHP Library Logo](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=1)](https://php-library.zlatanstajic.com)
+[![PHP Library Logo](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=2)](https://php-library.zlatanstajic.com)
 
 # Description
 
 PHP Library is a set of classes that contain the most useful attributes and methods that facilitate the development of Web applications.
 Project is open-sourced under MIT licence on [GitHub](https://github.com/90zlaya/php-library). Available over Composer and [Packagist].
 
-[![Latest Stable Version](https://poser.pugx.org/90zlaya/php-library/v/stable?clear_cache=1)][latest release]
-[![Total Downloads](https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=1)][Packagist]
-[![Travis Build Status](https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=1)](https://travis-ci.com/90zlaya/php-library)
-[![Coverage Status](https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=1)](https://coveralls.io/github/90zlaya/php-library)
+[![Latest Stable Version](https://poser.pugx.org/90zlaya/php-library/v/stable?clear_cache=2)][latest release]
+[![Total Downloads](https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=2)][Packagist]
+[![Travis Build Status](https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=2)](https://travis-ci.com/90zlaya/php-library)
+[![Coverage Status](https://coveralls.io/repos/github/90zlaya/php-library/badge.svg?branch=master&clear_cache=2)](https://coveralls.io/github/90zlaya/php-library)
 
 # Organization
 Every native class call should have following type of namespace call in front.
@@ -142,11 +142,11 @@ This library is powering following Websites/Web Applications:
 
 ### [Zlatan Stajić]
 
-[![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=1)][Zlatan Stajić]
+[![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=2)][Zlatan Stajić]
 
 ### [Space Prospection]
 
-[![Homepage of Space Prospection](https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=1)][Space Prospection]
+[![Homepage of Space Prospection](https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=2)][Space Prospection]
 
 ## API documentation
 
