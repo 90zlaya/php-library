@@ -142,11 +142,11 @@ This library is powering following Websites/Web Applications:
 
 ### [Zlatan Stajić]
 
-<img src="https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=3" alt="Homepage of zlatanstajic.com" width="450"/>
+<img src="https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=3" alt="Homepage of zlatanstajic.com" width="350"/>
 
 ### [Space Prospection]
 
-<img src="https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=3" alt="Space Prospection" width="450"/>
+<img src="https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=3" alt="Space Prospection" width="350"/>
 
 ## API documentation
 
