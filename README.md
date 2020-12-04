@@ -167,7 +167,7 @@ Copyright © 2017-2020 | [Zlatan Stajić] | Released under the [MIT License](htt
 [Zlatan Stajić]: https://www.zlatanstajic.com/
 [Space Prospection]: https://space-prospection.zlatanstajic.com
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
-[Travis-CI]: https://travis-ci.org/90zlaya/php-library
+[Travis-CI]: https://travis-ci.com/90zlaya/php-library
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
 [Coverals]:https://coveralls.io/github/90zlaya/php-library
 
