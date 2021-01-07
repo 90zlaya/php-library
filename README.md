@@ -36,7 +36,7 @@ PHP  | Production | Development
 ---- | ---------- | -----------
 7.0  | Yes        | No
 7.1  | Yes        | No
-7.2  | Yes        | Yes
+7.2  | Yes        | No
 7.3  | Yes        | Yes
 7.4  | Yes        | Yes
 

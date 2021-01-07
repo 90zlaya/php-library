@@ -3,6 +3,7 @@
 .phpunit.result.cache
 composer.lock
 phpDocumentor.phar
+.phpdoc/
 api/
 assets/
 coverage/
