@@ -6,6 +6,7 @@ phpDocumentor.phar
 .phpdoc/
 api/
 assets/
+build/
 coverage/
 demo/
 deploy/

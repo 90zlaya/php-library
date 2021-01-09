@@ -33,9 +33,9 @@
     }
   },
   "scripts": {
-    "phpcs": "vendor/bin/phpcs src tests --standard='ruleset.xml'",
-    "phpstan": "vendor/bin/phpstan analyse src --level max",
-    "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit"
+    "phpcs": "vendor/bin/phpcs src/ tests/ --standard='phpcs.xml'",
+    "phpstan": "vendor/bin/phpstan analyse src/ --level max",
+    "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover build/logs/clover.xml"
   },
   "config": {
       "sort-packages": true,

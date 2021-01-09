@@ -75,7 +75,7 @@ PHP Library has it's own coding standard which deviates from PSR-2 standard with
 composer run phpcs
 ```
 
-If you want to find out more about specific rules, open [ruleset.xml](ruleset.xml) file which is located in root directory.
+If you want to find out more about specific rules, open [phpcs.xml](phpcs.xml) file which is located in root directory.
 
 ## Bug analysis
 
