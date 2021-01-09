@@ -1,6 +1,6 @@
 [![PHP Library Logo](https://php-library.zlatanstajic.com/assets/img/phplibrary-logo-blue.png?clear_cache=3)](https://php-library.zlatanstajic.com)
 
-# Description
+## Description
 
 PHP Library is a set of classes that contain the most useful attributes and methods that facilitate the development of Web applications.
 Project is open-sourced under MIT licence on [GitHub](https://github.com/90zlaya/php-library). Available over Composer and [Packagist].
@@ -10,27 +10,28 @@ Project is open-sourced under MIT licence on [GitHub](https://github.com/90zlaya
 [![Travis Build Status]][Travis-CI]
 [![Coverage Status]][Coverals]
 
-# Organization
-Every native class call should have following type of namespace call in front.
+## Organization
 
-```php
-// Example of namespace structure
-use PHP_Library\Class_Subpackage\Class_Namespace\Class_Name;
-```
+### Files and Folders
 
-* All classes are inside [src folder](src/).
-* All unit tests are inside [tests folder](tests/).
+* All source files are inside [src](src/) folder.
+* All unit tests are inside [tests](tests/) folder.
 
-Autoload file is created by Composer and it's located inside vendor folder.
+### PHP Library League
 
-```php
-// How to access PHP Library classes
-include_once 'vendor/autoload.php';
-```
+[PHP Library League](https://github.com/php-library-league) represents group of developers making everything about PHP Library to be even richer. Since main goal for this library is to stay as lightweight as possible, some of the functionalities for development and testing are created as separate projects.
 
-# Installation
+* [Demo](https://github.com/php-library-league/demo): PHP Library demonstrations scripts
+* [Shell](https://github.com/php-library-league/shell): PHP Library shell scripts
+* [Outsource](https://github.com/php-library-league/outsource): PHP Library outsource folder
+* [Assets](https://github.com/php-library-league/assets): PHP Library official website assets
+* [Logos](https://github.com/php-library-league/logos): PHP Library and PHP Library League logos
 
-There are two ways of using PHP Library. First one is to install it inside another project, let's say framework like CodeIgniter or Laravel. Second one is to install it for development. Either way, you need PHP 7 and Composer to do it. Here's detailed list of PHP versions supported.
+Every single one of these projects has detailed instructions on how to integrate them inside PHP Library. Pay close attention to match release version of PHP Library with release version of desired project.
+
+## Installation
+
+There are two ways of using PHP Library. First one is to install it inside another project, let's say framework like [CodeIgniter](https://www.codeigniter.com) or [Laravel](https://laravel.com). Second one is to install it for development. Here's detailed list of PHP versions supported.
 
 PHP  | Production | Development
 ---- | ---------- | -----------
@@ -40,13 +41,14 @@ PHP  | Production | Development
 7.3  | Yes        | Yes
 7.4  | Yes        | Yes
 
-**Production** column shows on which versions PHP Library will work. **Development** column shows on which versions PHP Library is guaranteed to work and could be developed.
+*Production* column shows on which versions PHP Library will work. \
+*Development* column shows on which versions PHP Library will work for development.
 
-## Manual
+### Manual
 
 If you want the stable version, get the [latest release] from the releases page.
 
-## Composer
+### Composer
 
 Install stable library version by using standard commands.
 
@@ -55,122 +57,72 @@ Install stable library version by using standard commands.
 composer require 90zlaya/php-library
 ```
 
-## GitHub
+### GitHub
 
-If you want to develop this library and use GitHub instead of manual download, just clone repository to your hard drive.
+If you want to develop this library and use GitHub instead of manual download, just clone repository to your machine.
 
 ```bash
 # Clone repository via Git
 git clone https://github.com/90zlaya/php-library.git
 ```
 
-# Development
+## Development
 
-## Coding standard
+### Coding Standard
 
-PHP Library has it's own coding standard which deviates from PSR-2 standard with no much exceptions. To contribute to development of this project, you must follow this standard. [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) does this job for you in development versions of PHP Library.
+PHP Library has it's own coding standard inspired by CodeIgniter. To contribute to development of this project, you must follow this standard. [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) checks those rules for you in development versions of PHP Library.
 
 ```bash
-# Run coding standard for all PHP files in library
+# Run coding standard check
 composer run phpcs
 ```
 
-If you want to find out more about specific rules, open [phpcs.xml](phpcs.xml) file which is located in root directory.
+If you want to find out more about specific rules, open [phpcs.xml](phpcs.xml) file.
 
-## Bug analysis
+### Static Analysis
 
-This library has been tested with [PHP Stan](https://github.com/phpstan/phpstan) and approved as bug-free for all classes. It's recommended to run following command to check for buggs in project.
+PHP Library has been tested with [PHP Stan](https://github.com/phpstan/phpstan) and approved as bug-free. It's recommended to run following command to check for bugs in project.
 
 ```bash
-# Run bug analysis
+# Run static analysis
 composer run phpstan
 ```
 
-## Unit testing
+If you want to find out more about specific rules, open [phpstan.neon](phpstan.neon) file.
 
-All tests are covered with PHPUnit framework and stored inside tests folder. They need [outsource folder](https://github.com/php-library-league/outsource) to perform specific tests, which you have to download and unzip in PHP Library's root directory.
+### Unit Testing
 
-```bash
-# Download outsource repository
-wget https://github.com/php-library-league/outsource/archive/1.1.0.zip
-
-# Unzip and remove downloaded file
-unzip 1.1.0.zip && rm -rf 1.1.0.zip
-
-# Rename folder
-mv outsource-1.1.0/ outsource/
-
-# Unzip archive
-unzip outsource/archive.zip -d outsource/
-
-# Give full permissions to all outsource folders and files
-chmod -R 0777 outsource/
-```
-
-Command for running unit tests will target [phpunit.xml](phpunit.xml) file which is located inside root directory.
+PHP Library is covered with [PHPUnit](https://github.com/sebastianbergmann/phpunit) tests. They require [outsource folder](https://github.com/php-library-league/outsource) to perform specific tests. 
 
 ```bash
 # Run PHPUnit tests
 composer run phpunit
 ```
 
-# PHP Library League
+If you want to find out more about specific rules, open [phpunit.xml](phpunit.xml) file.
 
-PHP Library League represents group of developers making everything about PHP Library to be even richer. Since main goal for this library is to stay as lightweight as possible, some of the functionalities for development and testing are created as separate projects in domain of [PHP Library League](https://github.com/php-library-league) and they are:
+## References
 
-* [Demo](https://github.com/php-library-league/demo): PHP Library demonstrations scripts
-* [Shell](https://github.com/php-library-league/shell): PHP Library shell scripts
-* [Outsource](https://github.com/php-library-league/outsource): PHP Library outsource folder for demonstrations and PHP unit tests
-* [Assets](https://github.com/php-library-league/assets): PHP Library official website assets
-* [Logos](https://github.com/php-library-league/logos): Logos for PHP Library and PHP Library League
-
-Every single one of these projects has detailed instructions on how to integrate them inside PHP Library. Pay close attention to match release version of PHP Library with release version of desired project.
-
-# References
-
-## Inspiration
+### Inspiration
 
 Idea behind creation of this repository is making everyday Web Development process faster and easier.
 
-## Logo
+### Logo
 
-Official PHP Library logo is designed by [designseed.co](https://designseedco.com/en/) - an unlimited custom graphic design service.
+Official PHP Library logo is designed by [designseed.co](https://designseedco.com/en) - an unlimited custom graphic design service.
 
-## Customers
+### API Documentation
 
-This library is powering following Websites/Web Applications:
+Official PHP Library API documentation has been documented by [phpDocumentor](https://www.phpdoc.org) and could be studied online on [api](https://php-library.zlatanstajic.com/api) website.
 
-### [Zlatan Stajić]
+### Code Coverage
 
-<img src="https://link.zlatanstajic.com/images/portfolio/zlatanstajic.jpg?clear_cache=3" alt="Homepage of zlatanstajic.com" width="350"/>
+Official PHP Library code coverage report has been composed by [xDebug](https://xdebug.org) and could be studied online on [coverage](https://php-library.zlatanstajic.com/coverage) website.
 
-### [Space Prospection]
-
-<img src="https://link.zlatanstajic.com/images/portfolio/space-prospection.jpg?clear_cache=3" alt="Space Prospection" width="350"/>
-
-## API documentation
-
-Official PHP Library API documentation has been documented by [phpDocumentor](https://www.phpdoc.org/) and could be studied online on [API](https://php-library.zlatanstajic.com/api/).
-
-## Coverage
-
-Official PHP Library code coverage report has been composed by [xDebug](https://xdebug.org/) and could be studied online on [coverage](https://php-library.zlatanstajic.com/coverage/).
-
-## Migration
-
-All versions equal to PHP Library v2.0 or higher follow strict semantic versioning rules. All tests are guaranteed to pass for minor and patch versions, but major version change will make application crash.
-
-## Acknowledgements
-
-Copyright © 2017-2020 | [Zlatan Stajić] | Released under the [MIT License](http://www.opensource.org/licenses/mit-license.php)
-
-[Zlatan Stajić]: https://www.zlatanstajic.com/
-[Space Prospection]: https://space-prospection.zlatanstajic.com
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
 [Travis-CI]: https://travis-ci.com/90zlaya/php-library
 [latest release]: https://github.com/90zlaya/php-library/releases/latest
 [Coverals]:https://coveralls.io/github/90zlaya/php-library
-
 [Latest Stable Version]: https://poser.pugx.org/90zlaya/php-library/v/stable?clear_cache=3
 [Total Downloads]: https://poser.pugx.org/90zlaya/php-library/downloads?clear_cache=3
 [Travis Build Status]: https://img.shields.io/travis/90zlaya/php-library.svg?clear_cache=3
