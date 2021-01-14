@@ -101,23 +101,9 @@ composer run phpunit
 
 If you want to find out more about specific rules, open [phpunit.xml](phpunit.xml) file.
 
-# References
-
-## Inspiration
-
-Idea behind creation of this repository is making everyday Web Development process faster and easier.
-
-## Logo
+# Logo
 
 Official PHP Library logo is designed by [designseed.co](https://designseedco.com/en) - an unlimited custom graphic design service.
-
-## API Documentation
-
-Official PHP Library API documentation has been documented by [phpDocumentor](https://www.phpdoc.org) and could be studied online on [api](https://php-library.zlatanstajic.com/api) website.
-
-## Code Coverage
-
-Official PHP Library code coverage report has been composed by [xDebug](https://xdebug.org) and could be studied online on [coverage](https://php-library.zlatanstajic.com/coverage) website.
 
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
 [Travis-CI]: https://travis-ci.com/90zlaya/php-library
