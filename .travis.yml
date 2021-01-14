@@ -4,6 +4,7 @@ dist: trusty
 group: edge
 php:
   - 7.3
+  - 7.4
 install:
   - travis_retry composer install --no-interaction --no-suggest
   - wget -c -nc --retry-connrefused --tries=0 https://github.com/php-coveralls/php-coveralls/releases/download/v2.2.0/php-coveralls.phar -O coveralls.phar
