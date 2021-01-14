@@ -6,7 +6,9 @@ php:
   - 7.3
   - 7.4
 install:
-  - travis_retry composer install --no-interaction --no-suggest
+  - git clone https://github.com/php-library-league/shell.git
+  - bash shell/php-extensions.sh 7.4
+  - travis_retry composer install --no-interaction
   - wget -c -nc --retry-connrefused --tries=0 https://github.com/php-coveralls/php-coveralls/releases/download/v2.2.0/php-coveralls.phar -O coveralls.phar
   - chmod +x coveralls.phar
   - php coveralls.phar --version
@@ -14,7 +16,6 @@ before_script:
   - sudo mkdir -p /var/run/mysqld
   - sudo mkdir -p build/logs
   - sudo chmod -R 0777 build/logs
-  - git clone https://github.com/php-library-league/shell.git
   - ls -al
 script:
   - bash shell/outsource-install.sh
