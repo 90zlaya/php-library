@@ -44,6 +44,7 @@
   },
   "minimum-stability": "stable",
   "require": {
+    "php": "7.*",
     "phpoffice/phpspreadsheet": "1.16.*"
   },
   "require-dev": {
