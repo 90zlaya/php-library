@@ -122,42 +122,6 @@ Logo
 
 Official PHP Library logo is designed by [designseed.co] - an unlimited custom graphic design service.
 
-Customers
-----------------
-
-This library is powering following Websites/Web Applications:
-
-* [zlatanstajic.com]
-
-![Homepage of zlatanstajic.com](https://link.zlatanstajic.com/images/portfolio/small/zlatanstajic.jpg?clear_cache=1)
-
-* [cms.dis.rs]
-
-![Login page of cms.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/cms.dis.jpg?clear_cache=1)
-
-* [kupci.dis.rs]
-
-![Login page of kupci.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/kupci.dis.jpg?clear_cache=1)
-
-* [services.dis.rs]
-
-![Login page of kupci.dis.rs](https://link.zlatanstajic.com/images/portfolio/small/services.dis.jpg?clear_cache=1)
-
-API documentation
-----------------
-
-Official PHP Library API documentation has been documented by [phpDocumentor] and could be studied [online].
-
-Migration
-----------------
-
-When you update library version from older to newer, it's recommended to consult changelog file, which is located under the name [changelog.md] in root directory.
-
-Acknowledgements
-----------------
-
-Copyright © 2017-2018 | [Zlatan Stajic] | Released under the [MIT License]
-
 [Zlatan Stajic]: https://www.zlatanstajic.com/
 [GitHub]: https://github.com/90zlaya/php-library
 [Packagist]: https://packagist.org/packages/90zlaya/php-library
