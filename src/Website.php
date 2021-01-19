@@ -342,7 +342,7 @@ class Website {
         $meta .= PHP_EOL;
         $meta .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
         $meta .= PHP_EOL;
-        $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1">';
+        $meta .= '<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">';
         $meta .= PHP_EOL;
         $meta .= '<meta name="description" content="';
         $meta .= $this->description;
