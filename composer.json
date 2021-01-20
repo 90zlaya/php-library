@@ -48,6 +48,7 @@
     "phpoffice/phpspreadsheet": "1.10.*"
   },
   "require-dev": {
+    "php": "7.3.* || 7.4.*",
     "phpunit/phpunit": "9.5.*",
     "phpstan/phpstan": "0.12.*",
     "squizlabs/php_codesniffer": "3.4.*"
